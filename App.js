@@ -21,38 +21,31 @@
 //   },
 // });
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, FlatList, StyleSheet, Text, FlatListComponent} from 'react-native';
 import List from "./src/components/List";
 
-const data = [
-    {key: 'Devin'},
-    {key: 'Dan'},
-    {key: 'Dominic'},
-    {key: 'Jackson'},
-    {key: 'James'},
-    {key: 'Joel'},
-    {key: 'John'},
-    {key: 'Jillian'},
-    {key: 'Jimmy'},
-    {key: 'Julie'},
-    {key: 'John'},
-    {key: 'Jillian'},
-    {key: 'Jimmy'},
-    {key: 'Julie'},
-    {key: 'John'},
-    {key: 'Jillian'},
-    {key: 'Jimmy'},
-    {key: 'Julie'},
-    {key: 'John'},
-    {key: 'Jillian'},
-    {key: 'Jimmy'},
-    {key: 'Julie'},
-    // ...
-    // ...
-];
-
 const App = () => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    const getPrints = async () => {
+        try {
+            const response = await fetch('http://192.168.0.15/api/prints');
+            const json = await response.json();
+            setData(json.data);
+            console.log(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getPrints();
+    }, []);
+
     return (
         <View style={styles.container}>
             <List data={data} />

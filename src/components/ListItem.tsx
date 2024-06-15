@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 const ListItem = ({ item }) => {
-    return <Text style={styles.item}>{item.key}</Text>;
+    return (
+        <Text style={styles.item}>{item.title}</Text>
+    );
 };
 
 const styles = StyleSheet.create({
