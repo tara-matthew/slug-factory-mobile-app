@@ -1,23 +1,22 @@
-import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-const ListItem = () => {
-    return (
-        <View style={styles.container}>
-            <View>
-                <Text>Hello world</Text>
-                <Text>Helloooo</Text>
-            </View>
-        </View>
-    )
-}
+const ListItem = ({ item }) => {
+    return <Text style={styles.item}>{item.key}</Text>;
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+        width: '100%',
+        textAlign: 'center',
+        alignSelf: "center",
+        backgroundColor: '#f9c2ff',
+        marginVertical: 8,
+        marginHorizontal: 16,
     },
 });
-export default ListItem
+
+export default ListItem;
