@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 
-const GridItem = () => {
+const GridItem = ({item, style}) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Title</Text>
+        <View style={[style, styles.container]}>
+            <Text style={styles.text}>{item.title}</Text>
             <Text style={styles.text}>Description</Text>
         </View>
     )
@@ -12,9 +12,9 @@ const GridItem = () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '80%',
+        width: 200,
         flex: 1,
-        // height: 20,
+        height: 200,
         backgroundColor: "#d0cadb",
         marginBottom: 20,
         borderRadius: 5,
