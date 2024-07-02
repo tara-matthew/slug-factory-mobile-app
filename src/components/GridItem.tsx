@@ -1,25 +1,30 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet, View, Image} from 'react-native';
 
 const GridItem = ({item, style}) => {
+    const width = 300;
+    const height = 300;
+
     return (
         <View style={[style, styles.container]}>
-            <Text style={styles.text}>{item.title}</Text>
-            <Text style={styles.text}>Description</Text>
+            <Image
+                style={{
+                    width: width,
+                    height: height,
+                }}
+                source={{
+                    uri: item.images[0]?.url,
+                }}
+            />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        width: 200,
         flex: 1,
-        height: 200,
         backgroundColor: "#d0cadb",
         marginBottom: 20,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: 'red',
         shadowRadius: 2
     },
     text: {

@@ -21,22 +21,28 @@ const App = () => {
     };
 
     useEffect(() => {
-        getPrints();
+        getPrints().then(response => console.log(response));
     }, []);
 
     return (
         <View style={styles.container}>
-            <List data={data} />
-
+            <Text style={styles.text}>Recently Added</Text>
+            <List data={data}/>
+            <Text style={styles.text}>Most Popular</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         paddingTop: 100,
+        paddingHorizontal: 20
     },
+    text: {
+        fontSize: 18,
+        marginBottom: 10
+    }
 });
 
 // const App = () => {

@@ -5,6 +5,7 @@ import GridItem from "./GridItem";
 
 const List = ({ data }) => (
         <FlatList
+            style={{marginBottom: 30}}
             data={data}
             horizontal={true}
             renderItem={({ item }) => <GridItem item={item} style={{marginRight: 10}} />}
