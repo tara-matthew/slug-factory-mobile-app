@@ -1,26 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, StyleSheet, Text, FlatListComponent, Image} from 'react-native';
+import {View, FlatList, StyleSheet, Text, FlatListComponent, Image, ScrollView} from 'react-native';
 import List from "./src/components/List";
 import GridItem from "./src/components/GridItem";
 import useFetch from "./src/hooks/useFetch";
 
 const App = () => {
-    const url = "prints";
-    const { data, loading, error } = useFetch(url);
+    const {
+        data: latestPrints,
+        loading: loadingLatest,
+        error: errorLatest,
+    } = useFetch('prints/latest');
 
-    if (data && !loading) {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Recently Added</Text>
-                <List data={data}/>
-                <Text style={styles.text}>Most Popular</Text>
-            </View>
-        );
+    const {
+        data: popularPrints,
+        loading: loadingPopular,
+        error: errorPopular
+    } = useFetch('prints');
+
+    if (loadingLatest || loadingPopular) {
+        return <Text>Loading...</Text>;
     }
+
+        return (
+            <ScrollView style={styles.container}>
+                <Text style={styles.text}>Recently Added</Text>
+                <List data={latestPrints}/>
+                <Text style={styles.text}>Most Popular</Text>
+                <List data={popularPrints}/>
+
+            </ScrollView>
+        );
 };
 
 const styles = StyleSheet.create({
     container: {
+        flexGrow: 1,
         // flex: 1,
         paddingTop: 100,
         paddingHorizontal: 20
