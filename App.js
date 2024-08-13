@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {View, FlatList, StyleSheet, Text, FlatListComponent, Image, ScrollView} from 'react-native';
 import List from "./src/components/List";
-import GridItem from "./src/components/GridItem";
+import Card from "./src/components/molecule/Card";
 import useFetch from "./src/hooks/useFetch";
+import { Ionicons } from '@expo/vector-icons';
 
 const App = () => {
     const {
@@ -17,53 +18,43 @@ const App = () => {
         error: errorPopular
     } = useFetch('prints');
 
-    if (loadingLatest || loadingPopular) {
+    const {
+        data: randomPrints,
+        loading: loadingRandom,
+        error: errorRandom
+    } = useFetch('prints/random');
+
+    if (loadingLatest || loadingPopular || loadingRandom) {
         return <Text>Loading...</Text>;
     }
 
         return (
-            <ScrollView style={styles.container}>
-                <Text style={styles.text}>Recently Added</Text>
-                <List data={latestPrints}/>
-                <Text style={styles.text}>Most Popular</Text>
-                <List data={popularPrints}/>
-
-            </ScrollView>
+            <View style={styles.outerContainer}>
+                <ScrollView contentContainerStyle={styles.container}>
+                    <Ionicons style={{position: 'absolute', top: 60, right: 20}} name="notifications-outline" size={26} color="black" />
+                    <Text style={styles.text}>Recently Added</Text>
+                    <List data={latestPrints}/>
+                    <Text style={styles.text}>Most Popular</Text>
+                    <List data={popularPrints}/>
+                    <Text style={styles.text}>Last Viewed</Text>
+                    <List data={randomPrints}/>
+                </ScrollView>
+            </View>
         );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flexGrow: 1,
-        // flex: 1,
-        paddingTop: 100,
+        paddingVertical: 100,
         paddingHorizontal: 20
+    },
+    outerContainer: {
+      position: 'relative'
     },
     text: {
         fontSize: 18,
         marginBottom: 10
     }
 });
-
-// const App = () => {
-//     return (
-//         <View style={styles.container}>
-//             {/*<FlatList data={} renderItem={}*/}
-//             <GridItem></GridItem>
-//             <GridItem></GridItem>
-//             <GridItem></GridItem>
-//             <GridItem></GridItem>
-//         </View>
-//     )
-// }
-//
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         justifyContent: "center",
-//         alignItems: "center",
-//         paddingTop: 50,
-//     },
-// });
 
 export default App;
