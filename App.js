@@ -16,7 +16,7 @@ const App = () => {
         data: popularPrints,
         loading: loadingPopular,
         error: errorPopular
-    } = useFetch('prints');
+    } = useFetch('my/prints');
 
     const {
         data: randomPrints,
