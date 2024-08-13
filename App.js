@@ -4,6 +4,7 @@ import List from "./src/components/List";
 import Card from "./src/components/molecule/Card";
 import useFetch from "./src/hooks/useFetch";
 import { Ionicons } from '@expo/vector-icons';
+import "./global.css"
 
 const App = () => {
     const {
