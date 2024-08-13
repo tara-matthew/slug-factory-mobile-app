@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const GridItem = ({item, style}) => {
+const Card = ({item, style}) => {
     const width = 300;
     const height = 200;
 
@@ -27,9 +27,8 @@ const GridItem = ({item, style}) => {
                     color="white"
                     style={styles.icon}
                 />
-                {/*<Feather name="heart" size={32} color="black" style={styles.icon} />*/}
 
-            <Text style={{height: 45, fontSize: 18, padding: 8}}>{item.title}</Text>
+            <Text style={{height: 50, fontSize: 18, padding: 8}}>{item.title}</Text>
         </View>
         </View>
     )
@@ -63,4 +62,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default GridItem;
+export default Card;
