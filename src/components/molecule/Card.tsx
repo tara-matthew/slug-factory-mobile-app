@@ -5,13 +5,13 @@ import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Card = ({item, style}) => {
+const Card = ({item, className}) => {
     const width = 300;
     const height = 200;
 
     return (
-        <View style={[style, styles.container]}>
-            <View style={styles.imageContainer}>
+        <View className={className} style={[styles.container]}>
+            <View className={"relative"}>
             <Image
                 style={{
                     width: width,
@@ -26,6 +26,7 @@ const Card = ({item, style}) => {
                     size={32}
                     color="white"
                     style={styles.icon}
+                    className={"absolute top-1 right-2"}
                 />
 
             <Text style={{height: 50, fontSize: 18, padding: 8}}>{item.title}</Text>
@@ -43,16 +44,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         shadowRadius: 2
     },
-    text: {
-       textAlign: "center"
-    },
-    imageContainer: {
-        position: "relative"
-    },
     icon: {
-        position: 'absolute',
-        top: 5,
-        right: 5,
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 3

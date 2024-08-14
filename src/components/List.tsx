@@ -8,7 +8,7 @@ const List = ({ data }) => (
             style={{marginBottom: 30}}
             data={data}
             horizontal={true}
-            renderItem={({ item }) => <Card item={item} style={{marginRight: 10}} />}
+            renderItem={({ item }) => <Card className={"mr-4"} item={item} />}
             keyExtractor={(item) => item.id}
         />
 );
