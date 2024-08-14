@@ -5,8 +5,8 @@ const image = {uri: 'https://cdn.thingiverse.com/renders/18/f2/af/d5/e0/347d0cf9
 
 const Form = () => {
     return (
-    <View className={"flex flex-1 justify-center items-center px-8"}>
-        <Image className={"h-full absolute w-full opacity-1"} source={image}></Image>
+    <View className={"flex flex-1 justify-center items-center px-8 relative"}>
+        <Image className={"top-24 h-60 absolute w-full opacity-1"} source={image}></Image>
         <View className={"mb-10"}>
             <Text className={"text-xl font-bold"}>Sign in to Slug Factory</Text>
         </View>
