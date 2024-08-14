@@ -8,11 +8,12 @@ import ListGroup from "./src/components/template/ListGroup";
 import Home from "./src/pages/Home";
 import Form from "./src/components/organism/Form";
 import Welcome from "./src/components/template/Welcome";
+import Login from "./src/pages/Login";
 
 const App = () => {
         return (
             // <Home></Home>
-            <Welcome></Welcome>
+            <Login></Login>
         );
 };
 
