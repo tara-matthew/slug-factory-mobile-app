@@ -7,11 +7,12 @@ import "./global.css"
 import ListGroup from "./src/components/template/ListGroup";
 import Home from "./src/pages/Home";
 import Form from "./src/components/organism/Form";
+import Welcome from "./src/components/template/Welcome";
 
 const App = () => {
         return (
             // <Home></Home>
-            <Form headerText={"Sign in to Slug Factory"} buttonText={"Sign In"} inputs={[{placeholder: "Email"}, {placeholder: "Password"}]}></Form>
+            <Welcome></Welcome>
         );
 };
 
