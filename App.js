@@ -11,7 +11,7 @@ import Form from "./src/components/organism/Form";
 const App = () => {
         return (
             // <Home></Home>
-            <Form></Form>
+            <Form headerText={"Sign in to Slug Factory"} buttonText={"Sign In"} inputs={[{placeholder: "Email"}, {placeholder: "Password"}]}></Form>
         );
 };
 
