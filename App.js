@@ -6,10 +6,12 @@ import { Ionicons } from '@expo/vector-icons';
 import "./global.css"
 import ListGroup from "./src/components/template/ListGroup";
 import Home from "./src/pages/Home";
+import Form from "./src/components/organism/Form";
 
 const App = () => {
         return (
-            <Home></Home>
+            // <Home></Home>
+            <Form></Form>
         );
 };
 
