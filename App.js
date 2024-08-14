@@ -17,7 +17,7 @@ const App = () => {
         data: popularPrints,
         loading: loadingPopular,
         error: errorPopular
-    } = useFetch('my/prints');
+    } = useFetch('my/prints'); // todo route alias
 
     const {
         data: randomPrints,
