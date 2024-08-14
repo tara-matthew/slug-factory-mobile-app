@@ -1,7 +1,6 @@
 import React from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
-import ListItem from './ListItem';
-import Card from "./molecule/Card";
+import Card from "../molecule/Card";
 
 const List = ({ data }) => (
         <FlatList
