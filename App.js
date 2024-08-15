@@ -12,6 +12,7 @@ import Login from "./src/pages/Login";
 import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import PrintedDesign from "./src/pages/PrintedDesign";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,7 @@ const App = () => {
                 <Stack.Navigator>
                     <Tab.Screen name="Login" component={Login} />
                     <Tab.Screen name="Home" component={Home} />
+                    <Tab.Screen name="PrintedDesign" component={PrintedDesign} />
                 </Stack.Navigator>
             </NavigationContainer>
         );

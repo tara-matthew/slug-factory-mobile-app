@@ -31,7 +31,7 @@ const Home = () => {
             <ScrollView contentContainerStyle={styles.container}>
                <ListGroup data={{heading: "Recently Added", data: latestPrints}}></ListGroup>
                <ListGroup data={{heading: "Most Popular", data: popularPrints}}></ListGroup>
-               <ListGroup data={{heading: "Last Viewed", data: randomPrints}}></ListGroup>
+               <ListGroup data={{heading: "Last Viewed", data: latestPrints}}></ListGroup>
             </ScrollView>
         </View>
     );

@@ -1,16 +1,25 @@
 import React, {memo, useEffect} from 'react';
-import {Text, StyleSheet, View, Image} from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Feather } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import {Text, StyleSheet, View, Image, Pressable} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import {useNavigation} from "@react-navigation/native";
+
 
 const Card = ({item, className}) => {
     const width = 300;
     const height = 200;
 
+    const navigation = useNavigation();
+
+    const buttonPressed = (item) => {
+        console.log('pressed', item.title);
+        navigation.navigate('PrintedDesign', {print: item})
+
+    }
+
     return (
         <View className={className} style={[styles.container]}>
+            <Pressable
+                onPress={() => buttonPressed(item)}>
             <View className={"relative"}>
             <Image
                 style={{
@@ -31,6 +40,7 @@ const Card = ({item, className}) => {
 
             <Text style={{height: 50, fontSize: 18, padding: 8}}>{item.title}</Text>
         </View>
+            </Pressable>
         </View>
     )
 }

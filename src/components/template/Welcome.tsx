@@ -9,7 +9,6 @@ const Welcome = ({headerText, buttonText, inputs, buttonTo, sendDataToParent}) =
     function handleDataFromChild(data) {
         // setDataFromChild(data);
         sendDataToParent(data);
-        // console.log('this is the parent', data);
     }
 
     return (
