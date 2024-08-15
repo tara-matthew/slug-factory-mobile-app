@@ -1,18 +1,54 @@
-import React from "react";
+import React, {useState} from "react";
 import {View, TextInput, TouchableOpacity, Text, ImageBackground, Image} from "react-native";
+import {useNavigation} from "@react-navigation/native";
+import Home from "../../pages/Home";
+import login from "../../pages/Login";
 
 
-const Form = ({inputs, buttonText }) => {
+const Form = ({inputs, buttonText, buttonTo, sendDataToParent }) => {
+    const navigation = useNavigation();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [formValues, setFormValues] = useState(
+        inputs.reduce((acc: any, field: { placeholder: any; }) => ({ ...acc, [field.placeholder]: "" }), {})
+    );
+
+    const [error, setError] = useState("");
+
+    const login = async (email, password)  => {
+        console.log(email, password);
+    }
+
+    const handleSubmit = async () => {
+        sendDataToParent(formValues);
+        // const {email, password} = formValues;
+        // try {
+        //     await login(email, password);
+        //     navigation.navigate(buttonTo as never);
+        // } catch (e) {
+        //     setError(e)
+        // }
+    }
+
+    const handleChange = (name, value) => {
+        setFormValues({ ...formValues, [name]: value });
+        console.log('here', formValues)
+    };
+
     return (
     <View className={"w-full"}>
         {inputs.map((field, index) => (
             <View className={"bg-black/5 w-full p-5 rounded-2xl mb-7"} key={index}>
-                <TextInput placeholder={field.placeholder} />
+                <TextInput placeholder={field.placeholder}
+                           value={formValues[field.placeholder]}
+                           onChangeText={(text) => handleChange(field.placeholder, text)}
+                />
             </View>
         ))}
         <View className={"w-full mt-4"}>
             <TouchableOpacity
                 className={"w-full bg-purple-500 p-3.5 rounded-2xl"}
+                onPress={handleSubmit}
             >
                 <Text className={"text-center text-white"}>{buttonText}</Text>
 

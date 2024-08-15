@@ -5,15 +5,13 @@ import Card from "../molecule/Card";
 // const renderItem = ({ item }) => <Card className={"mr-4"} item={item} />;
 
 const renderItem = ({ item }) => {
-        console.log('Rendering item:', item.id);
-
         return (
             <Card className={"mr-4"} item={item} />
         );
 };
 
 const List = ({ data }) => {
-        console.log('list rendered');
+        console.log('list mounted');
         return (
                 <FlatList
                     style={{marginBottom: 30}}

@@ -11,7 +11,7 @@ const Login = () => {
     return (
         <View className={"flex flex-1 justify-center items-center px-8 relative"}>
             {/*<Image className={"top-24 h-60 absolute w-full"} source={image}></Image>*/}
-            <Welcome headerText={"Sign in to Slug Factory"} buttonText={"Sign In"} inputs={[{placeholder: "Email"}, {placeholder: "Password"}]}></Welcome>
+            <Welcome headerText={"Sign in to Slug Factory"} buttonText={"Sign In"} buttonTo={'Home'} inputs={[{placeholder: "email"}, {placeholder: "password"}]}></Welcome>
         </View>
     )
 }

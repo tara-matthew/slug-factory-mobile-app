@@ -11,18 +11,20 @@ import Welcome from "./src/components/template/Welcome";
 import Login from "./src/pages/Login";
 import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const App = () => {
         return (
             // <Home></Home>
             // <Login></Login>
             <NavigationContainer>
-                <Tab.Navigator>
+                <Stack.Navigator>
                     <Tab.Screen name="Login" component={Login} />
                     <Tab.Screen name="Home" component={Home} />
-                </Tab.Navigator>
+                </Stack.Navigator>
             </NavigationContainer>
         );
 };
