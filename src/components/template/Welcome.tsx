@@ -3,12 +3,13 @@ import {Image, Text, View} from "react-native";
 import Form from "../organism/Form";
 
 
-const Welcome = ({headerText, buttonText, inputs, buttonTo}) => {
+const Welcome = ({headerText, buttonText, inputs, buttonTo, sendDataToParent}) => {
     const [dataFromChild, setDataFromChild] = useState("");
 
     function handleDataFromChild(data) {
-        setDataFromChild(data);
-        console.log('this is the parent', data);
+        // setDataFromChild(data);
+        sendDataToParent(data);
+        // console.log('this is the parent', data);
     }
 
     return (

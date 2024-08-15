@@ -10,7 +10,7 @@ const Form = ({inputs, buttonText, buttonTo, sendDataToParent }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [formValues, setFormValues] = useState(
-        inputs.reduce((acc: any, field: { placeholder: any; }) => ({ ...acc, [field.placeholder]: "" }), {})
+        inputs.reduce((acc, field) => ({ ...acc, [field.placeholder]: "" }), {})
     );
 
     const [error, setError] = useState("");
@@ -21,13 +21,6 @@ const Form = ({inputs, buttonText, buttonTo, sendDataToParent }) => {
 
     const handleSubmit = async () => {
         sendDataToParent(formValues);
-        // const {email, password} = formValues;
-        // try {
-        //     await login(email, password);
-        //     navigation.navigate(buttonTo as never);
-        // } catch (e) {
-        //     setError(e)
-        // }
     }
 
     const handleChange = (name, value) => {
