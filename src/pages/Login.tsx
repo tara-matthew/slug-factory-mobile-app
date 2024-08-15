@@ -11,13 +11,14 @@ const Login = () => {
     const [error, setError] = useState("");
 
     async function handleDataFromChild(data) {
-        setDataFromChild(data);
+        // setDataFromChild(data);
         console.log('this is the parent', data);
         try {
             await login(data)
             // console.log('here');
-            navigation.navigate('Home')
+            navigation.navigate('Home' as never) // todo use proper types
         } catch (e) {
+            console.log(e)
             setError(e);
         }
     }
@@ -33,8 +34,7 @@ const Login = () => {
 
     return (
         <View className={"flex flex-1 justify-center items-center px-8 relative"}>
-            <Text>{dataFromChild.email}</Text>
-            {/*<Image className={"top-24 h-60 absolute w-full"} source={image}></Image>*/}
+            {error ? <Text className={"text-red-500 text-center mb-4"}>{error}</Text> : null}
             <Welcome sendDataToParent={handleDataFromChild} headerText={"Sign in to Slug Factory"} buttonText={"Sign In"} buttonTo={'Home'} inputs={[{placeholder: "email"}, {placeholder: "password"}]}></Welcome>
         </View>
     )

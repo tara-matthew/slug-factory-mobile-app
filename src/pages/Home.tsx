@@ -26,10 +26,6 @@ const Home = () => {
         return <Text>Loading...</Text>;
     }
 
-    // const latestPrintsMemo = useMemo(() => latestPrints, [latestPrints]);
-    // const popularPrintsMemo = useMemo(() => popularPrints, [popularPrints]);
-    // const randomPrintsMemo = useMemo(() => randomPrints, [randomPrints]);
-
     return (
         <View className={"relative"}>
             <ScrollView contentContainerStyle={styles.container}>
@@ -43,7 +39,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 100,
+        paddingVertical: 20,
         paddingHorizontal: 20
     },
     text: {

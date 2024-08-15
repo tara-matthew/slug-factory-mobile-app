@@ -6,18 +6,9 @@ import login from "../../pages/Login";
 
 
 const Form = ({inputs, buttonText, buttonTo, sendDataToParent }) => {
-    const navigation = useNavigation();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [formValues, setFormValues] = useState(
         inputs.reduce((acc, field) => ({ ...acc, [field.placeholder]: "" }), {})
     );
-
-    const [error, setError] = useState("");
-
-    const login = async (email, password)  => {
-        console.log(email, password);
-    }
 
     const handleSubmit = async () => {
         sendDataToParent(formValues);
@@ -25,7 +16,6 @@ const Form = ({inputs, buttonText, buttonTo, sendDataToParent }) => {
 
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
-        console.log('here', formValues)
     };
 
     return (
