@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useMemo} from 'react';
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import useFetch from "../hooks/useFetch";
@@ -26,6 +26,10 @@ const Home = () => {
         return <Text>Loading...</Text>;
     }
 
+    // const latestPrintsMemo = useMemo(() => latestPrints, [latestPrints]);
+    // const popularPrintsMemo = useMemo(() => popularPrints, [popularPrints]);
+    // const randomPrintsMemo = useMemo(() => randomPrints, [randomPrints]);
+
     return (
         <View className={"relative"}>
             <ScrollView contentContainerStyle={styles.container}>
@@ -48,4 +52,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Home;
+export default memo(Home);

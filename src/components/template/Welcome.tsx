@@ -12,6 +12,6 @@ const Welcome = ({headerText, buttonText, inputs}) => {
             <Form buttonText={buttonText} inputs={inputs}></Form>
         </View>
     )
-}
+};
 
 export default Welcome;

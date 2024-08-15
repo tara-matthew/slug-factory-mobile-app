@@ -9,11 +9,21 @@ import Home from "./src/pages/Home";
 import Form from "./src/components/organism/Form";
 import Welcome from "./src/components/template/Welcome";
 import Login from "./src/pages/Login";
+import {NavigationContainer} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 const App = () => {
         return (
             // <Home></Home>
-            <Login></Login>
+            // <Login></Login>
+            <NavigationContainer>
+                <Tab.Navigator>
+                    <Tab.Screen name="Login" component={Login} />
+                    <Tab.Screen name="Home" component={Home} />
+                </Tab.Navigator>
+            </NavigationContainer>
         );
 };
 

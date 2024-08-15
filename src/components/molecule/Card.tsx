@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useEffect} from 'react';
 import {Text, StyleSheet, View, Image} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Feather } from '@expo/vector-icons';
@@ -8,6 +8,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 const Card = ({item, className}) => {
     const width = 300;
     const height = 200;
+    // console.log('Card component rendered'); // Log to check re-renders
+    useEffect(() => {
+        console.log('Card component mounted or updated', item.id);
+    }, [item]); // Dependencies array: re-run effect when `item` changes
 
     return (
         <View className={className} style={[styles.container]}>
@@ -54,4 +58,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Card;
+export default memo(Card);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import useFetch from "../../hooks/useFetch";
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ListGroup;
+export default memo(ListGroup);
