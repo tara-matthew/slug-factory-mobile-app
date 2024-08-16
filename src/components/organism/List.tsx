@@ -6,7 +6,9 @@ import Card from "../molecule/Card";
 
 const renderItem = ({ item }) => {
         return (
-            <Card className={"mr-4"} item={item} />
+            <View className={"mr-4"}>
+                <Card item={item} />
+            </View>
         );
 };
 

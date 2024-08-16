@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import {useNavigation} from "@react-navigation/native";
 
 
-const Card = ({item, className}) => {
+const Card = ({item}) => {
     const width = 300;
     const height = 200;
 
@@ -18,7 +18,7 @@ const Card = ({item, className}) => {
     }
 
     return (
-        <View className={className} style={[styles.container]}>
+        <View style={[styles.container]}>
             <Pressable
                 onPress={() => buttonPressed(item)}>
             <View className={"relative"}>
