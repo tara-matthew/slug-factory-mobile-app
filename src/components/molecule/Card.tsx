@@ -12,6 +12,7 @@ const Card = ({item, className}) => {
 
     const buttonPressed = (item) => {
         console.log('pressed', item.title);
+        // @ts-ignore
         navigation.navigate('PrintedDesign', {print: item})
 
     }
