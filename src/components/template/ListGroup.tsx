@@ -7,7 +7,7 @@ import List from "../organism/List";
 const ListGroup = ({data}) => {
     return (
         <View>
-            <Text className={"mb-3 text-xl"}>{data.heading}</Text>
+            <Text className={"mb-3 text-2xl"}>{data.heading}</Text>
             <List data={data.data}/>
         </View>
     );
