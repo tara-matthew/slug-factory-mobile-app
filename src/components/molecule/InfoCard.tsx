@@ -5,7 +5,6 @@ const InfoCard = () => {
     return (
         <View style={styles.container} className={'rounded-lg shadow-sm p-8'}>
             <View className={'flex flex-row items-center'}>
-                {/* Left Section: Image and Text */}
                 <View className="justify-center items-center">
                     <Image
                         style={{
@@ -20,12 +19,10 @@ const InfoCard = () => {
                         }}
                     />
 
-                    {/* Wrapping the text under the image */}
                     <Text
                         className={"text-xl font-bold text-center"}
                         style={{ maxWidth: 120, textAlign: 'center' }}
                         numberOfLines={1}
-                        ellipsizeMode="tail"
                     >
                         Tara
                     </Text>
@@ -38,7 +35,6 @@ const InfoCard = () => {
                     </Text>
                 </View>
 
-                {/* Right Section: Other Information */}
                 <View className="flex-1 flex flex-col items-end">
                     <TouchableOpacity>
                         <Text className={'text-xl font-bold pb-2'}>Thingiverse</Text>
