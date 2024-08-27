@@ -16,7 +16,7 @@ const InfoCard = () => {
                         }}
                         resizeMode={"cover"}
                         source={{
-                            uri: 'https://picsum.photos/640/480?random=40225',
+                            uri: 'https://avatars.githubusercontent.com/u/97165289',
                         }}
                     />
 
