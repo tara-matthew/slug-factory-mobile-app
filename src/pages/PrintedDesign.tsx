@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Text, View, Image, ScrollView, StyleSheet, TouchableOpacity, Button, Pressable} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import Pill from "../components/atom/Pill";
+import PillGroup from "../components/molecule/PillGroup";
 
 const PrintedDesign = (data) => {
     const print = data.route.params.print;
@@ -18,8 +19,37 @@ const PrintedDesign = (data) => {
     const buttonPressed = () => {
         console.log('here');
         navigation.navigate('Thingiverse' as never)
-
     }
+
+    const pills = [
+        {
+            'title': 'Ender-3'
+        },
+        {
+            'title': print.filament_material.name,
+        },
+        {
+            'title': print.filament_brand.name,
+        },
+        {
+            'title': print.filament_colour.name,
+        },
+        {
+            'title': '20% infill',
+        },
+        {
+            'title': 'Tree supports',
+        },
+        {
+            'title': 'Tag',
+        },
+        {
+            'title': 'Another tag',
+        },
+        {
+            'title': 'Yet another tag',
+        }
+    ]
 
     return (
         <View>
@@ -37,19 +67,8 @@ const PrintedDesign = (data) => {
                     <Text className={'mb-4'}>{print.description}</Text>
                 </View>
 
-                <View className={"flex flex-row flex-wrap gap-y-4 gap-x-3 mb-9"}>
-                    <Pill title={'Ender-3'} />
-                    <Pill title={print.filament_material.name} />
-                    <Pill title={print.filament_brand.name} />
-                    <Pill title={print.filament_colour.name} />
-                    <Pill title={'20% infill'} />
-                    <Pill title={'Tree supports'} />
-                    <Pill title={'Tag'} />
-                    <Pill title={'Another Tag'} />
-                    <Pill title={'Yet Another Tag'} />
-                    <Pill title={'Tag'} />
-                </View>
-                
+                <PillGroup pills={pills}></PillGroup>
+
                 <View style={styles.divider}></View>
                 {/*<Text className={"text-center text-2xl mt-5 font-bold"}>Upload Information</Text>*/}
                 <View className={"my-5"}>
