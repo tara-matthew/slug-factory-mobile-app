@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Text, View, Image, ScrollView, StyleSheet, TouchableOpacity, Button, Pressable} from "react-native";
 import {useNavigation} from "@react-navigation/native";
+import Pill from "../components/atom/Pill";
 
 const PrintedDesign = (data) => {
     const print = data.route.params.print;
@@ -34,74 +35,21 @@ const PrintedDesign = (data) => {
             <Text className={"text-center text-2xl mt-5 font-bold"}>{print.title}</Text>
                 <View className={'my-5'}>
                     <Text className={'mb-4'}>{print.description}</Text>
-                    {/*<Text className={'mb-4'}>Printed on Ender-3</Text>*/}
-                    {/*<Text className={'mb-4'}>Material: {print.filament_material.name}</Text>*/}
-                    {/*<Text className={'mb-4'}>Brand: {print.filament_brand.name}</Text>*/}
-                    {/*<Text className={'mb-4'}>Colour: {print.filament_colour.name}</Text>*/}
-                    {/*<Text className={'mb-4'}>Infill: 20%</Text>*/}
                 </View>
+
                 <View className={"flex flex-row flex-wrap gap-y-4 gap-x-3 mb-9"}>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>Ender-3</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>{print.filament_material.name}</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>{print.filament_brand.name}</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>{print.filament_colour.name}</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>20% infill</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>Tree supports</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>Tag</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>Another tag</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>Yet another tag</Text>
-
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={"bg-white p-3.5 rounded-2xl"}
-                    >
-                        <Text className={"text-center text-black"}>Another tag</Text>
-
-                    </TouchableOpacity>
+                    <Pill title={'Ender-3'} />
+                    <Pill title={print.filament_material.name} />
+                    <Pill title={print.filament_brand.name} />
+                    <Pill title={print.filament_colour.name} />
+                    <Pill title={'20% infill'} />
+                    <Pill title={'Tree supports'} />
+                    <Pill title={'Tag'} />
+                    <Pill title={'Another Tag'} />
+                    <Pill title={'Yet Another Tag'} />
+                    <Pill title={'Tag'} />
                 </View>
+                
                 <View style={styles.divider}></View>
                 {/*<Text className={"text-center text-2xl mt-5 font-bold"}>Upload Information</Text>*/}
                 <View className={"my-5"}>
