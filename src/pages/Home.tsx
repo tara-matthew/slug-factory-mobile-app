@@ -29,7 +29,7 @@ const Home = () => {
     return (
         <View className={"relative"}>
             <ScrollView contentContainerStyle={styles.container}>
-               <ListGroup data={{heading: "Recently Added", data: latestPrints}}></ListGroup>
+               <ListGroup data={{heading: "Recently Uploaded", data: latestPrints}}></ListGroup>
                <ListGroup data={{heading: "Most Popular", data: popularPrints}}></ListGroup>
                <ListGroup data={{heading: "Last Viewed", data: latestPrints}}></ListGroup>
             </ScrollView>
