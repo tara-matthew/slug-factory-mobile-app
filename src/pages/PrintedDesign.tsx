@@ -71,7 +71,7 @@ const PrintedDesign = (data) => {
                 <PillGroup pills={pills}></PillGroup>
 
                 <View style={styles.divider}></View>
-                <View className={"my-5 w-11/12 m-auto"}>
+                <View className={"my-5 w-full m-auto"}>
                     <InfoCard />
                     {/*<Text className={"text-lg"}>Uploaded by Test Test</Text>*/}
                     {/*<Text className={"text-lg"}>21/8/2024</Text>*/}

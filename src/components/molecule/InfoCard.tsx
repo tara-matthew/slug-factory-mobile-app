@@ -1,20 +1,47 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const InfoCard = () => {
     return (
-        <View style={styles.container} className={'p-8 rounded-lg shadow-sm'}>
+        <View style={styles.container} className={'rounded-lg shadow-sm p-8'}>
+            <View className={'flex flex-row items-center'}>
+                {/* Left Section: Image and Text */}
+                <View className="justify-center items-center">
+                    <Image
+                        style={{
+                            width: 75,
+                            height: 75,
+                            borderRadius: 75,
+                            marginBottom: 8
+                        }}
+                        resizeMode={"cover"}
+                        source={{
+                            uri: 'https://picsum.photos/640/480?random=40225',
+                        }}
+                    />
 
-            <View className={'flex flex-row'}>
-                <View className="flex-1 justify-center">
-                    <Text className={"text-xl font-bold"}>Tara</Text>
+                    {/* Wrapping the text under the image */}
+                    <Text
+                        className={"text-xl font-bold text-center"}
+                        style={{ maxWidth: 120, textAlign: 'center' }}
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                    >
+                        Tara
+                    </Text>
 
-                    <Text className={"text-lg"}>10 uploads</Text>
+                    <Text
+                        className={"text-lg text-center"}
+                        style={{ maxWidth: 120, textAlign: 'center' }}
+                    >
+                        10 uploads
+                    </Text>
                 </View>
 
-                <View className="flex flex-col items-end">
+                {/* Right Section: Other Information */}
+                <View className="flex-1 flex flex-col items-end">
                     <TouchableOpacity>
-                        <Text className={'text-lg font-bold pb-2'}>Thingiverse</Text>
+                        <Text className={'text-xl font-bold pb-2'}>Thingiverse</Text>
                     </TouchableOpacity>
                     <View style={styles.divider}></View>
 
@@ -27,19 +54,20 @@ const InfoCard = () => {
                     <Text className={"text-lg py-2"}>4 reviews</Text>
                 </View>
             </View>
-
         </View>
-    )
+    );
+
+
 }
 
 const styles = StyleSheet.create( {
     container: {
-        backgroundColor: 'white' //"#e8eaeb",
+        backgroundColor: '#e8e8e8', //"#e8eaeb",
     },
     divider: {
-        width: '100%',
+        width: '50%',
         height: 1,
-        backgroundColor: '#DFE4EA'
+        backgroundColor: 'gray'
     }
 })
 
