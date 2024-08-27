@@ -5,7 +5,7 @@ import Home from "../../pages/Home";
 import login from "../../pages/Login";
 
 
-const Form = ({inputs, buttonText, buttonTo, sendDataToParent }) => {
+const Form = ({inputs, buttonText, buttonTo, sendDataToParent=null }) => {
     const [formValues, setFormValues] = useState(
         inputs.reduce((acc, field) => ({ ...acc, [field.placeholder]: "" }), {})
     );
