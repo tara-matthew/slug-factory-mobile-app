@@ -3,6 +3,7 @@ import {Text, View, Image, ScrollView, StyleSheet, TouchableOpacity, Button, Pre
 import {useNavigation} from "@react-navigation/native";
 import Pill from "../components/atom/Pill";
 import PillGroup from "../components/molecule/PillGroup";
+import InfoCard from "../components/molecule/InfoCard";
 
 const PrintedDesign = (data) => {
     const print = data.route.params.print;
@@ -70,12 +71,12 @@ const PrintedDesign = (data) => {
                 <PillGroup pills={pills}></PillGroup>
 
                 <View style={styles.divider}></View>
-                {/*<Text className={"text-center text-2xl mt-5 font-bold"}>Upload Information</Text>*/}
-                <View className={"my-5"}>
-                    <Text className={"text-lg"}>Uploaded by Test Test</Text>
-                    <Text className={"text-lg"}>21/8/2024</Text>
-                    <Text className={"text-lg"}>Printed 3 times</Text>
-                    <TouchableOpacity onPress={buttonPressed}><Text className={'text-lg font-bold'}>Original from Thingiverse</Text></TouchableOpacity>
+                <View className={"my-5 w-11/12 m-auto"}>
+                    <InfoCard />
+                    {/*<Text className={"text-lg"}>Uploaded by Test Test</Text>*/}
+                    {/*<Text className={"text-lg"}>21/8/2024</Text>*/}
+                    {/*<Text className={"text-lg"}>Printed 3 times</Text>*/}
+                    {/*<TouchableOpacity onPress={buttonPressed}><Text className={'text-lg font-bold'}>Original from Thingiverse</Text></TouchableOpacity>*/}
 
                 </View>
 
