@@ -77,14 +77,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginVertical: 10,
     },
-    descriptionContainer: {
-        marginVertical: 20,
+    text: {
+        fontSize: 18,
+        marginBottom: 10
     },
     divider: {
         width: '100%',
         height: 1,
         backgroundColor: '#DFE4EA',
-        marginVertical: 20,
     },
 });
 
