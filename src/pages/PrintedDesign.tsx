@@ -1,108 +1,91 @@
-import React, {useState} from "react";
-import {Text, View, Image, ScrollView, StyleSheet, TouchableOpacity, Button, Pressable} from "react-native";
-import {useNavigation} from "@react-navigation/native";
-import Pill from "../components/atom/Pill";
+import React, { useState, useEffect } from "react";
+import { Text, View, Image, ScrollView, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
 
-const PrintedDesign = (data) => {
-    const print = data.route.params.print;
-    console.log(print);
-    console.log(print.filament_material_id);
-    const imageUrl = print.images[0].url;
-    Image.getSize(imageUrl, (width, height) => {
-        console.log(width/height)
-        setAspectRatio(width/height)
-    })
-    const [aspectRatio, setAspectRatio] = useState(0);
+const PrintedDesign = ({ route }) => {
+    const { print } = route.params;
+    const [aspectRatio, setAspectRatio] = useState(1); // Default aspect ratio
     const navigation = useNavigation();
 
-    const buttonPressed = () => {
-        console.log('here');
-        navigation.navigate('Thingiverse' as never)
-    }
+    useEffect(() => {
+        if (print.images.length > 0) {
+            const imageUrl = print.images[0].url;
+            Image.getSize(imageUrl, (width, height) => {
+                setAspectRatio(width / height);
+            });
+        }
+    }, [print.images]);
 
     const pills = [
-        {
-            'title': 'Ender-3'
-        },
-        {
-            'title': print.filament_material.name,
-        },
-        {
-            'title': print.filament_brand.name,
-        },
-        {
-            'title': print.filament_colour.name,
-        },
-        {
-            'title': '20% infill',
-        },
-        {
-            'title': 'Tree supports',
-        },
-        {
-            'title': 'Tag',
-        },
-        {
-            'title': 'Another tag',
-        },
-        {
-            'title': 'Yet another tag',
-        }
-    ]
+        { 'title': 'Ender-3' },
+        { 'title': print.filament_material.name },
+        { 'title': print.filament_brand.name },
+        { 'title': print.filament_colour.name },
+        { 'title': '20% infill' },
+        { 'title': 'Tree supports' },
+        { 'title': 'Tag' },
+        { 'title': 'Another tag' },
+        { 'title': 'Yet another tag' },
+    ];
+
+    const images = print.images.map((image) => image.url);
+
+    const buttonPressed = () => {
+        navigation.navigate('Thingiverse');
+    };
 
     return (
-        <View>
-            <ScrollView contentContainerStyle={styles.container}>
-            <Image style={{
-                width: '100%',
-                height: undefined,
-                aspectRatio: aspectRatio,
-            }}
-                   source={{
-                uri: print.images[0]?.url,
-            }} />
-            <Text className={"text-center text-2xl mt-5 font-bold"}>{print.title}</Text>
-                <View className={'my-5'}>
-                    <Text className={'mb-4'}>{print.description}</Text>
-                </View>
-
-                <PillGroup pills={pills}></PillGroup>
-
-                <View style={styles.divider}></View>
-                <View className={"my-5 w-full m-auto"}>
-                    <InfoCard />
-                    {/*<Text className={"text-lg"}>Uploaded by Test Test</Text>*/}
-                    {/*<Text className={"text-lg"}>21/8/2024</Text>*/}
-                    {/*<Text className={"text-lg"}>Printed 3 times</Text>*/}
-                    {/*<TouchableOpacity onPress={buttonPressed}><Text className={'text-lg font-bold'}>Original from Thingiverse</Text></TouchableOpacity>*/}
-
-                </View>
-
+        <ScrollView contentContainerStyle={styles.container}>
+            {/* Horizontal ScrollView for Images */}
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {images.map((image, index) => (
+                    <Image
+                        key={index}
+                        source={{ uri: image }}
+                        style={{ height: 300, width:300, aspectRatio: aspectRatio }}
+                    />
+                ))}
             </ScrollView>
-        </View>
-    )
-}
 
+            <Text className={"text-center text-2xl mt-5 font-bold"}>{print.title}</Text>
+
+            <View className={'my-5'}>
+                <Text className={'mb-4'}>{print.description}</Text>
+            </View>
+
+            <PillGroup pills={pills} />
+
+            <View style={styles.divider} />
+
+            <View className={"my-5 w-full m-auto"}>
+                <InfoCard />
+            </View>
+        </ScrollView>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 20,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
     },
-    view: {
-        // paddingVertical: 50,
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginVertical: 10,
     },
-    text: {
-        fontSize: 18,
-        marginBottom: 10
+    descriptionContainer: {
+        marginVertical: 20,
     },
     divider: {
         width: '100%',
         height: 1,
-        backgroundColor: '#DFE4EA'
-    }
+        backgroundColor: '#DFE4EA',
+        marginVertical: 20,
+    },
 });
 
 export default PrintedDesign;
