@@ -3,20 +3,11 @@ import { Text, View, Image, ScrollView, StyleSheet, Dimensions } from "react-nat
 import { useNavigation } from "@react-navigation/native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
+import ImageList from "../components/molecule/ImageList";
 
 const PrintedDesign = ({ route }) => {
     const { print } = route.params;
-    const [aspectRatio, setAspectRatio] = useState(1); // Default aspect ratio
     const navigation = useNavigation();
-
-    useEffect(() => {
-        if (print.images.length > 0) {
-            const imageUrl = print.images[0].url;
-            Image.getSize(imageUrl, (width, height) => {
-                setAspectRatio(width / height);
-            });
-        }
-    }, [print.images]);
 
     const pills = [
         { 'title': 'Ender-3' },
@@ -32,22 +23,10 @@ const PrintedDesign = ({ route }) => {
 
     const images = print.images.map((image) => image.url);
 
-    const buttonPressed = () => {
-        navigation.navigate('Thingiverse');
-    };
-
     return (
         <ScrollView>
-            {/* Horizontal ScrollView for Images */}
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled={true} >
-                {images.map((image, index) => (
-                    <Image
-                        key={index}
-                        source={{ uri: image }}
-                        style={{ width: Dimensions.get('window').width, aspectRatio: aspectRatio }}
-                    />
-                ))}
-            </ScrollView>
+            <ImageList images={images} />
+
             <View style={styles.container}>
                 <Text className={"text-center text-2xl mt-5 font-bold"}>{print.title}</Text>
 
