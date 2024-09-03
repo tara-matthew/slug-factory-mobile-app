@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, ScrollView, StyleSheet } from "react-native";
+import { Text, View, Image, ScrollView, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
@@ -37,30 +37,31 @@ const PrintedDesign = ({ route }) => {
     };
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView>
             {/* Horizontal ScrollView for Images */}
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled={true} >
                 {images.map((image, index) => (
                     <Image
                         key={index}
                         source={{ uri: image }}
-                        style={{ height: 300, width:300, aspectRatio: aspectRatio }}
+                        style={{ width: Dimensions.get('window').width, aspectRatio: aspectRatio }}
                     />
                 ))}
             </ScrollView>
+            <View style={styles.container}>
+                <Text className={"text-center text-2xl mt-5 font-bold"}>{print.title}</Text>
 
-            <Text className={"text-center text-2xl mt-5 font-bold"}>{print.title}</Text>
+                <View className={'my-5'}>
+                    <Text className={'mb-4'}>{print.description}</Text>
+                </View>
 
-            <View className={'my-5'}>
-                <Text className={'mb-4'}>{print.description}</Text>
-            </View>
+                <PillGroup pills={pills} />
 
-            <PillGroup pills={pills} />
+                <View style={styles.divider} />
 
-            <View style={styles.divider} />
-
-            <View className={"my-5 w-full m-auto"}>
-                <InfoCard />
+                <View className={"my-5 w-full m-auto"}>
+                    <InfoCard />
+                </View>
             </View>
         </ScrollView>
     );
@@ -68,8 +69,9 @@ const PrintedDesign = ({ route }) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 20,
-        paddingHorizontal: 20,
+        paddingBottom: 20,
+        // paddingVertical: 20,
+        paddingHorizontal: 15,
     },
     title: {
         fontSize: 24,

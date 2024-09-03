@@ -1,15 +1,22 @@
 import React from 'react';
 import Pill from "../atom/Pill";
-import {View} from "react-native";
+import {StyleSheet, View} from "react-native";
 
 const PillGroup = ({pills}) => {
     return (
-        <View className={"flex flex-row flex-wrap gap-y-4 gap-x-3 mb-9"}>
+        <View className={"flex flex-row flex-wrap mb-9"} style={styles.container}>
             {pills.map((pill, index) => (
                 <Pill key={index} title={pill.title} />
             ))}
         </View>
     )
 }
+
+const styles = StyleSheet.create( {
+    container: {
+        rowGap: 16,
+        columnGap: 12
+    },
+})
 
 export default PillGroup;

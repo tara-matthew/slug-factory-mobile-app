@@ -58,7 +58,7 @@ const InfoCard = () => {
 
 const styles = StyleSheet.create( {
     container: {
-        backgroundColor: '#e8e8e8', //"#e8eaeb",
+        backgroundColor: "#d0cadb"//'#e8e8e8', //"#e8eaeb",
     },
     divider: {
         width: '50%',
