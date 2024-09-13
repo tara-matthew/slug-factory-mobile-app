@@ -4,23 +4,28 @@ import ListGroup from "../components/template/ListGroup";
 import useFetch from "../hooks/useFetch";
 
 const Home = () => {
+    const options = useMemo(() => ({
+        method: 'GET'
+    }), []);
+
     const {
         data: latestPrints,
         loading: loadingLatest,
         error: errorLatest,
-    } = useFetch('prints/latest');
+    } = useFetch('prints/latest', options);
+
 
     const {
         data: popularPrints,
         loading: loadingPopular,
         error: errorPopular
-    } = useFetch('my/prints'); // todo route alias
+    } = useFetch('my/prints', options); // todo route alias
 
     const {
         data: randomPrints,
         loading: loadingRandom,
         error: errorRandom
-    } = useFetch('prints/random');
+    } = useFetch('prints/random', options);
 
     if (loadingLatest || loadingPopular || loadingRandom) {
         return <Text>Loading...</Text>;
