@@ -10,6 +10,7 @@ const Login = () => {
     const navigation = useNavigation();
     const [dataFromChild, setDataFromChild] = useState({});
     const [loginData, setLoginData] = useState<any>(null);
+    const [error, setError] = useState("");
 
     async function handleDataFromChild(formData) {
         // setDataFromChild(data);
@@ -26,16 +27,17 @@ const Login = () => {
 
             const data = await response.json();
 
+            console.log(data.errors);
+
             if(! response.ok) {
                 throw new Error(data.message);
             }
 
             if (data) {
-                navigation.navigate('Home'); // Navigate on successful login
+                navigation.navigate('Home');
             }
-
         } catch (err) {
-            console.log('here', err.message)
+            console.log('here', err)
         }
     }
 
