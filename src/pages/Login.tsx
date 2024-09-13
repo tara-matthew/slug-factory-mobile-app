@@ -3,6 +3,7 @@ import Welcome from "../components/template/Welcome";
 import {Image, View, Text} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import useFetch from "../hooks/useFetch";
+import axios from "axios";
 
 const image = {uri: 'https://cdn.thingiverse.com/renders/18/f2/af/d5/e0/347d0cf950a6d42312a4d4a61d8c9c18_display_large.jpg'};
 
@@ -14,42 +15,28 @@ const Login = () => {
 
     async function handleDataFromChild(formData) {
         // setDataFromChild(data);
-        console.log('this is the parent', formData);
+        // TODO move into a login function and call that here
         try {
-            const response = await fetch('https://ghif128xv9.sharedwithexpose.com/api/auth/login', {
-                method: 'POST',
-                body: JSON.stringify(formData),
+            await axios.post('https://ghif128xv9.sharedwithexpose.com/api/auth/login', {
+                username: formData.username,
+                password: formData.password,
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }
-            })
+            });
+            navigation.navigate('Home'); // Navigate on successful login
 
-            const data = await response.json();
-
-            console.log(data.errors);
-
-            if(! response.ok) {
-                throw new Error(data.message);
-            }
-
-            if (data) {
-                navigation.navigate('Home');
-            }
         } catch (err) {
-            console.log('here', err)
+            const error = err.response.data.errors ?? err.response.data.message
+            console.log(err.response.data.message);
+            setError(err.response.data.message)
         }
     }
 
-    // Check if data is available to navigate
-    // if (data) {
-    //     console.log('success')
-    //     navigation.navigate('Home'); // Navigate on successful login
-    // }
-
     return (
         <View className={"flex flex-1 justify-center items-center px-8 relative"}>
-            {/*{fetchError ? <Text className={"text-red-500 text-center mb-4"}>{fetchError}</Text> : null}*/}
+            {error ? <Text className={"text-red-500 text-center mb-4"}>{error}</Text> : null}
             <Welcome sendDataToParent={handleDataFromChild} headerText={"Sign in to Slug Factory"} buttonText={"Sign In"} buttonTo={'Home'} inputs={[{placeholder: "username"}, {placeholder: "password"}]}></Welcome>
         </View>
     )
