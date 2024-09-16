@@ -20,6 +20,11 @@ const Login = () => {
     async function handleDataFromChild(formData) {
         // setDataFromChild(data);
         const result = await onLogin(formData.username, formData.password);
+        console.log(result);
+        if (result.error) {
+            setError(result.msg);
+        }
+        console.log(error);
         // console.log(result.json().data);
         // TODO move into a login function and call that here
         // try {

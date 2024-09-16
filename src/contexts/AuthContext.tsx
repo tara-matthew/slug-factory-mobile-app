@@ -46,7 +46,9 @@ export const AuthProvider = ({ children }) => {
 
             // set axios headers
         } catch (e) {
-            return { error: true, msg: (e as any).response.data}
+            // console.log(e.response.data.message);
+            // console.log(e.response.data.errors);
+            return { error: true, msg: (e as any).response.data.message}
         }
     }
 
