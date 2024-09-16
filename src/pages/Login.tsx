@@ -4,6 +4,7 @@ import {Image, View, Text} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import useFetch from "../hooks/useFetch";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const image = {uri: 'https://cdn.thingiverse.com/renders/18/f2/af/d5/e0/347d0cf950a6d42312a4d4a61d8c9c18_display_large.jpg'};
 
@@ -17,7 +18,7 @@ const Login = () => {
         // setDataFromChild(data);
         // TODO move into a login function and call that here
         try {
-            await axios.post('https://ghif128xv9.sharedwithexpose.com/api/auth/login', {
+            const response = await axios.post('http://y5od4x98yo.sharedwithexpose.com/api/auth/login', {
                 username: formData.username,
                 password: formData.password,
                 headers: {
@@ -25,7 +26,13 @@ const Login = () => {
                     'Accept': 'application/json'
                 }
             });
-            navigation.navigate('Home'); // Navigate on successful login
+            // Persist token into storage
+            const token = response.data.data.token;
+            // console.log(token);
+            await AsyncStorage.setItem("token", token);
+            const storedToken = await AsyncStorage.getItem("token")
+            console.log(storedToken)
+            // navigation.navigate('Home');
 
         } catch (err) {
             const error = err.response.data.errors ?? err.response.data.message
