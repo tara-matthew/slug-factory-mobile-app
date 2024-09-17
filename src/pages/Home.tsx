@@ -7,7 +7,7 @@ import axios from "axios";
 const Home = () => {
     const baseURL = "https://wkz4a6zhju.sharedwithexpose.com/api"
 
-    const [loadingLatest, setLoadingLatest] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [latestPrints, setLatestPrints] = useState([])
     const [popularPrints, setPopularPrints] = useState([])
     const [randomPrints, setRandomPrints] = useState([])
@@ -37,12 +37,16 @@ const Home = () => {
             setLatestPrints(latestPrints.data)
             setPopularPrints(popularPrints.data)
             setRandomPrints(randomPrints.data)
+        }).catch((err) => {
+            console.error(err);
+        }).finally(() => {
+            setLoading(false);
         });
     }
 
-    // if (loadingLatest) {
-    //     return <Text>Loading...</Text>;
-    // }
+    if (loading) {
+        return <Text>Loading...</Text>;
+    }
 
     return (
         <View className={"relative"}>
