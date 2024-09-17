@@ -1,7 +1,9 @@
 import {useEffect, useMemo, useState} from "react";
 
-const baseURL = "http://khxmdwcdgp.sharedwithexpose.com/api"
+const baseURL = "https://ghif128xv9.sharedwithexpose.com/api"
+
 const useFetch = (url: string, options) => {
+    console.log(options);
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,12 +14,22 @@ const useFetch = (url: string, options) => {
                 const response = await fetch(`${baseURL}/${url}`, {
                     headers: {
                         "Content-Type": "application/json",
+                        "Accept": "application/json",
                     }, ...options,
                 });
+                // if (!response.ok) {
+                //     // Create an error object to throw
+                //     const error = new Error(`HTTP error! status: ${response.status}`);
+                //     // Attach status code to the error object
+                //     (error as any).status = response.status;
+                //     throw error;
+                // }
                 const result = await response.json();
+                console.log(result);
                 setData(result.data)
             } catch (error) {
-                setError(error);
+                console.log(error);
+                setError(error.message);
             } finally {
                 setLoading(false);
             }

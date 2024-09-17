@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
 
             if (token) {
                 // set header
+                axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
                 setAuthState({
                     token: token,
@@ -36,15 +37,15 @@ export const AuthProvider = ({ children }) => {
     const login = async(username: string, password: string) => {
         try {
             const result =  await axios.post('https://gcmu1ookz2.sharedwithexpose.com/api/auth/login', {username, password})
-            console.log(result.data.data.token)
+            const token = result.data.data.token;
             setAuthState({
-                token: result.data.data.token,
+                token: token,
                 authenticated: true
             })
 
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await AsyncStorage.setItem("token", result.data.data.token);
 
-            // set axios headers
         } catch (e) {
             // console.log(e.response.data.message);
             // console.log(e.response.data.errors);
