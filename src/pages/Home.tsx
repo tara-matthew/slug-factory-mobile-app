@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, Text, View} from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import useFetch from "../hooks/useFetch";
 import axios from "axios";
+import fetchData from "../hooks/apiFetch";
 
 const Home = () => {
     const baseURL = "https://wkz4a6zhju.sharedwithexpose.com/api"
@@ -11,37 +12,28 @@ const Home = () => {
     const [latestPrints, setLatestPrints] = useState([])
     const [popularPrints, setPopularPrints] = useState([])
     const [randomPrints, setRandomPrints] = useState([])
-    const options = useMemo(() => ({
-        method: 'GET'
-    }), []);
 
     useEffect(() => {
         getHomeData()
     }, []);
 
-    const getHomeData = () => {
+    const getHomeData = async () => {
         let endpoints = [
             `${baseURL}/prints/latest`,
             `${baseURL}/my/prints`,
             `${baseURL}/prints/random`,
         ];
 
-        Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-            (
-                [
-                    {data: latestPrints},
-                    {data: popularPrints},
-                    {data: randomPrints}
-                ]
-            )=> {
-            setLatestPrints(latestPrints.data)
-            setPopularPrints(popularPrints.data)
-            setRandomPrints(randomPrints.data)
-        }).catch((err) => {
-            console.error(err);
-        }).finally(() => {
+        try {
+            const [latestPrints, popularPrints, randomPrints] = await fetchData(endpoints);
+            setLatestPrints(latestPrints);
+            setPopularPrints(popularPrints);
+            setRandomPrints(randomPrints);
+        } catch (error) {
+            console.error("Error in getHomeData", error);
+        } finally {
             setLoading(false);
-        });
+        }
     }
 
     if (loading) {
