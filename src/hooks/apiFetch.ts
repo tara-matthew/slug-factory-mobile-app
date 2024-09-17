@@ -1,5 +1,4 @@
 import axios from "axios";
-import {useState} from "react";
 
 const fetchData = async (endpoints) => {
     try {
@@ -8,16 +7,15 @@ const fetchData = async (endpoints) => {
             const response = await Promise.all(
                 endpoints.map((endpoint) => axios.get(endpoint))
             );
-            return response.map(({ data }) => data.data);
+            return response.map(({ data }) => data);
         } else {
             const { data } = await axios.get(endpoints);
             // Return the data directly if it's a single endpoint
-            return data.data;
+            return data;
         }
     } catch (error) {
-        console.error("Error fetching data", error);
         throw error; // Handle the error as needed
-    } 
+    }
 };
 
 export default fetchData;
