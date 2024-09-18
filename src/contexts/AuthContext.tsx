@@ -1,9 +1,7 @@
 import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import {parse} from "ts-jest";
 
-// Create a context
 const AuthContext = createContext({});
 
 export const useAuth = () => {
@@ -19,26 +17,14 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const loadToken = async () => {
             const token = await AsyncStorage.getItem("token");
-            // delete axios.defaults.headers.common["Authorization"];
-            // delete axios.defaults.headers.common["Authorization"];
-            //
-            // await AsyncStorage.removeItem("token");
-            // setAuthState({
-            //     token: null,
-            //     authenticated: false
-            // });
 
             if (token) {
-                // console.log(authState.authenticated);
-                // set header
                 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-                console.log('here');
 
                 setAuthState({
                     token: token,
                     authenticated: true
                 })
-
             }
         }
         loadToken();
@@ -69,9 +55,7 @@ export const AuthProvider = ({ children }) => {
                 token: null,
                 authenticated: false
             });
-            // console.log(e.response.data.message);
-            // console.log(e.response.data.message);
-            // console.log(e.response.data.errors);
+
             return { error: true, msg: e}
         }
     }
