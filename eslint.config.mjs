@@ -16,6 +16,7 @@ export default [
       "unused-imports": unusedImports,
     },
     rules: {
+      "indent": ["error", 4],
       "no-unused-vars": "error",
       "unused-imports/no-unused-imports": "error",
       "no-undef": "error"
