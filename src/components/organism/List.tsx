@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
+import { FlatList, View } from 'react-native';
 import Card from "../molecule/Card";
 
 const renderItem = ({ item }) => {
