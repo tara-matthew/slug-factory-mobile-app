@@ -7,7 +7,6 @@ const fetchData = async (endpoints, method = 'GET', params = null) => {
             endpoints.map((endpoint) => axios({
                 method: method,
                 url: endpoint,
-                data: params
             }))
         );
         return response.map(({ data }) => data);
@@ -17,6 +16,7 @@ const fetchData = async (endpoints, method = 'GET', params = null) => {
             url: endpoints,
             data: params
         });
+
         return data;
     }
 };
