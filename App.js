@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, ActivityIndicator, View} from 'react-native';
+import { StyleSheet } from 'react-native';
 import "./global.css"
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
