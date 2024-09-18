@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react-native';
 import Pill from "./Pill";
+import React from "react";
 
 it('Displays the correct title', () => {
     const { getByText } = render(<Pill title={'test title'} />);

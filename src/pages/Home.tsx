@@ -14,7 +14,7 @@ const Home = () => {
     });
 
     useEffect(() => {
-        getHomeData()
+        void getHomeData()
     }, []);
 
     const getHomeData = async () => {
