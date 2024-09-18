@@ -7,6 +7,11 @@ import unusedImports from "eslint-plugin-unused-imports";
 
 export default [
   {
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
     plugins: {
       "unused-imports": unusedImports,
     },
