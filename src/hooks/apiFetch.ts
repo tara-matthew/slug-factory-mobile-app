@@ -1,13 +1,22 @@
 import axios from "axios";
 
-const fetchData = async (endpoints) => {
+axios.defaults.baseURL = 'http://slug-factory-api.test/api';
+const fetchData = async (endpoints, method = 'GET', params = null) => {
     if (Array.isArray(endpoints)) {
         const response = await Promise.all(
-            endpoints.map((endpoint) => axios.get(endpoint))
+            endpoints.map((endpoint) => axios({
+                method: method,
+                url: endpoint,
+                data: params
+            }))
         );
         return response.map(({ data }) => data);
     } else {
-        const { data } = await axios.get(endpoints);
+        const { data } = await axios({
+            method: method,
+            url: endpoints,
+            data: params
+        });
         return data;
     }
 };

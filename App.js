@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {StyleSheet, Text, ActivityIndicator, View} from 'react-native';
 import "./global.css"
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
@@ -24,14 +24,22 @@ const App = () => {
 export const Layout = () => {
     const { authState } = useAuth();
 
+    if (!authState.authenticated) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
+
     return (
         <NavigationContainer>
             <Stack.Navigator>
                 { authState?.authenticated ? (
-                    <Tab.Screen name="Home" component={Home} />) : (
-                    <Tab.Screen name="Login" component={Login} /> )}
-                <Tab.Screen name="PrintedDesign" component={PrintedDesign} />
-                <Tab.Screen name="Thingiverse" component={Thingiverse} />
+                    <Tab.Screen name="Home" component={ Home } />) : (
+                    <Tab.Screen name="Login" component={ Login } /> )}
+                <Tab.Screen name="PrintedDesign" component={ PrintedDesign } />
+                <Tab.Screen name="Thingiverse" component={ Thingiverse } />
             </Stack.Navigator>
         </NavigationContainer>
     );

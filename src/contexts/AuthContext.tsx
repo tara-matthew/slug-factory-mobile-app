@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import fetchData from "../hooks/apiFetch";
 
 const AuthContext = createContext({});
 
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async(username: string, password: string) => {
         try {
-            const result =  await axios.post('https://vg1qdjy7ez.sharedwithexpose.com/api/auth/login', { username, password })
+            const result =  await fetchData('/auth/login', 'POST', { username: username, password: password })
             const token = result.data.data.token;
             setAuthState({
                 token: token,
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await AsyncStorage.setItem("token", result.data.data.token);
 
-            const user = await axios.get('https://vg1qdjy7ez.sharedwithexpose.com/api/me')
+            const user = await fetchData('/me');
             await AsyncStorage.setItem("user", JSON.stringify(user.data));
             return result;
 

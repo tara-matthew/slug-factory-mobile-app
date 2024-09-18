@@ -4,8 +4,6 @@ import ListGroup from "../components/template/ListGroup";
 import fetchData from "../hooks/apiFetch";
 
 const Home = () => {
-    const baseURL = "http://slug-factory-api.test/api"
-
     const [loading, setLoading] = useState(true);
     const [prints, setPrints] = useState({
         latest: [],
@@ -19,9 +17,9 @@ const Home = () => {
 
     const getHomeData = async () => {
         const endpoints = [
-            `${baseURL}/prints/latest`,
-            `${baseURL}/my/prints`,
-            `${baseURL}/prints/random`,
+            `/prints/latest`,
+            `/my/prints`,
+            `/prints/random`,
         ];
 
         try {
@@ -39,7 +37,7 @@ const Home = () => {
     }
 
     if (loading) {
-        return <Text>Loading...</Text>;
+        return (<Text>Loading...</Text>)
     }
 
     return (
