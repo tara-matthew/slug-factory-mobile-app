@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Dimensions, Image, ScrollView} from "react-native";
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Image, ScrollView } from "react-native";
 
 const ImageList = (props) => {
     const [aspectRatio, setAspectRatio] = useState(1);

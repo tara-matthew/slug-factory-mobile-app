@@ -1,10 +1,10 @@
-import React, {memo} from 'react';
-import {Text, StyleSheet, View, Image, Pressable} from 'react-native';
+import React, { memo } from 'react';
+import { Text, StyleSheet, View, Image, Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 
-const Card = ({item}) => {
+const Card = ({ item }) => {
     const width = 300;
     const height = 200;
 
@@ -13,7 +13,7 @@ const Card = ({item}) => {
     const buttonPressed = (item) => {
         console.log('pressed', item.title);
         // @ts-ignore
-        navigation.navigate('PrintedDesign', {print: item})
+        navigation.navigate('PrintedDesign', { print: item })
 
     }
 
@@ -21,26 +21,26 @@ const Card = ({item}) => {
         <View style={[styles.container]}>
             <Pressable
                 onPress={() => buttonPressed(item)}>
-            <View className={"relative"}>
-            <Image
-                style={{
-                    width: width,
-                    height: height,
-                }}
-                source={{
-                    uri: item.images[0]?.url,
-                }}
-            />
-                <MaterialIcons
-                    name="favorite-outline"
-                    size={32}
-                    color="white"
-                    style={styles.icon}
-                    className={"absolute top-1 right-2"}
-                />
+                <View className={"relative"}>
+                    <Image
+                        style={{
+                            width: width,
+                            height: height,
+                        }}
+                        source={{
+                            uri: item.images[0]?.url,
+                        }}
+                    />
+                    <MaterialIcons
+                        name="favorite-outline"
+                        size={32}
+                        color="white"
+                        style={styles.icon}
+                        className={"absolute top-1 right-2"}
+                    />
 
-            <Text style={{height: 50, fontSize: 18, padding: 8}}>{item.title}</Text>
-        </View>
+                    <Text style={{ height: 50, fontSize: 18, padding: 8 }}>{item.title}</Text>
+                </View>
             </Pressable>
         </View>
     )
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
-        textShadowOffset: {width: -1, height: 1},
+        textShadowOffset: { width: -1, height: 1 },
         textShadowRadius: 3
         // opacity: 5
         // backgroundColor: 'rgba(0, 0, 0, 0.5)'

@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async(username: string, password: string) => {
         try {
-            const result =  await axios.post('https://vg1qdjy7ez.sharedwithexpose.com/api/auth/login', {username, password})
+            const result =  await axios.post('https://vg1qdjy7ez.sharedwithexpose.com/api/auth/login', { username, password })
             const token = result.data.data.token;
             setAuthState({
                 token: token,
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
                 authenticated: false
             });
 
-            return { error: true, msg: e}
+            return { error: true, msg: e }
         }
     }
 

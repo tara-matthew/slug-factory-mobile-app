@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import { Text, View} from "react-native";
+import React, { useState } from 'react';
+import { Text, View } from "react-native";
 import Form from "../organism/Form";
 
 
-const Welcome = ({headerText, buttonText, inputs, buttonTo, sendDataToParent}) => {
+const Welcome = ({ headerText, buttonText, inputs, buttonTo, sendDataToParent }) => {
     const [dataFromChild, setDataFromChild] = useState("");
 
     function handleDataFromChild(data) {

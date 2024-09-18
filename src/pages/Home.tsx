@@ -1,5 +1,5 @@
-import React, {memo, useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from "react-native";
+import React, { memo, useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import fetchData from "../hooks/apiFetch";
 
@@ -45,9 +45,9 @@ const Home = () => {
     return (
         <View className={"relative"}>
             <ScrollView contentContainerStyle={styles.container}>
-               <ListGroup data={{heading: "Recently Uploaded", data: prints.latest}}></ListGroup>
-               <ListGroup data={{heading: "Most Popular", data: prints.popular}}></ListGroup>
-               <ListGroup data={{heading: "Last Viewed", data: prints.random}}></ListGroup>
+                <ListGroup data={{ heading: "Recently Uploaded", data: prints.latest }}></ListGroup>
+                <ListGroup data={{ heading: "Most Popular", data: prints.popular }}></ListGroup>
+                <ListGroup data={{ heading: "Last Viewed", data: prints.random }}></ListGroup>
             </ScrollView>
         </View>
     );

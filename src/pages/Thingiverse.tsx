@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, ScrollView, StyleSheet} from "react-native";
+import { View, Image, ScrollView, StyleSheet } from "react-native";
 import RenderHtml from 'react-native-render-html';
 
 const Thingiverse = () => {
@@ -19,9 +19,9 @@ const Thingiverse = () => {
                     height: undefined,
                     aspectRatio: 1.3333,
                 }}
-                       source={{
-                           uri: 'https://picsum.photos/640/480?random=40225',
-                       }} />
+                source={{
+                    uri: 'https://picsum.photos/640/480?random=40225',
+                }} />
 
                 <RenderHtml
                     contentWidth={100}
