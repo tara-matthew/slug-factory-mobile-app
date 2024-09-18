@@ -36,12 +36,20 @@ export const Layout = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 { authState?.authenticated ? (
-                    <Tab.Screen name="Home" component={ Home } />) : (
+                    <Stack.Screen name="Main" component={ MainTabs } options={{ headerShown: false }} />) : (
                     <Tab.Screen name="Login" component={ Login } /> )}
-                <Tab.Screen name="PrintedDesign" component={ PrintedDesign } />
-                <Tab.Screen name="Thingiverse" component={ Thingiverse } />
+                <Stack.Screen name="PrintedDesign" component={PrintedDesign} />
             </Stack.Navigator>
         </NavigationContainer>
+    );
+}
+
+function MainTabs() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Profile" component={Thingiverse} />
+        </Tab.Navigator>
     );
 }
 
