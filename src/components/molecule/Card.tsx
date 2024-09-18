@@ -3,7 +3,6 @@ import { Text, StyleSheet, View, Image, Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
-
 const Card = ({ item }) => {
     const width = 300;
     const height = 200;
