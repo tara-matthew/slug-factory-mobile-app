@@ -17,7 +17,7 @@ const Login = () => {
     async function handleDataFromChild(formData) {
         // setDataFromChild(data);
         const result = await onLogin(formData.username, formData.password);
-        if (result?.error) {
+        if (result.error) {
             setError(result.msg);
         }
     }

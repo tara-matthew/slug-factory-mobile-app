@@ -27,6 +27,13 @@ export const AuthProvider = ({ children }) => {
                     token: token,
                     authenticated: true
                 })
+
+                // await AsyncStorage.removeItem("token");
+                // delete axios.defaults.headers.common["Authorization"];
+                // setAuthState({
+                //     token: null,
+                //     authenticated: null
+                // })
             }
         }
         loadToken();
@@ -35,21 +42,24 @@ export const AuthProvider = ({ children }) => {
     const login = async(username: string, password: string) => {
         try {
             const result =  await fetchData('/auth/login', 'POST', { username: username, password: password })
-            const token = result.data.data.token;
+            // console.log('result', result.data)
+            const token = result.data.token;
             setAuthState({
                 token: token,
                 authenticated: true
             })
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            await AsyncStorage.setItem("token", result.data.data.token);
+            await AsyncStorage.setItem("token", token);
 
             const user = await fetchData('/me');
             await AsyncStorage.setItem("user", JSON.stringify(user.data));
+            console.log('here', user);
             return result;
 
         } catch (e) {
-            console.log('exception', e);
+            const message = e.response.data.message;
+            // console.log('exception', e.response.data.message);
             delete axios.defaults.headers.common["Authorization"];
 
             await AsyncStorage.removeItem("token");
@@ -58,7 +68,7 @@ export const AuthProvider = ({ children }) => {
                 authenticated: false
             });
 
-            return { error: true, msg: e }
+            return { error: true, msg: message }
         }
     }
 

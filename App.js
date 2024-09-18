@@ -24,13 +24,13 @@ const App = () => {
 export const Layout = () => {
     const { authState } = useAuth();
 
-    if (!authState.authenticated) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-        );
-    }
+    // if (!authState.authenticated) {
+    //     return (
+    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //             <ActivityIndicator size="large" color="#0000ff" />
+    //         </View>
+    //     );
+    // }
 
     return (
         <NavigationContainer>
