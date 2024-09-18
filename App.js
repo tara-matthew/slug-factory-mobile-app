@@ -14,7 +14,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import PrintedDesign from "./src/pages/PrintedDesign";
 import Thingiverse from "./src/pages/Thingiverse";
-import {AuthProvider} from "./src/contexts/AuthContext";
+import {AuthProvider, useAuth} from "./src/contexts/AuthContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -22,17 +22,28 @@ const Stack = createNativeStackNavigator();
 const App = () => {
         return (
             <AuthProvider>
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        <Tab.Screen name="Login" component={Login} />
-                        <Tab.Screen name="Home" component={Home} />
-                        <Tab.Screen name="PrintedDesign" component={PrintedDesign} />
-                        <Tab.Screen name="Thingiverse" component={Thingiverse} />
-                    </Stack.Navigator>
-                </NavigationContainer>
+                <Layout></Layout>
             </AuthProvider>
         );
 };
+
+export const Layout = () => {
+    const {authState} = useAuth();
+    console.log(
+        authState
+    )
+    return (
+            <NavigationContainer>
+                <Stack.Navigator>
+                    { authState?.authenticated ? (
+                        <Tab.Screen name="Home" component={Home} />) : (
+                        <Tab.Screen name="Login" component={Login} /> )}
+                    <Tab.Screen name="PrintedDesign" component={PrintedDesign} />
+                    <Tab.Screen name="Thingiverse" component={Thingiverse} />
+                </Stack.Navigator>
+            </NavigationContainer>
+    );
+}
 
 const styles = StyleSheet.create({
     container: {

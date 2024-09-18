@@ -19,12 +19,20 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const loadToken = async () => {
             const token = await AsyncStorage.getItem("token");
-            const user = await AsyncStorage.getItem("user");
-            console.log(JSON.parse(user))
+            // delete axios.defaults.headers.common["Authorization"];
+            // delete axios.defaults.headers.common["Authorization"];
+            //
+            // await AsyncStorage.removeItem("token");
+            // setAuthState({
+            //     token: null,
+            //     authenticated: false
+            // });
 
             if (token) {
+                // console.log(authState.authenticated);
                 // set header
                 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+                console.log('here');
 
                 setAuthState({
                     token: token,
@@ -38,32 +46,39 @@ export const AuthProvider = ({ children }) => {
 
     const login = async(username: string, password: string) => {
         try {
-            const result =  await axios.post('https://q7tupkm52t.sharedwithexpose.com/api/auth/login', {username, password})
+            const result =  await axios.post('https://vg1qdjy7ez.sharedwithexpose.com/api/auth/login', {username, password})
             const token = result.data.data.token;
-            console.log('here', result);
             setAuthState({
                 token: token,
                 authenticated: true
             })
 
-            // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await AsyncStorage.setItem("token", result.data.data.token);
-            console.log('to here');
 
-            const user = await axios.get('https://q7tupkm52t.sharedwithexpose.com/api/me')
+            const user = await axios.get('https://vg1qdjy7ez.sharedwithexpose.com/api/me')
             await AsyncStorage.setItem("user", JSON.stringify(user.data));
             return result;
 
         } catch (e) {
-            console.log(e);
+            console.log('exception', e);
+            delete axios.defaults.headers.common["Authorization"];
+
+            await AsyncStorage.removeItem("token");
+            setAuthState({
+                token: null,
+                authenticated: false
+            });
+            // console.log(e.response.data.message);
             // console.log(e.response.data.message);
             // console.log(e.response.data.errors);
-            return { error: true, msg: (e as any)}
+            return { error: true, msg: e}
         }
     }
 
     const value = {
-        onLogin: login
+        onLogin: login,
+        authState
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

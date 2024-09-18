@@ -4,7 +4,7 @@ import ListGroup from "../components/template/ListGroup";
 import fetchData from "../hooks/apiFetch";
 
 const Home = () => {
-    const baseURL = "https://q7tupkm52t.sharedwithexpose.com/api"
+    const baseURL = "http://slug-factory-api.test/api"
 
     const [loading, setLoading] = useState(true);
     const [prints, setPrints] = useState({
