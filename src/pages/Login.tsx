@@ -1,9 +1,7 @@
-import React, {memo, useContext, useMemo, useState} from "react";
+import React, {memo, useState} from "react";
 import Welcome from "../components/template/Welcome";
-import {Image, View, Text} from "react-native";
+import { View, Text} from "react-native";
 import {useNavigation} from "@react-navigation/native";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useAuth} from "../contexts/AuthContext";
 
 const image = {uri: 'https://cdn.thingiverse.com/renders/18/f2/af/d5/e0/347d0cf950a6d42312a4d4a61d8c9c18_display_large.jpg'};

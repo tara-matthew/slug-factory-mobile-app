@@ -1,6 +1,5 @@
-import React, {useState} from "react";
-import {Text, View, Image, ScrollView, StyleSheet, TouchableOpacity, Button, Pressable} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import React from "react";
+import { View, Image, ScrollView, StyleSheet} from "react-native";
 import RenderHtml from 'react-native-render-html';
 
 const Thingiverse = () => {

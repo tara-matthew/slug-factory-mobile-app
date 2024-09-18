@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, Image, ScrollView, StyleSheet, Dimensions } from "react-native";
+import React from "react";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";

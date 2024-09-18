@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useMemo, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import fetchData from "../hooks/apiFetch";
@@ -18,7 +18,7 @@ const Home = () => {
     }, []);
 
     const getHomeData = async () => {
-        let endpoints = [
+        const endpoints = [
             `${baseURL}/prints/latest`,
             `${baseURL}/my/prints`,
             `${baseURL}/prints/random`,
