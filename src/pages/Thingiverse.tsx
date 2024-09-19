@@ -1,8 +1,13 @@
-import React from "react";
-import { View, Image, ScrollView, StyleSheet } from "react-native";
+import React, {useEffect, useState} from "react";
+import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import RenderHtml from 'react-native-render-html';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "../contexts/AuthContext";
 
 const Thingiverse = () => {
+
+    const [user, setUser] = useState({})
+    const { getUser } = useAuth();
 
     const source = {
         html: `
@@ -10,6 +15,16 @@ const Thingiverse = () => {
   Hello World!
 </p>`
     };
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const user = await getUser();
+            setUser(user);
+        };
+
+        void fetchUser();
+    }, []);
+
 
     return (
         <View>
@@ -27,6 +42,10 @@ const Thingiverse = () => {
                     contentWidth={100}
                     source={source}
                 />
+
+                <Text>{user.name}</Text>
+                <Text>{user.email}</Text>
+
 
             </ScrollView>
         </View>

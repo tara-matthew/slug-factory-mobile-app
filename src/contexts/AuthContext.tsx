@@ -72,9 +72,20 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const getUser = async () => {
+        try {
+            const user = await AsyncStorage.getItem('user')
+            return JSON.parse(user)
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
+
     const value = {
         onLogin: login,
-        authState
+        authState,
+        getUser
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
