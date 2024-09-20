@@ -1,7 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Pill from "../atom/Pill";
+import ContentWithDivider from "./ContentWithDivider";
 
-const InfoCard = () => {
+type InfoCardProps = {
+    imageUrl: string;
+    name: string;
+    uploadCount: number;
+    info: Array<string>;
+}
+
+const InfoCard = (props: InfoCardProps) => {
+
+    useEffect(() => {
+        props.info.map((item, index) => {
+            console.log(item);
+        })
+    }, []);
+
     return (
         <View style={styles.container} className={'rounded-lg shadow-sm p-8'}>
             <View className={'flex flex-row items-center'}>
@@ -15,7 +31,7 @@ const InfoCard = () => {
                         }}
                         resizeMode={"cover"}
                         source={{
-                            uri: 'https://avatars.githubusercontent.com/u/97165289',
+                            uri: props.imageUrl,
                         }}
                     />
 
@@ -24,30 +40,45 @@ const InfoCard = () => {
                         style={{ maxWidth: 120, textAlign: 'center' }}
                         numberOfLines={1}
                     >
-                        Tara
+                        {props.name}
                     </Text>
 
                     <Text
                         className={"text-lg text-center"}
                         style={{ maxWidth: 120, textAlign: 'center' }}
                     >
-                        10 uploads
+                        {props.uploadCount} uploads
                     </Text>
                 </View>
 
-                <View className="flex-1 flex flex-col items-end">
-                    <TouchableOpacity>
-                        <Text className={'text-xl font-bold pb-2'}>Thingiverse</Text>
-                    </TouchableOpacity>
-                    <View style={styles.divider}></View>
+                <View className="flex-1 flex flex-col">
+                    {props.info.map((item, index) => {
+                        const isFirst = index === 0;
+                        const isLast = index === props.info.length - 1;
 
-                    <Text className={"text-lg py-2"}>21/8/2024</Text>
-                    <View style={styles.divider}></View>
+                        return (
+                            <ContentWithDivider
+                                class={"items-end"}
+                                key={index}
+                                top={!isFirst}
+                                bottom={!isLast}
+                                text={item}
+                            >
+                            </ContentWithDivider>
+                        );
+                    })}
+                    {/*<TouchableOpacity>*/}
+                    {/*    <Text className={'text-xl font-bold pb-2'}>Thingiverse</Text>*/}
+                    {/*</TouchableOpacity>*/}
+                    {/*<View style={styles.divider}></View>*/}
 
-                    <Text className={"text-lg py-2"}>Printed 3 times</Text>
-                    <View style={styles.divider}></View>
+                    {/*<Text className={"text-lg py-2"}>21/8/2024</Text>*/}
+                    {/*<View style={styles.divider}></View>*/}
 
-                    <Text className={"text-lg py-2"}>4 reviews</Text>
+                    {/*<Text className={"text-lg py-2"}>Printed 3 times</Text>*/}
+                    {/*<View style={styles.divider}></View>*/}
+
+                    {/*<Text className={"text-lg py-2"}>4 reviews</Text>*/}
                 </View>
             </View>
         </View>

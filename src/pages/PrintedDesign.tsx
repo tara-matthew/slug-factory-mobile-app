@@ -39,7 +39,13 @@ const PrintedDesign = ({ route }) => {
                 <View style={styles.divider} />
 
                 <View className={"my-5 w-full m-auto"}>
-                    <InfoCard />
+                    <InfoCard
+                        imageUrl={'https://avatars.githubusercontent.com/u/97165289'}
+                        name={'Tara'}
+                        uploadCount={10}
+                        info={['Thingiverse', '21/8/2024', 'Printed 3 times', '4 reviews']}
+
+                    />
                 </View>
             </View>
         </ScrollView>
