@@ -61,7 +61,7 @@ const InfoCard = (props: InfoCardProps) => {
                                 key={ index }
                                 top={ false }
                                 bottom={ !isLast }
-                                dividerWidth={"half"}
+                                dividerWidth="half"
                             >
                                 <Text className="text-lg py-2">{item}</Text>
 

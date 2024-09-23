@@ -1,5 +1,5 @@
-import React, {ReactNode, useEffect} from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { ReactNode } from "react";
+import { View } from "react-native";
 import Divider from "../atom/Divider";
 
 type ContentWithDivider = {
@@ -12,13 +12,13 @@ type ContentWithDivider = {
 };
 const ContentWithDivider = (props: ContentWithDivider) => {
     return (
-        <View className={props.outerClass}>
-            {props.top && <Divider width={props.dividerWidth} />}
+        <View className={ props.outerClass }>
+            {props.top && <Divider width={ props.dividerWidth } />}
 
-            <View className={props?.innerClass}>
+            <View className={ props?.innerClass }>
                 { props.children }
             </View>
-            {props.bottom && <Divider width={props.dividerWidth} />}
+            {props.bottom && <Divider width={ props.dividerWidth } />}
 
         </View>
     );
