@@ -63,6 +63,8 @@ const InfoCard = (props: InfoCardProps) => {
                                 bottom={ !isLast }
                                 text={ item }
                             >
+                                <Text className="text-lg py-2">{item}</Text>
+
                             </ContentWithDivider>
                         );
                     })}

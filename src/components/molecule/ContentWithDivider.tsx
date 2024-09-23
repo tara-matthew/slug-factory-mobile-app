@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactNode, useEffect} from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 type ContentWithDivider = {
@@ -6,12 +6,13 @@ type ContentWithDivider = {
     bottom: boolean;
     text: string;
     class: string;
+    children: ReactNode;
 };
 const ContentWithDivider = (props: ContentWithDivider) => {
     return (
         <View className={ props.class }>
             {props.top && <View style={ styles.divider } />}
-            <Text className="text-lg py-2">{props.text}</Text>
+            {props.children}
             {props.bottom && <View style={ styles.divider } />}
         </View>
     );
