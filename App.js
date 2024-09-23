@@ -10,6 +10,8 @@ import PrintedDesign from "./src/pages/PrintedDesign";
 import { AuthProvider, useAuth } from "./src/contexts/AuthContext";
 import MyProfile from "./src/pages/MyProfile";
 import EditProfile from "./src/pages/EditProfile";
+import MyPrints from "./src/pages/MyPrints";
+import MyFavourites from "./src/pages/MyFavourites";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -44,6 +46,14 @@ export const Layout = () => {
                                     name="EditProfile"
                                     component={ EditProfile }
                                     options={ { title: "Edit Profile", headerBackTitle: "Back" } }
+                                />
+                                <Stack.Screen
+                                    name="MyPrints"
+                                    component={ MyPrints }
+                                />
+                                <Stack.Screen
+                                    name="MyFavourites"
+                                    component={ MyFavourites }
                                 />
                                 <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
                             </>

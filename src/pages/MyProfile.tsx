@@ -5,6 +5,8 @@ import InfoCard from "../components/molecule/InfoCard";
 import { useNavigation } from "@react-navigation/native";
 import EditProfile from "./EditProfile";
 import TouchableLink from "../components/molecule/TouchableLink";
+import MyFavourites from "./MyFavourites";
+import MyPrints from "./MyPrints";
 
 const MyProfile = () => {
     interface IUser {
@@ -36,8 +38,8 @@ const MyProfile = () => {
             />
             <View className="w-full mt-4">
                 <TouchableLink to={ EditProfile } title="Edit Profile" />
-                <TouchableLink to={ EditProfile } title="Favourites" />
-                <TouchableLink to={ EditProfile } title="Recent prints" />
+                <TouchableLink to={ MyFavourites } title="Favourites" />
+                <TouchableLink to={ MyPrints } title="Recent prints" />
                 <TouchableLink to={ EditProfile } title="Printer & filament preference" />
                 <TouchableLink to={ EditProfile } title="Saved tutorials & notes" />
             </View>
