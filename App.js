@@ -43,7 +43,7 @@ export const Layout = () => {
                                 <Stack.Screen
                                     name="EditProfile"
                                     component={ EditProfile }
-                                    options={ { title: "Edit Profile" } }
+                                    options={ { title: "Edit Profile", headerBackTitle: "Back" } }
                                 />
                                 <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
                             </>
