@@ -7,6 +7,7 @@ import ImageList from "../components/molecule/ImageList";
 
 const PrintedDesign = ({ route }) => {
     const { print } = route.params;
+    console.log(route.params.print.title)
     const navigation = useNavigation();
 
     const pills = [
