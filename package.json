@@ -31,7 +31,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@eslint/js": "^9.10.0",
-    "@stylistic/eslint-plugin-js": "^2.8.0",
+    "@stylistic/eslint-plugin": "^2.8.0",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.6.0",
     "@tsconfig/react-native": "^3.0.5",
