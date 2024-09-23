@@ -1,4 +1,4 @@
-import React, {ClassType} from 'react';
+import React, {ClassType, useEffect} from 'react';
 import EditProfile from "../../pages/EditProfile";
 import ContentWithDivider from "./ContentWithDivider";
 import {Text, TouchableOpacity} from "react-native";
@@ -6,8 +6,15 @@ import {MaterialIcons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import type { RouteProp } from '@react-navigation/native';
 
+interface ITouchableLinkProps {
+    title: string;
+    to: never;
+}
 
-const TouchableLink = (props) => {
+const TouchableLink = (props: ITouchableLinkProps) => {
+    useEffect(() => {
+        // console.log(typeof props.to)
+    }, []);
     const navigation = useNavigation();
     return (
         <TouchableOpacity

@@ -47,23 +47,4 @@ const MyProfile = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        paddingVertical: 20,
-        paddingHorizontal: 20,
-    },
-    view: {
-        // paddingVertical: 50,
-    },
-    text: {
-        fontSize: 18,
-        marginBottom: 10,
-    },
-    divider: {
-        width: "100%",
-        height: 1,
-        backgroundColor: "gray",
-    },
-});
-
 export default MyProfile;
