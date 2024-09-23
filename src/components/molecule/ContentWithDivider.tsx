@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 type ContentWithDivider = {
     top: boolean;
@@ -16,12 +16,11 @@ const ContentWithDivider = (props: ContentWithDivider) => {
         </View>
     )
 }
-// todo try 100% width view?
 
 const styles = StyleSheet.create( {
     divider: {
         width: '50%',
-        height: .5,
+        height: 1,
         backgroundColor: 'gray'
     }
 })

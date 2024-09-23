@@ -53,14 +53,13 @@ const InfoCard = (props: InfoCardProps) => {
 
                 <View className="flex-1 flex flex-col">
                     {props.info.map((item, index) => {
-                        const isFirst = index === 0;
                         const isLast = index === props.info.length - 1;
 
                         return (
                             <ContentWithDivider
                                 class={"items-end"}
                                 key={index}
-                                top={!isFirst}
+                                top={false}
                                 bottom={!isLast}
                                 text={item}
                             >
