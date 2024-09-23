@@ -1,10 +1,8 @@
-import React, {ClassType, useEffect} from 'react';
-import EditProfile from "../../pages/EditProfile";
+import React, { useEffect } from "react";
 import ContentWithDivider from "./ContentWithDivider";
-import {Text, TouchableOpacity} from "react-native";
-import {MaterialIcons} from "@expo/vector-icons";
-import {useNavigation} from "@react-navigation/native";
-import type { RouteProp } from '@react-navigation/native';
+import { Text, TouchableOpacity } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 interface ITouchableLinkProps {
     title: string;
@@ -25,7 +23,7 @@ const TouchableLink = (props: ITouchableLinkProps) => {
                 <MaterialIcons name="chevron-right" size={ 20 } />
             </ContentWithDivider>
         </TouchableOpacity>
-    )
-}
+    );
+};
 
 export default TouchableLink;

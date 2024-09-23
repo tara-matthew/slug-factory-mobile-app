@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import InfoCard from "../components/molecule/InfoCard";
-import { MaterialIcons } from "@expo/vector-icons";
-import ContentWithDivider from "../components/molecule/ContentWithDivider";
 import { useNavigation } from "@react-navigation/native";
 import EditProfile from "./EditProfile";
 import TouchableLink from "../components/molecule/TouchableLink";
@@ -37,11 +35,11 @@ const MyProfile = () => {
                 info={ ["1 follower", "25 favourites", user.email] }
             />
             <View className="w-full mt-4">
-                <TouchableLink to={EditProfile} title={'Edit Profile'} />
-                <TouchableLink to={EditProfile} title={'Favourites'} />
-                <TouchableLink to={EditProfile} title={'Recent prints'} />
-                <TouchableLink to={EditProfile} title={'Printer & filament preference'} />
-                <TouchableLink to={EditProfile} title={'Saved tutorials & notes'} />
+                <TouchableLink to={ EditProfile } title="Edit Profile" />
+                <TouchableLink to={ EditProfile } title="Favourites" />
+                <TouchableLink to={ EditProfile } title="Recent prints" />
+                <TouchableLink to={ EditProfile } title="Printer & filament preference" />
+                <TouchableLink to={ EditProfile } title="Saved tutorials & notes" />
             </View>
         </View>
     );

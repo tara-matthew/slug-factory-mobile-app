@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -8,7 +8,7 @@ const AuthContext = createContext({});
 
 export const useAuth = () => {
     return useContext(AuthContext);
-}
+};
 
 export const AuthProvider = ({ children }) => {
     const [authState, setAuthState] = useState({
@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }) => {
 
                 setAuthState({
                     token: token,
-                    authenticated: true
-                })
+                    authenticated: true,
+                });
 
                 // await AsyncStorage.removeItem("token");
                 // delete axios.defaults.headers.common["Authorization"];
@@ -35,28 +35,29 @@ export const AuthProvider = ({ children }) => {
                 //     authenticated: null
                 // })
             }
-        }
+
+            // remove headers and set auth state to false within an else?
+        };
         loadToken();
     }, []);
 
-    const login = async(username: string, password: string) => {
+    const login = async (username: string, password: string) => {
         try {
-            const result =  await fetchData('/auth/login', 'POST', { username: username, password: password })
+            const result = await fetchData("/auth/login", "POST", { username: username, password: password });
             // console.log('result', result.data)
             const token = result.data.token;
             setAuthState({
                 token: token,
-                authenticated: true
-            })
+                authenticated: true,
+            });
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await AsyncStorage.setItem("token", token);
 
-            const user = await fetchData('/me');
+            const user = await fetchData("/me");
             await AsyncStorage.setItem("user", JSON.stringify(user.data));
-            console.log('here', user);
+            console.log("here", user);
             return result;
-
         } catch (e) {
             const message = e.response.data.message;
             // console.log('exception', e.response.data.message);
@@ -65,29 +66,27 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.removeItem("token");
             setAuthState({
                 token: null,
-                authenticated: false
+                authenticated: false,
             });
 
-            return { error: true, msg: message }
+            return { error: true, msg: message };
         }
-    }
+    };
 
     const getUser = async () => {
         try {
-            const user = await AsyncStorage.getItem('user')
-            return JSON.parse(user)
+            const user = await AsyncStorage.getItem("user");
+            return JSON.parse(user);
         } catch (e) {
             console.log(e);
         }
-
-    }
+    };
 
     const value = {
         onLogin: login,
         authState,
-        getUser
+        getUser,
     };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
+    return <AuthContext.Provider value={ value }>{children}</AuthContext.Provider>;
+};
