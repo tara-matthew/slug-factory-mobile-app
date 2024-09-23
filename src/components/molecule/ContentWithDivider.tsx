@@ -4,23 +4,27 @@ import { StyleSheet, View, Text } from "react-native";
 type ContentWithDivider = {
     top: boolean;
     bottom: boolean;
-    // text: string;
-    class?: string;
+    outerClass?: string;
+    innerClass?: string;
     children: ReactNode;
 };
 const ContentWithDivider = (props: ContentWithDivider) => {
     return (
-        <View className={ props?.class }>
+        <View className={props.outerClass}>
             {props.top && <View style={ styles.divider } />}
-            { props.children }
+
+            <View className={props?.innerClass}>
+                { props.children }
+            </View>
             {props.bottom && <View style={ styles.divider } />}
+
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     divider: {
-        width: "100%",
+        width: "50%",
         height: 1,
         backgroundColor: "gray",
     },

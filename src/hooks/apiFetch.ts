@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://m4bjwnzikd.sharedwithexpose.com/api";
+axios.defaults.baseURL = "http://slug-factory-api.test/api";
 const fetchData = async (endpoints, method = "GET", params = null) => {
     if (Array.isArray(endpoints)) {
         return fetchMultipleEndpoints(endpoints, method);

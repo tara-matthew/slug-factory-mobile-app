@@ -57,7 +57,7 @@ const InfoCard = (props: InfoCardProps) => {
 
                         return (
                             <ContentWithDivider
-                                class="items-end"
+                                outerClass="items-end"
                                 key={ index }
                                 top={ false }
                                 bottom={ !isLast }

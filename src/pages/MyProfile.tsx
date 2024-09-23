@@ -33,37 +33,26 @@ const MyProfile = () => {
                 info={ ["1 follower", "25 favourites", user.email] }
             />
             <View className="w-full mt-4">
-                <ContentWithDivider top={false} bottom={true}>
-                    <View className="flex flex-row justify-between items-center">
-                        <Text className={"py-5 px-10"}>Edit profile</Text>
-                        <MaterialIcons name={"chevron-right"} size={20} />
-                    </View>
+                <ContentWithDivider top={false} bottom={true} innerClass={"flex flex-row justify-between items-center w-full"}>
+                    <Text className={"py-5 px-10"}>Edit profile</Text>
+                    <MaterialIcons name={"chevron-right"} size={20} />
                 </ContentWithDivider>
-                {/*<View className="flex flex-row justify-between items-center">*/}
-                {/*    <Text className={"py-5 px-10"}>Edit profile</Text>*/}
-                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
-                {/*</View>*/}
-                {/*<View style={ styles.divider } />*/}
-                {/*<View className="flex flex-row justify-between items-center">*/}
-                {/*    <Text className={"py-5 px-10"}>Favourites</Text>*/}
-                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
-                {/*</View>*/}
-                {/*<View style={ styles.divider } />*/}
-                {/*<View className="flex flex-row justify-between items-center">*/}
-                {/*    <Text className={"py-5 px-10"}>Recent prints</Text>*/}
-                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
-                {/*</View>*/}
-                {/*<View style={ styles.divider } />*/}
-                {/*<View className="flex flex-row justify-between items-center">*/}
-                {/*    <Text className={"py-5 px-10"}>Printer & filament preferences</Text>*/}
-                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
-                {/*</View>*/}
-                {/*<View style={ styles.divider } />*/}
-                {/*<View className="flex flex-row justify-between items-center">*/}
-                {/*    <Text className={"py-5 px-10"}>Saved tutorials & notes</Text>*/}
-                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
-                {/*</View>*/}
-                {/*<View style={ styles.divider } />*/}
+                <ContentWithDivider top={false} bottom={true} innerClass={"flex flex-row justify-between items-center w-full"}>
+                    <Text className={"py-5 px-10"}>Favourites</Text>
+                    <MaterialIcons name={"chevron-right"} size={20} />
+                </ContentWithDivider>
+                <ContentWithDivider top={false} bottom={true} innerClass={"flex flex-row justify-between items-center w-full"}>
+                    <Text className={"py-5 px-10"}>Recent prints</Text>
+                    <MaterialIcons name={"chevron-right"} size={20} />
+                </ContentWithDivider>
+                <ContentWithDivider top={false} bottom={true} innerClass={"flex flex-row justify-between items-center w-full"}>
+                    <Text className={"py-5 px-10"}>Printer & filament preferences</Text>
+                    <MaterialIcons name={"chevron-right"} size={20} />
+                </ContentWithDivider>
+                <ContentWithDivider top={false} bottom={true} innerClass={"flex flex-row justify-between items-center w-full"}>
+                    <Text className={"py-5 px-10"}>Saved tutorials & notes</Text>
+                    <MaterialIcons name={"chevron-right"} size={20} />
+                </ContentWithDivider>
             </View>
         </View>
     );
