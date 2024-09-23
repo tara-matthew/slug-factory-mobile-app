@@ -6,6 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import ContentWithDivider from "../components/molecule/ContentWithDivider";
 import { useNavigation } from "@react-navigation/native";
 import EditProfile from "./EditProfile";
+import TouchableLink from "../components/molecule/TouchableLink";
 
 const MyProfile = () => {
     interface IUser {
@@ -36,30 +37,11 @@ const MyProfile = () => {
                 info={ ["1 follower", "25 favourites", user.email] }
             />
             <View className="w-full mt-4">
-                <TouchableOpacity
-                    onPress={ () => navigation.navigate(EditProfile) }
-                >
-                    <ContentWithDivider top={ false } bottom={ true } innerClass="flex flex-row justify-between items-center w-full" dividerWidth="full">
-                        <Text className="py-5 px-10">Edit profile</Text>
-                        <MaterialIcons name="chevron-right" size={ 20 } />
-                    </ContentWithDivider>
-                </TouchableOpacity>
-                <ContentWithDivider top={ false } bottom={ true } innerClass="flex flex-row justify-between items-center w-full" dividerWidth="full">
-                    <Text className="py-5 px-10">Favourites</Text>
-                    <MaterialIcons name="chevron-right" size={ 20 } />
-                </ContentWithDivider>
-                <ContentWithDivider top={ false } bottom={ true } innerClass="flex flex-row justify-between items-center w-full" dividerWidth="full">
-                    <Text className="py-5 px-10">Recent prints</Text>
-                    <MaterialIcons name="chevron-right" size={ 20 } />
-                </ContentWithDivider>
-                <ContentWithDivider top={ false } bottom={ true } innerClass="flex flex-row justify-between items-center w-full" dividerWidth="full">
-                    <Text className="py-5 px-10">Printer & filament preferences</Text>
-                    <MaterialIcons name="chevron-right" size={ 20 } />
-                </ContentWithDivider>
-                <ContentWithDivider top={ false } bottom={ true } innerClass="flex flex-row justify-between items-center w-full" dividerWidth="full">
-                    <Text className="py-5 px-10">Saved tutorials & notes</Text>
-                    <MaterialIcons name="chevron-right" size={ 20 } />
-                </ContentWithDivider>
+                <TouchableLink to={EditProfile} title={'Edit Profile'} />
+                <TouchableLink to={EditProfile} title={'Favourites'} />
+                <TouchableLink to={EditProfile} title={'Recent prints'} />
+                <TouchableLink to={EditProfile} title={'Printer & filament preference'} />
+                <TouchableLink to={EditProfile} title={'Saved tutorials & notes'} />
             </View>
         </View>
     );

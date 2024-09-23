@@ -26,7 +26,7 @@ const Home = () => {
             const [latestPrints, popularPrints, randomPrints] = await fetchData(endpoints);
             setPrints({
                 latest: latestPrints.data,
-                popular: randomPrints.data,
+                popular: popularPrints.data,
                 random: randomPrints.data,
             });
         } catch (error) {
