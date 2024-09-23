@@ -61,7 +61,6 @@ const InfoCard = (props: InfoCardProps) => {
                                 key={ index }
                                 top={ false }
                                 bottom={ !isLast }
-                                text={ item }
                             >
                                 <Text className="text-lg py-2">{item}</Text>
 

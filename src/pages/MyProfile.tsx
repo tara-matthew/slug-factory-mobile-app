@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import InfoCard from "../components/molecule/InfoCard";
 import { MaterialIcons } from "@expo/vector-icons";
+import ContentWithDivider from "../components/molecule/ContentWithDivider";
 
 const MyProfile = () => {
     interface IUser {
@@ -32,31 +33,37 @@ const MyProfile = () => {
                 info={ ["1 follower", "25 favourites", user.email] }
             />
             <View className="w-full mt-4">
-                <View className="flex flex-row justify-between items-center">
-                    <Text className={"py-5 px-10"}>Edit profile</Text>
-                    <MaterialIcons name={"chevron-right"} size={20} />
-                </View>
-                <View style={ styles.divider } />
-                <View className="flex flex-row justify-between items-center">
-                    <Text className={"py-5 px-10"}>Favourites</Text>
-                    <MaterialIcons name={"chevron-right"} size={20} />
-                </View>
-                <View style={ styles.divider } />
-                <View className="flex flex-row justify-between items-center">
-                    <Text className={"py-5 px-10"}>Recent prints</Text>
-                    <MaterialIcons name={"chevron-right"} size={20} />
-                </View>
-                <View style={ styles.divider } />
-                <View className="flex flex-row justify-between items-center">
-                    <Text className={"py-5 px-10"}>Printer & filament preferences</Text>
-                    <MaterialIcons name={"chevron-right"} size={20} />
-                </View>
-                <View style={ styles.divider } />
-                <View className="flex flex-row justify-between items-center">
-                    <Text className={"py-5 px-10"}>Saved tutorials & notes</Text>
-                    <MaterialIcons name={"chevron-right"} size={20} />
-                </View>
-                <View style={ styles.divider } />
+                <ContentWithDivider top={false} bottom={true}>
+                    <View className="flex flex-row justify-between items-center">
+                        <Text className={"py-5 px-10"}>Edit profile</Text>
+                        <MaterialIcons name={"chevron-right"} size={20} />
+                    </View>
+                </ContentWithDivider>
+                {/*<View className="flex flex-row justify-between items-center">*/}
+                {/*    <Text className={"py-5 px-10"}>Edit profile</Text>*/}
+                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
+                {/*</View>*/}
+                {/*<View style={ styles.divider } />*/}
+                {/*<View className="flex flex-row justify-between items-center">*/}
+                {/*    <Text className={"py-5 px-10"}>Favourites</Text>*/}
+                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
+                {/*</View>*/}
+                {/*<View style={ styles.divider } />*/}
+                {/*<View className="flex flex-row justify-between items-center">*/}
+                {/*    <Text className={"py-5 px-10"}>Recent prints</Text>*/}
+                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
+                {/*</View>*/}
+                {/*<View style={ styles.divider } />*/}
+                {/*<View className="flex flex-row justify-between items-center">*/}
+                {/*    <Text className={"py-5 px-10"}>Printer & filament preferences</Text>*/}
+                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
+                {/*</View>*/}
+                {/*<View style={ styles.divider } />*/}
+                {/*<View className="flex flex-row justify-between items-center">*/}
+                {/*    <Text className={"py-5 px-10"}>Saved tutorials & notes</Text>*/}
+                {/*    <MaterialIcons name={"chevron-right"} size={20} />*/}
+                {/*</View>*/}
+                {/*<View style={ styles.divider } />*/}
             </View>
         </View>
     );
