@@ -1,5 +1,6 @@
 import React, {ReactNode, useEffect} from "react";
 import { StyleSheet, View, Text } from "react-native";
+import Divider from "../atom/Divider";
 
 type ContentWithDivider = {
     top: boolean;
@@ -7,27 +8,20 @@ type ContentWithDivider = {
     outerClass?: string;
     innerClass?: string;
     children: ReactNode;
+    dividerWidth: string; // todo make an enum
 };
 const ContentWithDivider = (props: ContentWithDivider) => {
     return (
         <View className={props.outerClass}>
-            {props.top && <View style={ styles.divider } />}
+            {props.top && <Divider width={props.dividerWidth} />}
 
             <View className={props?.innerClass}>
                 { props.children }
             </View>
-            {props.bottom && <View style={ styles.divider } />}
+            {props.bottom && <Divider width={props.dividerWidth} />}
 
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    divider: {
-        width: "50%",
-        height: 1,
-        backgroundColor: "gray",
-    },
-});
 
 export default ContentWithDivider;
