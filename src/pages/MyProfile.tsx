@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import InfoCard from "../components/molecule/InfoCard";
 import { MaterialIcons } from "@expo/vector-icons";
 import ContentWithDivider from "../components/molecule/ContentWithDivider";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import EditProfile from "./EditProfile";
 
 const MyProfile = () => {

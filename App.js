@@ -38,10 +38,22 @@ export const Layout = () => {
             <Stack.Navigator>
                 { authState?.authenticated
                     ? (
-                            <Stack.Screen name="Main" component={ MainTabs } options={ { headerShown: false, title: 'Home' } } />)
+                            <>
+                                <Stack.Screen name="Main" component={ MainTabs } options={ { headerShown: false, title: "Home" } } />
+                                <Stack.Screen
+                                    name="EditProfile"
+                                    component={ EditProfile }
+                                    options={ { title: "Edit Profile" } }
+                                />
+                                <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
+                            </>
+                        )
+
                     : (
-                            <Tab.Screen name="Login" component={ Login } />)}
-                <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={({ route }) => ({ title: route.params.print.title })} />
+                            <>
+                                <Tab.Screen name="Login" component={ Login } />
+                            </>
+                        )}
             </Stack.Navigator>
         </NavigationContainer>
     );
@@ -51,7 +63,7 @@ function MainTabs() {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Home" component={ Home } />
-            <Tab.Screen name="ProfileStack" component={ProfileStack} options={{ headerShown: false, title: 'Profile' }} />
+            <Tab.Screen name="ProfileStack" component={ ProfileStack } options={ { headerShown: false, title: "Profile" } } />
         </Tab.Navigator>
     );
 }
@@ -59,8 +71,11 @@ function MainTabs() {
 function ProfileStack() {
     return (
         <Stack.Navigator>
-            <Tab.Screen name="MyProfile" component={ MyProfile } options={{ title: 'Profile' }} />
-            <Stack.Screen name="EditProfile" component={EditProfile} options={{ title: 'Edit Profile' }} />
+            <Stack.Screen
+                name="MyProfile"
+                component={ MyProfile }
+                options={ { title: "Profile" } }
+            />
         </Stack.Navigator>
     );
 }
