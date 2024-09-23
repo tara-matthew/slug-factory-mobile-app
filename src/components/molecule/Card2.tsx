@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 import { View, Text } from "react-native";
 
 const Card2 = memo(
-    ({ item }: {item: any}) => (
+    ({ item }: { item: any }) => (
         <View>
-            <Text style={{ height: 50, fontSize: 18, padding: 8 }}>{item.title}</Text>
+            <Text style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
         </View>
     ),
     (prevProps, nextProps) => {

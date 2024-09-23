@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { Text, StyleSheet, View, Image, Pressable } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { memo } from "react";
+import { Text, StyleSheet, View, Image, Pressable } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const Card = ({ item }) => {
@@ -10,40 +10,40 @@ const Card = ({ item }) => {
     const navigation = useNavigation();
 
     const buttonPressed = (item) => {
-        console.log('pressed', item.title);
+        console.log("pressed", item.title);
         // @ts-ignore
-        navigation.navigate('PrintedDesign', { print: item })
-
-    }
+        navigation.navigate("PrintedDesign", { print: item });
+    };
 
     return (
-        <View style={[styles.container]}>
+        <View style={ [styles.container] }>
             <Pressable
-                onPress={() => buttonPressed(item)}>
-                <View className={"relative"}>
+                onPress={ () => buttonPressed(item) }
+            >
+                <View className="relative">
                     <Image
-                        style={{
+                        style={ {
                             width: width,
                             height: height,
-                        }}
-                        source={{
+                        } }
+                        source={ {
                             uri: item.images[0]?.url,
-                        }}
+                        } }
                     />
                     <MaterialIcons
                         name="favorite-outline"
-                        size={32}
+                        size={ 32 }
                         color="white"
-                        style={styles.icon}
-                        className={"absolute top-1 right-2"}
+                        style={ styles.icon }
+                        className="absolute top-1 right-2"
                     />
 
-                    <Text style={{ height: 50, fontSize: 18, padding: 8 }}>{item.title}</Text>
+                    <Text style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
                 </View>
             </Pressable>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -52,16 +52,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#d0cadb",
         marginBottom: 20,
-        shadowRadius: 2
+        shadowRadius: 2,
     },
     icon: {
-        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowColor: "rgba(0, 0, 0, 0.75)",
         textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 3
+        textShadowRadius: 3,
         // opacity: 5
         // backgroundColor: 'rgba(0, 0, 0, 0.5)'
         // backgroundColor: 'red',
-    }
-})
+    },
+});
 
 export default memo(Card);

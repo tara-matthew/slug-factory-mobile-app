@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import fetchData from "../hooks/apiFetch";
@@ -8,11 +8,11 @@ const Home = () => {
     const [prints, setPrints] = useState({
         latest: [],
         popular: [],
-        random: []
+        random: [],
     });
 
     useEffect(() => {
-        void getHomeData()
+        void getHomeData();
     }, []);
 
     const getHomeData = async () => {
@@ -27,39 +27,39 @@ const Home = () => {
             setPrints({
                 latest: latestPrints.data,
                 popular: popularPrints.data,
-                random: randomPrints.data
+                random: randomPrints.data,
             });
         } catch (error) {
             console.error("Error in getHomeData", error);
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     if (loading) {
-        return (<Text>Loading...</Text>)
+        return (<Text>Loading...</Text>);
     }
 
     return (
-        <View className={"relative"}>
-            <ScrollView contentContainerStyle={styles.container}>
-                <ListGroup data={{ heading: "Recently Uploaded", data: prints.latest }}></ListGroup>
-                <ListGroup data={{ heading: "Most Popular", data: prints.popular }}></ListGroup>
-                <ListGroup data={{ heading: "Last Viewed", data: prints.random }}></ListGroup>
+        <View className="relative">
+            <ScrollView contentContainerStyle={ styles.container }>
+                <ListGroup data={ { heading: "Recently Uploaded", data: prints.latest } }></ListGroup>
+                <ListGroup data={ { heading: "Most Popular", data: prints.popular } }></ListGroup>
+                <ListGroup data={ { heading: "Last Viewed", data: prints.random } }></ListGroup>
             </ScrollView>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 20,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
     },
     text: {
         fontSize: 18,
-        marginBottom: 10
-    }
+        marginBottom: 10,
+    },
 });
 
 export default memo(Home);
