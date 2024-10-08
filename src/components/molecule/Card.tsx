@@ -23,7 +23,7 @@ const Card = ({ item }) => {
                 <View className="relative">
                     <Image
                         style={ {
-                            width: width,
+                            width: '100%',
                             height: height,
                         } }
                         source={ {
@@ -38,7 +38,7 @@ const Card = ({ item }) => {
                         className="absolute top-1 right-2"
                     />
 
-                    <Text style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
+                    <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
                 </View>
             </Pressable>
         </View>
@@ -47,7 +47,7 @@ const Card = ({ item }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 300,
+        // width: 300,
         // height: 250,
         flex: 1,
         backgroundColor: "#d0cadb",
