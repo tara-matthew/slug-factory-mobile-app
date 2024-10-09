@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<View
+  className="w-1/2"
+  style={
+    {
+      "backgroundColor": "gray",
+      "height": 1,
+    }
+  }
+/>
+`;
+
+exports[`Renders correctly 2`] = `
+<View
+  className="w-full"
+  style={
+    {
+      "backgroundColor": "gray",
+      "height": 1,
+    }
+  }
+/>
+`;
