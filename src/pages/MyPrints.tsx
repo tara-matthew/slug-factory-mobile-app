@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {ScrollView, Text, View} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import fetchData from "../hooks/apiFetch";
-import ListGroup from "../components/template/ListGroup";
 import Grid from "../components/organism/Grid";
 
 const MyPrints = () => {
@@ -25,9 +24,9 @@ const MyPrints = () => {
 
     return (
         <View>
-            {/*<ScrollView>*/}
-                <Grid prints={prints}></Grid>
-            {/*</ScrollView>*/}
+            {/* <ScrollView> */}
+            <Grid prints={ prints }></Grid>
+            {/* </ScrollView> */}
         </View>
     );
 };

@@ -1,10 +1,10 @@
 import React from "react";
-import {FlatList, StyleSheet, View} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import Card from "../molecule/Card";
 
 const renderItem = ({ item }) => {
     return (
-        <View className="mr-4" style={[styles.container]}>
+        <View className="mr-4" style={ [styles.container] }>
             <Card item={ item } />
         </View>
     );

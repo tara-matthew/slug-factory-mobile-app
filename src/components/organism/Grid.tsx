@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {FlatList, View, StyleSheet} from "react-native";
+import React, { useEffect } from "react";
+import { FlatList, StyleSheet } from "react-native";
 import Card from "../molecule/Card";
 
 const Grid = (props) => {
@@ -9,7 +9,7 @@ const Grid = (props) => {
     const renderItem = ({ item }) => {
         return (
             // <View style={{marginRight: 10}}>
-                <Card item={item} />
+            <Card item={ item } />
             // </View>
         );
     };
@@ -17,16 +17,16 @@ const Grid = (props) => {
         <FlatList
             className="mb-8"
             // style={styles.container}
-            contentContainerStyle={styles.grid}
-            columnWrapperStyle={{justifyContent: "space-between", gap: 20}}
+            contentContainerStyle={ styles.grid }
+            columnWrapperStyle={ { justifyContent: "space-between", gap: 20 } }
             data={ props.prints }
-            numColumns={2}
+            numColumns={ 2 }
             initialNumToRender={ 5 }
             renderItem={ renderItem }
             keyExtractor={ item => item.id }
         />
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     grid: {
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
         // marginBottom: 20,
     },
     card: {
-        marginRight: 20
-    }
+        marginRight: 20,
+    },
 });
 
 export default Grid;

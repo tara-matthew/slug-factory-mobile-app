@@ -1,20 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Card from './Card';
+import Card from "./Card";
 
-test('renders correctly', () => {
-    // jest.mock('@expo/vector-icons', () => 'Icon')
-    const item =
-        {
+test("renders correctly", () => {
+    const item
+        = {
             images: [
                 {
                     id: 1,
-                    url: 'test'
-                }
-            ]
-        }
+                    url: "test",
+                },
+            ],
+        };
 
-    // console.log(item);
-    const tree = renderer.create(<Card item={item} />).toJSON();
+    const tree = renderer.create(<Card item={ item } />).toJSON();
     expect(tree).toMatchSnapshot();
 });
