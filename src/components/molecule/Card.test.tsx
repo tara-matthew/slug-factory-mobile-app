@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Card from "./Card";
 
-test("renders correctly", () => {
+it("Renders correctly", () => {
     const item
         = {
             images: [

@@ -8,9 +8,7 @@ const Grid = (props) => {
     }, []);
     const renderItem = ({ item }) => {
         return (
-            // <View style={{marginRight: 10}}>
             <Card item={ item } />
-            // </View>
         );
     };
     return (
@@ -31,15 +29,6 @@ const Grid = (props) => {
 const styles = StyleSheet.create({
     grid: {
         padding: 20,
-    },
-    container: {
-        // gap: 20
-    },
-    cardContainer: {
-        // gap: 20,
-        // flex: 1, // Allows the Card to take up available space
-        // marginRight: 10, // Or you could use padding in the grid
-        // marginBottom: 20,
     },
     card: {
         marginRight: 20,

@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<View
+  className="w-full"
+>
+  <View
+    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="First placeholder"
+      value=""
+    />
+  </View>
+  <View
+    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Second placeholder"
+      value=""
+    />
+  </View>
+  <View
+    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Third placeholder"
+      value=""
+    />
+  </View>
+  <View
+    className="w-full mt-4"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#d0cadb",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        className="text-center"
+      >
+        Click me
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders correctly 1`] = `
+<View
+  className="w-full"
+>
+  <View
+    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="First placeholder"
+      value=""
+    />
+  </View>
+  <View
+    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Second placeholder"
+      value=""
+    />
+  </View>
+  <View
+    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Third placeholder"
+      value=""
+    />
+  </View>
+  <View
+    className="w-full mt-4"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#d0cadb",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        className="text-center"
+      >
+        Click me
+      </Text>
+    </View>
+  </View>
+</View>
+`;
