@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { View } from "react-native";
 import Divider from "../atom/Divider";
-import {IContentWithDivider} from "../../contracts/Divider";
+import { IContentWithDivider } from "../../contracts/Divider";
 
 const ContentWithDivider = (props: IContentWithDivider) => {
     return (

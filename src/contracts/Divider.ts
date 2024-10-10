@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 export interface IDividerProps {
     width: DividerWidth;
@@ -14,6 +14,6 @@ export interface IContentWithDivider {
 }
 
 export enum DividerWidth {
-    Half = 'half',
-    Full = 'full',
+    Half = "half",
+    Full = "full",
 }
