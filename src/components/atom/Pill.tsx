@@ -1,11 +1,8 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { IPillProps } from "../../contracts/Pill";
 
-type PillProps = {
-    title: string;
-};
-
-const Pill = (props: PillProps) => {
+const Pill = (props: IPillProps) => {
     return (
         <TouchableOpacity
             className="bg-white p-3.5 rounded-2xl"

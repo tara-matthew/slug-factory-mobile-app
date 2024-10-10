@@ -1,16 +1,9 @@
 import React, { ReactNode } from "react";
 import { View } from "react-native";
 import Divider from "../atom/Divider";
+import {IContentWithDivider} from "../../contracts/Divider";
 
-type ContentWithDivider = {
-    top: boolean;
-    bottom: boolean;
-    outerClass?: string;
-    innerClass?: string;
-    children: ReactNode;
-    dividerWidth: string; // todo make an enum
-};
-const ContentWithDivider = (props: ContentWithDivider) => {
+const ContentWithDivider = (props: IContentWithDivider) => {
     return (
         <View className={ props.outerClass }>
             {props.top && <Divider width={ props.dividerWidth } />}
