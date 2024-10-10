@@ -1,21 +1,10 @@
-import React, { useEffect } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {Image, StyleSheet, Text, View} from "react-native";
 import ContentWithDivider from "./ContentWithDivider";
+import {DividerWidth} from "../../contracts/Divider";
+import { IInfoCardProps } from "../../contracts/InfoCard";
 
-type InfoCardProps = {
-    imageUrl: string;
-    name: string;
-    uploadCount: number;
-    info: Array<string>;
-};
-
-const InfoCard = (props: InfoCardProps) => {
-    useEffect(() => {
-        props.info.map((item, index) => {
-            console.log(item);
-        });
-    }, []);
-
+const InfoCard = (props: IInfoCardProps) => {
     return (
         <View style={ styles.container } className="rounded-lg shadow-sm p-8">
             <View className="flex flex-row items-center">
@@ -61,7 +50,7 @@ const InfoCard = (props: InfoCardProps) => {
                                 key={ index }
                                 top={ false }
                                 bottom={ !isLast }
-                                dividerWidth="half"
+                                dividerWidth={ DividerWidth.Half }
                             >
                                 <Text className="text-lg py-2">{item}</Text>
 
