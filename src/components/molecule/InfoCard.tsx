@@ -1,7 +1,7 @@
 import React from "react";
-import {Image, StyleSheet, Text, View} from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import ContentWithDivider from "./ContentWithDivider";
-import {DividerWidth} from "../../contracts/Divider";
+import { DividerWidth } from "../../contracts/Divider";
 import { IInfoCardProps } from "../../contracts/InfoCard";
 
 const InfoCard = (props: IInfoCardProps) => {
