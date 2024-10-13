@@ -3,7 +3,7 @@ import { View } from "react-native";
 import Divider from "../atom/Divider";
 import { IContentWithDivider } from "../../contracts/Divider";
 
-const ContentWithDivider = (props: IContentWithDivider) => {
+const ContentWithDivider = (props: IContentWithDivider) => { // TODO variants rather than classes
     return (
         <View className={ props.outerClass }>
             {props.top && <Divider width={ props.dividerWidth } />}
