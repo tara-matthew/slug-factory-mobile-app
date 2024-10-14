@@ -1,7 +1,7 @@
 import Divider from "./Divider";
 import React from "react";
 import renderer from "react-test-renderer";
-import {DividerWidth} from "../../contracts/Divider";
+import { DividerWidth } from "../../contracts/Divider";
 
 it("Renders correctly", () => {
     const widths = [DividerWidth.Half, DividerWidth.Full];

@@ -28,7 +28,7 @@ it("Renders correctly", () => {
             user_id: 2001,
         },
     ];
-    const tree = renderer.create(<Grid prints={prints} />).toJSON();
+    const tree = renderer.create(<Grid prints={ prints } />).toJSON();
     expect(tree).toMatchSnapshot();
 });
 

@@ -1,5 +1,5 @@
-import {IPrint} from "./Print";
+import { IPrint } from "./Print";
 
 export interface IGridProps {
-    prints: IPrint[]
+    prints: IPrint[];
 }

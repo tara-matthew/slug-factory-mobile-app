@@ -1,4 +1,4 @@
-import {IImage} from "./Image";
+import { IImage } from "./Image";
 
 export interface IPrint {
     created_at: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Card from "./Card";
-import {render} from "@testing-library/react-native";
+import { render } from "@testing-library/react-native";
 
 it("Displays text", () => {
     const item
@@ -15,7 +15,7 @@ it("Displays text", () => {
             ],
         };
 
-    const { getByText } = render(<Card item={item} image={item.images[0]} />);
+    const { getByText } = render(<Card item={ item } image={ item.images[0] } />);
     expect(getByText("A card")).toBeTruthy();
 });
 
@@ -32,6 +32,6 @@ it("Renders correctly", () => {
             ],
         };
 
-    const tree = renderer.create(<Card item={ item } image={item.images[0]} />).toJSON();
+    const tree = renderer.create(<Card item={ item } image={ item.images[0] } />).toJSON();
     expect(tree).toMatchSnapshot();
 });

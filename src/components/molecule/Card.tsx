@@ -2,8 +2,7 @@ import React, { memo } from "react";
 import { Text, StyleSheet, View, Image, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import {IImage} from "../../contracts/Image";
-import {ICardProps} from "../../contracts/Card";
+import { ICardProps } from "../../contracts/Card";
 
 const Card = ({ item, image }: ICardProps) => {
     const height = 200;
