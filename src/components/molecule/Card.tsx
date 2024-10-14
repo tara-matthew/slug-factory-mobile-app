@@ -4,10 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { ICardProps } from "../../contracts/Card";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-type RootStackParamList = {
-    PrintedDesign: { print: object };
-};
+import { RootStackParamList } from "../../contracts/Navigator";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
