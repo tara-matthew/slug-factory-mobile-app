@@ -3,11 +3,18 @@ import { Text, StyleSheet, View, Image, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { ICardProps } from "../../contracts/Card";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type RootStackParamList = {
+    PrintedDesign: { print: object };
+};
+
+type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
 const Card = ({ item, image }: ICardProps) => {
     const height = 200;
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProps>();
 
     const buttonPressed = (item) => {
         console.log("pressed", item);
