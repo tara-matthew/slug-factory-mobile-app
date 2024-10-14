@@ -4,7 +4,7 @@ import ContentWithDivider from "./ContentWithDivider";
 import { DividerWidth } from "../../contracts/Divider";
 import { IInfoCardProps } from "../../contracts/InfoCard";
 
-const InfoCard = (props: IInfoCardProps) => {
+const InfoCard = ({ name, uploadCount, imageUrl, info }: IInfoCardProps) => {
     return (
         <View style={ styles.container } className="rounded-lg shadow-sm p-8">
             <View className="flex flex-row items-center">
@@ -18,7 +18,7 @@ const InfoCard = (props: IInfoCardProps) => {
                         } }
                         resizeMode="cover"
                         source={ {
-                            uri: props.imageUrl,
+                            uri: imageUrl,
                         } }
                     />
 
@@ -27,22 +27,22 @@ const InfoCard = (props: IInfoCardProps) => {
                         style={ { maxWidth: 120, textAlign: "center" } }
                         numberOfLines={ 1 }
                     >
-                        {props.name}
+                        {name}
                     </Text>
 
                     <Text
                         className="text-lg text-center"
                         style={ { maxWidth: 120, textAlign: "center" } }
                     >
-                        {props.uploadCount}
+                        {uploadCount}
                         {" "}
                         uploads
                     </Text>
                 </View>
 
                 <View className="flex-1 flex flex-col">
-                    {props.info.map((item, index) => {
-                        const isLast = index === props.info.length - 1;
+                    {info.map((item, index) => {
+                        const isLast = index === info.length - 1;
 
                         return (
                             <ContentWithDivider
@@ -57,18 +57,6 @@ const InfoCard = (props: IInfoCardProps) => {
                             </ContentWithDivider>
                         );
                     })}
-                    {/* <TouchableOpacity> */}
-                    {/*    <Text className={'text-xl font-bold pb-2'}>Thingiverse</Text> */}
-                    {/* </TouchableOpacity> */}
-                    {/* <View style={styles.divider}></View> */}
-
-                    {/* <Text className={"text-lg py-2"}>21/8/2024</Text> */}
-                    {/* <View style={styles.divider}></View> */}
-
-                    {/* <Text className={"text-lg py-2"}>Printed 3 times</Text> */}
-                    {/* <View style={styles.divider}></View> */}
-
-                    {/* <Text className={"text-lg py-2"}>4 reviews</Text> */}
                 </View>
             </View>
         </View>
