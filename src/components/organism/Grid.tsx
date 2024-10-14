@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Card from "../molecule/Card";
+import {IPrint} from "../../contracts/Print";
+import { IGridProps } from "../../contracts/Grid";
 
-const Grid = ({ prints }) => {
+const Grid = ({ prints }: IGridProps) => {
     const renderItem = ({ item }) => {
         return (
             <Card item={item} image={item.images[0]} />

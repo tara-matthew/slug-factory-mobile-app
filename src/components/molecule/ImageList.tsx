@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, ScrollView } from "react-native";
+import { IImageListProps } from "../../contracts/Image";
 
-const ImageList = (props) => {
+const ImageList = ({ images }: IImageListProps) => {
     const [aspectRatio, setAspectRatio] = useState(1);
 
     useEffect(() => {
-        if (props.images.length > 0) {
-            const imageUrl = props.images[0];
+        if (images.length > 0) {
+            const imageUrl = images[0];
             Image.getSize(imageUrl, (width, height) => {
                 setAspectRatio(width / height);
             });
         }
-    }, [props.images]);
+    }, [images]);
 
     return (
         <ScrollView
@@ -19,7 +20,7 @@ const ImageList = (props) => {
             showsHorizontalScrollIndicator={ false }
             pagingEnabled
         >
-            {props.images.map((image, index) => (
+            {images.map((image, index) => (
                 <Image
                     key={ index }
                     source={ { uri: image } }

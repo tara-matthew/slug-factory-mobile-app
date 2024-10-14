@@ -2,15 +2,16 @@ import React, { memo } from "react";
 import { Text, StyleSheet, View, Image, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import {IImage} from "../../contracts/Image";
+import {ICardProps} from "../../contracts/Card";
 
-const Card = ({ item, image }) => {
+const Card = ({ item, image }: ICardProps) => {
     const height = 200;
 
     const navigation = useNavigation();
 
     const buttonPressed = (item) => {
         console.log("pressed", item);
-        // @ts-ignore
         navigation.navigate("PrintedDesign", { print: item });
     };
 
