@@ -5,7 +5,7 @@ import Card from "../molecule/Card";
 const renderItem = ({ item }) => {
     return (
         <View className="mr-4" style={ [styles.container] }>
-            <Card item={ item } />
+            <Card item={ item } image={item.images[0]} />
         </View>
     );
 };

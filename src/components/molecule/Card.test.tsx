@@ -15,7 +15,7 @@ it("Displays text", () => {
             ],
         };
 
-    const { getByText } = render(<Card item={item} />);
+    const { getByText } = render(<Card item={item} image={item.images[0]} />);
     expect(getByText("A card")).toBeTruthy();
 });
 
@@ -32,6 +32,6 @@ it("Renders correctly", () => {
             ],
         };
 
-    const tree = renderer.create(<Card item={ item } />).toJSON();
+    const tree = renderer.create(<Card item={ item } image={item.images[0]} />).toJSON();
     expect(tree).toMatchSnapshot();
 });

@@ -2,22 +2,18 @@ import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Card from "../molecule/Card";
 
-const Grid = (props) => {
-    useEffect(() => {
-        console.log(props.prints);
-    }, []);
+const Grid = ({ prints }) => {
     const renderItem = ({ item }) => {
         return (
-            <Card item={ item } />
+            <Card item={item} image={item.images[0]} />
         );
     };
     return (
         <FlatList
             className="mb-8"
-            // style={styles.container}
             contentContainerStyle={ styles.grid }
             columnWrapperStyle={ { justifyContent: "space-between", gap: 20 } }
-            data={ props.prints }
+            data={prints }
             numColumns={ 2 }
             initialNumToRender={ 5 }
             renderItem={ renderItem }

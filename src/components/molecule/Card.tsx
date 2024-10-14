@@ -3,14 +3,13 @@ import { Text, StyleSheet, View, Image, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const Card = ({ item }) => {
-    const width = 300;
+const Card = ({ item, image }) => {
     const height = 200;
 
     const navigation = useNavigation();
 
     const buttonPressed = (item) => {
-        console.log("pressed", item.title);
+        console.log("pressed", item);
         // @ts-ignore
         navigation.navigate("PrintedDesign", { print: item });
     };
@@ -23,11 +22,11 @@ const Card = ({ item }) => {
                 <View className="relative">
                     <Image
                         style={ {
-                            width: '100%',
+                            width: "100%",
                             height: height,
                         } }
                         source={ {
-                            uri: item.images[0]?.url,
+                            uri: image.url,
                         } }
                     />
                     <MaterialIcons
@@ -38,7 +37,7 @@ const Card = ({ item }) => {
                         className="absolute top-1 right-2"
                     />
 
-                    <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
+                    <Text adjustsFontSizeToFit={ true } numberOfLines={ 2 } style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
                 </View>
             </Pressable>
         </View>
@@ -47,8 +46,6 @@ const Card = ({ item }) => {
 
 const styles = StyleSheet.create({
     container: {
-        // width: 300,
-        // height: 250,
         flex: 1,
         backgroundColor: "#d0cadb",
         marginBottom: 20,
