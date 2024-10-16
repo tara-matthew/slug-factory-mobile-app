@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import InfoCard from "../components/molecule/InfoCard";
-import { useNavigation } from "@react-navigation/native";
 import EditProfile from "./EditProfile";
 import TouchableLink from "../components/molecule/TouchableLink";
 import MyFavourites from "./MyFavourites";
@@ -16,7 +15,6 @@ const MyProfile = () => {
 
     const [user, setUser] = useState<Partial<IUser>>({});
     const { getUser } = useAuth();
-    const navigation = useNavigation();
 
     useEffect(() => {
         const fetchUser = async () => {
