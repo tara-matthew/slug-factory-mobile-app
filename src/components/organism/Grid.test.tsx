@@ -26,9 +26,10 @@ it("Renders correctly", () => {
             title: "Gorgeous Concrete Shoes ",
             type: "PrintedDesign",
             user_id: 2001,
+            is_favourite: false,
         },
     ];
-    const tree = renderer.create(<Grid prints={ prints } />).toJSON();
+    const tree = renderer.create(<Grid items={ prints } />).toJSON();
     expect(tree).toMatchSnapshot();
 });
 

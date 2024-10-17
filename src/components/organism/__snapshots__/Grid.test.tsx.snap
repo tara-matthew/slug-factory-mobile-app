@@ -24,6 +24,7 @@ exports[`Renders correctly 1`] = `
           },
         ],
         "infill_percentage": null,
+        "is_favourite": false,
         "title": "Gorgeous Concrete Shoes ",
         "type": "PrintedDesign",
         "user_id": 2001,

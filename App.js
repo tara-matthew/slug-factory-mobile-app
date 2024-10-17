@@ -11,7 +11,7 @@ import { AuthProvider, useAuth } from "./src/contexts/AuthContext";
 import MyProfile from "./src/pages/MyProfile";
 import EditProfile from "./src/pages/EditProfile";
 import MyPrints from "./src/pages/MyPrints";
-import MyFavourites from "./src/pages/MyFavourites";
+import MyFavouritePrints from "./src/pages/MyFavouritePrints";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -50,10 +50,12 @@ export const Layout = () => {
                                 <Stack.Screen
                                     name="MyPrints"
                                     component={ MyPrints }
+                                    options={ { title: "My Prints", headerBackTitle: "Back" } }
                                 />
                                 <Stack.Screen
-                                    name="MyFavourites"
-                                    component={ MyFavourites }
+                                    name="MyFavouritePrints"
+                                    component={ MyFavouritePrints }
+                                    options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
                                 />
                                 <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
                             </>

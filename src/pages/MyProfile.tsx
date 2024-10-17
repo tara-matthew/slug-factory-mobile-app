@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import InfoCard from "../components/molecule/InfoCard";
 import EditProfile from "./EditProfile";
 import TouchableLink from "../components/molecule/TouchableLink";
-import MyFavourites from "./MyFavourites";
+import MyFavouritePrints from "./MyFavouritePrints";
 import MyPrints from "./MyPrints";
 
 const MyProfile = () => {
@@ -36,7 +36,7 @@ const MyProfile = () => {
             />
             <View className="w-full mt-4">
                 <TouchableLink to={ EditProfile } title="Edit Profile" />
-                <TouchableLink to={ MyFavourites } title="Favourites" />
+                <TouchableLink to={ MyFavouritePrints } title="Favourites" />
                 <TouchableLink to={ MyPrints } title="My prints" />
                 <TouchableLink to={ EditProfile } title="Printer & filament preference" />
                 <TouchableLink to={ EditProfile } title="Saved tutorials & notes" />

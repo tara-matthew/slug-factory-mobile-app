@@ -28,7 +28,7 @@ const MyPrints = () => {
 
     return (
         <View>
-            <Grid prints={ prints }></Grid>
+            <Grid items={ prints }></Grid>
         </View>
     );
 };
