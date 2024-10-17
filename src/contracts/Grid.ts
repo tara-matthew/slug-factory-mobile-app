@@ -1,5 +1,4 @@
-import { IPrint } from "./Print";
-import {IImage} from "./Image";
+import { IImage } from "./Image";
 
 export interface IGridProps {
     items: IGridItem[];

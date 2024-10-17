@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import fetchData from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
-import {IFavourite} from "../contracts/Favourite";
+import { IFavourite } from "../contracts/Favourite";
 
 const MyFavouritePrints = () => {
     const [loading, setLoading] = useState(true);
