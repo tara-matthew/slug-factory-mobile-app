@@ -15,7 +15,7 @@ const MyFavouritePrints = () => {
     const getFavourites = async () => {
         try {
             const favouriteData = await fetchData("/my/favourites?type=printed_design");
-            const favourites = favouriteData.data.map((favourite: IFavourite) => favourite.resource);
+            const favourites = favouriteData.data.map((favourite: IFavourite) => favourite.resource); // TODO separate into a custom hook
             setFavourites(favourites);
         } catch (error) {
             console.error("Error in getting prints", error);

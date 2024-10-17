@@ -1,11 +1,12 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import {Dimensions, StyleSheet} from "react-native";
 import "./global.css";
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import PrintedDesign from "./src/pages/PrintedDesign";
 import { AuthProvider, useAuth } from "./src/contexts/AuthContext";
 import MyProfile from "./src/pages/MyProfile";
@@ -15,6 +16,7 @@ import MyFavouritePrints from "./src/pages/MyFavouritePrints";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 const App = () => {
     return (
@@ -75,6 +77,7 @@ function MainTabs() {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Home" component={ Home } />
+            <Tab.Screen name="Favourites" component={ FavouriteTopTabs } options={{ title: "Favourites" }} />
             <Tab.Screen name="ProfileStack" component={ ProfileStack } options={ { headerShown: false, title: "Profile" } } />
         </Tab.Navigator>
     );
@@ -89,6 +92,15 @@ function ProfileStack() {
                 options={ { title: "Profile" } }
             />
         </Stack.Navigator>
+    );
+}
+
+function FavouriteTopTabs() {
+    return (
+        <TopTab.Navigator initialLayout={ { width: Dimensions.get('window').width } } screenOptions={{tabBarItemStyle: { width: Dimensions.get("window").width / 2 }}}>
+            <TopTab.Screen name="Prints" component={MyFavouritePrints} />
+            <TopTab.Screen name="Test" component={MyProfile} />
+        </TopTab.Navigator>
     );
 }
 
