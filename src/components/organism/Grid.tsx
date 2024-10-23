@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Card from "../molecule/Card";
 import { IGridProps } from "../../contracts/Grid";
 
 const Grid = ({ items }: IGridProps) => {
+    useEffect(() => {
+        console.log({items})
+    }, []);
     const renderItem = ({ item }) => {
         return (
-            <Card item={ item } image={ item.images[0] } />
+            <Card item={ item } imageURL={ item?.images?.[0]?.url ?? item.image_url } />
         );
     };
     return (

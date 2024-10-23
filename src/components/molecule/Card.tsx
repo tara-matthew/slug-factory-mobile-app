@@ -8,7 +8,7 @@ import { RootStackParamList } from "../../contracts/Navigator";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
-const Card = ({ item, image }: ICardProps) => {
+const Card = ({ item, imageURL }) => {
     const height = 200;
 
     const navigation = useNavigation<NavigationProps>();
@@ -30,7 +30,7 @@ const Card = ({ item, image }: ICardProps) => {
                             height: height,
                         } }
                         source={ {
-                            uri: image.url,
+                            uri: imageURL,
                         } }
                     />
                     <MaterialIcons

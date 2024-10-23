@@ -13,6 +13,7 @@ import MyProfile from "./src/pages/MyProfile";
 import EditProfile from "./src/pages/EditProfile";
 import MyPrints from "./src/pages/MyPrints";
 import MyFavouritePrints from "./src/pages/MyFavouritePrints";
+import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -97,9 +98,9 @@ function ProfileStack() {
 
 function FavouriteTopTabs() {
     return (
-        <TopTab.Navigator initialLayout={ { width: Dimensions.get('window').width } } screenOptions={{tabBarItemStyle: { width: Dimensions.get("window").width / 2 }}}>
-            <TopTab.Screen name="Prints" component={MyFavouritePrints} />
-            <TopTab.Screen name="Test" component={MyProfile} />
+        <TopTab.Navigator initialLayout={ { width: Dimensions.get("window").width } } screenOptions={ { tabBarItemStyle: { width: Dimensions.get("window").width / 2 } } }>
+            <TopTab.Screen name="Prints" component={ MyFavouritePrints } />
+            <TopTab.Screen name="Filaments" component={ MyFavouriteFilaments } />
         </TopTab.Navigator>
     );
 }
