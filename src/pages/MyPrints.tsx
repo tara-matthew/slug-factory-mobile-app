@@ -2,14 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import fetchData from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
+import {useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {RootStackParamList} from "../contracts/Navigator";
+
+type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
+
 
 const MyPrints = () => {
     const [loading, setLoading] = useState(true);
     const [prints, setPrints] = useState([]);
+    const navigation = useNavigation<NavigationProps>();
+
 
     useEffect(() => {
         void getPrints();
     }, []);
+
+    async function handleDataFromChild(item) {
+        console.log('my print level', item);
+        navigation.navigate("PrintedDesign", { print: item });
+
+    }
 
     const getPrints = async () => {
         try {
@@ -28,7 +42,7 @@ const MyPrints = () => {
 
     return (
         <View>
-            <Grid items={ prints }></Grid>
+            <Grid items={ prints } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );
 };

@@ -10,6 +10,7 @@ import MyPrints from "./MyPrints";
 const MyProfile = () => {
     interface IUser {
         name: string;
+        username: string;
         email: string;
     }
 
@@ -19,7 +20,6 @@ const MyProfile = () => {
     useEffect(() => {
         const fetchUser = async () => {
             const user = await getUser();
-            console.log(user);
             setUser(user);
         };
 
@@ -30,7 +30,7 @@ const MyProfile = () => {
         <View className="my-5 w-full m-auto px-5">
             <InfoCard
                 imageUrl="https://avatars.githubusercontent.com/u/97165289"
-                name={ user.name }
+                name={ user.username }
                 uploadCount={ 5 }
                 info={ ["1 follower", "25 favourites", user.email] }
             />

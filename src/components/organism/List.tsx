@@ -2,15 +2,20 @@ import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Card from "../molecule/Card";
 
-const renderItem = ({ item }) => {
-    return (
-        <View className="mr-4" style={ [styles.container] }>
-            <Card item={ item } imageURL={ item.images[0].url } />
-        </View>
-    );
-};
 
-const List = ({ data }) => {
+const List = ({ data, sendDataToParent }) => {
+    const renderItem = ({ item }) => {
+        return (
+            <View className="mr-4" style={ [styles.container] }>
+                <Card item={item} imageURL={item?.images?.[0].url ?? item.image_url } sendDataToParent={handleDataFromChild} />
+            </View>
+        );
+    };
+
+    function handleDataFromChild(data) {
+        sendDataToParent(data);
+    }
+
     console.log("list mounted");
     return (
         <FlatList

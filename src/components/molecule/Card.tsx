@@ -8,14 +8,15 @@ import { RootStackParamList } from "../../contracts/Navigator";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
-const Card = ({ item, imageURL }) => {
+const Card = ({ item, imageURL, sendDataToParent }: ICardProps) => {
     const height = 200;
 
     const navigation = useNavigation<NavigationProps>();
 
     const buttonPressed = (item) => {
-        console.log("pressed", item);
-        navigation.navigate("PrintedDesign", { print: item });
+        sendDataToParent(item);
+        // console.log("pressed", item);
+        // navigation.navigate("PrintedDesign", { print: item });
     };
 
     return (

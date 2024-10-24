@@ -1,5 +1,5 @@
-import React from "react";
-import {Dimensions, StyleSheet} from "react-native";
+import React, { useEffect } from "react";
+import { Dimensions, StyleSheet } from "react-native";
 import "./global.css";
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
@@ -14,6 +14,7 @@ import EditProfile from "./src/pages/EditProfile";
 import MyPrints from "./src/pages/MyPrints";
 import MyFavouritePrints from "./src/pages/MyFavouritePrints";
 import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
+import Filament from "./src/pages/Filament";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,10 @@ const App = () => {
 
 export const Layout = () => {
     const { authState } = useAuth();
+
+    useEffect(() => {
+        console.log(authState);
+    });
 
     // if (!authState.authenticated) {
     //     return (
@@ -61,6 +66,7 @@ export const Layout = () => {
                                     options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
                                 />
                                 <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
+                                <Stack.Screen name="Filament" component={ Filament } options={ ({ route }) => ({ title: route.params.filament.title }) } />
                             </>
                         )
 
@@ -78,7 +84,7 @@ function MainTabs() {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Home" component={ Home } />
-            <Tab.Screen name="Favourites" component={ FavouriteTopTabs } options={{ title: "Favourites" }} />
+            <Tab.Screen name="Favourites" component={ FavouriteTopTabs } options={ { title: "Favourites" } } />
             <Tab.Screen name="ProfileStack" component={ ProfileStack } options={ { headerShown: false, title: "Profile" } } />
         </Tab.Navigator>
     );
@@ -98,7 +104,15 @@ function ProfileStack() {
 
 function FavouriteTopTabs() {
     return (
-        <TopTab.Navigator initialLayout={ { width: Dimensions.get("window").width } } screenOptions={ { tabBarItemStyle: { width: Dimensions.get("window").width / 2 } } }>
+        <TopTab.Navigator
+            initialLayout={ { width: Dimensions.get("window").width } }
+            screenOptions={ {
+                tabBarLabelStyle: { textTransform: "none", fontSize: 16 },
+                tabBarIndicatorStyle: {backgroundColor: "#d0cadb"},
+                tabBarItemStyle:
+                { width: Dimensions.get("window").width / 2 },
+            }}
+        >
             <TopTab.Screen name="Prints" component={ MyFavouritePrints } />
             <TopTab.Screen name="Filaments" component={ MyFavouriteFilaments } />
         </TopTab.Navigator>

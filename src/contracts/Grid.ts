@@ -6,5 +6,6 @@ export interface IGridProps {
 
 export interface IGridItem {
     title: string;
-    images: IImage[];
+    images?: IImage[];
+    image_url?: string;
 }

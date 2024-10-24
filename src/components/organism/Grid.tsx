@@ -3,13 +3,14 @@ import { FlatList, StyleSheet } from "react-native";
 import Card from "../molecule/Card";
 import { IGridProps } from "../../contracts/Grid";
 
-const Grid = ({ items }: IGridProps) => {
-    useEffect(() => {
-        console.log({items})
-    }, []);
+const Grid = ({ items, sendDataToParent }) => {
+    function handleDataFromChild(data) {
+        sendDataToParent(data);
+    }
+
     const renderItem = ({ item }) => {
         return (
-            <Card item={ item } imageURL={ item?.images?.[0]?.url ?? item.image_url } />
+            <Card sendDataToParent={ handleDataFromChild } item={ item } imageURL={ item?.images?.[0]?.url ?? item.image_url } />
         );
     };
     return (
