@@ -11,7 +11,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDes
 const Card = ({ item, imageURL, sendDataToParent }: ICardProps) => {
     const height = 200;
 
-    const navigation = useNavigation<NavigationProps>();
+    const uri = imageURL.startsWith("https") ? imageURL : `http://slug-factory-api.test/${imageURL}`;
 
     const buttonPressed = (item) => {
         sendDataToParent(item);
@@ -29,9 +29,10 @@ const Card = ({ item, imageURL, sendDataToParent }: ICardProps) => {
                         style={ {
                             width: "100%",
                             height: height,
+                            // resizeMode: "center",
                         } }
                         source={ {
-                            uri: imageURL,
+                            uri: uri,
                         } }
                     />
                     <MaterialIcons

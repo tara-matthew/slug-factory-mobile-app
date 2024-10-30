@@ -5,14 +5,13 @@ import Grid from "../components/organism/Grid";
 import {useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {RootStackParamList} from "../contracts/Navigator";
-
-type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
+import {PrintedDesignNavigationProps} from "../contracts/Navigator";
 
 
 const MyPrints = () => {
     const [loading, setLoading] = useState(true);
     const [prints, setPrints] = useState([]);
-    const navigation = useNavigation<NavigationProps>();
+    const navigation = useNavigation<PrintedDesignNavigationProps>();
 
 
     useEffect(() => {
