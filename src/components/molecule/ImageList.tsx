@@ -8,7 +8,7 @@ const ImageList = ({ images }: IImageListProps) => {
 
     useEffect(() => {
         if (images.length > 0) {
-            const imageUrl = images[0].startsWith("https") ? images[0] : `http://slug-factory-api.test/${images[0]}`;
+            const imageUrl = images[0].startsWith("https") ? images[0] : `https://5lowb7p0bv.sharedwithexpose.com/${images[0]}`;
             Image.getSize(imageUrl, (width, height) => {
                 setAspectRatio(width / height);
             });
@@ -26,8 +26,8 @@ const ImageList = ({ images }: IImageListProps) => {
 
                 <Image
                     key={ index }
-                    source={ { uri: image.startsWith("https") ? image : `http://slug-factory-api.test/${image}` } }
-                    style={ { width: Dimensions.get("window").width, aspectRatio: aspectRatio, resizeMode: "contain" } }
+                    source={ { uri: image.startsWith("https") ? image : `https://5lowb7p0bv.sharedwithexpose.com/${image}` } }
+                    style={ { width: Dimensions.get("window").width, height: 400, resizeMode: "cover" } }
                 />
             ))}
         </ScrollView>

@@ -25,8 +25,10 @@ const PrintedDesign = ({ route }) => {
     const images = print.images.map(image => image.url);
 
     return (
-        <ScrollView>
+        <ScrollView style={{width: "100%"}}>
+            <View style={styles.imageContainer}>
             <ImageList images={ images } />
+            </View>
 
             <View style={ styles.container }>
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
@@ -58,6 +60,9 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         // paddingVertical: 20,
         paddingHorizontal: 15,
+    },
+    imageContainer: {
+      // height: 400
     },
     title: {
         fontSize: 24,

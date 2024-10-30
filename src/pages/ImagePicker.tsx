@@ -13,7 +13,7 @@ const  ImagePickerExample = () => {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             // allowsMultipleSelection: true,
-            aspect: [4, 3],
+            aspect: [1,1],
             quality: 1,
         });
 
@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 600,
+        height: 480,
     },
 });
 
