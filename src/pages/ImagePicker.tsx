@@ -11,36 +11,23 @@ const  ImagePickerExample = () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
-            // allowsEditing: true,
-            allowsMultipleSelection: true,
+            allowsEditing: true,
+            // allowsMultipleSelection: true,
             aspect: [4, 3],
             quality: 1,
         });
 
         console.log(result.assets);
 
-        let formData = new FormData();
-        formData.append('file', {
-            uri: result.assets[0].uri,
+        const formData = new FormData();
+        formData.append("file", {
+            uri: result?.assets[0].uri,
             name: `name`,
-            // type: `image/jpeg`,
+            type: `image/jpeg`,
         });
 
-        console.log('here', formData);
-
-        // console.log(result.assets[0].uri);
-
-        let options = {
-            method: "POST",
-            body: formData,
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "multipart/form-data"
-            }
-        };
-
         try {
-            await fetch('https://5qfgpmiix4.sharedwithexpose.com/api/upload', options)//apiFetch('/upload', 'POST', {body: formData});
+            await apiFetch("/upload", "POST", formData);
         } catch (error) {
             console.log(error);
         }
