@@ -16,6 +16,8 @@ import MyFavouritePrints from "./src/pages/MyFavouritePrints";
 import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
 import ImagePickerExample from "./src/pages/ImagePicker";
+import StorePrint from "./src/pages/StorePrint";
+import DropdownComponent2 from "./src/pages/Dropdown";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -87,6 +89,7 @@ function MainTabs() {
             <Tab.Screen name="Home" component={ Home } />
             <Tab.Screen name="Favourites" component={ FavouriteTopTabs } options={ { title: "Favourites" } } />
             <Tab.Screen name="Image" component={ ImagePickerExample } />
+            <Tab.Screen name="New Print" component={ StorePrint } />
             <Tab.Screen name="ProfileStack" component={ ProfileStack } options={ { headerShown: false, title: "Profile" } } />
         </Tab.Navigator>
     );
