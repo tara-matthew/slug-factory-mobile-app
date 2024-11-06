@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import { RadioButton, Checkbox } from "react-native-paper";
+import { RadioButton } from "react-native-paper";
 
 const StorePrint = () => {
-    const [formValues, setFormValues] = useState(null);
+    const [formValues, setFormValues] = useState({adhesion: 'skirt', material: 'pla'});
     const [checked, setChecked] = React.useState("first");
     const [value, setValue] = React.useState("first");
 
@@ -25,7 +25,6 @@ const StorePrint = () => {
         return value === matchValue ? { backgroundColor: "#d2d1d3" } : {};
     };
 
-    // @ts-ignore
     return (
         <View>
             <View className="p-5">
@@ -37,56 +36,61 @@ const StorePrint = () => {
                     />
                 </View>
                 <Text>Material</Text>
-                <RadioButton.Group
-                    onValueChange={ newValue => handleChange("material", newValue) }
-                    value={ formValues?.material }
-                >
-                    <RadioButton.Item
-                        value="pla"
-                        label="PLA"
-                        style={ {
-                            ...getBackgroundColorStyle(formValues?.material, "pla"),
-                        } }
-                    />
-                    <RadioButton.Item
-                        value="petg"
-                        label="PETG"
-                        style={ {
-                            ...getBackgroundColorStyle(formValues?.material, "petg"),
-                        } }
-                    />
-                    <RadioButton.Item
-                        value="abs"
-                        label="ABS"
-                        style={ {
-                            ...getBackgroundColorStyle(formValues?.material, "abs"),
-                        } }
-                    />
-                </RadioButton.Group>
-                <Checkbox.Item
-                    label="Brim"
-                    status={ formValues?.uses_brim ? "checked" : "unchecked" }
-                    onPress={ () => {
-                        handleChange("uses_brim", !formValues?.uses_brim);
-                    } }
-                />
-                <Checkbox.Item
-                    label="Raft"
-                    status={ formValues?.uses_raft ? "checked" : "unchecked" }
-                    onPress={ () => {
-                        handleChange("uses_raft", !formValues?.uses_raft);
-                    } }
-                />
+                <View className="mb-8">
+                    <RadioButton.Group
+                        onValueChange={ newValue => handleChange("material", newValue) }
+                        value={ formValues?.material }
+                    >
+                        <RadioButton.Item
+                            value="pla"
+                            label="PLA"
+                            style={ {
+                                ...getBackgroundColorStyle(formValues?.material, "pla"),
+                            } }
+                        />
+                        <RadioButton.Item
+                            value="petg"
+                            label="PETG"
+                            style={ {
+                                ...getBackgroundColorStyle(formValues?.material, "petg"),
+                            } }
+                        />
+                        <RadioButton.Item
+                            value="abs"
+                            label="ABS"
+                            style={ {
+                                ...getBackgroundColorStyle(formValues?.material, "abs"),
+                            } }
+                        />
+                    </RadioButton.Group>
+                </View>
+                <View className="mb-8">
+                    <Text>Adhesion</Text>
 
-                {/* <RadioButton.Group onValueChange={ newValue => handleChange("adhesion", newValue) } value={ formValues?.adhesion }> */}
-                {/*    <RadioButton.Item */}
-                {/*        value="brim" */}
-                {/*        label="Brim" */}
-                {/*        // style={{ */}
-                {/*        //     ...getBackgroundColorStyle(value, "yes"), */}
-                {/*        // }} */}
-                {/*    /> */}
-                {/* </RadioButton.Group> */}
+                    <RadioButton.Group onValueChange={ newValue => handleChange("adhesion", newValue) } value={ formValues?.adhesion }>
+                        <RadioButton.Item
+                            value="skirt"
+                            label="Skirt"
+                            style={ {
+                                ...getBackgroundColorStyle(formValues?.adhesion, "skirt"),
+                            } }
+                        />
+                        <RadioButton.Item
+                            value="brim"
+                            label="Brim"
+                            style={ {
+                                ...getBackgroundColorStyle(formValues?.adhesion, "brim"),
+                            } }
+                        />
+                        <RadioButton.Item
+                            value="raft"
+                            label="Raft"
+                            style={ {
+                                ...getBackgroundColorStyle(formValues?.adhesion, "raft"),
+                            } }
+                        />
+                    </RadioButton.Group>
+                </View>
 
                 <View className="w-full mt-4">
                     <TouchableOpacity
