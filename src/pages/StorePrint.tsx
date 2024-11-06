@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import { RadioButton } from "react-native-paper";
+import { RadioButton, Checkbox } from "react-native-paper";
 
 const StorePrint = () => {
     const [formValues, setFormValues] = useState(null);
@@ -9,6 +9,7 @@ const StorePrint = () => {
 
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
+        // console.log(formValues);
         // console.log(formValues.title);
     };
 
@@ -17,8 +18,8 @@ const StorePrint = () => {
     };
 
     useEffect(() => {
-        console.log(value)
-    }, [value]);
+        console.log(formValues);
+    }, [formValues]);
 
     const getBackgroundColorStyle = (value, matchValue) => {
         return value === matchValue ? { backgroundColor: "#d2d1d3" } : {};
@@ -30,30 +31,62 @@ const StorePrint = () => {
             <View className="p-5">
                 <Text>Title</Text>
                 <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                <TextInput
-                    placeholder={ "title" }
-                    onChangeText={ text => handleChange("title", text) }
-                />
+                    <TextInput
+                        placeholder="title"
+                        onChangeText={ text => handleChange("title", text) }
+                    />
                 </View>
                 <Text>Material</Text>
-                <RadioButton.Group onValueChange={ newValue => setValue(newValue) } value={ value }>
+                <RadioButton.Group
+                    onValueChange={ newValue => handleChange("material", newValue) }
+                    value={ formValues?.material }
+                >
                     <RadioButton.Item
                         value="pla"
                         label="PLA"
-                        style={{
-                            ...getBackgroundColorStyle(value, "pla"),
-                            // paddingLeft: 0
-                        }}
+                        style={ {
+                            ...getBackgroundColorStyle(formValues?.material, "pla"),
+                        } }
                     />
                     <RadioButton.Item
                         value="petg"
                         label="PETG"
-                        style={{
-                            ...getBackgroundColorStyle(value, "petg"),
-                            // paddingLeft: 0
-                        }}
+                        style={ {
+                            ...getBackgroundColorStyle(formValues?.material, "petg"),
+                        } }
+                    />
+                    <RadioButton.Item
+                        value="abs"
+                        label="ABS"
+                        style={ {
+                            ...getBackgroundColorStyle(formValues?.material, "abs"),
+                        } }
                     />
                 </RadioButton.Group>
+                <Checkbox.Item
+                    label="Brim"
+                    status={ formValues?.uses_brim ? "checked" : "unchecked" }
+                    onPress={ () => {
+                        handleChange("uses_brim", !formValues?.uses_brim);
+                    } }
+                />
+                <Checkbox.Item
+                    label="Raft"
+                    status={ formValues?.uses_raft ? "checked" : "unchecked" }
+                    onPress={ () => {
+                        handleChange("uses_raft", !formValues?.uses_raft);
+                    } }
+                />
+
+                {/* <RadioButton.Group onValueChange={ newValue => handleChange("adhesion", newValue) } value={ formValues?.adhesion }> */}
+                {/*    <RadioButton.Item */}
+                {/*        value="brim" */}
+                {/*        label="Brim" */}
+                {/*        // style={{ */}
+                {/*        //     ...getBackgroundColorStyle(value, "yes"), */}
+                {/*        // }} */}
+                {/*    /> */}
+                {/* </RadioButton.Group> */}
 
                 <View className="w-full mt-4">
                     <TouchableOpacity
