@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
+import {View, Text, TouchableOpacity, TextInput, ScrollView, Button, Image, StyleSheet} from "react-native";
 import { RadioButton } from "react-native-paper";
+import * as ImagePicker from "expo-image-picker";
+import apiFetch from "../hooks/apiFetch";
+import axios from "axios";
 
 const StorePrint = () => {
-    const [formValues, setFormValues] = useState({ adhesion: "skirt", material: "pla", uses_supports: false });
+    const [formValues, setFormValues] = useState({ adhesion: "skirt", material_id: 1, uses_supports: false, title: ""});
     const [checked, setChecked] = React.useState("first");
     const [value, setValue] = React.useState("first");
+    const [image, setImage] = useState(null);
+
 
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
@@ -14,16 +19,86 @@ const StorePrint = () => {
     };
 
     const handleSubmit = async () => {
-        console.log("submitting", formValues);
+        const formData = new FormData();
+        Object.keys(formValues).forEach((key) => {
+            formData.append(key, formValues[key]);
+        });
+        formData.append('description', 'sepifjoifk')
+        formData.append('filament_brand_id', 1)
+        formData.append('filament_colour_id', 1)
+        formData.append('filament_material_id', 1)
+        if (image) {
+            formData.append("images[][image]", image);
+        }
+        console.log(formData);
+        // console.log("submitting", formValues.images);
+        try {
+            // const result = await axios.post('/prints', {
+            //     formValues,
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //         // Add any other necessary headers, e.g., Authorization
+            //     },
+            // });
+            const headers = {"Content-Type": "multipart/form-data"};
+            const result = await apiFetch("/prints", "POST", formData);
+            // console.log({resu/slt})
+        } catch (error) {
+            console.log("error", error);
+        }
     };
 
-    useEffect(() => {
-        console.log(formValues);
-    }, [formValues]);
+    // useEffect(() => {
+    //     console.log(formValues);
+    // }, [formValues]);
 
     const getBackgroundColorStyle = (value, matchValue) => {
         return value === matchValue ? { backgroundColor: "#d2d1d3" } : {};
     };
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            // allowsMultipleSelection: true,
+            aspect: [1,1],
+            quality: 1,
+        });
+
+        // const formData = new FormData();
+        // formData.append("images", {
+        //     uri: result?.assets?.[0]?.uri,
+        //     name: `name`,
+        //     type: `image/jpeg`,
+        // });
+        // setFormValues(prevValues => ({
+        //     ...prevValues,
+        //     images: formData,  // Directly store the single image object
+        // }));
+        // // setFormValues({ ...formValues, images: formData });
+        // console.log(formData, formValues);
+
+        // try {
+        //     await apiFetch("/prints", "POST", formData);
+        //     // await apiFetch("/upload", "POST", formData);
+        // } catch (error) {
+        //     console.log(error);
+        // }
+
+
+        if (!result.canceled) {
+            setImage({
+                uri: result.assets[0].uri,
+                name: "name.jpg", // Adjust the name dynamically
+                type: "image/jpeg",
+            });
+        }
+        console.log(image);
+    };
+
+    /* TODO read from the database on app load, add a context, and use that here */
+    /* TODO generate groups and items in a loop */
 
     return (
         <ScrollView style={ { width: "100%" } }>
@@ -37,31 +112,51 @@ const StorePrint = () => {
                             onChangeText={ text => handleChange("title", text) }
                         />
                     </View>
+                    <View style={styles.container}>
+                        <Button title="Upload images" onPress={pickImage} />
+                        {image && <Image source={{ uri: image.uri }} style={styles.image} />}
+                    </View>
+
+
                     <Text>Material</Text>
                     <View className="mb-8">
                         <RadioButton.Group
-                            onValueChange={ newValue => handleChange("material", newValue) }
-                            value={ formValues?.material }
+                            onValueChange={ newValue => handleChange("material_id", parseInt(newValue)) }
+                            value={ formValues?.material_id?.toString() }
                         >
                             <RadioButton.Item
-                                value="pla"
+                                value="1"
                                 label="PLA"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues?.material, "pla"),
+                                    ...getBackgroundColorStyle(formValues.material_id, 1),
                                 } }
                             />
                             <RadioButton.Item
-                                value="petg"
+                                value="2"
                                 label="PETG"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues?.material, "petg"),
+                                    ...getBackgroundColorStyle(formValues.material_id, 2),
                                 } }
                             />
                             <RadioButton.Item
-                                value="abs"
+                                value="3"
                                 label="ABS"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues?.material, "abs"),
+                                    ...getBackgroundColorStyle(formValues.material_id, 3),
+                                } }
+                            />
+                            <RadioButton.Item
+                                value="4"
+                                label="Nylon"
+                                style={ {
+                                    ...getBackgroundColorStyle(formValues.material_id, 4),
+                                } }
+                            />
+                            <RadioButton.Item
+                                value="5"
+                                label="TPU"
+                                style={ {
+                                    ...getBackgroundColorStyle(formValues.material_id, 5),
                                 } }
                             />
                         </RadioButton.Group>
@@ -127,5 +222,19 @@ const StorePrint = () => {
         </ScrollView>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    image: {
+        width: 100,
+        height: 100,
+        marginBottom: 30,
+
+    },
+});
 
 export default StorePrint;
