@@ -5,12 +5,11 @@ import * as ImagePicker from "expo-image-picker";
 import apiFetch from "../hooks/apiFetch";
 import ImageList from "../components/molecule/ImageList";
 import { Size } from "../contracts/Image";
-import {useNavigation} from "@react-navigation/native";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../contracts/Navigator";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../contracts/Navigator";
 
-
-type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const StorePrint = () => {
     const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "" });
@@ -93,7 +92,7 @@ const StorePrint = () => {
                             onChangeText={ text => handleChange("title", text) }
                         />
                     </View>
-                    <View style={ styles.container } className={"mb-8"}>
+                    <View style={ styles.container } className="mb-8">
                         <Button title="Upload images" onPress={ pickImage } />
                         {images.length > 0
                         && <ImageList size={ Size.Small } images={ images.map(i => i.uri) } />}
