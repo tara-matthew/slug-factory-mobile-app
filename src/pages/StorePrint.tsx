@@ -5,10 +5,18 @@ import * as ImagePicker from "expo-image-picker";
 import apiFetch from "../hooks/apiFetch";
 import ImageList from "../components/molecule/ImageList";
 import { Size } from "../contracts/Image";
+import {useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {RootStackParamList} from "../contracts/Navigator";
+
+
+type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
 const StorePrint = () => {
     const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "" });
     const [images, setImages] = useState([]);
+
+    const navigation = useNavigation<NavigationProps>();
 
     const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
@@ -29,11 +37,19 @@ const StorePrint = () => {
                     uri: image.uri,
                     name: image.name,
                     type: image.type,
-                });
+                } as unknown as Blob);
             });
         }
+
         try {
             const result = await apiFetch("/prints", "POST", formData);
+            console.log(result);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: "Main" }],
+            });
+
+            navigation.navigate("PrintedDesign", { print: result.data });
         } catch (error) {
             console.log("error", error);
         }
