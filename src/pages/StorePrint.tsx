@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from "react";
-import {Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import {RadioButton} from "react-native-paper";
+import React, { useState } from "react";
+import { Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import apiFetch from "../hooks/apiFetch";
 import ImageList from "../components/molecule/ImageList";
-import {Size} from "../contracts/Image";
+import { Size } from "../contracts/Image";
 
 const StorePrint = () => {
-    const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: ""});
-    const [image, setImage] = useState([]);
+    const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "" });
+    const [images, setImages] = useState([]);
 
-    useEffect(() => {
-        console.log(image[0])
-    }, [image]);
-    const handleChange = (name, value) => {
+    const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
     };
 
@@ -22,26 +19,19 @@ const StorePrint = () => {
         Object.keys(formValues).forEach((key) => {
             formData.append(key, formValues[key]);
         });
-        console.log(formData);
-        formData.append('description', 'sepifjoifk')
-        formData.append('filament_brand_id', 1)
-        formData.append('filament_colour_id', 1)
+        formData.append("description", "sepifjoifk");
+        formData.append("filament_brand_id", 1);
+        formData.append("filament_colour_id", 1);
 
-        // if (image) {
-        //     formData.append("images[][image]", image);
-        // }
-        if (image) {
-            console.log({image})
-            image.forEach((i) => {
+        if (images) {
+            images.forEach((image) => {
                 formData.append("images[]", {
-                    uri: i.uri,
-                    name: i.name,
-                    type: i.type,
+                    uri: image.uri,
+                    name: image.name,
+                    type: image.type,
                 });
             });
         }
-        console.log(formData);
-        // console.log("submitting", formValues.images);
         try {
             const result = await apiFetch("/prints", "POST", formData);
         } catch (error) {
@@ -49,31 +39,27 @@ const StorePrint = () => {
         }
     };
 
+    // TODO could memoise this
     const getBackgroundColorStyle = (value, matchValue) => {
-        return value === matchValue ? { backgroundColor: "#d2d1d3" } : {};
+        return value === matchValue ? { backgroundColor: "#d0cadb" } : {};
     };
 
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
+        const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
-            // allowsEditing: true,
             allowsMultipleSelection: true,
-            aspect: [1,1],
             quality: 1,
         });
 
         if (!result.canceled) {
-            const selectedImages = result.assets.map((asset) => ({
+            const selectedImages = result.assets.map(asset => ({
                 uri: asset.uri,
-                name: asset.fileName || "image.jpg", // Dynamically set name if available
-                type: asset.mimeType || "image/jpeg", // Dynamically set MIME type
+                name: asset.fileName || "image.jpg",
+                type: asset.mimeType || "image/jpeg",
             }));
 
-            // Set the images state to the array of selected images
-            setImage(selectedImages);
+            setImages(selectedImages);
         }
-        console.log(image);
     };
 
     /* TODO read from the database on app load, add a context, and use that here */
@@ -91,13 +77,11 @@ const StorePrint = () => {
                             onChangeText={ text => handleChange("title", text) }
                         />
                     </View>
-                    <View style={styles.container}>
-                        <Button title="Upload images" onPress={pickImage} />
-                        {image.length > 0
-                        && <ImageList size={Size.Small} images={ image.map((i) => i.uri) } />
-                        }
+                    <View style={ styles.container } className={"mb-8"}>
+                        <Button title="Upload images" onPress={ pickImage } />
+                        {images.length > 0
+                        && <ImageList size={ Size.Small } images={ images.map(i => i.uri) } />}
                     </View>
-
 
                     <Text>Material</Text>
                     <View className="mb-8">
@@ -207,8 +191,8 @@ const StorePrint = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
     },
     image: {
         width: 100,
