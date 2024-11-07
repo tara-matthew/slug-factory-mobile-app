@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { RadioButton } from "react-native-paper";
+import { RadioButton, ActivityIndicator } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import apiFetch from "../hooks/apiFetch";
 import ImageList from "../components/molecule/ImageList";
@@ -8,12 +8,14 @@ import { Size } from "../contracts/Image";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../contracts/Navigator";
+import * as ImageManipulator from "expo-image-manipulator";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const StorePrint = () => {
     const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "" });
     const [images, setImages] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const navigation = useNavigation<NavigationProps>();
 
@@ -21,8 +23,9 @@ const StorePrint = () => {
         setFormValues({ ...formValues, [name]: value });
     };
 
-    const handleSubmit = async () => {
+    const createFormData = () => {
         const formData = new FormData();
+
         Object.keys(formValues).forEach((key) => {
             formData.append(key, formValues[key]);
         });
@@ -39,10 +42,15 @@ const StorePrint = () => {
                 } as unknown as Blob);
             });
         }
+        return formData;
+    };
+
+    const handleSubmit = async () => {
+        const formData = createFormData();
+        setLoading(true);
 
         try {
             const result = await apiFetch("/prints", "POST", formData);
-            console.log(result);
             navigation.reset({
                 index: 0,
                 routes: [{ name: "Main" }],
@@ -51,6 +59,8 @@ const StorePrint = () => {
             navigation.navigate("PrintedDesign", { print: result.data });
         } catch (error) {
             console.log("error", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -66,11 +76,21 @@ const StorePrint = () => {
             quality: 1,
         });
 
+        const compressedImagePromises = result.assets.map(asset =>
+            ImageManipulator.manipulateAsync(
+                asset.uri,
+                [{ resize: { width: asset.width / 2, height: asset.height / 2 } }],
+                { compress: 0.5 },
+            ),
+        );
+
+        const compressedImages = await Promise.all(compressedImagePromises);
+
         if (!result.canceled) {
-            const selectedImages = result.assets.map(asset => ({
+            const selectedImages = compressedImages.map(asset => ({
                 uri: asset.uri,
-                name: asset.fileName || "image.jpg",
-                type: asset.mimeType || "image/jpeg",
+                name: "image",
+                type: "image/jpeg",
             }));
 
             setImages(selectedImages);
@@ -81,124 +101,132 @@ const StorePrint = () => {
     /* TODO generate groups and items in a loop */
 
     return (
-        <ScrollView style={ { width: "100%" } }>
+        <ScrollView contentContainerStyle={ { flexGrow: 1 } } style={ { width: "100%" } }>
+            {loading
+                ? (
+                        <View style={ { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "white" } }>
+                            <ActivityIndicator size="large" color="#0000ff" animating={ true } />
+                        </View>
+                    )
+                : (
 
-            <View>
-                <View className="p-5">
-                    <Text>Title</Text>
-                    <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                        <TextInput
-                            placeholder="title"
-                            onChangeText={ text => handleChange("title", text) }
-                        />
-                    </View>
-                    <View style={ styles.container } className="mb-8">
-                        <Button title="Upload images" onPress={ pickImage } />
-                        {images.length > 0
-                        && <ImageList size={ Size.Small } images={ images.map(i => i.uri) } />}
-                    </View>
+                        <View>
+                            <View className="p-5">
+                                <Text>Title</Text>
+                                <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
+                                    <TextInput
+                                        placeholder="title"
+                                        onChangeText={ text => handleChange("title", text) }
+                                    />
+                                </View>
+                                <View style={ styles.container } className="mb-8">
+                                    <Button title="Upload images" onPress={ pickImage } />
+                                    {images.length > 0
+                                    && <ImageList size={ Size.Small } images={ images.map(i => i.uri) } />}
+                                </View>
 
-                    <Text>Material</Text>
-                    <View className="mb-8">
-                        <RadioButton.Group
-                            onValueChange={ newValue => handleChange("filament_material_id", parseInt(newValue)) }
-                            value={ formValues?.filament_material_id?.toString() }
-                        >
-                            <RadioButton.Item
-                                value="1"
-                                label="PLA"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues.filament_material_id, 1),
-                                } }
-                            />
-                            <RadioButton.Item
-                                value="2"
-                                label="PETG"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues.filament_material_id, 2),
-                                } }
-                            />
-                            <RadioButton.Item
-                                value="3"
-                                label="ABS"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues.filament_material_id, 3),
-                                } }
-                            />
-                            <RadioButton.Item
-                                value="4"
-                                label="Nylon"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues.filament_material_id, 4),
-                                } }
-                            />
-                            <RadioButton.Item
-                                value="5"
-                                label="TPU"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues.filament_material_id, 5),
-                                } }
-                            />
-                        </RadioButton.Group>
-                    </View>
-                    <View className="mb-8">
-                        <Text>Adhesion</Text>
+                                <Text>Material</Text>
+                                <View className="mb-8">
+                                    <RadioButton.Group
+                                        onValueChange={ newValue => handleChange("filament_material_id", parseInt(newValue)) }
+                                        value={ formValues?.filament_material_id?.toString() }
+                                    >
+                                        <RadioButton.Item
+                                            value="1"
+                                            label="PLA"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues.filament_material_id, 1),
+                                            } }
+                                        />
+                                        <RadioButton.Item
+                                            value="2"
+                                            label="PETG"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues.filament_material_id, 2),
+                                            } }
+                                        />
+                                        <RadioButton.Item
+                                            value="3"
+                                            label="ABS"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues.filament_material_id, 3),
+                                            } }
+                                        />
+                                        <RadioButton.Item
+                                            value="4"
+                                            label="Nylon"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues.filament_material_id, 4),
+                                            } }
+                                        />
+                                        <RadioButton.Item
+                                            value="5"
+                                            label="TPU"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues.filament_material_id, 5),
+                                            } }
+                                        />
+                                    </RadioButton.Group>
+                                </View>
+                                <View className="mb-8">
+                                    <Text>Adhesion</Text>
 
-                        <RadioButton.Group onValueChange={ newValue => handleChange("adhesion", newValue) } value={ formValues?.adhesion }>
-                            <RadioButton.Item
-                                value="skirt"
-                                label="Skirt"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues?.adhesion, "skirt"),
-                                } }
-                            />
-                            <RadioButton.Item
-                                value="brim"
-                                label="Brim"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues?.adhesion, "brim"),
-                                } }
-                            />
-                            <RadioButton.Item
-                                value="raft"
-                                label="Raft"
-                                style={ {
-                                    ...getBackgroundColorStyle(formValues?.adhesion, "raft"),
-                                } }
-                            />
-                        </RadioButton.Group>
-                    </View>
-                    <Text>Supports</Text>
-                    <RadioButton.Group onValueChange={ newValue => handleChange("uses_supports", newValue == "true") } value={ formValues?.uses_supports ? "true" : "false" }>
-                        <RadioButton.Item
-                            value="true"
-                            label="Yes"
-                            style={ {
-                                ...getBackgroundColorStyle(formValues?.uses_supports, true),
-                            } }
-                        />
-                        <RadioButton.Item
-                            value="false"
-                            label="No"
-                            style={ {
-                                ...getBackgroundColorStyle(formValues?.uses_supports, false),
-                            } }
-                        />
-                    </RadioButton.Group>
+                                    <RadioButton.Group onValueChange={ newValue => handleChange("adhesion", newValue) } value={ formValues?.adhesion }>
+                                        <RadioButton.Item
+                                            value="skirt"
+                                            label="Skirt"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues?.adhesion, "skirt"),
+                                            } }
+                                        />
+                                        <RadioButton.Item
+                                            value="brim"
+                                            label="Brim"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues?.adhesion, "brim"),
+                                            } }
+                                        />
+                                        <RadioButton.Item
+                                            value="raft"
+                                            label="Raft"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues?.adhesion, "raft"),
+                                            } }
+                                        />
+                                    </RadioButton.Group>
+                                </View>
+                                <Text>Supports</Text>
+                                <RadioButton.Group onValueChange={ newValue => handleChange("uses_supports", newValue == "true") } value={ formValues?.uses_supports ? "true" : "false" }>
+                                    <RadioButton.Item
+                                        value="true"
+                                        label="Yes"
+                                        style={ {
+                                            ...getBackgroundColorStyle(formValues?.uses_supports, true),
+                                        } }
+                                    />
+                                    <RadioButton.Item
+                                        value="false"
+                                        label="No"
+                                        style={ {
+                                            ...getBackgroundColorStyle(formValues?.uses_supports, false),
+                                        } }
+                                    />
+                                </RadioButton.Group>
 
-                    <View className="w-full mt-4">
-                        <TouchableOpacity
-                            style={ { backgroundColor: "#d0cadb" } }
-                            className="w-full p-3.5 rounded-2xl"
-                            onPress={ handleSubmit }
-                        >
-                            <Text className="text-center">Submit</Text>
+                                <View className="w-full mt-4">
+                                    <TouchableOpacity
+                                        style={ { backgroundColor: "#d0cadb" } }
+                                        className="w-full p-3.5 rounded-2xl"
+                                        onPress={ handleSubmit }
+                                    >
+                                        <Text className="text-center">Submit</Text>
 
-                        </TouchableOpacity>
+                                    </TouchableOpacity>
 
-                    </View>
-                </View>
-            </View>
+                                </View>
+                            </View>
+                        </View>
+                    )}
         </ScrollView>
     );
 };
