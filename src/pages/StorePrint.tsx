@@ -3,19 +3,16 @@ import {View, Text, TouchableOpacity, TextInput, ScrollView, Button, Image, Styl
 import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import apiFetch from "../hooks/apiFetch";
-import axios from "axios";
 
 const StorePrint = () => {
-    const [formValues, setFormValues] = useState({ adhesion: "skirt", material_id: 1, uses_supports: false, title: ""});
-    const [checked, setChecked] = React.useState("first");
-    const [value, setValue] = React.useState("first");
-    const [image, setImage] = useState(null);
+    const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: ""});
+    const [image, setImage] = useState([]);
 
-
+    useEffect(() => {
+        console.log(image)
+    }, [image]);
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
-        // console.log(formValues);
-        // console.log(formValues.title);
     };
 
     const handleSubmit = async () => {
@@ -23,34 +20,32 @@ const StorePrint = () => {
         Object.keys(formValues).forEach((key) => {
             formData.append(key, formValues[key]);
         });
+        console.log(formData);
         formData.append('description', 'sepifjoifk')
         formData.append('filament_brand_id', 1)
         formData.append('filament_colour_id', 1)
-        formData.append('filament_material_id', 1)
+
+        // if (image) {
+        //     formData.append("images[][image]", image);
+        // }
         if (image) {
-            formData.append("images[][image]", image);
+            console.log({image})
+            image.forEach((i) => {
+                formData.append("images[]", {
+                    uri: i.uri,
+                    name: i.name,
+                    type: i.type,
+                });
+            });
         }
         console.log(formData);
         // console.log("submitting", formValues.images);
         try {
-            // const result = await axios.post('/prints', {
-            //     formValues,
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         // Add any other necessary headers, e.g., Authorization
-            //     },
-            // });
-            const headers = {"Content-Type": "multipart/form-data"};
             const result = await apiFetch("/prints", "POST", formData);
-            // console.log({resu/slt})
         } catch (error) {
             console.log("error", error);
         }
     };
-
-    // useEffect(() => {
-    //     console.log(formValues);
-    // }, [formValues]);
 
     const getBackgroundColorStyle = (value, matchValue) => {
         return value === matchValue ? { backgroundColor: "#d2d1d3" } : {};
@@ -60,39 +55,21 @@ const StorePrint = () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            // allowsMultipleSelection: true,
+            // allowsEditing: true,
+            allowsMultipleSelection: true,
             aspect: [1,1],
             quality: 1,
         });
 
-        // const formData = new FormData();
-        // formData.append("images", {
-        //     uri: result?.assets?.[0]?.uri,
-        //     name: `name`,
-        //     type: `image/jpeg`,
-        // });
-        // setFormValues(prevValues => ({
-        //     ...prevValues,
-        //     images: formData,  // Directly store the single image object
-        // }));
-        // // setFormValues({ ...formValues, images: formData });
-        // console.log(formData, formValues);
-
-        // try {
-        //     await apiFetch("/prints", "POST", formData);
-        //     // await apiFetch("/upload", "POST", formData);
-        // } catch (error) {
-        //     console.log(error);
-        // }
-
-
         if (!result.canceled) {
-            setImage({
-                uri: result.assets[0].uri,
-                name: "name.jpg", // Adjust the name dynamically
-                type: "image/jpeg",
-            });
+            const selectedImages = result.assets.map((asset) => ({
+                uri: asset.uri,
+                name: asset.fileName || "image.jpg", // Dynamically set name if available
+                type: asset.mimeType || "image/jpeg", // Dynamically set MIME type
+            }));
+
+            // Set the images state to the array of selected images
+            setImage(selectedImages);
         }
         console.log(image);
     };
@@ -121,42 +98,42 @@ const StorePrint = () => {
                     <Text>Material</Text>
                     <View className="mb-8">
                         <RadioButton.Group
-                            onValueChange={ newValue => handleChange("material_id", parseInt(newValue)) }
-                            value={ formValues?.material_id?.toString() }
+                            onValueChange={ newValue => handleChange("filament_material_id", parseInt(newValue)) }
+                            value={ formValues?.filament_material_id?.toString() }
                         >
                             <RadioButton.Item
                                 value="1"
                                 label="PLA"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues.material_id, 1),
+                                    ...getBackgroundColorStyle(formValues.filament_material_id, 1),
                                 } }
                             />
                             <RadioButton.Item
                                 value="2"
                                 label="PETG"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues.material_id, 2),
+                                    ...getBackgroundColorStyle(formValues.filament_material_id, 2),
                                 } }
                             />
                             <RadioButton.Item
                                 value="3"
                                 label="ABS"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues.material_id, 3),
+                                    ...getBackgroundColorStyle(formValues.filament_material_id, 3),
                                 } }
                             />
                             <RadioButton.Item
                                 value="4"
                                 label="Nylon"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues.material_id, 4),
+                                    ...getBackgroundColorStyle(formValues.filament_material_id, 4),
                                 } }
                             />
                             <RadioButton.Item
                                 value="5"
                                 label="TPU"
                                 style={ {
-                                    ...getBackgroundColorStyle(formValues.material_id, 5),
+                                    ...getBackgroundColorStyle(formValues.filament_material_id, 5),
                                 } }
                             />
                         </RadioButton.Group>
