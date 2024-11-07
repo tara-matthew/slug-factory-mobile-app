@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import {View, Text, TouchableOpacity, TextInput, ScrollView, Button, Image, StyleSheet} from "react-native";
-import { RadioButton } from "react-native-paper";
+import React, {useEffect, useState} from "react";
+import {Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {RadioButton} from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import apiFetch from "../hooks/apiFetch";
+import ImageList from "../components/molecule/ImageList";
+import {Size} from "../contracts/Image";
 
 const StorePrint = () => {
     const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: ""});
     const [image, setImage] = useState([]);
 
     useEffect(() => {
-        console.log(image)
+        console.log(image[0])
     }, [image]);
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
@@ -91,7 +93,9 @@ const StorePrint = () => {
                     </View>
                     <View style={styles.container}>
                         <Button title="Upload images" onPress={pickImage} />
-                        {image && <Image source={{ uri: image.uri }} style={styles.image} />}
+                        {image.length > 0
+                        && <ImageList size={Size.Small} images={ image.map((i) => i.uri) } />
+                        }
                     </View>
 
 

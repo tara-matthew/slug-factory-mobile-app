@@ -5,4 +5,10 @@ export interface IImage {
 
 export interface IImageListProps {
     images: string[];
+    size: Size;
+}
+
+export enum Size {
+    Small = "small",
+    Large = "large",
 }
