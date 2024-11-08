@@ -29,8 +29,6 @@ const StorePrint = () => {
         Object.keys(formValues).forEach((key) => {
             formData.append(key, formValues[key]);
         });
-        formData.append("filament_brand_id", 1);
-        formData.append("filament_colour_id", 1);
 
         if (images) {
             images.forEach((image) => {
@@ -75,17 +73,17 @@ const StorePrint = () => {
             quality: 1,
         });
 
-        const compressedImagePromises = result.assets.map(asset =>
-            ImageManipulator.manipulateAsync(
-                asset.uri,
-                [{ resize: { width: asset.width / 2, height: asset.height / 2 } }],
-                { compress: 0.5 },
-            ),
-        );
-
-        const compressedImages = await Promise.all(compressedImagePromises);
-
         if (!result.canceled) {
+            const compressedImagePromises = result.assets.map(asset =>
+                ImageManipulator.manipulateAsync(
+                    asset.uri,
+                    [{ resize: { width: asset.width / 2, height: asset.height / 2 } }],
+                    { compress: 0.5 },
+                ),
+            );
+
+            const compressedImages = await Promise.all(compressedImagePromises);
+
             const selectedImages = compressedImages.map(asset => ({
                 uri: asset.uri,
                 name: "image",
