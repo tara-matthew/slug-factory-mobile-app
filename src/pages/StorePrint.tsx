@@ -112,6 +112,11 @@ const StorePrint = () => {
 
                         <View>
                             <View className="p-5">
+                                <View style={ styles.container } className="mb-8">
+                                    <Button title="Choose images" onPress={ pickImage } />
+                                    {images.length > 0
+                                    && <ImageList size={ Size.Small } images={ images.map(i => i.uri) } />}
+                                </View>
                                 <Text>Title</Text>
                                 <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
                                     <TextInput
@@ -119,12 +124,6 @@ const StorePrint = () => {
                                         onChangeText={ text => handleChange("title", text) }
                                     />
                                 </View>
-                                <View style={ styles.container } className="mb-8">
-                                    <Button title="Upload images" onPress={ pickImage } />
-                                    {images.length > 0
-                                    && <ImageList size={ Size.Small } images={ images.map(i => i.uri) } />}
-                                </View>
-
                                 <Text>Material</Text>
                                 <View className="mb-8">
                                     <RadioButton.Group
