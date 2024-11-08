@@ -5,6 +5,7 @@ export interface IImage {
 
 export interface IImageListProps {
     images: string[];
+    blurhashes: string[];
     size: Size;
 }
 

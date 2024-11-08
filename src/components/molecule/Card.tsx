@@ -1,18 +1,18 @@
 import React, { memo } from "react";
-import { Text, StyleSheet, View, Image, Pressable } from "react-native";
+import { Text, StyleSheet, View, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { ICardProps } from "../../contracts/Card";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../contracts/Navigator";
+import { Image } from 'expo-image';
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
-const Card = ({ item, imageURL, sendDataToParent }: ICardProps) => {
+const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
     const height = 200;
 
     const uri = imageURL.startsWith("https") ? imageURL : `${process.env.EXPO_PUBLIC_URL}/${imageURL}`;
-
     const buttonPressed = (item) => {
         sendDataToParent(item);
         // console.log("pressed", item);
@@ -26,6 +26,8 @@ const Card = ({ item, imageURL, sendDataToParent }: ICardProps) => {
             >
                 <View className="relative">
                     <Image
+                        placeholder={{blurhash}}
+                        transition={1000}
                         style={ {
                             width: "100%",
                             height: height,

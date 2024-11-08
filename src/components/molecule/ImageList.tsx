@@ -1,9 +1,13 @@
 import React, {useEffect, useMemo, useState} from "react";
-import {Dimensions, Image, ScrollView, StyleSheet} from "react-native";
+import {Dimensions, ScrollView, StyleSheet} from "react-native";
 import {IImageListProps, Size} from "../../contracts/Image";
+import { Image } from 'expo-image';
 
-const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
+
+const ImageList = ({ images, blurhashes, size = Size.Large }: IImageListProps) => {
     console.log(images[0]);
+    // const blurhash =
+    //     '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
 
     const computedStyles = useMemo(() => {
@@ -22,6 +26,8 @@ const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
 
                 <Image
                     key={ index }
+                    placeholder={blurhashes?.[index] ?? '1234'}
+                    transition={5000}
                     source={ { uri: image.startsWith("prints") ? `${process.env.EXPO_PUBLIC_URL}/${image}` : image } }
                     style={ [computedStyles.image, styles.image] }
                 />

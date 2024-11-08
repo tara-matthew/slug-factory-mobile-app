@@ -3,5 +3,6 @@ export interface ICardProps {
         title: string;
     };
     imageURL: string;
+    blurhash: string;
     sendDataToParent: any;
 }
