@@ -1,20 +1,21 @@
 import React from "react";
-import { Text, View, ScrollView, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import {ScrollView, StyleSheet, Text, View} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
 import ImageList from "../components/molecule/ImageList";
+import {Size} from "../contracts/Image";
 
 const PrintedDesign = ({ route }) => {
     const { print } = route.params;
-    console.log(route.params.print.title);
+    console.log(print);
     const navigation = useNavigation();
 
     const pills = [
         { title: "Ender-3" },
         { title: print.filament_material.name },
-        { title: print.filament_brand.name },
-        { title: print.filament_colour.name },
+        { title: print?.filament_brand?.name ?? "A brand" },
+        { title: print?.filament_colour?.name ?? "A colour" },
         { title: "20% infill" },
         { title: "Tree supports" },
         { title: "Tag" },
@@ -23,11 +24,13 @@ const PrintedDesign = ({ route }) => {
     ];
 
     const images = print.images.map(image => image.url);
+    const blurhashes = print.images.map(image => image.blurhash);
+    console.log(blurhashes);
 
     return (
         <ScrollView style={{width: "100%"}}>
             <View style={styles.imageContainer}>
-            <ImageList images={ images } />
+            <ImageList images={ images } blurhashes={blurhashes} size={Size.Large} />
             </View>
 
             <View style={ styles.container }>
