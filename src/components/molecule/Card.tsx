@@ -11,7 +11,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDes
 const Card = ({ item, imageURL, sendDataToParent }: ICardProps) => {
     const height = 200;
 
-    const uri = imageURL.startsWith("https") ? imageURL : `http://slug-factory-api.test/${imageURL}`;
+    const uri = imageURL.startsWith("https") ? imageURL : `${process.env.EXPO_PUBLIC_URL}/${imageURL}`;
 
     const buttonPressed = (item) => {
         sendDataToParent(item);

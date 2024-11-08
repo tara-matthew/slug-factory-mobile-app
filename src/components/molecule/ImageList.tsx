@@ -22,7 +22,7 @@ const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
 
                 <Image
                     key={ index }
-                    source={ { uri: image.startsWith("prints") ? `http://slug-factory-api.test/${image}` :image } }
+                    source={ { uri: image.startsWith("prints") ? `${process.env.EXPO_PUBLIC_URL}/${image}` : image } }
                     style={ [computedStyles.image, styles.image] }
                 />
             ))}
