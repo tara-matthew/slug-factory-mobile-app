@@ -13,7 +13,7 @@ import * as ImageManipulator from "expo-image-manipulator";
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const StorePrint = () => {
-    const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "" });
+    const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,6 @@ const StorePrint = () => {
         Object.keys(formValues).forEach((key) => {
             formData.append(key, formValues[key]);
         });
-        formData.append("description", "sepifjoifk");
         formData.append("filament_brand_id", 1);
         formData.append("filament_colour_id", 1);
 
@@ -65,7 +64,7 @@ const StorePrint = () => {
     };
 
     // TODO could memoise this
-    const getBackgroundColorStyle = (value, matchValue) => {
+    const getBackgroundColorStyle = (value: string | number | boolean, matchValue: string | number | boolean) => {
         return value === matchValue ? { backgroundColor: "#d0cadb" } : {};
     };
 
@@ -195,22 +194,35 @@ const StorePrint = () => {
                                     </RadioButton.Group>
                                 </View>
                                 <Text>Supports</Text>
-                                <RadioButton.Group onValueChange={ newValue => handleChange("uses_supports", newValue == "true") } value={ formValues?.uses_supports ? "true" : "false" }>
-                                    <RadioButton.Item
-                                        value="true"
-                                        label="Yes"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues?.uses_supports, true),
-                                        } }
+                                <View className="mb-8">
+                                    <RadioButton.Group onValueChange={ newValue => handleChange("uses_supports", newValue == "true") } value={ formValues?.uses_supports ? "true" : "false" }>
+                                        <RadioButton.Item
+                                            value="true"
+                                            label="Yes"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues?.uses_supports, true),
+                                            } }
+                                        />
+                                        <RadioButton.Item
+                                            value="false"
+                                            label="No"
+                                            style={ {
+                                                ...getBackgroundColorStyle(formValues?.uses_supports, false),
+                                            } }
+                                        />
+                                    </RadioButton.Group>
+                                </View>
+                                <Text>Description</Text>
+                                <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
+                                    <TextInput
+                                        style={ { height: 50 } }
+                                        editable
+                                        multiline
+                                        numberOfLines={ 10 }
+                                        placeholder="description"
+                                        onChangeText={ text => handleChange("description", text) }
                                     />
-                                    <RadioButton.Item
-                                        value="false"
-                                        label="No"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues?.uses_supports, false),
-                                        } }
-                                    />
-                                </RadioButton.Group>
+                                </View>
 
                                 <View className="w-full mt-4">
                                     <TouchableOpacity
