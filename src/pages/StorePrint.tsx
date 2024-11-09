@@ -10,6 +10,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../contracts/Navigator";
 import * as ImageManipulator from "expo-image-manipulator";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { fromRequest } from "../data-transfer-objects/ImagePickerData";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -34,9 +35,9 @@ const StorePrint = () => {
         if (images) {
             images.forEach((image) => {
                 formData.append("images[]", {
-                    uri: image.uri,
-                    name: image.name,
-                    type: image.type,
+                    uri: image.url,
+                    name: "image",
+                    type: "image/jpeg",
                 } as unknown as Blob);
             });
         }
@@ -49,6 +50,7 @@ const StorePrint = () => {
 
         try {
             const result = await apiFetch("/prints", "POST", formData);
+            console.log(result);
             navigation.reset({
                 index: 0,
                 routes: [{ name: "Main" }],
@@ -87,11 +89,9 @@ const StorePrint = () => {
 
             const selectedImages = compressedImages.map(asset => ({
                 uri: asset.uri,
-                name: "image",
-                type: "image/jpeg",
             }));
 
-            setImages(selectedImages);
+            setImages(fromRequest(selectedImages));
         }
     };
 
@@ -124,7 +124,7 @@ const StorePrint = () => {
                         <View className="p-5">
                             <View style={ styles.container } className="mb-8">
                                 <Button title="Choose images" onPress={ pickImage } />
-                                {images.length > 0 && <ImageList size={ Size.Small } images={ images.map(i => i.uri) } />}
+                                {images.length > 0 && <ImageList size={ Size.Small } images={ images } />}
                             </View>
 
                             <Text>Title</Text>
