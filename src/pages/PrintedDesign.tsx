@@ -8,8 +8,6 @@ import { Size } from "../contracts/Image";
 
 const PrintedDesign = ({ route }) => {
     const { print } = route.params;
-    console.log(print);
-    const navigation = useNavigation();
 
     const pills = [
         { title: "Ender-3" },
