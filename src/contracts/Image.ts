@@ -1,6 +1,7 @@
 export interface IImage {
-    id: number;
+    id?: number;
     url: string;
+    blurhash?: string;
 }
 
 export interface IImageListProps {
