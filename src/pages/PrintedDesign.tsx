@@ -1,10 +1,10 @@
 import React from "react";
-import {ScrollView, StyleSheet, Text, View} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
 import ImageList from "../components/molecule/ImageList";
-import {Size} from "../contracts/Image";
+import { Size } from "../contracts/Image";
 
 const PrintedDesign = ({ route }) => {
     const { print } = route.params;
@@ -24,9 +24,9 @@ const PrintedDesign = ({ route }) => {
     ];
 
     return (
-        <ScrollView style={{width: "100%"}}>
-            <View style={styles.imageContainer}>
-            <ImageList images={ print.images } size={Size.Large} />
+        <ScrollView style={ { width: "100%" } }>
+            <View style={ styles.imageContainer }>
+                <ImageList images={ print.images } size={ Size.Large } />
             </View>
 
             <View style={ styles.container }>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     imageContainer: {
-      // height: 400
+        // height: 400
     },
     title: {
         fontSize: 24,

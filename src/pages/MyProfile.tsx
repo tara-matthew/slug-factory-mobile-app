@@ -4,7 +4,6 @@ import { useAuth } from "../contexts/AuthContext";
 import InfoCard from "../components/molecule/InfoCard";
 import EditProfile from "./EditProfile";
 import TouchableLink from "../components/molecule/TouchableLink";
-import MyFavouritePrints from "./MyFavouritePrints";
 import MyPrints from "./MyPrints";
 
 const MyProfile = () => {

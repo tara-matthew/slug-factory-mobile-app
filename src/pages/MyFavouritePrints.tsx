@@ -3,12 +3,11 @@ import { Text, View } from "react-native";
 import fetchData from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
 import { IFavourite } from "../contracts/Favourite";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../contracts/Navigator";
-import {useNavigation} from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../contracts/Navigator";
+import { useNavigation } from "@react-navigation/native";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
-
 
 const MyFavouritePrints = () => {
     const [loading, setLoading] = useState(true);
@@ -20,7 +19,7 @@ const MyFavouritePrints = () => {
     }, []);
 
     async function handleDataFromChild(item) {
-        console.log('my favourite prints level', item);
+        console.log("my favourite prints level", item);
         navigation.navigate("PrintedDesign", { print: item });
     }
 
@@ -46,7 +45,7 @@ const MyFavouritePrints = () => {
 
     return (
         <View>
-            <Grid items={ favourites } sendDataToParent={handleDataFromChild}></Grid>
+            <Grid items={ favourites } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );
 };

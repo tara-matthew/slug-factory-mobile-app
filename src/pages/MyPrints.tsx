@@ -2,26 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import fetchData from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
-import {useNavigation} from "@react-navigation/native";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../contracts/Navigator";
-import {PrintedDesignNavigationProps} from "../contracts/Navigator";
-
+import { useNavigation } from "@react-navigation/native";
+import { PrintedDesignNavigationProps } from "../contracts/Navigator";
 
 const MyPrints = () => {
     const [loading, setLoading] = useState(true);
     const [prints, setPrints] = useState([]);
     const navigation = useNavigation<PrintedDesignNavigationProps>();
 
-
     useEffect(() => {
         void getPrints();
     }, []);
 
     async function handleDataFromChild(item) {
-        console.log('my print level', item);
+        console.log("my print level", item);
         navigation.navigate("PrintedDesign", { print: item });
-
     }
 
     const getPrints = async () => {

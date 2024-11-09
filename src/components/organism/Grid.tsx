@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Card from "../molecule/Card";
-import { IGridProps } from "../../contracts/Grid";
 
 const Grid = ({ items, sendDataToParent }) => {
     function handleDataFromChild(data) {
