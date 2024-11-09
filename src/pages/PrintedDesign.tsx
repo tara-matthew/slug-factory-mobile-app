@@ -23,14 +23,10 @@ const PrintedDesign = ({ route }) => {
         { title: "Yet another tag" },
     ];
 
-    const images = print.images.map(image => image.url);
-    const blurhashes = print.images.map(image => image.blurhash);
-    console.log(blurhashes);
-
     return (
         <ScrollView style={{width: "100%"}}>
             <View style={styles.imageContainer}>
-            <ImageList images={ images } blurhashes={blurhashes} size={Size.Large} />
+            <ImageList images={ print.images } size={Size.Large} />
             </View>
 
             <View style={ styles.container }>
