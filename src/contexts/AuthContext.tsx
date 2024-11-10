@@ -16,12 +16,24 @@ export const AuthProvider = ({ children }) => {
         authenticated: null,
     });
 
+    // axios.interceptors.request.use(
+    //     async (config) => {
+    //         const token = await AsyncStorage.getItem("token");
+    //         if (token) {
+    //             config.headers["Authorization"] = `Bearer ${token}`;
+    //         }
+    //         return config;
+    //     },
+    //     (error) => Promise.reject(error)
+    // );
+
     useEffect(() => {
         const loadToken = async () => {
             const token = await AsyncStorage.getItem("token");
 
             if (token) {
                 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+                console.log(axios.defaults.headers);
 
                 setAuthState({
                     token: token,
@@ -55,11 +67,13 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.setItem("token", token);
 
             const user = await fetchData("/me");
+            console.log(user);
             await AsyncStorage.setItem("user", JSON.stringify(user.data));
             console.log("here", user);
             return result;
         } catch (e) {
-            const message = e.response.data.message;
+            console.log(e);
+            // const message = e.response?.data?.message;
             // console.log('exception', e.response.data.message);
             delete axios.defaults.headers.common["Authorization"];
 
@@ -69,7 +83,7 @@ export const AuthProvider = ({ children }) => {
                 authenticated: false,
             });
 
-            return { error: true, msg: message };
+            return { error: true };
         }
     };
 
@@ -81,6 +95,9 @@ export const AuthProvider = ({ children }) => {
             console.log(e);
         }
     };
+
+    // TODO provide the user globally too
+
 
     const value = {
         onLogin: login,

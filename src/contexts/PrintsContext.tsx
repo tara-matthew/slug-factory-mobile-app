@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import apiFetch from '../hooks/apiFetch';
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Assuming this is your custom hook for making API requests
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useAuth} from "./AuthContext"; // Assuming this is your custom hook for making API requests
 
 // Create the context
 const PrintContext = createContext(null);
@@ -12,18 +13,19 @@ export const PrintProvider = ({ children }) => {
     const [popularPrints, setPopularPrints] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { authState } = useAuth();
 
     // Fetch prints once when the provider is mounted
     useEffect(() => {
         const fetchPrints = async () => {
             try {
+                console.log(authState);
                 const token = await AsyncStorage.getItem("token");
-
-                const latestResponse = await axios.get("/prints/latest", {headers: {
-                    'Authorization': 'Bearer ' + token,
-                    }});
-                // const popularResponse = await apiFetch("/prints/popular");
-                setLatestPrints(latestResponse.data); // Assuming response.data is the prints array
+                if (authState.authenticated === true) {
+                    const latestResponse = await apiFetch('/prints/latest')
+                    // const popularResponse = await apiFetch("/prints/popular");
+                    setLatestPrints(latestResponse); // Assuming response.data is the prints array
+                }
                 // setPopularPrints(popularResponse.data);
             } catch (err) {
                 setError(err);
@@ -35,7 +37,7 @@ export const PrintProvider = ({ children }) => {
         };
 
         void fetchPrints();
-    }, []);
+    }, [authState.authenticated]);
 
     // Function to update a print (for example, when it's favorited)
     const updatePrint = (updatedPrint) => {
