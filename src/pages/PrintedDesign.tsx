@@ -6,12 +6,15 @@ import ImageList from "../components/molecule/ImageList";
 import { Size } from "../contracts/Image";
 import { useAuth } from "../contexts/AuthContext";
 import apiFetch from "../hooks/apiFetch";
+import {usePrints} from "../contexts/PrintsContext";
 
 const PrintedDesign = ({ route }) => {
     const [print, setPrint] = useState(route.params.print);
     const { getUser } = useAuth();
     const [user, setUser] = useState<Partial<IUser>>({});
     // const [belongsToUser, setBelongsToUser] = useState(false);
+    const { updatePrint } = usePrints();
+
 
     const pills = [
         // { title: "Ender-3" },
@@ -46,6 +49,9 @@ const PrintedDesign = ({ route }) => {
             await removeFromFavourites();
         }
         toggleFavouriteStatus();
+        const updatedPrint = { ...print, is_favourite: !print.is_favourite };
+        console.log(updatedPrint.is_favourite);
+        updatePrint(updatedPrint);
     };
 
     const addToFavourites = async () => {

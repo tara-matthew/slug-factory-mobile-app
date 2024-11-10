@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../contracts/Navigator";
+import {usePrints} from "../contexts/PrintsContext";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
@@ -17,7 +18,10 @@ const Home = () => {
         popular: [],
         random: [],
     });
+    const {latestPrints} = usePrints()
     const navigation = useNavigation<NavigationProps>();
+    // console.log(latestPrints);
+    // console.log(prints.latest[0].is_favourite);
 
     async function handleDataFromChild(item) {
         console.log("Home level", item);
@@ -25,8 +29,9 @@ const Home = () => {
     }
 
     useEffect(() => {
-        void getHomeData(); // TODO separate out concerns, perform api call in a hook so this screen focuses on data presentation
-    }, []);
+        // void getHomeData(); // TODO separate out concerns, perform api call in a hook so this screen focuses on data presentation
+        console.log("Updated latestPrints in Home:", latestPrints);
+    }, [latestPrints]);
 
     const getHomeData = async () => {
         const endpoints = [
@@ -37,6 +42,7 @@ const Home = () => {
 
         try {
             const [latestPrints, popularPrints, randomPrints] = await fetchData(endpoints);
+            console.log(latestPrints.data[0].is_favourite)
             setPrints({
                 latest: latestPrints.data,
                 popular: popularPrints.data,
@@ -54,16 +60,16 @@ const Home = () => {
         }
     };
 
-    if (loading) {
-        return (<Text>Loading...</Text>);
-    }
+    // if (loading) {
+    //     return (<Text>Loading...</Text>);
+    // }
 
     return (
         <View className="relative">
             <ScrollView contentContainerStyle={ styles.container }>
-                <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ prints.latest }></ListGroup>
-                <ListGroup sendDataToParent={ handleDataFromChild } heading="Most Popular" data={ prints.popular }></ListGroup>
-                <ListGroup sendDataToParent={ handleDataFromChild } heading="Last Viewed" data={ prints.random }></ListGroup>
+                <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ latestPrints.data }></ListGroup>
+                {/*<ListGroup sendDataToParent={ handleDataFromChild } heading="Most Popular" data={ prints.popular }></ListGroup>*/}
+                {/*<ListGroup sendDataToParent={ handleDataFromChild } heading="Last Viewed" data={ prints.random }></ListGroup>*/}
             </ScrollView>
         </View>
     );
