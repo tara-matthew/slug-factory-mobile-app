@@ -13,7 +13,7 @@ const PrintedDesign = ({ route }) => {
     const { getUser } = useAuth();
     const [user, setUser] = useState<Partial<IUser>>({});
     // const [belongsToUser, setBelongsToUser] = useState(false);
-    const { updatePrint, togglePrint } = usePrints();
+    const { updatePrint, toggleFavouritePrint } = usePrints();
 
 
     const pills = [
@@ -51,7 +51,7 @@ const PrintedDesign = ({ route }) => {
         toggleFavouriteStatus();
         const updatedPrint = { ...print, is_favourite: !print.is_favourite };
         updatePrint(updatedPrint);
-        togglePrint(updatedPrint);
+        toggleFavouritePrint(updatedPrint);
     };
 
     const addToFavourites = async () => {

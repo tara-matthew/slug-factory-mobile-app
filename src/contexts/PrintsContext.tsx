@@ -68,7 +68,7 @@ export const PrintProvider = ({ children }) => {
         });
     };
 
-    const togglePrint = (print) => {
+    const toggleFavouritePrint = (print) => {
         setPrints((currentPrints) => {
             const isAlreadyFavourite = currentPrints.favourites.some(favPrint => favPrint.id === print.id);
 
@@ -86,7 +86,7 @@ export const PrintProvider = ({ children }) => {
     // TODO investigate destructuring prints into its separate properties
 
     return (
-        <PrintContext.Provider value={ { prints, loading, updatePrint, togglePrint } }>
+        <PrintContext.Provider value={ { prints, loading, updatePrint, toggleFavouritePrint } }>
             {children}
         </PrintContext.Provider>
     );
