@@ -13,52 +13,51 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDes
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
-    const [prints, setPrints] = useState({
-        latest: [],
-        popular: [],
-        random: [],
-    });
-    const {latestPrints} = usePrints()
+    // const [prints, setPrints] = useState({
+    //     latest: [],
+    //     popular: [],
+    //     random: [],
+    // });
+    // const {latestPrints} = usePrints()
+    const {prints} = usePrints()
+    console.log("prints", prints);
     const navigation = useNavigation<NavigationProps>();
-    // console.log(latestPrints);
-    // console.log(prints.latest[0].is_favourite);
 
     async function handleDataFromChild(item) {
-        console.log("Home level", item);
+        // console.log("Home level", item);
         navigation.navigate("PrintedDesign", { print: item });
     }
 
     useEffect(() => {
         // void getHomeData(); // TODO separate out concerns, perform api call in a hook so this screen focuses on data presentation
-        console.log("Updated latestPrints in Home:", latestPrints);
-    }, [latestPrints]);
+        // console.log("Updated latestPrints in Home:", prints);
+    }, [prints]);
 
-    const getHomeData = async () => {
-        const endpoints = [
-            `/prints/latest`,
-            `/my/prints`,
-            `/prints/random`,
-        ];
-
-        try {
-            const [latestPrints, popularPrints, randomPrints] = await fetchData(endpoints);
-            console.log(latestPrints.data[0].is_favourite)
-            setPrints({
-                latest: latestPrints.data,
-                popular: popularPrints.data,
-                random: randomPrints.data,
-            });
-        } catch (error) {
-            console.error("Error in getHomeData", error.response.status);
-            if (error.response.status === 401) {
-                // TODO rework to proper logout, perform at a higher level
-                await AsyncStorage.removeItem("token");
-                delete axios.defaults.headers.common["Authorization"];
-            }
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const getHomeData = async () => {
+    //     const endpoints = [
+    //         `/prints/latest`,
+    //         `/my/prints`,
+    //         `/prints/random`,
+    //     ];
+    //
+    //     try {
+    //         const [latestPrints, popularPrints, randomPrints] = await fetchData(endpoints);
+    //         setPrints({
+    //             latest: latestPrints.data,
+    //             popular: popularPrints.data,
+    //             random: randomPrints.data,
+    //         });
+    //     } catch (error) {
+    //         console.error("Error in getHomeData", error.response.status);
+    //         if (error.response.status === 401) {
+    //             // TODO rework to proper logout, perform at a higher level
+    //             await AsyncStorage.removeItem("token");
+    //             delete axios.defaults.headers.common["Authorization"];
+    //         }
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     // if (loading) {
     //     return (<Text>Loading...</Text>);
@@ -67,7 +66,7 @@ const Home = () => {
     return (
         <View className="relative">
             <ScrollView contentContainerStyle={ styles.container }>
-                <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ latestPrints.data }></ListGroup>
+                <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ prints?.latest }></ListGroup>
                 {/*<ListGroup sendDataToParent={ handleDataFromChild } heading="Most Popular" data={ prints.popular }></ListGroup>*/}
                 {/*<ListGroup sendDataToParent={ handleDataFromChild } heading="Last Viewed" data={ prints.random }></ListGroup>*/}
             </ScrollView>
