@@ -66,9 +66,9 @@ const Home = () => {
     return (
         <View className="relative">
             <ScrollView contentContainerStyle={ styles.container }>
-                <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ prints?.latest }></ListGroup>
-                {/*<ListGroup sendDataToParent={ handleDataFromChild } heading="Most Popular" data={ prints.popular }></ListGroup>*/}
-                {/*<ListGroup sendDataToParent={ handleDataFromChild } heading="Last Viewed" data={ prints.random }></ListGroup>*/}
+                <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ prints.latest }></ListGroup>
+                <ListGroup sendDataToParent={ handleDataFromChild } heading="Most Popular" data={ prints.popular }></ListGroup>
+                <ListGroup sendDataToParent={ handleDataFromChild } heading="Last Viewed" data={ prints.random }></ListGroup>
             </ScrollView>
         </View>
     );
