@@ -12,15 +12,8 @@ import {usePrints} from "../contexts/PrintsContext";
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
 const Home = () => {
-    const [loading, setLoading] = useState(true);
-    // const [prints, setPrints] = useState({
-    //     latest: [],
-    //     popular: [],
-    //     random: [],
-    // });
-    // const {latestPrints} = usePrints()
-    const {prints} = usePrints()
-    console.log("prints", prints);
+    const {prints, loading } = usePrints();
+    console.log(prints.favourites);
     const navigation = useNavigation<NavigationProps>();
 
     async function handleDataFromChild(item) {
@@ -28,40 +21,9 @@ const Home = () => {
         navigation.navigate("PrintedDesign", { print: item });
     }
 
-    useEffect(() => {
-        // void getHomeData(); // TODO separate out concerns, perform api call in a hook so this screen focuses on data presentation
-        // console.log("Updated latestPrints in Home:", prints);
-    }, [prints]);
-
-    // const getHomeData = async () => {
-    //     const endpoints = [
-    //         `/prints/latest`,
-    //         `/my/prints`,
-    //         `/prints/random`,
-    //     ];
-    //
-    //     try {
-    //         const [latestPrints, popularPrints, randomPrints] = await fetchData(endpoints);
-    //         setPrints({
-    //             latest: latestPrints.data,
-    //             popular: popularPrints.data,
-    //             random: randomPrints.data,
-    //         });
-    //     } catch (error) {
-    //         console.error("Error in getHomeData", error.response.status);
-    //         if (error.response.status === 401) {
-    //             // TODO rework to proper logout, perform at a higher level
-    //             await AsyncStorage.removeItem("token");
-    //             delete axios.defaults.headers.common["Authorization"];
-    //         }
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
-    // if (loading) {
-    //     return (<Text>Loading...</Text>);
-    // }
+    if (loading) {
+        return (<Text>Loading...</Text>);
+    }
 
     return (
         <View className="relative">
