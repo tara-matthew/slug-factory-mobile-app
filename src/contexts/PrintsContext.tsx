@@ -77,7 +77,7 @@ export const PrintProvider = ({ children }) => {
         });
     };
 
-    const addPrint = (newPrint) => {
+    const togglePrint = (newPrint) => {
         setFavouritePrints((prevFavourites) => {
             const isAlreadyFavourite = prevFavourites.some(favPrint => favPrint.id === newPrint.id);
 
@@ -92,7 +92,7 @@ export const PrintProvider = ({ children }) => {
     };
 
     return (
-        <PrintContext.Provider value={ { prints, favouritePrints, loading, updatePrint, addPrint } }>
+        <PrintContext.Provider value={ { prints, favouritePrints, loading, updatePrint, togglePrint } }>
             {children}
         </PrintContext.Provider>
     );

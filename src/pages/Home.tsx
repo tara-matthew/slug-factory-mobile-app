@@ -13,7 +13,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDes
 
 const Home = () => {
     const {prints, loading } = usePrints();
-    console.log(prints.favourites);
+    // console.log(prints.favourites);
     const navigation = useNavigation<NavigationProps>();
 
     async function handleDataFromChild(item) {
