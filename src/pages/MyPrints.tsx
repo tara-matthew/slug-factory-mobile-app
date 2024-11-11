@@ -34,6 +34,10 @@ const MyPrints = () => {
         return (<Text>Loading...</Text>);
     }
 
+    if (prints.length === 0) {
+        return (<Text>You have no prints yet</Text>)
+    }
+
     return (
         <View>
             <Grid items={ prints } sendDataToParent={ handleDataFromChild }></Grid>
