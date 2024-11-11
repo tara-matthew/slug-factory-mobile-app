@@ -5,13 +5,9 @@ import InfoCard from "../components/molecule/InfoCard";
 import EditProfile from "./EditProfile";
 import TouchableLink from "../components/molecule/TouchableLink";
 import MyPrints from "./MyPrints";
+import {IUser} from "../contracts/User";
 
 const MyProfile = () => {
-    interface IUser {
-        name: string;
-        username: string;
-        email: string;
-    }
 
     const [user, setUser] = useState<Partial<IUser>>({});
     const { getUser } = useAuth();
@@ -36,8 +32,8 @@ const MyProfile = () => {
             <View className="w-full mt-4">
                 <TouchableLink to={ EditProfile } title="Edit Profile" />
                 <TouchableLink to={ MyPrints } title="My prints" />
-                <TouchableLink to={ EditProfile } title="Printer & filament preference" />
-                <TouchableLink to={ EditProfile } title="Saved tutorials & notes" />
+                {/*<TouchableLink to={ EditProfile } title="Printer & filament preference" />*/}
+                {/*<TouchableLink to={ EditProfile } title="Saved tutorials & notes" />*/}
             </View>
         </View>
     );

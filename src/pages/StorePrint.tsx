@@ -127,7 +127,7 @@ const StorePrint = () => {
                                 {images.length > 0 && <ImageList size={ Size.Small } images={ images } />}
                             </View>
 
-                            <Text>Title</Text>
+                            <Text className={ "font-bold text-lg" }>Title</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
                                 <TextInput
                                     placeholder="title"
@@ -135,7 +135,7 @@ const StorePrint = () => {
                                 />
                             </View>
 
-                            <Text>Material</Text>
+                            <Text className={"font-bold text-lg"}>Material</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
                                     onValueChange={ newValue => handleChange("filament_material_id", parseInt(newValue)) }
@@ -179,7 +179,7 @@ const StorePrint = () => {
                                 </RadioButton.Group>
                             </View>
 
-                            <Text>Adhesion</Text>
+                            <Text className={"font-bold text-lg"}>Adhesion</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
                                     onValueChange={ newValue => handleChange("adhesion", newValue) }
@@ -209,7 +209,7 @@ const StorePrint = () => {
                                 </RadioButton.Group>
                             </View>
 
-                            <Text>Supports</Text>
+                            <Text className={"font-bold text-lg"}>Supports</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
                                     onValueChange={ newValue => handleChange("uses_supports", newValue == "true") }
@@ -232,7 +232,7 @@ const StorePrint = () => {
                                 </RadioButton.Group>
                             </View>
 
-                            <Text>Description</Text>
+                            <Text className={"font-bold text-lg"}>Description</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
                                 <TextInput
                                     style={ { height: 50 } }

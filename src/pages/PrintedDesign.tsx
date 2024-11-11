@@ -82,7 +82,7 @@ const PrintedDesign = ({ route }) => {
             <View style={ styles.imageContainer }>
                 <ImageList images={ print.images } size={ Size.Large } />
             </View>
-            {!belongsToUser && <Button onPress={ toggleFavourite } title={ favouriteText }></Button>}
+            {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
 
             <View style={ styles.container }>
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
