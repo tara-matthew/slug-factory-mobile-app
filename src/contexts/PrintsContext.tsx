@@ -2,24 +2,19 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import fetchData from "../hooks/apiFetch";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { useAuth } from "./AuthContext";
-import {IFavourite} from "../contracts/Favourite"; // Assuming this is your custom hook for making API requests
+import { IFavourite } from "../contracts/Favourite"; // Assuming this is your custom hook for making API requests
 
 // Create the context
 const PrintContext = createContext(null);
 
-// Create the PrintProvider component
 export const PrintProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [prints, setPrints] = useState({
         latest: [],
         popular: [],
         random: [],
-        // favourites: [],
+        favourites: [],
     });
-    const [favouritePrints, setFavouritePrints] = useState([]);
-
-    const { authState } = useAuth();
 
     useEffect(() => {
         const fetchPrints = async () => {
@@ -31,17 +26,15 @@ export const PrintProvider = ({ children }) => {
                 `/my/favourites?type=printed_design`,
             ];
             try {
-                const [latestPrints, popularPrints, randomPrints, favouritePrints] = await fetchData(endpoints);
+                const [latestPrints, popularPrints, randomPrints, favouriteData] = await fetchData(endpoints);
+                const favourites = favouriteData.data.map((favourite: IFavourite) => favourite.resource); // TODO separate into a custom hook
+
                 setPrints({
                     latest: latestPrints.data,
                     popular: popularPrints.data,
                     random: randomPrints.data,
-                    // favourites: favouritePrints.data,
+                    favourites: favourites,
                 });
-                const favouriteData = await fetchData(`/my/favourites?type=printed_design`);
-                const favourites = favouriteData.data.map((favourite: IFavourite) => favourite.resource); // TODO separate into a custom hook
-
-                setFavouritePrints(favourites);
             } catch (error) {
                 console.error("Error in getHomeData", error.response.status);
                 if (error.response.status === 401) {
@@ -55,7 +48,7 @@ export const PrintProvider = ({ children }) => {
         };
 
         void fetchPrints();
-    }, [authState.authenticated]);
+    }, []);
 
     const updatePrint = (updatedPrint) => {
         setPrints((currentPrints) => {
@@ -68,8 +61,6 @@ export const PrintProvider = ({ children }) => {
                 return result;
             }, {});
 
-            console.log(updatedCategories);
-
             return {
                 ...currentPrints,
                 ...updatedCategories,
@@ -77,22 +68,25 @@ export const PrintProvider = ({ children }) => {
         });
     };
 
-    const togglePrint = (newPrint) => {
-        setFavouritePrints((prevFavourites) => {
-            const isAlreadyFavourite = prevFavourites.some(favPrint => favPrint.id === newPrint.id);
+    const togglePrint = (print) => {
+        setPrints((currentPrints) => {
+            const isAlreadyFavourite = currentPrints.favourites.some(favPrint => favPrint.id === print.id);
 
-            if (isAlreadyFavourite) {
-                // Remove the print if it's already in the favourites list
-                return prevFavourites.filter(favPrint => favPrint.id !== newPrint.id);
-            } else {
-                // Add the print to the favourites list
-                return [...prevFavourites, newPrint];
-            }
+            const updatedFavourites = isAlreadyFavourite
+                ? currentPrints.favourites.filter(favPrint => favPrint.id !== print.id)
+                : [...currentPrints.favourites, print];
+
+            return {
+                ...currentPrints,
+                favourites: updatedFavourites,
+            };
         });
     };
 
+    // TODO investigate destructuring prints into its separate properties
+
     return (
-        <PrintContext.Provider value={ { prints, favouritePrints, loading, updatePrint, togglePrint } }>
+        <PrintContext.Provider value={ { prints, loading, updatePrint, togglePrint } }>
             {children}
         </PrintContext.Provider>
     );

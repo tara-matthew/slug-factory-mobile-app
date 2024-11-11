@@ -11,44 +11,26 @@ import {usePrints} from "../contexts/PrintsContext";
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
 const MyFavouritePrints = () => {
-    const [loading, setLoading] = useState(true);
-    const [favourites, setFavourites] = useState([]);
     const navigation = useNavigation<NavigationProps>();
-    const { favouritePrints } = usePrints();
-    console.log("my favourites", favouritePrints);
+    const { prints, loading } = usePrints();
 
-    // useEffect(() => {
-    //     void getFavourites();
-    // }, []);
 
     async function handleDataFromChild(item) {
         console.log("my favourite prints level", item);
         navigation.navigate("PrintedDesign", { print: item });
     }
 
-    // const getFavourites = async () => {
-    //     try {
-    //         const favouriteData = await fetchData("/my/favourites?type=printed_design");
-    //         const favourites = favouriteData.data.map((favourite: IFavourite) => favourite.resource); // TODO separate into a custom hook
-    //         setFavourites(favourites);
-    //     } catch (error) {
-    //         console.error("Error in getting prints", error);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+    if (loading) {
+        return (<Text>Loading...</Text>);
+    }
 
-    // if (loading) {
-    //     return (<Text>Loading...</Text>);
-    // }
-
-    if (favouritePrints.length === 0) {
+    if (prints.favourites.length === 0) {
         return (<Text>You have no favourites yet</Text>);
     }
 
     return (
         <View>
-            <Grid items={ favouritePrints } sendDataToParent={ handleDataFromChild }></Grid>
+            <Grid items={ prints.favourites } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );
 };
