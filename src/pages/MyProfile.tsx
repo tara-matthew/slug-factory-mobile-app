@@ -14,6 +14,7 @@ const MyProfile = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
+            console.log('fetching user');
             const user = await getUser();
             setUser(user);
         };
