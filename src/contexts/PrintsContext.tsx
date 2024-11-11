@@ -50,6 +50,7 @@ export const PrintProvider = ({ children }) => {
         void fetchPrints();
     }, []);
 
+    // Updates a print property within every category (categories being latest, popular etc), may need to refactor to update specific categories, or write another method
     const updatePrint = (updatedPrint) => {
         setPrints((currentPrints) => {
             const updatedCategories = Object.keys(currentPrints).reduce((result, category) => {
