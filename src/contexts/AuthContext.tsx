@@ -3,6 +3,7 @@ import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import fetchData from "../hooks/apiFetch";
+import {fromResponse} from "../data-transfer-objects/UserData";
 
 const AuthContext = createContext({});
 
@@ -16,16 +17,16 @@ export const AuthProvider = ({ children }) => {
         authenticated: null,
     });
 
-    // axios.interceptors.request.use(
-    //     async (config) => {
-    //         const token = await AsyncStorage.getItem("token");
-    //         if (token) {
-    //             config.headers["Authorization"] = `Bearer ${token}`;
-    //         }
-    //         return config;
-    //     },
-    //     (error) => Promise.reject(error)
-    // );
+    axios.interceptors.request.use(
+        async (config) => {
+            const token = await AsyncStorage.getItem("token");
+            if (token) {
+                config.headers["Authorization"] = `Bearer ${token}`;
+            }
+            return config;
+        },
+        error => Promise.reject(error),
+    );
 
     useEffect(() => {
         const loadToken = async () => {
@@ -67,9 +68,8 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.setItem("token", token);
 
             const user = await fetchData("/me");
-            console.log(user);
-            await AsyncStorage.setItem("user", JSON.stringify(user.data));
-            console.log("here", user);
+            const userData = fromResponse(user.data);
+            await AsyncStorage.setItem("user", JSON.stringify(userData));
             return result;
         } catch (e) {
             console.log(e);
