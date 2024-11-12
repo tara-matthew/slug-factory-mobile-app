@@ -52,6 +52,7 @@ const PrintedDesign = ({ route }) => {
             await removeFromFavourites();
         }
         toggleFavouriteStatus();
+        // Makes sure if we go back and back onto the print, the state remains updated
         const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
         updatePrint(updatedPrint);
         toggleFavouritePrint(updatedPrint);
@@ -78,6 +79,7 @@ const PrintedDesign = ({ route }) => {
     };
 
     const toggleFavouriteStatus = () => {
+        // For showing the state update immediately in the component (different from comment above)
         setPrint(prevPrint => ({
             ...prevPrint,
             is_favourite: !prevPrint.is_favourite, // Toggle the favourite status

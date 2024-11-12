@@ -1,4 +1,4 @@
-import {IUser} from "../contracts/User";
+import { IUser } from "../contracts/User";
 
 export interface UserData {
     id: string;

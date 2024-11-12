@@ -15,7 +15,6 @@ const MyPrints = () => {
     }, []);
 
     async function handleDataFromChild(item) {
-        console.log("my print level", item);
         navigation.navigate("PrintedDesign", { print: item });
     }
 
@@ -35,7 +34,7 @@ const MyPrints = () => {
     }
 
     if (prints.length === 0) {
-        return (<Text>You have no prints yet</Text>)
+        return (<Text>You have no prints yet</Text>);
     }
 
     return (

@@ -3,7 +3,6 @@ import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import fetchData from "../hooks/apiFetch";
-import {fromResponse} from "../data-transfer-objects/UserData";
 
 const AuthContext = createContext({});
 
@@ -57,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username: string, password: string) => {
         try {
-            console.log('logging in');
+            console.log("logging in");
             const result = await fetchData("/auth/login", "POST", { username: username, password: password });
             // console.log('result', result.data)
             const token = result.data.token;
@@ -89,7 +88,6 @@ export const AuthProvider = ({ children }) => {
             return { error: true };
         }
     };
-
 
     const value = {
         onLogin: login,

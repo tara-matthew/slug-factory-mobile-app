@@ -18,8 +18,8 @@ import Filament from "./src/pages/Filament";
 import ImagePickerExample from "./src/pages/ImagePicker";
 import StorePrint from "./src/pages/StorePrint";
 import { PaperProvider } from "react-native-paper";
-import {PrintProvider} from "./src/contexts/PrintsContext";
-import {UserProvider} from "./src/contexts/UserContext";
+import { PrintProvider } from "./src/contexts/PrintsContext";
+import { UserProvider } from "./src/contexts/UserContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -30,11 +30,11 @@ const App = () => {
 
         <AuthProvider>
             <UserProvider>
-            <PrintProvider>
-                <PaperProvider>
-                    <Layout></Layout>
-                </PaperProvider>
-            </PrintProvider>
+                <PrintProvider>
+                    <PaperProvider>
+                        <Layout></Layout>
+                    </PaperProvider>
+                </PrintProvider>
             </UserProvider>
 
         </AuthProvider>

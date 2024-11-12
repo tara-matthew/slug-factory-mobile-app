@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { RadioButton, ActivityIndicator } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
@@ -11,7 +11,7 @@ import { RootStackParamList } from "../contracts/Navigator";
 import * as ImageManipulator from "expo-image-manipulator";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { fromRequest } from "../data-transfer-objects/ImagePickerData";
-import {useUser} from "../contexts/UserContext";
+import { useUser } from "../contexts/UserContext";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -19,7 +19,7 @@ const StorePrint = () => {
     const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const {user, setUser} = useUser();
+    const { user, setUser } = useUser();
 
     const navigation = useNavigation<NavigationProps>();
 
@@ -61,7 +61,7 @@ const StorePrint = () => {
                 index: 0,
                 routes: [{ name: "Main" }],
             });
-            setUser((prevUser) => ({
+            setUser(prevUser => ({
                 ...prevUser,
                 prints_count: prevUser.prints_count + 1, // Only age is updated, other properties remain unchanged
             }));
@@ -137,7 +137,7 @@ const StorePrint = () => {
                                 {images.length > 0 && <ImageList size={ Size.Small } images={ images } />}
                             </View>
 
-                            <Text className={ "font-bold text-lg" }>Title</Text>
+                            <Text className="font-bold text-lg">Title</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
                                 <TextInput
                                     placeholder="title"
@@ -145,7 +145,7 @@ const StorePrint = () => {
                                 />
                             </View>
 
-                            <Text className={"font-bold text-lg"}>Material</Text>
+                            <Text className="font-bold text-lg">Material</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
                                     onValueChange={ newValue => handleChange("filament_material_id", parseInt(newValue)) }
@@ -189,7 +189,7 @@ const StorePrint = () => {
                                 </RadioButton.Group>
                             </View>
 
-                            <Text className={"font-bold text-lg"}>Adhesion</Text>
+                            <Text className="font-bold text-lg">Adhesion</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
                                     onValueChange={ newValue => handleChange("adhesion", newValue) }
@@ -219,7 +219,7 @@ const StorePrint = () => {
                                 </RadioButton.Group>
                             </View>
 
-                            <Text className={"font-bold text-lg"}>Supports</Text>
+                            <Text className="font-bold text-lg">Supports</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
                                     onValueChange={ newValue => handleChange("uses_supports", newValue == "true") }
@@ -242,7 +242,7 @@ const StorePrint = () => {
                                 </RadioButton.Group>
                             </View>
 
-                            <Text className={"font-bold text-lg"}>Description</Text>
+                            <Text className="font-bold text-lg">Description</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
                                 <TextInput
                                     style={ { height: 50 } }
