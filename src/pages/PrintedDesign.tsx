@@ -1,13 +1,12 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
 import ImageList from "../components/molecule/ImageList";
 import { Size } from "../contracts/Image";
-import { useAuth } from "../contexts/AuthContext";
 import apiFetch from "../hooks/apiFetch";
-import {usePrints} from "../contexts/PrintsContext";
-import {useUser} from "../contexts/UserContext";
+import { usePrints } from "../contexts/PrintsContext";
+import { useUser } from "../contexts/UserContext";
 
 const PrintedDesign = ({ route }) => {
     const [print, setPrint] = useState(route.params.print);
@@ -15,8 +14,7 @@ const PrintedDesign = ({ route }) => {
     // const [user, setUser] = useState<Partial<IUser>>({});
     // const [belongsToUser, setBelongsToUser] = useState(false);
     const { updatePrint, toggleFavouritePrint } = usePrints();
-    const {user, setUser } = useUser();
-
+    const { user, setUser } = useUser();
 
     const pills = [
         // { title: "Ender-3" },
@@ -40,11 +38,7 @@ const PrintedDesign = ({ route }) => {
         const text = print.favourited_count > 1 || print.favourited_count === 0 ? "times" : "time";
 
         return `Favourited ${print.favourited_count} ${text}`;
-    }, []);
-
-    useEffect(() => {
-        console.log(print);
-    }, []);
+    }, [print.favourited_count]);
 
     const belongsToUser = user?.id === print.user_id;
     const favouriteText = useMemo(() => {
@@ -58,10 +52,10 @@ const PrintedDesign = ({ route }) => {
             await removeFromFavourites();
         }
         toggleFavouriteStatus();
-        const updatedPrint = { ...print, is_favourite: !print.is_favourite };
+        const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
         updatePrint(updatedPrint);
         toggleFavouritePrint(updatedPrint);
-        setUser((prevUser) => ({
+        setUser(prevUser => ({
             ...prevUser,
             favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
         }));
@@ -87,6 +81,7 @@ const PrintedDesign = ({ route }) => {
         setPrint(prevPrint => ({
             ...prevPrint,
             is_favourite: !prevPrint.is_favourite, // Toggle the favourite status
+            favourited_count: prevPrint.favourited_count + (print.is_favourite ? -1 : +1),
         }));
     };
 
@@ -110,10 +105,10 @@ const PrintedDesign = ({ route }) => {
 
                 <View className="my-5 w-full m-auto">
                     <InfoCard
-                        imageUrl={print.user.avatar_url}
-                        name={print.user.username}
+                        imageUrl={ print.user.avatar_url }
+                        name={ print.user.username }
                         uploadCount={ uploadText }
-                        info={ ["21/8/2024", "0 reviews", favouriteInfoText ] }
+                        info={ ["21/8/2024", "0 reviews", favouriteInfoText] }
 
                     />
                 </View>
