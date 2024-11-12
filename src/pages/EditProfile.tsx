@@ -8,40 +8,33 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {RootStackParamList} from "../contracts/Navigator";
+import {useUser} from "../contexts/UserContext";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 
 const EditProfile = () => {
-    const [user, setUser] = useState<Partial<IUser>>({});
+    // const [user, setUser] = useState<Partial<IUser>>({});
     const [formValues, setFormValues] = useState({});
 
-    const { getUser } = useAuth();
+    const { user, setUser } = useUser();
     const navigation = useNavigation<NavigationProps>();
 
-
-
-    const handleChange = (name: string, value: string | number | boolean) => {
-        setUser({ ...user, [name]: value });
-        console.log(user);
+    const handleChange = (name: string, value: string) => {
+        setFormValues(prevValues => ({ ...prevValues, [name]: value }));
+        console.log(formValues);
     };
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const user = await getUser();
-            setUser(user);
-        };
-
-        void fetchUser();
+        console.log(user);
     }, []);
 
     const handleSubmit = async () => {
-        console.log(user);
-
         try {
-            await apiFetch('/me', 'PATCH', user)
-            // TODO use a proper context, to avoid doing this
-            await AsyncStorage.setItem('user', JSON.stringify(user));
+            const updatedUser = await apiFetch('/me', 'PATCH', formValues);
+            console.log(updatedUser);
+            const userData = fromResponse(updatedUser.data);
+            setUser(userData);
             navigation.navigate("MyProfile");
 
         } catch (error) {
@@ -61,7 +54,13 @@ const EditProfile = () => {
             </View>
             <Text>Bio</Text>
             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                <TextInput defaultValue={user.bio} onChangeText={ text => handleChange("bio", text) }></TextInput>
+                <TextInput
+                    defaultValue={user.bio}
+                    multiline
+                    numberOfLines={ 10 }
+                    onChangeText={ text => handleChange("bio", text) }
+                >
+                </TextInput>
             </View>
             <View className="w-full mt-4">
                 <TouchableOpacity

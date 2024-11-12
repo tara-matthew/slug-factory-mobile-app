@@ -17,7 +17,9 @@ import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
 import ImagePickerExample from "./src/pages/ImagePicker";
 import StorePrint from "./src/pages/StorePrint";
-import DropdownComponent2 from "./src/pages/Dropdown";
+import { PaperProvider } from "react-native-paper";
+import {PrintProvider} from "./src/contexts/PrintsContext";
+import {UserProvider} from "./src/contexts/UserContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -25,9 +27,18 @@ const TopTab = createMaterialTopTabNavigator();
 
 const App = () => {
     return (
+
         <AuthProvider>
-            <Layout></Layout>
+            <UserProvider>
+            <PrintProvider>
+                <PaperProvider>
+                    <Layout></Layout>
+                </PaperProvider>
+            </PrintProvider>
+            </UserProvider>
+
         </AuthProvider>
+
     );
 };
 
@@ -113,10 +124,10 @@ function FavouriteTopTabs() {
             initialLayout={ { width: Dimensions.get("window").width } }
             screenOptions={ {
                 tabBarLabelStyle: { textTransform: "none", fontSize: 16 },
-                tabBarIndicatorStyle: {backgroundColor: "#d0cadb"},
+                tabBarIndicatorStyle: { backgroundColor: "#d0cadb" },
                 tabBarItemStyle:
                 { width: Dimensions.get("window").width / 2 },
-            }}
+            } }
         >
             <TopTab.Screen name="Prints" component={ MyFavouritePrints } />
             <TopTab.Screen name="Filaments" component={ MyFavouriteFilaments } />

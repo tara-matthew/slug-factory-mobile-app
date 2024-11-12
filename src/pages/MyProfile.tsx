@@ -6,21 +6,14 @@ import EditProfile from "./EditProfile";
 import TouchableLink from "../components/molecule/TouchableLink";
 import MyPrints from "./MyPrints";
 import {IUser} from "../contracts/User";
+import apiFetch from "../hooks/apiFetch";
+import {useUser} from "../contexts/UserContext";
 
 const MyProfile = () => {
 
-    const [user, setUser] = useState<Partial<IUser>>({});
-    const { getUser } = useAuth();
+    // const [user, setUser] = useState<Partial<IUser>>({});
+    const { user } = useUser();
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            console.log('fetching user');
-            const user = await getUser();
-            setUser(user);
-        };
-
-        void fetchUser();
-    }, []);
 
     return (
         <View className="my-5 w-full m-auto px-5">

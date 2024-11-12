@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
         token: null,
         authenticated: null,
     });
+    // const [user, setUser] = useState({});
 
     axios.interceptors.request.use(
         async (config) => {
@@ -56,6 +57,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username: string, password: string) => {
         try {
+            console.log('logging in');
             const result = await fetchData("/auth/login", "POST", { username: username, password: password });
             // console.log('result', result.data)
             const token = result.data.token;
@@ -70,6 +72,7 @@ export const AuthProvider = ({ children }) => {
             const user = await fetchData("/me");
             const userData = fromResponse(user.data);
             await AsyncStorage.setItem("user", JSON.stringify(userData));
+            // setUser(userData);
             return result;
         } catch (e) {
             console.log(e);
@@ -103,6 +106,7 @@ export const AuthProvider = ({ children }) => {
         onLogin: login,
         authState,
         getUser,
+        // user
     };
 
     return <AuthContext.Provider value={ value }>{children}</AuthContext.Provider>;
