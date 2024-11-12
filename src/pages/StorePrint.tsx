@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { RadioButton, ActivityIndicator } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
@@ -11,6 +11,7 @@ import { RootStackParamList } from "../contracts/Navigator";
 import * as ImageManipulator from "expo-image-manipulator";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { fromRequest } from "../data-transfer-objects/ImagePickerData";
+import {useUser} from "../contexts/UserContext";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -18,8 +19,13 @@ const StorePrint = () => {
     const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const {user, setUser} = useUser();
 
     const navigation = useNavigation<NavigationProps>();
+
+    useEffect(() => {
+        console.log(user);
+    }, []);
 
     const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
@@ -55,6 +61,10 @@ const StorePrint = () => {
                 index: 0,
                 routes: [{ name: "Main" }],
             });
+            setUser((prevUser) => ({
+                ...prevUser,
+                prints_count: prevUser.prints_count + 1, // Only age is updated, other properties remain unchanged
+            }));
 
             navigation.navigate("PrintedDesign", { print: result.data });
         } catch (error) {

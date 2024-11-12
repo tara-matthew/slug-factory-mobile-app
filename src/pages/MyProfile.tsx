@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import { View } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import InfoCard from "../components/molecule/InfoCard";
@@ -14,14 +14,18 @@ const MyProfile = () => {
     // const [user, setUser] = useState<Partial<IUser>>({});
     const { user } = useUser();
 
+    const favouritesText = useMemo(() => {
+        return `${user.favourites_count} favourites`;
+    }, [user.favourites_count]);
+
 
     return (
         <View className="my-5 w-full m-auto px-5">
             <InfoCard
                 imageUrl="https://avatars.githubusercontent.com/u/97165289"
                 name={ user.username }
-                uploadCount={ 5 }
-                info={ ["1 follower", "25 favourites", user.email] }
+                uploadCount={ user.prints_count }
+                info={ [favouritesText, user.email] }
             />
             <View className="w-full mt-4">
                 <TouchableLink to={ EditProfile } title="Edit Profile" />

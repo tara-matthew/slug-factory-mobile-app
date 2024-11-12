@@ -11,10 +11,11 @@ import {useUser} from "../contexts/UserContext";
 
 const PrintedDesign = ({ route }) => {
     const [print, setPrint] = useState(route.params.print);
-    const { user } = useUser();
+    // const { user } = useUser();
     // const [user, setUser] = useState<Partial<IUser>>({});
     // const [belongsToUser, setBelongsToUser] = useState(false);
     const { updatePrint, toggleFavouritePrint } = usePrints();
+    const {user, setUser } = useUser();
 
 
     const pills = [
@@ -48,6 +49,10 @@ const PrintedDesign = ({ route }) => {
         const updatedPrint = { ...print, is_favourite: !print.is_favourite };
         updatePrint(updatedPrint);
         toggleFavouritePrint(updatedPrint);
+        setUser((prevUser) => ({
+            ...prevUser,
+            favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
+        }));
     };
 
     const addToFavourites = async () => {
