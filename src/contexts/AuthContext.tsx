@@ -69,9 +69,9 @@ export const AuthProvider = ({ children }) => {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await AsyncStorage.setItem("token", token);
 
-            const user = await fetchData("/me");
-            const userData = fromResponse(user.data);
-            await AsyncStorage.setItem("user", JSON.stringify(userData));
+            // const user = await fetchData("/me");
+            // const userData = fromResponse(user.data);
+            // await AsyncStorage.setItem("user", JSON.stringify(userData));
             // setUser(userData);
             return result;
         } catch (e) {
@@ -90,23 +90,10 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const getUser = async () => {
-        try {
-            const user = await AsyncStorage.getItem("user");
-            return JSON.parse(user);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    // TODO provide the user globally too
-
 
     const value = {
         onLogin: login,
         authState,
-        getUser,
-        // user
     };
 
     return <AuthContext.Provider value={ value }>{children}</AuthContext.Provider>;

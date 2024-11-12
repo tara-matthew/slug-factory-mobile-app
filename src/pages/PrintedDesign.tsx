@@ -7,11 +7,12 @@ import { Size } from "../contracts/Image";
 import { useAuth } from "../contexts/AuthContext";
 import apiFetch from "../hooks/apiFetch";
 import {usePrints} from "../contexts/PrintsContext";
+import {useUser} from "../contexts/UserContext";
 
 const PrintedDesign = ({ route }) => {
     const [print, setPrint] = useState(route.params.print);
-    const { getUser } = useAuth();
-    const [user, setUser] = useState<Partial<IUser>>({});
+    const { user } = useUser();
+    // const [user, setUser] = useState<Partial<IUser>>({});
     // const [belongsToUser, setBelongsToUser] = useState(false);
     const { updatePrint, toggleFavouritePrint } = usePrints();
 
@@ -29,12 +30,7 @@ const PrintedDesign = ({ route }) => {
     ];
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const user = await getUser();
-            setUser(user);
-        };
-
-        void fetchUser();
+        console.log(user);
     }, []);
 
     const belongsToUser = user?.id === print.user_id;

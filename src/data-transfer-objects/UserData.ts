@@ -1,6 +1,7 @@
 import {IUser} from "../contracts/User";
 
 export interface UserData {
+    id: string;
     country: {
         id: string;
         name: string;
@@ -17,6 +18,7 @@ export interface UserData {
 
 export function fromResponse(user: UserData): IUser {
     return {
+        id: user.id,
         bio: user.profile.bio,
         email: user.email,
         profile_set_public_at: user.profile.set_public_at,
