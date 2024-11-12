@@ -35,8 +35,6 @@ const InfoCard = ({ name, uploadCount, imageUrl, info }: IInfoCardProps) => {
                         style={ { maxWidth: 120, textAlign: "center" } }
                     >
                         {uploadCount}
-                        {" "}
-                        uploads
                     </Text>
                 </View>
 

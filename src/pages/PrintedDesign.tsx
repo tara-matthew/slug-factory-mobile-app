@@ -30,8 +30,20 @@ const PrintedDesign = ({ route }) => {
         // { title: "Yet another tag" },
     ];
 
+    const uploadText = useMemo(() => {
+        const text = print.user.prints_count > 1 ? "uploads" : "upload";
+
+        return `${print.user.prints_count} ${text}`;
+    }, []);
+
+    const favouriteInfoText = useMemo(() => {
+        const text = print.favourited_count > 1 || print.favourited_count === 0 ? "times" : "time";
+
+        return `Favourited ${print.favourited_count} ${text}`;
+    }, []);
+
     useEffect(() => {
-        console.log(user);
+        console.log(print);
     }, []);
 
     const belongsToUser = user?.id === print.user_id;
@@ -98,10 +110,10 @@ const PrintedDesign = ({ route }) => {
 
                 <View className="my-5 w-full m-auto">
                     <InfoCard
-                        imageUrl="https://avatars.githubusercontent.com/u/97165289"
-                        name="Tara"
-                        uploadCount={ 10 }
-                        info={ ["Thingiverse", "21/8/2024", "Printed 3 times", "4 reviews"] }
+                        imageUrl={print.user.avatar_url}
+                        name={print.user.username}
+                        uploadCount={ uploadText }
+                        info={ ["21/8/2024", "0 reviews", favouriteInfoText ] }
 
                     />
                 </View>

@@ -18,13 +18,19 @@ const MyProfile = () => {
         return `${user.favourites_count} favourites`;
     }, [user.favourites_count]);
 
+    const uploadText = useMemo(() => {
+       const text = user.prints_count > 1 ? "uploads" : "upload";
+
+       return `${user.prints_count} ${text}`;
+    }, []);
+
 
     return (
         <View className="my-5 w-full m-auto px-5">
             <InfoCard
-                imageUrl="https://avatars.githubusercontent.com/u/97165289"
+                imageUrl={user.avatar_url}
                 name={ user.username }
-                uploadCount={ user.prints_count }
+                uploadCount={ uploadText }
                 info={ [favouritesText, user.email] }
             />
             <View className="w-full mt-4">

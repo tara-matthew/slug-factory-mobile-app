@@ -23,6 +23,7 @@ export function fromResponse(user: UserData): IUser {
         id: user.id,
         bio: user.profile.bio,
         email: user.email,
+        avatar_url: user.avatar_url,
         profile_set_public_at: user.profile.set_public_at,
         username: user.username,
         name: user.name,
