@@ -7,7 +7,6 @@ import MyPrints from "./MyPrints";
 import { useUser } from "../contexts/UserContext";
 
 const MyProfile = () => {
-    // const [user, setUser] = useState<Partial<IUser>>({});
     const { user } = useUser();
 
     const favouritesText = useMemo(() => {

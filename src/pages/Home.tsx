@@ -13,7 +13,7 @@ const Home = () => {
     const navigation = useNavigation<NavigationProps>();
 
     async function handleDataFromChild(item) {
-        navigation.navigate("PrintedDesign", { print: item });
+        navigation.navigate("PrintedDesign", { print_id: item.id, print: item });
     }
 
     if (loading) {

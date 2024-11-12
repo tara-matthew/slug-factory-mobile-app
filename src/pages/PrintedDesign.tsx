@@ -9,10 +9,10 @@ import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 
 const PrintedDesign = ({ route }) => {
+    // TODO just pass in the print ID rather than the whole object, this is an anti-pattern!
+    // https://reactnavigation.org/docs/params/
+    console.log(route.params.print_id);
     const [print, setPrint] = useState(route.params.print);
-    // const { user } = useUser();
-    // const [user, setUser] = useState<Partial<IUser>>({});
-    // const [belongsToUser, setBelongsToUser] = useState(false);
     const { updatePrint, toggleFavouritePrint } = usePrints();
     const { user, setUser } = useUser();
 
