@@ -7,11 +7,12 @@ import { Size } from "../contracts/Image";
 import apiFetch from "../hooks/apiFetch";
 import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
+import {format} from "date-fns"
 
 const PrintedDesign = ({ route }) => {
     // TODO just pass in the print ID rather than the whole object, this is an anti-pattern!
     // https://reactnavigation.org/docs/params/
-    console.log(route.params.print_id);
+    // console.log(route.params.print_id);
     const [print, setPrint] = useState(route.params.print);
     const { updatePrint, toggleFavouritePrint } = usePrints();
     const { user, setUser } = useUser();
@@ -27,6 +28,10 @@ const PrintedDesign = ({ route }) => {
         // { title: "Another tag" },
         // { title: "Yet another tag" },
     ];
+
+    const printCreatedAt = useMemo(() => {
+        return format(new Date(print.created_at), 'dd/mm/yyyy')
+    });
 
     const uploadText = useMemo(() => {
         const text = print.user.prints_count > 1 ? "uploads" : "upload";
@@ -110,7 +115,7 @@ const PrintedDesign = ({ route }) => {
                         imageUrl={ print.user.avatar_url }
                         name={ print.user.username }
                         uploadCount={ uploadText }
-                        info={ ["21/8/2024", "0 reviews", favouriteInfoText] }
+                        info={ [printCreatedAt, "0 reviews", favouriteInfoText] }
 
                     />
                 </View>
