@@ -19,7 +19,7 @@ const Login = () => {
     return (
         <View className="flex flex-1 justify-center items-center px-8 relative">
             {error ? <Text className="text-red-500 text-center mb-4">{error}</Text> : null}
-            <Welcome sendDataToParent={ handleDataFromChild } headerText="Sign in to Slug Factory" buttonText="Sign In" buttonTo="Home" inputs={ [{ placeholder: "username" }, { placeholder: "password" }] }></Welcome>
+            <Welcome sendDataToParent={ handleDataFromChild } headerText="Sign in to Slug Factory" buttonText="Sign In" buttonTo="Home" inputs={ [{ placeholder: "username", title: "Username", inputProps: {autoCapitalize: "none"} }, { placeholder: "password", title: "Password", inputProps: {secureTextEntry: true, autoCapitalize: "none"} }] }></Welcome>
         </View>
     );
 };

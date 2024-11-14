@@ -59,7 +59,6 @@ export const AuthProvider = ({ children }) => {
         try {
             console.log("logging in");
             const result = await fetchData("/auth/login", "POST", { username: username, password: password });
-            // console.log('result', result.data)
             const token = result.data.token;
             setAuthState({
                 token: token,
@@ -71,8 +70,6 @@ export const AuthProvider = ({ children }) => {
             return result;
         } catch (e) {
             console.log(e);
-            // const message = e.response?.data?.message;
-            // console.log('exception', e.response.data.message);
             await logout();
 
             return { error: true };

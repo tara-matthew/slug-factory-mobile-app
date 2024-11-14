@@ -17,12 +17,17 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
     return (
         <View className="w-full">
             {inputs.map((field, index) => (
-                <View className="bg-black/5 w-full p-5 rounded-2xl mb-7" key={ index }>
-                    <TextInput
-                        placeholder={ field.placeholder }
-                        value={ formValues[field.placeholder] }
-                        onChangeText={ text => handleChange(field.placeholder, text) }
-                    />
+                <View key={ index }>
+                    <Text className="font-bold">{field.title}</Text>
+
+                    <View className="bg-black/5 w-full p-5 rounded-2xl mb-7">
+                        <TextInput
+                            { ...field.inputProps }
+                            placeholder={ field.placeholder }
+                            value={ formValues[field.placeholder] }
+                            onChangeText={ text => handleChange(field.placeholder, text) }
+                        />
+                    </View>
                 </View>
             ))}
             <View className="w-full mt-4">
