@@ -6,17 +6,21 @@ import { fromResponse } from "../data-transfer-objects/UserData"; // Assuming th
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const fetchedUser = await fetchData("/me");
+                console.log(fetchedUser.data);
                 const userData = fromResponse(fetchedUser.data);
 
                 setUser(userData);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -24,7 +28,7 @@ export const UserProvider = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={ { user, setUser } }>
+        <UserContext.Provider value={ { user, setUser, loading } }>
             {children}
         </UserContext.Provider>
     );

@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
         token: null,
         authenticated: null,
     });
+    const [loading, setLoading] = useState(true);  // Add loading state
 
     axios.interceptors.response.use(
         response => response,
@@ -51,6 +52,7 @@ export const AuthProvider = ({ children }) => {
                 console.log("no token");
                 await logout();
             }
+            setLoading(false);
         };
         void loadToken();
     }, []);
@@ -69,8 +71,8 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.setItem("token", token);
             return result;
         } catch (e) {
-            console.log(e);
-            await logout();
+            console.log('exception', e);
+            // await logout();
 
             return { error: true };
         }
@@ -100,6 +102,7 @@ export const AuthProvider = ({ children }) => {
         onRegister: register,
         logout,
         authState,
+        loading
     };
 
     return <AuthContext.Provider value={ value }>{children}</AuthContext.Provider>;

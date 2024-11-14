@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Dimensions, StyleSheet } from "react-native";
+import {Dimensions, StyleSheet, View, Text} from "react-native";
 import "./global.css";
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
@@ -17,9 +17,10 @@ import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
 import ImagePickerExample from "./src/pages/ImagePicker";
 import StorePrint from "./src/pages/StorePrint";
-import { PaperProvider } from "react-native-paper";
+import {ActivityIndicator, PaperProvider} from "react-native-paper";
 import { PrintProvider } from "./src/contexts/PrintsContext";
-import { UserProvider } from "./src/contexts/UserContext";
+import {UserProvider, useUser} from "./src/contexts/UserContext";
+import CreateProfile from "./src/pages/CreateProfile";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -34,45 +35,45 @@ const App = () => {
 };
 
 export const Layout = () => {
-    const { authState } = useAuth();
+    const { authState, loading } = useAuth();
+    const hasFilledInProfile = false;
+    const {user} = useUser();
 
     useEffect(() => {
-        console.log(authState);
-    });
-
-    // if (!authState.authenticated) {
-    //     return (
-    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //             <ActivityIndicator size="large" color="#0000ff" />
-    //         </View>
-    //     );
-    // }
+        console.log(user);
+    }, [user]);
 
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                { authState?.authenticated
+                { authState.authenticated
                     ? (
-                            <>
-                                <Stack.Screen name="Main" component={ MainTabs } options={ { headerShown: false, title: "Home" } } />
-                                <Stack.Screen
-                                    name="EditProfile"
-                                    component={ EditProfile }
-                                    options={ { title: "Edit Profile", headerBackTitle: "Back" } }
-                                />
-                                <Stack.Screen
-                                    name="MyPrints"
-                                    component={ MyPrints }
-                                    options={ { title: "My Prints", headerBackTitle: "Back" } }
-                                />
-                                <Stack.Screen
-                                    name="MyFavouritePrints"
-                                    component={ MyFavouritePrints }
-                                    options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
-                                />
-                                <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
-                                <Stack.Screen name="Filament" component={ Filament } options={ ({ route }) => ({ title: route.params.filament.title }) } />
-                            </>
+                            !user.profile_set_public_at // use set public at
+                                ? (
+                                        <Stack.Screen name="CreateProfile" component={ CreateProfile } />
+                                    )
+                                : (
+                                        <>
+                                            <Stack.Screen name="Main" component={ MainTabs } options={ { headerShown: false, title: "Home" } } />
+                                            <Stack.Screen
+                                                name="EditProfile"
+                                                component={ EditProfile }
+                                                options={ { title: "Edit Profile", headerBackTitle: "Back" } }
+                                            />
+                                            <Stack.Screen
+                                                name="MyPrints"
+                                                component={ MyPrints }
+                                                options={ { title: "My Prints", headerBackTitle: "Back" } }
+                                            />
+                                            <Stack.Screen
+                                                name="MyFavouritePrints"
+                                                component={ MyFavouritePrints }
+                                                options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
+                                            />
+                                            <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
+                                            <Stack.Screen name="Filament" component={ Filament } options={ ({ route }) => ({ title: route.params.filament.title }) } />
+                                        </>
+                                    )
                         )
 
                     : (
@@ -98,7 +99,15 @@ function MainTabs() {
 }
 
 const AppContent = () => {
-    const { authState } = useAuth();
+    const { authState, loading } = useAuth();
+
+    if (loading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
 
     return (
         <PaperProvider>
