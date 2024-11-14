@@ -26,27 +26,11 @@ const Stack = createNativeStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 const App = () => {
-
     return (
         <AuthProvider>
             <AppContent></AppContent>
         </AuthProvider>
-    )
-
-    // return (
-    //
-    //     <AuthProvider>
-    //         <UserProvider>
-    //             <PrintProvider>
-    //                 <PaperProvider>
-    //                     <Layout></Layout>
-    //                 </PaperProvider>
-    //             </PrintProvider>
-    //         </UserProvider>
-    //
-    //     </AuthProvider>
-    //     );
-
+    );
 };
 
 export const Layout = () => {
@@ -118,15 +102,17 @@ const AppContent = () => {
 
     return (
         <PaperProvider>
-            {authState.authenticated ? (
-                <UserProvider>
-                    <PrintProvider>
+            {authState.authenticated
+                ? (
+                        <UserProvider>
+                            <PrintProvider>
+                                <Layout />
+                            </PrintProvider>
+                        </UserProvider>
+                    )
+                : (
                         <Layout />
-                    </PrintProvider>
-                </UserProvider>
-            ) : (
-                <Layout />
-            )}
+                    )}
         </PaperProvider>
     );
 };

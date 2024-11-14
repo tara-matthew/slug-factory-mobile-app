@@ -14,7 +14,6 @@ export const PrintProvider = ({ children }) => {
         random: [],
         favourites: [],
     });
-    const { authState, setAuthState, logout } = useAuth();
 
     useEffect(() => {
         const fetchPrints = async () => {
