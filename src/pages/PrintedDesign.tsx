@@ -7,7 +7,7 @@ import { Size } from "../contracts/Image";
 import apiFetch from "../hooks/apiFetch";
 import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
-import {format} from "date-fns"
+import { format } from "date-fns";
 
 const PrintedDesign = ({ route }) => {
     // TODO just pass in the print ID rather than the whole object, this is an anti-pattern!
@@ -30,7 +30,7 @@ const PrintedDesign = ({ route }) => {
     ];
 
     const printCreatedAt = useMemo(() => {
-        return format(new Date(print.created_at), 'dd/mm/yyyy')
+        return format(new Date(print.created_at), "dd/mm/yyyy");
     });
 
     const uploadText = useMemo(() => {

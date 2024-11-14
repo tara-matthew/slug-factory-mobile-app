@@ -19,13 +19,13 @@ export const AuthProvider = ({ children }) => {
 
     axios.interceptors.response.use(
         response => response,
-        async error => {
+        async (error) => {
             if (error.response?.status === 401) {
-                console.log('logging out')
+                console.log("logging out");
                 await logout(); // Call logout on 401 Unauthorized
             }
             return Promise.reject(error);
-        }
+        },
     );
 
     useEffect(() => {
@@ -42,13 +42,13 @@ export const AuthProvider = ({ children }) => {
                         token: token,
                         authenticated: true,
                     });
-                } catch (e) {
-                    // TODO check for 401
-                    console.log('expired token', e)
-                    await logout();
+                } catch (error) {
+                    if (error.response.status === 401) {
+                        await logout();
+                    }
                 }
             } else {
-                console.log('no token');
+                console.log("no token");
                 await logout();
             }
         };
@@ -79,20 +79,20 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const logout = async() => {
+    const logout = async () => {
         await AsyncStorage.removeItem("token");
         delete axios.defaults.headers.common["Authorization"];
         setAuthState({
             token: null,
-            authenticated: null
-        })
-    }
+            authenticated: null,
+        });
+    };
 
     const value = {
         onLogin: login,
         logout,
         authState,
-        setAuthState
+        setAuthState,
     };
 
     return <AuthContext.Provider value={ value }>{children}</AuthContext.Provider>;

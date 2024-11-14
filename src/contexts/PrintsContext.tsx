@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import fetchData from "../hooks/apiFetch";
 import { IFavourite } from "../contracts/Favourite";
-import { useAuth } from "./AuthContext"; // Assuming this is your custom hook for making API requests
+// Assuming this is your custom hook for making API requests
 
 // Create the context
 const PrintContext = createContext(null);

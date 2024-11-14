@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Dimensions, StyleSheet, View} from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import "./global.css";
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
@@ -17,7 +17,7 @@ import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
 import ImagePickerExample from "./src/pages/ImagePicker";
 import StorePrint from "./src/pages/StorePrint";
-import {ActivityIndicator, PaperProvider} from "react-native-paper";
+import { PaperProvider } from "react-native-paper";
 import { PrintProvider } from "./src/contexts/PrintsContext";
 import { UserProvider } from "./src/contexts/UserContext";
 

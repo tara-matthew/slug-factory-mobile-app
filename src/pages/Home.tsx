@@ -1,17 +1,17 @@
-import React, {memo, useEffect} from "react";
+import React, { memo } from "react";
 import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../contracts/Navigator";
 import { usePrints } from "../contexts/PrintsContext";
-import {useAuth} from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
 const Home = () => {
     const { prints, loading } = usePrints();
-    const {logout} = useAuth();
+    const { logout } = useAuth();
     const navigation = useNavigation<NavigationProps>();
 
     async function handleDataFromChild(item) {
@@ -25,7 +25,7 @@ const Home = () => {
     return (
         <View className="relative">
             <ScrollView contentContainerStyle={ styles.container }>
-                <Button title="logout" onPress={logout}></Button>
+                <Button title="logout" onPress={ logout }></Button>
                 <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ prints.latest }></ListGroup>
                 <ListGroup sendDataToParent={ handleDataFromChild } heading="Most Popular" data={ prints.popular }></ListGroup>
                 <ListGroup sendDataToParent={ handleDataFromChild } heading="Last Viewed" data={ prints.random }></ListGroup>
