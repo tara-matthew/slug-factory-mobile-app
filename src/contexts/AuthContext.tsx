@@ -16,63 +16,43 @@ export const AuthProvider = ({ children }) => {
         token: null,
         authenticated: null,
     });
-    // const [user, setUser] = useState({});
 
-    // axios.interceptors.request.use(
-    //     async (config) => {
-    //         const token = await AsyncStorage.getItem("token");
-    //         console.log(token);
-    //         if (token) {
-    //             config.headers["Authorization"] = `Bearer ${token}`;
-    //         } else {
-    //             await logout();
-    //         }
-    //         return config;
-    //     },
-    //     error => Promise.reject(error),
-    // );
-
-    // axios.interceptors.response.use(
-    //     response => response,
-    //     async error => {
-    //         if (error.response?.status === 401) {
-    //             console.log('logging out')
-    //             await logout(); // Call logout on 401 Unauthorized
-    //         }
-    //         return Promise.reject(error);
-    //     }
-    // );
+    axios.interceptors.response.use(
+        response => response,
+        async error => {
+            if (error.response?.status === 401) {
+                console.log('logging out')
+                await logout(); // Call logout on 401 Unauthorized
+            }
+            return Promise.reject(error);
+        }
+    );
 
     useEffect(() => {
         const loadToken = async () => {
-            console.log('loading token');
             const token = await AsyncStorage.getItem("token");
-            console.log('token loaded', token);
-            console.log(axios.defaults.headers.common["Authorization"]);
 
             if (token) {
                 try {
                     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-                    await apiFetch('/me')
+                    await apiFetch("/me");
 
                     setAuthState({
                         token: token,
                         authenticated: true,
                     });
                 } catch (e) {
+                    // TODO check for 401
                     console.log('expired token', e)
                     await logout();
                 }
-
             } else {
                 console.log('no token');
                 await logout();
             }
-
-            // remove headers and set auth state to false within an else?
         };
-        loadToken();
+        void loadToken();
     }, []);
 
     const login = async (username: string, password: string) => {
@@ -88,11 +68,6 @@ export const AuthProvider = ({ children }) => {
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await AsyncStorage.setItem("token", token);
-
-            // const user = await fetchData("/me");
-            // const userData = fromResponse(user.data);
-            // await AsyncStorage.setItem("user", JSON.stringify(userData));
-            // setUser(userData);
             return result;
         } catch (e) {
             console.log(e);

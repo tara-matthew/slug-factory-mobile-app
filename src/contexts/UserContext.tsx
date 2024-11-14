@@ -23,8 +23,8 @@ export const UserProvider = ({ children }) => {
                     setUser(userData);
                 }
             } catch (error) {
-                await logout();
-                // console.error(error);
+                // await logout();
+                console.error(error);
             }
         };
 

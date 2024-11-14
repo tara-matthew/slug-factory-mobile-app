@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import fetchData from "../hooks/apiFetch";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
 import { IFavourite } from "../contracts/Favourite";
-import {useAuth} from "./AuthContext"; // Assuming this is your custom hook for making API requests
+import { useAuth } from "./AuthContext"; // Assuming this is your custom hook for making API requests
 
 // Create the context
 const PrintContext = createContext(null);
@@ -26,30 +24,21 @@ export const PrintProvider = ({ children }) => {
                 `/prints/random`,
                 `/my/favourites?type=printed_design`,
             ];
-            console.log('prints context', authState.authenticated);
 
             try {
-                if (authState.authenticated) {
-                    const [latestPrints, popularPrints, randomPrints, favouriteData] = await fetchData(endpoints);
-                    const favourites = favouriteData.data.map((favourite: IFavourite) => favourite.resource); // TODO separate into a custom hook
+                const [latestPrints, popularPrints, randomPrints, favouriteData] = await fetchData(endpoints);
+                const favourites = favouriteData.data.map((favourite: IFavourite) => favourite.resource); // TODO separate into a custom hook
 
-                    setPrints({
-                        latest: latestPrints.data,
-                        popular: popularPrints.data,
-                        random: randomPrints.data,
-                        favourites: favourites,
-                    });
-                }
+                setPrints({
+                    latest: latestPrints.data,
+                    popular: popularPrints.data,
+                    random: randomPrints.data,
+                    favourites: favourites,
+                });
             } catch (error) {
                 console.error("Error in getHomeData", error.response.status);
-                if (error.response.status === 401) {
-                    // TODO rework to proper logout, perform at a higher level
-                    await AsyncStorage.removeItem("token");
-                    delete axios.defaults.headers.common["Authorization"];
-                    await logout();
-                }
             } finally {
-                console.log('done loading')
+                console.log("done loading");
                 setLoading(false);
             }
         };
