@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Dimensions, StyleSheet } from "react-native";
+import {Dimensions, StyleSheet, View} from "react-native";
 import "./global.css";
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
@@ -17,7 +17,7 @@ import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
 import ImagePickerExample from "./src/pages/ImagePicker";
 import StorePrint from "./src/pages/StorePrint";
-import { PaperProvider } from "react-native-paper";
+import {ActivityIndicator, PaperProvider} from "react-native-paper";
 import { PrintProvider } from "./src/contexts/PrintsContext";
 import { UserProvider } from "./src/contexts/UserContext";
 
@@ -26,20 +26,27 @@ const Stack = createNativeStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 const App = () => {
+
     return (
-
         <AuthProvider>
-            <UserProvider>
-                <PrintProvider>
-                    <PaperProvider>
-                        <Layout></Layout>
-                    </PaperProvider>
-                </PrintProvider>
-            </UserProvider>
-
+            <AppContent></AppContent>
         </AuthProvider>
+    )
 
-    );
+    // return (
+    //
+    //     <AuthProvider>
+    //         <UserProvider>
+    //             <PrintProvider>
+    //                 <PaperProvider>
+    //                     <Layout></Layout>
+    //                 </PaperProvider>
+    //             </PrintProvider>
+    //         </UserProvider>
+    //
+    //     </AuthProvider>
+    //     );
+
 };
 
 export const Layout = () => {
@@ -105,6 +112,24 @@ function MainTabs() {
         </Tab.Navigator>
     );
 }
+
+const AppContent = () => {
+    const { authState } = useAuth();
+
+    return (
+        <PaperProvider>
+            {authState.authenticated ? (
+                <UserProvider>
+                    <PrintProvider>
+                        <Layout />
+                    </PrintProvider>
+                </UserProvider>
+            ) : (
+                <Layout />
+            )}
+        </PaperProvider>
+    );
+};
 
 function ProfileStack() {
     return (

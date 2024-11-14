@@ -9,22 +9,27 @@ const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
-    const { authState } = useAuth();
+    const { authState, logout } = useAuth();
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const fetchedUser = await fetchData("/me");
-                const userData = fromResponse(fetchedUser.data);
+                console.log("Fetching user", authState);
+                if (authState.authenticated) {
+                    console.log('authenticated')
+                    const fetchedUser = await fetchData("/me");
+                    const userData = fromResponse(fetchedUser.data);
 
-                setUser(userData);
+                    setUser(userData);
+                }
             } catch (error) {
-                console.error(error);
+                await logout();
+                // console.error(error);
             }
         };
 
         void fetchUser();
-    }, []);
+    }, [authState.authenticated]);
 
     return (
         <UserContext.Provider value={ { user, setUser } }>
