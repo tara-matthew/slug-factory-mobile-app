@@ -34,6 +34,18 @@ const App = () => {
     );
 };
 
+export const LoggedOutLayout = () => {
+    return (
+        <NavigationContainer>
+        <Stack.Navigator>
+        <>
+            <Tab.Screen name="Login" component={ Login } />
+        </>
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
+}
+
 export const Layout = () => {
     const { authState, loading } = useAuth();
     const hasFilledInProfile = false;
@@ -120,7 +132,7 @@ const AppContent = () => {
                         </UserProvider>
                     )
                 : (
-                        <Layout />
+                        <LoggedOutLayout />
                     )}
         </PaperProvider>
     );
