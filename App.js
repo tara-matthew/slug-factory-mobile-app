@@ -39,8 +39,11 @@ const App = () => {
 export const LoggedOutLayout = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={{
+                headerBackVisible: false,
+            }}>
                 <>
+                    <Tab.Screen name="Register" component={ Register } />
                     <Tab.Screen name="Login" component={ Login } />
                 </>
             </Stack.Navigator>

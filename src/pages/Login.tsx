@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import Welcome from "../components/template/Welcome";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import {useNavigation} from "@react-navigation/native";
 
@@ -24,11 +24,14 @@ const Login = () => {
 
     return (
         <View className="flex flex-1 justify-center items-center px-8 relative">
-            <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={100} className={"w-full"}>
+            <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={100} className={"w-full mb-6"}>
 
             {error ? <Text className="text-red-500 text-center mb-4">{error}</Text> : null}
             <Welcome sendDataToParent={ handleDataFromChild } headerText="Sign in to Slug Factory" buttonText="Sign In" buttonTo="Home" inputs={ [{ placeholder: "username", title: "Username", inputProps: {autoCapitalize: "none"} }, { placeholder: "password", title: "Password", inputProps: {secureTextEntry: true, autoCapitalize: "none"} }] }></Welcome>
             </KeyboardAvoidingView>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                <Text>Don't have an account yet?</Text>
+            </TouchableOpacity>
 
             </View>
     );

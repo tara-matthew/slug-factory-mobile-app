@@ -14,7 +14,7 @@ const Welcome = ({ headerText, buttonText, inputs, buttonTo, sendDataToParent })
     return (
 
         <View className="w-full">
-            <View className="mb-5">
+            <View className="mb-10">
                 <Text className="text-xl font-bold text-center">{headerText}</Text>
             </View>
             <Form sendDataToParent={ handleDataFromChild } buttonText={ buttonText } buttonTo={ buttonTo } inputs={ inputs }></Form>
