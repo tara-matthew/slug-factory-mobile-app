@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, KeyboardAvoidingView } from "react-native";
+import { Text, View } from "react-native";
 import Form from "../organism/Form";
 
 const Welcome = ({ headerText, buttonText, inputs, buttonTo, sendDataToParent }) => {

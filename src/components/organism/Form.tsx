@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import {View, TextInput, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, ScrollView} from "react-native";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
     const [formValues, setFormValues] = useState(
@@ -17,7 +16,7 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
     };
 
     return (
-            <View className={"w-full"}>
+        <View className="w-full">
             {inputs.map((field, index) => (
                 <View key={ index }>
                     <Text className="font-bold">{field.title}</Text>
@@ -43,7 +42,7 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
                 </TouchableOpacity>
 
             </View>
-            </View>
+        </View>
     );
 };
 

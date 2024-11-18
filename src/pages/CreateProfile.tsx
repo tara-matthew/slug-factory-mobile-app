@@ -1,12 +1,12 @@
-import {View, Text, ScrollView, TextInput, TouchableOpacity, StyleSheet} from "react-native";
-import {useUser} from "../contexts/UserContext";
-import React, {useState} from "react";
+import { View, Text, ScrollView, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { useUser } from "../contexts/UserContext";
+import React, { useState } from "react";
 import apiFetch from "../hooks/apiFetch";
-import {fromResponse} from "../data-transfer-objects/UserData";
+import { fromResponse } from "../data-transfer-objects/UserData";
 
 const CreateProfile = () => {
-    const [formValues, setFormValues] = useState({})
-    const {user, setUser} = useUser();
+    const [formValues, setFormValues] = useState({});
+    const { user, setUser } = useUser();
 
     // console.log(formValues)
 
@@ -54,8 +54,8 @@ const CreateProfile = () => {
             </ScrollView>
 
         </View>
-)
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

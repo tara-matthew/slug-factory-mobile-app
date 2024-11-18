@@ -22,7 +22,7 @@ const EditProfile = () => {
     };
 
     useEffect(() => {
-        console.log({user});
+        console.log({ user });
     }, [user]);
 
     const handleSubmit = async () => {

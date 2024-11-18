@@ -1,8 +1,8 @@
 import React, { memo, useState } from "react";
 import Welcome from "../components/template/Welcome";
-import {View, Text, KeyboardAvoidingView, TouchableOpacity} from "react-native";
+import { View, Text, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const Register = () => {
     const [error, setError] = useState("");
@@ -45,15 +45,15 @@ const Register = () => {
 
     return (
         <View className="flex flex-1 justify-center items-center px-8 relative">
-            <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={15} className={"w-full mb-6"}>
+            <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={ 15 } className="w-full mb-6">
 
-            {error ? <Text className="text-red-500 text-center mb-4">{error}</Text> : null}
-            <Welcome sendDataToParent={ handleDataFromChild } headerText="Register for Slug Factory" buttonText="Register" buttonTo="Home" inputs={ inputs }></Welcome>
+                {error ? <Text className="text-red-500 text-center mb-4">{error}</Text> : null}
+                <Welcome sendDataToParent={ handleDataFromChild } headerText="Register for Slug Factory" buttonText="Register" buttonTo="Home" inputs={ inputs }></Welcome>
             </KeyboardAvoidingView>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text>Already have an account?</Text>
+            <TouchableOpacity onPress={ () => navigation.navigate("Login") }>
+                <Text>Already have an account?</Text>
             </TouchableOpacity>
-            </View>
+        </View>
     );
 };
 
