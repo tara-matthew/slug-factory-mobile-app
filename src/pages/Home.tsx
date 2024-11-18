@@ -25,7 +25,6 @@ const Home = () => {
     return (
         <View className="relative">
             <ScrollView contentContainerStyle={ styles.container }>
-                <Button title="logout" onPress={ logout }></Button>
                 <ListGroup sendDataToParent={ handleDataFromChild } heading="Recently Uploaded" data={ prints.latest }></ListGroup>
                 <ListGroup sendDataToParent={ handleDataFromChild } heading="Most Popular" data={ prints.popular }></ListGroup>
                 <ListGroup sendDataToParent={ handleDataFromChild } heading="Last Viewed" data={ prints.random }></ListGroup>

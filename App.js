@@ -22,6 +22,7 @@ import { PrintProvider } from "./src/contexts/PrintsContext";
 import { UserProvider, useUser } from "./src/contexts/UserContext";
 import CreateProfile from "./src/pages/CreateProfile";
 import Register from "./src/pages/Register";
+import EditPrint from "./src/pages/EditPrint";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -44,8 +45,8 @@ export const LoggedOutLayout = () => {
             } }
             >
                 <>
-                    <Tab.Screen name="Register" component={ Register } />
                     <Tab.Screen name="Login" component={ Login } />
+                    <Tab.Screen name="Register" component={ Register } />
                 </>
             </Stack.Navigator>
         </NavigationContainer>
@@ -93,6 +94,7 @@ export const Layout = () => {
                                     options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
                                 />
                                 <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
+                                <Stack.Screen name="EditPrint" component={ EditPrint } />
                                 <Stack.Screen name="Filament" component={ Filament } options={ ({ route }) => ({ title: route.params.filament.title }) } />
                             </>
                         )}

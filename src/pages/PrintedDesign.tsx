@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
@@ -8,8 +8,10 @@ import apiFetch from "../hooks/apiFetch";
 import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 import { format } from "date-fns";
+import {useNavigation} from "@react-navigation/native";
 
 const PrintedDesign = ({ route }) => {
+    const navigation = useNavigation();
     // TODO just pass in the print ID rather than the whole object, this is an anti-pattern!
     // https://reactnavigation.org/docs/params/
     // console.log(route.params.print_id);
@@ -91,6 +93,16 @@ const PrintedDesign = ({ route }) => {
             favourited_count: prevPrint.favourited_count + (print.is_favourite ? -1 : +1),
         }));
     };
+
+    useEffect(() => {
+        if (belongsToUser) {
+            navigation.setOptions({
+                headerRight: () => (
+                    <Button title={"Edit"} onPress={ () => navigation.navigate("EditPrint", {id: print.id}) }></Button>
+                ),
+            });
+        }
+    }, [navigation])
 
     return (
         <ScrollView style={ { width: "100%" } }>

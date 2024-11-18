@@ -4,32 +4,47 @@ exports[`Renders correctly 1`] = `
 <View
   className="w-full"
 >
-  <View
-    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
-  >
-    <TextInput
-      onChangeText={[Function]}
-      placeholder="First placeholder"
-      value=""
+  <View>
+    <Text
+      className="font-bold"
     />
+    <View
+      className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="First placeholder"
+        value=""
+      />
+    </View>
   </View>
-  <View
-    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
-  >
-    <TextInput
-      onChangeText={[Function]}
-      placeholder="Second placeholder"
-      value=""
+  <View>
+    <Text
+      className="font-bold"
     />
+    <View
+      className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Second placeholder"
+        value=""
+      />
+    </View>
   </View>
-  <View
-    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
-  >
-    <TextInput
-      onChangeText={[Function]}
-      placeholder="Third placeholder"
-      value=""
+  <View>
+    <Text
+      className="font-bold"
     />
+    <View
+      className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Third placeholder"
+        value=""
+      />
+    </View>
   </View>
   <View
     className="w-full mt-4"

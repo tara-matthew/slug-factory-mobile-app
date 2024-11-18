@@ -48,9 +48,14 @@ exports[`Renders correctly 1`] = `
       className="relative"
     >
       <Image
+        placeholder={
+          {
+            "blurhash": undefined,
+          }
+        }
         source={
           {
-            "uri": "test",
+            "uri": "https://test.com",
           }
         }
         style={
@@ -59,6 +64,7 @@ exports[`Renders correctly 1`] = `
             "width": "100%",
           }
         }
+        transition={1000}
       />
       Icon: favorite-outline, Size: 32, Color: white
       <Text

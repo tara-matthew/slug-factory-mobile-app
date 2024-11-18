@@ -1,5 +1,6 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "name": "slug-factory-mobile-app",
     "slug": "slug-factory-mobile-app",
     "version": "1.0.0",
@@ -29,6 +30,6 @@
     },
     "plugins": [
       "react-native-compressor"
-    ]
+    ],
   }
 }

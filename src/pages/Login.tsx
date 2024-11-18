@@ -29,7 +29,7 @@ const Login = () => {
                 <Welcome sendDataToParent={ handleDataFromChild } headerText="Sign in to Slug Factory" buttonText="Sign In" buttonTo="Home" inputs={ [{ placeholder: "username", title: "Username", inputProps: { autoCapitalize: "none" } }, { placeholder: "password", title: "Password", inputProps: { secureTextEntry: true, autoCapitalize: "none" } }] }></Welcome>
             </KeyboardAvoidingView>
             <TouchableOpacity onPress={ () => navigation.navigate("Register") }>
-                <Text>Don't have an account yet?</Text>
+                <Text className={"font-bold text-md"}>Don't have an account yet?</Text>
             </TouchableOpacity>
 
         </View>
