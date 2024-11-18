@@ -40,7 +40,6 @@ const Register = () => {
             console.log("heree", result.error);
         } else {
             await onLogin(formData.username, formData.password);
-            navigation.navigate('MyPrints')
         }
     }
 

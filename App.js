@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Dimensions, StyleSheet, View, Text} from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import "./global.css";
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
@@ -17,10 +17,11 @@ import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
 import ImagePickerExample from "./src/pages/ImagePicker";
 import StorePrint from "./src/pages/StorePrint";
-import {ActivityIndicator, PaperProvider} from "react-native-paper";
+import { ActivityIndicator, PaperProvider } from "react-native-paper";
 import { PrintProvider } from "./src/contexts/PrintsContext";
-import {UserProvider, useUser} from "./src/contexts/UserContext";
+import { UserProvider, useUser } from "./src/contexts/UserContext";
 import CreateProfile from "./src/pages/CreateProfile";
+import Register from "./src/pages/Register";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -34,63 +35,61 @@ const App = () => {
     );
 };
 
+// TODO create a nav wrapper
 export const LoggedOutLayout = () => {
     return (
         <NavigationContainer>
-        <Stack.Navigator>
-        <>
-            <Tab.Screen name="Login" component={ Login } />
-        </>
+            <Stack.Navigator>
+                <>
+                    <Tab.Screen name="Login" component={ Login } />
+                </>
             </Stack.Navigator>
         </NavigationContainer>
-    )
-}
+    );
+};
 
 export const Layout = () => {
-    const { authState, loading } = useAuth();
-    const hasFilledInProfile = false;
-    const {user} = useUser();
+    const { user, loading } = useUser();
 
     useEffect(() => {
-        console.log(user);
+        console.log(loading);
     }, [user]);
+
+    if (loading) {
+        return (
+            <View style={ { flex: 1, justifyContent: "center", alignItems: "center" } }>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
 
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                { authState.authenticated
+                {!user.profile_set_public_at // use set public at
                     ? (
-                            !user.profile_set_public_at // use set public at
-                                ? (
-                                        <Stack.Screen name="CreateProfile" component={ CreateProfile } />
-                                    )
-                                : (
-                                        <>
-                                            <Stack.Screen name="Main" component={ MainTabs } options={ { headerShown: false, title: "Home" } } />
-                                            <Stack.Screen
-                                                name="EditProfile"
-                                                component={ EditProfile }
-                                                options={ { title: "Edit Profile", headerBackTitle: "Back" } }
-                                            />
-                                            <Stack.Screen
-                                                name="MyPrints"
-                                                component={ MyPrints }
-                                                options={ { title: "My Prints", headerBackTitle: "Back" } }
-                                            />
-                                            <Stack.Screen
-                                                name="MyFavouritePrints"
-                                                component={ MyFavouritePrints }
-                                                options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
-                                            />
-                                            <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
-                                            <Stack.Screen name="Filament" component={ Filament } options={ ({ route }) => ({ title: route.params.filament.title }) } />
-                                        </>
-                                    )
+                            <Stack.Screen name="CreateProfile" component={ CreateProfile } />
                         )
-
                     : (
                             <>
-                                <Tab.Screen name="Login" component={ Login } />
+                                <Stack.Screen name="Main" component={ MainTabs } options={ { headerShown: false, title: "Home" } } />
+                                <Stack.Screen
+                                    name="EditProfile"
+                                    component={ EditProfile }
+                                    options={ { title: "Edit Profile", headerBackTitle: "Back" } }
+                                />
+                                <Stack.Screen
+                                    name="MyPrints"
+                                    component={ MyPrints }
+                                    options={ { title: "My Prints", headerBackTitle: "Back" } }
+                                />
+                                <Stack.Screen
+                                    name="MyFavouritePrints"
+                                    component={ MyFavouritePrints }
+                                    options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
+                                />
+                                <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
+                                <Stack.Screen name="Filament" component={ Filament } options={ ({ route }) => ({ title: route.params.filament.title }) } />
                             </>
                         )}
             </Stack.Navigator>
@@ -112,14 +111,6 @@ function MainTabs() {
 
 const AppContent = () => {
     const { authState, loading } = useAuth();
-
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-        );
-    }
 
     return (
         <PaperProvider>

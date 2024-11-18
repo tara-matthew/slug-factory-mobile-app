@@ -14,7 +14,7 @@ const MyProfile = () => {
     }, [user.favourites_count]);
 
     const uploadText = useMemo(() => {
-        const text = user.prints_count > 1 ? "uploads" : "upload";
+        const text = user.prints_count > 1 || user.prints_count === 0 ? "uploads" : "upload";
 
         return `${user.prints_count} ${text}`;
     }, []);
