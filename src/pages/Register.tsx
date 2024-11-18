@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import Welcome from "../components/template/Welcome";
-import { View, Text } from "react-native";
+import { View, Text, KeyboardAvoidingView } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import {useNavigation} from "@react-navigation/native";
 
@@ -24,9 +24,9 @@ const Register = () => {
             {
                 placeholder: "password", title: "Password", inputProps: { secureTextEntry: false, autoCapitalize: "none" },
             },
-            {
-                placeholder: "password_confirmation", title: "Confirm Password", inputProps: { secureTextEntry: false, autoCapitalize: "none" },
-            },
+            // {
+            //     placeholder: "password_confirmation", title: "Confirm Password", inputProps: { secureTextEntry: false, autoCapitalize: "none" },
+            // },
         ];
 
     async function handleDataFromChild(formData) {
@@ -45,9 +45,12 @@ const Register = () => {
 
     return (
         <View className="flex flex-1 justify-center items-center px-8 relative">
+            <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30} className={"w-full"}>
+
             {error ? <Text className="text-red-500 text-center mb-4">{error}</Text> : null}
-            <Welcome sendDataToParent={ handleDataFromChild } headerText="Register for to Slug Factory" buttonText="Register" buttonTo="Home" inputs={ inputs }></Welcome>
-        </View>
+            <Welcome sendDataToParent={ handleDataFromChild } headerText="Register for Slug Factory" buttonText="Register" buttonTo="Home" inputs={ inputs }></Welcome>
+            </KeyboardAvoidingView>
+            </View>
     );
 };
 
