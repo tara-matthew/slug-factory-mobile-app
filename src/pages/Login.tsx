@@ -2,16 +2,22 @@ import React, { memo, useState } from "react";
 import Welcome from "../components/template/Welcome";
 import { View, Text } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
+import {useNavigation} from "@react-navigation/native";
 
 const Login = () => {
     const [error, setError] = useState("");
     // @ts-ignore
     const { onLogin } = useAuth();
+    const navigation = useNavigation();
+
 
     async function handleDataFromChild(formData) {
         // setDataFromChild(data);
         const result = await onLogin(formData.username, formData.password);
+        console.log({result});
         if (result.error) {
+            console.log('heree',result.error);
+
             setError(result.msg);
         }
     }
