@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Text, View } from "react-native";
 import Grid from "../components/organism/Grid";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -10,16 +10,12 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDes
 
 const MyFavouritePrints = () => {
     const navigation = useNavigation<NavigationProps>();
-    const { prints, loading, fetchPrints } = usePrints();
+    const { prints, loading } = usePrints();
 
     async function handleDataFromChild(item) {
         console.log("my favourite prints level", item);
         navigation.navigate("PrintedDesign", { print: item });
     }
-
-    // useEffect(() => {
-    //     fetchPrints();
-    // }, []);
 
     if (loading) {
         return (<Text>Loading...</Text>);
