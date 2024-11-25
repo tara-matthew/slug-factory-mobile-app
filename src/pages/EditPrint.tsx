@@ -18,15 +18,26 @@ import {fromResponse} from "../data-transfer-objects/PrintData";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import {fromRequest} from "../data-transfer-objects/ImagePickerData";
+import form from "../components/organism/Form";
+import {useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {RootStackParamList} from "../contracts/Navigator";
+
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+
 
 const EditPrint = ({ route }) => {
     const [formValues, setFormValues] = useState({ adhesion: "brim", filament_material_id: null, filament_colour_id: null, uses_supports: false, title: "", description: "", images: null });
     const [images, setImages] = useState([]);
+    const [newImages, setNewImages] = useState([]);
     const [print,setPrint] = useState({});
     const [loading, setLoading] = useState(false);
 
 
-    const id = route.params.id
+    const id = route.params.id;
+
+    const navigation = useNavigation<NavigationProps>();
+
 
     useEffect(() => {
         const fetchPrint = async () => {
@@ -44,7 +55,6 @@ const EditPrint = ({ route }) => {
                     // images: printData.images
                 });
                 setImages(printData.images);
-                console.log(formValues, images);
 
                 // setPrint(print.data);
             } catch (error) {
@@ -65,13 +75,17 @@ const EditPrint = ({ route }) => {
         // console.log(formValues);
 
         Object.keys(formValues).forEach((key) => {
+            // console.log(key);
             // if (formValues[key] !== null) {
                 formData.append(key, formValues[key]);
             // }
         });
+        formData.append("_method", "PATCH");
 
-        if (images) {
-            images.forEach((image) => {
+        console.log(formData);
+
+        if (newImages) {
+            newImages.forEach((image) => {
                 formData.append("images[]", {
                     uri: image.url,
                     name: "image",
@@ -79,6 +93,7 @@ const EditPrint = ({ route }) => {
                 } as unknown as Blob);
             });
         }
+        console.log(formData);
         return formData;
     };
 
@@ -87,8 +102,14 @@ const EditPrint = ({ route }) => {
         setLoading(true);
 
         try {
-            // const result = await apiFetch("/prints", "POST", formData);
-            console.log(formData);
+            const result = await apiFetch(`/prints/${id}`, "POST", formData);
+            navigation.reset({
+                index: 1,
+                routes: [
+                    { name: "Main" },
+                    { name: "PrintedDesign", params: { print: result.data } },
+                ],
+            });
 
             // navigation.navigate("PrintedDesign", { print: result.data });
         } catch (error) {
@@ -126,6 +147,7 @@ const EditPrint = ({ route }) => {
             console.log(selectedImages);
 
             setImages(fromRequest(selectedImages));
+            setNewImages(fromRequest(selectedImages));
         }
     };
 
