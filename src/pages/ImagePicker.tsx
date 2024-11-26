@@ -1,60 +1,33 @@
-import { useState } from 'react';
-import { Button, Image, View, StyleSheet } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import apiFetch from "../hooks/apiFetch";
-import fetchData from "../hooks/apiFetch";
+import { Image } from "expo-image";
+import { StyleSheet } from "react-native";
 
-const  ImagePickerExample = () => {
-    const [image, setImage] = useState<string | null>(null);
+const blurhash
+    = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
-    const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            // allowsMultipleSelection: true,
-            aspect: [1,1],
-            quality: 1,
-        });
-
-        console.log(result.assets);
-
-        const formData = new FormData();
-        formData.append("file", {
-            uri: result?.assets[0].uri,
-            name: `name`,
-            type: `image/jpeg`,
-        });
-
-        try {
-            await apiFetch("/upload", "POST", formData);
-        } catch (error) {
-            console.log(error);
-        }
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-        }
-    };
-
+export default function App() {
     return (
-        <View style={styles.container}>
-            <Button title="Pick an image from camera roll" onPress={pickImage} />
-            {image && <Image source={{ uri: image }} style={styles.image} />}
-        </View>
+        // <View style={styles.container}>
+        <Image
+            style={ styles.image }
+            source="https://picsum.photos/seed/696/3000/2000"
+            placeholder={ blurhash }
+            contentFit="cover"
+            transition={ 5000 }
+        />
+        // </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
     },
     image: {
-        width: 600,
-        height: 480,
+        flex: 1,
+        width: "100%",
+        backgroundColor: "#0553",
     },
 });
-
-export default ImagePickerExample;
