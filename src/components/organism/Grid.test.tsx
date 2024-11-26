@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Grid from "./Grid";
 it("Renders correctly", () => {
+    const mockSendDataToParent = jest.fn();
     const prints = [
         {
             created_at: "2024-09-16T14:21:07.000000Z",
@@ -29,7 +30,7 @@ it("Renders correctly", () => {
             is_favourite: false,
         },
     ];
-    const tree = renderer.create(<Grid items={ prints } />).toJSON();
+    const tree = renderer.create(<Grid items={ prints } sendDataToParent={mockSendDataToParent} />).toJSON();
     expect(tree).toMatchSnapshot();
 });
 
