@@ -35,7 +35,7 @@ const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
 
 const styles = StyleSheet.create({
     image: {
-        contentFit: "cover",
+        objectFit: "cover",
     },
     largeImage: {
         width: Dimensions.get("window").width,
