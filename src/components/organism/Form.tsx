@@ -7,7 +7,6 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
     );
 
     const handleSubmit = async () => {
-        console.log(formValues.password, formValues.password_confirmation);
         sendDataToParent(formValues);
     };
 

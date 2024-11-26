@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../contracts/Navigator";
+import {PrintedDesignNavigationProps, RootStackParamList} from "../contracts/Navigator";
 import { usePrints } from "../contexts/PrintsContext";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -12,7 +12,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDes
 const Home = () => {
     const { prints, loading } = usePrints();
     const { logout } = useAuth();
-    const navigation = useNavigation<NavigationProps>();
+    const navigation = useNavigation<PrintedDesignNavigationProps>();
 
     async function handleDataFromChild(item) {
         navigation.navigate("PrintedDesign", { print_id: item.id, print: item });

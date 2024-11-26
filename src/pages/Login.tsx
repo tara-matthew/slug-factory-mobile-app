@@ -3,18 +3,18 @@ import Welcome from "../components/template/Welcome";
 import { View, Text, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
+import { RegisterNavigationProps } from "../contracts/Navigator";
 
 const Login = () => {
     const [error, setError] = useState("");
     const { onLogin } = useAuth();
-    const navigation = useNavigation();
+    const navigation = useNavigation<RegisterNavigationProps>();
 
     async function handleDataFromChild(formData) {
         const result = await onLogin(formData.username, formData.password);
         console.log({ result });
         if (result.error) {
             console.log(result.error);
-
             setError(result.msg);
         }
     }

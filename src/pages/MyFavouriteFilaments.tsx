@@ -3,23 +3,19 @@ import { Text, View } from "react-native";
 import fetchData from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
 import { IFavourite } from "../contracts/Favourite";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../contracts/Navigator";
 import { useNavigation } from "@react-navigation/native";
-
-type NavigationProps = NativeStackNavigationProp<RootStackParamList, "Filament">;
+import { FilamentNavigationProps } from "../contracts/Navigator";
 
 const MyFavouriteFilaments = () => {
     const [loading, setLoading] = useState(true);
     const [favourites, setFavourites] = useState([]);
-    const navigation = useNavigation<NavigationProps>();
+    const navigation = useNavigation<FilamentNavigationProps>();
 
     useEffect(() => {
         void getFavourites();
     }, []);
 
     async function handleDataFromChild(item) {
-        console.log("my favourite filaments level", item);
         navigation.navigate("Filament", { filament: item });
     }
 

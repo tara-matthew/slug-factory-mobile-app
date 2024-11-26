@@ -5,7 +5,9 @@ export type RootStackParamList = {
     Filament: { filament: object };
     Main: undefined;
     MyProfile: undefined;
+    Register: undefined;
 };
 
 export type PrintedDesignNavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
-export type ProfileNavigationProps = NativeStackNavigationProp<RootStackParamList, "Filament">;
+export type FilamentNavigationProps = NativeStackNavigationProp<RootStackParamList, "Filament">;
+export type RegisterNavigationProps = NativeStackNavigationProp<RootStackParamList, "Register">;

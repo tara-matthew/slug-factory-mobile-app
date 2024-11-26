@@ -15,7 +15,7 @@ const MyPrints = () => {
     }, []);
 
     async function handleDataFromChild(item) {
-        navigation.navigate("PrintedDesign", { print: item });
+        navigation.navigate("PrintedDesign", { print_id: item.id, print: item });
     }
 
     const getPrints = async () => {
