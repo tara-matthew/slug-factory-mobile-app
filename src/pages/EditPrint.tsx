@@ -24,10 +24,9 @@ import { RootStackParamList } from "../contracts/Navigator";
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const EditPrint = ({ route }) => {
-    const [formValues, setFormValues] = useState({ adhesion_type: "brim", filament_material_id: null, filament_colour_id: null, uses_supports: false, title: "", description: "", images: null });
+    const [formValues, setFormValues] = useState({ adhesion_type: "brim", filament_material_id: null, uses_supports: false, title: "", description: ""});
     const [images, setImages] = useState([]);
     const [newImages, setNewImages] = useState([]);
-    const [print, setPrint] = useState({});
     const [loading, setLoading] = useState(false);
 
     const id = route.params.id;
@@ -38,21 +37,15 @@ const EditPrint = ({ route }) => {
         const fetchPrint = async () => {
             try {
                 const print = await apiFetch(`/prints/${id}`);
-                // console.log(print.data.images);
                 const printData = fromResponse(print.data);
-                // console.log(printData);
                 setFormValues({
                     title: printData.title,
                     description: printData.description,
                     filament_material_id: printData.filament_material_id,
-                    // filament_colour_id: printData.filament_colour_id,
                     uses_supports: printData.uses_supports,
                     adhesion_type: printData.adhesion_type,
-                    // images: printData.images
                 });
                 setImages(printData.images);
-
-                // setPrint(print.data);
             } catch (error) {
                 console.error(error);
             }
@@ -63,22 +56,15 @@ const EditPrint = ({ route }) => {
 
     const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
-        console.log(formValues);
     };
 
     const createFormData = () => {
         const formData = new FormData();
-        // console.log(formValues);
 
         Object.keys(formValues).forEach((key) => {
-            // console.log(key);
-            // if (formValues[key] !== null) {
             formData.append(key, formValues[key]);
-            // }
         });
         formData.append("_method", "PATCH");
-
-        console.log(formData);
 
         if (newImages) {
             newImages.forEach((image) => {
@@ -89,7 +75,6 @@ const EditPrint = ({ route }) => {
                 } as unknown as Blob);
             });
         }
-        console.log(formData);
         return formData;
     };
 
@@ -107,7 +92,6 @@ const EditPrint = ({ route }) => {
                 ],
             });
 
-            // navigation.navigate("PrintedDesign", { print: result.data });
         } catch (error) {
             console.log("error", error);
         } finally {
@@ -140,7 +124,6 @@ const EditPrint = ({ route }) => {
             const selectedImages = compressedImages.map(asset => ({
                 uri: asset.uri,
             }));
-            console.log(selectedImages);
 
             setImages(fromRequest(selectedImages));
             setNewImages(fromRequest(selectedImages));
