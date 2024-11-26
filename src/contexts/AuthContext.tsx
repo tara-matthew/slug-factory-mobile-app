@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import fetchData from "../hooks/apiFetch";
 import apiFetch from "../hooks/apiFetch";
+import * as Device from 'expo-device';
 
 const AuthContext = createContext({});
 
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         token: null,
         authenticated: null,
     });
-    const [loading, setLoading] = useState(true);  // Add loading state
+    const [loading, setLoading] = useState(true); // Add loading state
 
     axios.interceptors.response.use(
         response => response,
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const loadToken = async () => {
+            console.log(Device.deviceName);
             const token = await AsyncStorage.getItem("token");
 
             if (token) {
@@ -60,7 +62,8 @@ export const AuthProvider = ({ children }) => {
     const login = async (username: string, password: string) => {
         try {
             console.log("logging in");
-            const result = await fetchData("/auth/login", "POST", { username: username, password: password });
+            const deviceName = Device.deviceName;
+            const result = await fetchData("/auth/login", "POST", { username: username, password: password, device_name: deviceName });
             const token = result.data.token;
             setAuthState({
                 token: token,
@@ -71,7 +74,7 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.setItem("token", token);
             return result;
         } catch (e) {
-            console.log('exception', e);
+            console.log("exception", e);
             // await logout();
 
             return { error: true };
@@ -83,6 +86,7 @@ export const AuthProvider = ({ children }) => {
             console.log("registering");
             await fetchData("/auth/register", "POST", { name: name, email: email, username: username, password: password, password_confirmation: password_confirmation });
         } catch (e) {
+            // console.log(e);
             console.error(e.response);
             return { error: true };
         }
@@ -102,7 +106,7 @@ export const AuthProvider = ({ children }) => {
         onRegister: register,
         logout,
         authState,
-        loading
+        loading,
     };
 
     return <AuthContext.Provider value={ value }>{children}</AuthContext.Provider>;
