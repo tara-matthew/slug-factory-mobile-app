@@ -9,3 +9,9 @@ export interface IListData {
     images?: IImage[];
     image_url?: string;
 }
+
+export interface IListGroupProps {
+    heading: string;
+    data: IListData[];
+    sendDataToParent: (data: never) => void;
+}

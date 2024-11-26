@@ -6,8 +6,6 @@ const Welcome = ({ headerText, buttonText, inputs, buttonTo, sendDataToParent })
     const [dataFromChild, setDataFromChild] = useState("");
 
     function handleDataFromChild(data) {
-        console.log(data);
-        // setDataFromChild(data);
         sendDataToParent(data);
     }
 
