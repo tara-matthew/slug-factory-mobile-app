@@ -24,7 +24,7 @@ import { useUser } from "../contexts/UserContext";
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const StorePrint = () => {
-    const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
+    const [formValues, setFormValues] = useState({ adhesion_type: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
     const { user, setUser } = useUser();
@@ -37,12 +37,14 @@ const StorePrint = () => {
 
     const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
+        console.log(formValues);
     };
 
     const createFormData = () => {
         const formData = new FormData();
 
         Object.keys(formValues).forEach((key) => {
+            console.log(typeof formValues[key], key);
             formData.append(key, formValues[key]);
         });
 
@@ -55,11 +57,13 @@ const StorePrint = () => {
                 } as unknown as Blob);
             });
         }
+        console.log(formData);
         return formData;
     };
 
     const handleSubmit = async () => {
         const formData = createFormData();
+        console.log(formData);
         setLoading(true);
 
         try {
@@ -80,7 +84,7 @@ const StorePrint = () => {
 
             // navigation.navigate("PrintedDesign", { print: result.data });
         } catch (error) {
-            console.log("error", error);
+            console.log("error", error.message);
         } finally {
             setLoading(false);
         }
@@ -204,28 +208,28 @@ const StorePrint = () => {
                             <Text className="font-bold text-lg">Adhesion</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
-                                    onValueChange={ newValue => handleChange("adhesion", newValue) }
-                                    value={ formValues?.adhesion }
+                                    onValueChange={ newValue => handleChange("adhesion_type", newValue) }
+                                    value={ formValues?.adhesion_type }
                                 >
                                     <RadioButton.Item
                                         value="skirt"
                                         label="Skirt"
                                         style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion, "skirt"),
+                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "skirt"),
                                         } }
                                     />
                                     <RadioButton.Item
                                         value="brim"
                                         label="Brim"
                                         style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion, "brim"),
+                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "brim"),
                                         } }
                                     />
                                     <RadioButton.Item
                                         value="raft"
                                         label="Raft"
                                         style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion, "raft"),
+                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "raft"),
                                         } }
                                     />
                                 </RadioButton.Group>
