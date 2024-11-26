@@ -31,20 +31,14 @@ const StorePrint = () => {
 
     const navigation = useNavigation<NavigationProps>();
 
-    useEffect(() => {
-        console.log(user);
-    }, []);
-
     const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
-        console.log(formValues);
     };
 
     const createFormData = () => {
         const formData = new FormData();
 
         Object.keys(formValues).forEach((key) => {
-            console.log(typeof formValues[key], key);
             formData.append(key, formValues[key]);
         });
 
@@ -57,18 +51,15 @@ const StorePrint = () => {
                 } as unknown as Blob);
             });
         }
-        console.log(formData);
         return formData;
     };
 
     const handleSubmit = async () => {
         const formData = createFormData();
-        console.log(formData);
         setLoading(true);
 
         try {
             const result = await apiFetch("/prints", "POST", formData);
-            console.log(result);
             navigation.reset({
                 index: 1,
                 routes: [
