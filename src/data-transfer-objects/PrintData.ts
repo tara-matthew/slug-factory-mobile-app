@@ -14,6 +14,7 @@ export interface PrintData {
     };
     settings: {
         uses_supports: boolean;
+        adhesion_type: string;
     };
     images: [
         {
@@ -34,6 +35,7 @@ export function fromResponse(print: PrintData) {
         filament_material_id: print.filament_material.id,
         // filament_colour_id: print.filament_colour.id,
         uses_supports: print?.settings?.uses_supports,
+        adhesion_type: print?.settings?.adhesion_type,
         images: print.images,
     };
 }

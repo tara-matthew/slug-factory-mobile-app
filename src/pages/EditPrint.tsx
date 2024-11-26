@@ -27,7 +27,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 
 const EditPrint = ({ route }) => {
-    const [formValues, setFormValues] = useState({ adhesion: "brim", filament_material_id: null, filament_colour_id: null, uses_supports: false, title: "", description: "", images: null });
+    const [formValues, setFormValues] = useState({ adhesion_type: "brim", filament_material_id: null, filament_colour_id: null, uses_supports: false, title: "", description: "", images: null });
     const [images, setImages] = useState([]);
     const [newImages, setNewImages] = useState([]);
     const [print,setPrint] = useState({});
@@ -52,6 +52,7 @@ const EditPrint = ({ route }) => {
                     filament_material_id: printData.filament_material_id,
                     // filament_colour_id: printData.filament_colour_id,
                     uses_supports: printData.uses_supports,
+                    adhesion_type: printData.adhesion_type,
                     // images: printData.images
                 });
                 setImages(printData.images);
@@ -235,28 +236,28 @@ const EditPrint = ({ route }) => {
                             <Text className="font-bold text-lg">Adhesion</Text>
                             <View className="mb-8">
                                 <RadioButton.Group
-                                    onValueChange={ newValue => handleChange("adhesion", newValue) }
-                                    value={ formValues?.adhesion }
+                                    onValueChange={ newValue => handleChange("adhesion_type", newValue) }
+                                    value={ formValues?.adhesion_type }
                                 >
                                     <RadioButton.Item
                                         value="skirt"
                                         label="Skirt"
                                         style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion, "skirt"),
+                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "skirt"),
                                         } }
                                     />
                                     <RadioButton.Item
                                         value="brim"
                                         label="Brim"
                                         style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion, "brim"),
+                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "brim"),
                                         } }
                                     />
                                     <RadioButton.Item
                                         value="raft"
                                         label="Raft"
                                         style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion, "raft"),
+                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "raft"),
                                         } }
                                     />
                                 </RadioButton.Group>
