@@ -4,7 +4,6 @@ import Card from "../molecule/Card";
 
 const List = ({ data, sendDataToParent }) => {
     const renderItem = ({ item }) => {
-        // console.log(item);
         return (
             <View className="mr-4" style={ [styles.container] }>
                 <Card item={ item } imageURL={ item?.images?.[0].url ?? item.image_url } blurhash={ item?.images?.[0].blurhash } sendDataToParent={ handleDataFromChild } />
@@ -16,7 +15,6 @@ const List = ({ data, sendDataToParent }) => {
         sendDataToParent(data);
     }
 
-    console.log("list mounted");
     return (
         <FlatList
             className="mb-8"

@@ -9,7 +9,12 @@ const Grid = ({ items, sendDataToParent }) => {
 
     const renderItem = ({ item }) => {
         return (
-            <Card sendDataToParent={ handleDataFromChild } item={ item } blurhash={ item?.images?.[0].blurhash } imageURL={ item?.images?.[0]?.url ?? item.image_url } />
+            <Card
+                sendDataToParent={ handleDataFromChild }
+                item={ item }
+                blurhash={ item?.images?.[0].blurhash }
+                imageURL={ item?.images?.[0]?.url ?? item.image_url }
+            />
         );
     };
     return (
