@@ -49,6 +49,9 @@ it("Sends the item data when the card is pressed", () => {
 });
 
 it("Renders correctly", () => {
+    const mockSendDataToParent = jest.fn();
+    const blurhash
+        = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
     const item
         = {
             images: [
@@ -59,6 +62,6 @@ it("Renders correctly", () => {
             ],
         };
 
-    const tree = renderer.create(<Card item={ item } image={ item.images[0] } imageURL="https://test.com" />).toJSON();
+    const tree = renderer.create(<Card item={ item } blurhash={ blurhash } sendDataToParent={ mockSendDataToParent } imageURL="https://test.com" />).toJSON();
     expect(tree).toMatchSnapshot();
 });
