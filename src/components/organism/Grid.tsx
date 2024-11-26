@@ -1,9 +1,10 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Card from "../molecule/Card";
+import { IGridProps } from "../../contracts/Grid";
 
-const Grid = ({ items, sendDataToParent }) => {
-    function handleDataFromChild(data) {
+const Grid = ({ items, sendDataToParent }: IGridProps) => {
+    function handleDataFromChild(data: never) {
         sendDataToParent(data);
     }
 
