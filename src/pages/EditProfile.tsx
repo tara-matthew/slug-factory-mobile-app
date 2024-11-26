@@ -10,7 +10,6 @@ import { useUser } from "../contexts/UserContext";
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const EditProfile = () => {
-    // const [user, setUser] = useState<Partial<IUser>>({});
     const [formValues, setFormValues] = useState({});
 
     const { user, setUser, loading } = useUser();

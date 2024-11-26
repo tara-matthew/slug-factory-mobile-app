@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 
 const Register = () => {
     const [error, setError] = useState("");
-    // @ts-ignore
     const { onLogin, onRegister } = useAuth();
     const navigation = useNavigation();
 
@@ -24,9 +23,6 @@ const Register = () => {
             {
                 placeholder: "password", title: "Password", inputProps: { secureTextEntry: false, autoCapitalize: "none" },
             },
-            // {
-            //     placeholder: "password_confirmation", title: "Confirm Password", inputProps: { secureTextEntry: false, autoCapitalize: "none" },
-            // },
         ];
 
     async function handleDataFromChild(formData) {
@@ -37,7 +33,7 @@ const Register = () => {
             formData.password,
             formData.password_confirmation);
         if (result?.error) {
-            console.log("heree", result.error);
+            console.log(result.error);
         } else {
             await onLogin(formData.username, formData.password);
         }
