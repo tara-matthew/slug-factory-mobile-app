@@ -1,17 +1,23 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Card from "../molecule/Card";
+import {IListProps} from "../../contracts/List";
 
-const List = ({ data, sendDataToParent }) => {
+const List = ({ data, sendDataToParent }: IListProps) => {
     const renderItem = ({ item }) => {
         return (
             <View className="mr-4" style={ [styles.container] }>
-                <Card item={ item } imageURL={ item?.images?.[0].url ?? item.image_url } blurhash={ item?.images?.[0].blurhash } sendDataToParent={ handleDataFromChild } />
+                <Card
+                    item={ item }
+                    imageURL={ item?.images?.[0].url ?? item.image_url }
+                    blurhash={ item?.images?.[0].blurhash }
+                    sendDataToParent={ handleDataFromChild }
+                />
             </View>
         );
     };
 
-    function handleDataFromChild(data) {
+    function handleDataFromChild(data: never) {
         sendDataToParent(data);
     }
 
