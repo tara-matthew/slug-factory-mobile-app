@@ -37,7 +37,6 @@ export const PrintProvider = ({ children }) => {
             } catch (error) {
                 console.error("Error in getHomeData", error.response.status);
             } finally {
-                console.log("done loading");
                 setLoading(false);
             }
         };

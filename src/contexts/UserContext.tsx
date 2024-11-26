@@ -13,7 +13,6 @@ export const UserProvider = ({ children }) => {
         const fetchUser = async () => {
             try {
                 const fetchedUser = await fetchData("/me");
-                console.log(fetchedUser.data);
                 const userData = fromResponse(fetchedUser.data);
 
                 setUser(userData);

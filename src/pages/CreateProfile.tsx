@@ -8,11 +8,8 @@ const CreateProfile = () => {
     const [formValues, setFormValues] = useState({});
     const { user, setUser } = useUser();
 
-    // console.log(formValues)
-
     const handleChange = (name: string, value: string) => {
         setFormValues(prevValues => ({ ...prevValues, [name]: value }));
-        // console.log(formValues);
     };
 
     const handleSubmit = async () => {

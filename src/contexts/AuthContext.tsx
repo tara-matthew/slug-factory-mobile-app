@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const loadToken = async () => {
-            console.log(Device.deviceName);
             const token = await AsyncStorage.getItem("token");
 
             if (token) {
@@ -51,7 +50,6 @@ export const AuthProvider = ({ children }) => {
                     }
                 }
             } else {
-                console.log("no token");
                 await logout();
             }
             setLoading(false);
@@ -61,7 +59,6 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username: string, password: string) => {
         try {
-            console.log("logging in");
             const deviceName = Device.deviceName;
             const result = await fetchData("/auth/login", "POST", { username: username, password: password, device_name: deviceName });
             const token = result.data.token;
@@ -74,7 +71,6 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.setItem("token", token);
             return result;
         } catch (e) {
-            console.log("exception", e);
             // await logout();
 
             return { error: true };
@@ -83,10 +79,8 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (name: string, email: string, username: string, password: string, password_confirmation: string) => {
         try {
-            console.log("registering");
             await fetchData("/auth/register", "POST", { name: name, email: email, username: username, password: password, password_confirmation: password_confirmation });
         } catch (e) {
-            // console.log(e);
             console.error(e.response);
             return { error: true };
         }

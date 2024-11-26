@@ -12,7 +12,6 @@ const Login = () => {
 
     async function handleDataFromChild(formData) {
         const result = await onLogin(formData.username, formData.password);
-        console.log({ result });
         if (result.error) {
             console.log(result.error);
             setError(result.msg);
