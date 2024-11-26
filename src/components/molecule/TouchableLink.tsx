@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ContentWithDivider from "./ContentWithDivider";
 import { Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -7,9 +7,6 @@ import { ITouchableLinkProps } from "../../contracts/TouchableLink";
 import { DividerWidth } from "../../contracts/Divider";
 
 const TouchableLink = ({ to, title }: ITouchableLinkProps) => {
-    useEffect(() => {
-        // console.log(typeof props.to)
-    }, []);
     const navigation = useNavigation();
     return (
         <TouchableOpacity
