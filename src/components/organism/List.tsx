@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Card from "../molecule/Card";
-import {IListProps} from "../../contracts/List";
+import { IListProps } from "../../contracts/List";
 
 const List = ({ data, sendDataToParent }: IListProps) => {
     const renderItem = ({ item }) => {
