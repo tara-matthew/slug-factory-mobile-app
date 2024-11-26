@@ -3,9 +3,9 @@ import axios from "axios";
 axios.defaults.baseURL = process.env.EXPO_PUBLIC_API_URL;
 const fetchData = async (endpoints, method = "GET", params = null, headers = {}) => {
     if (Array.isArray(endpoints)) {
-        return fetchMultipleEndpoints(endpoints, method, headers);
+        return fetchMultipleEndpoints(endpoints, method);
     } else {
-        return fetchSingleEndpoint(endpoints, method, params);
+        return fetchSingleEndpoint(endpoints, method, params, headers);
     }
 };
 

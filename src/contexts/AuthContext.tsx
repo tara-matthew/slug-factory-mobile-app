@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import fetchData from "../hooks/apiFetch";
 import apiFetch from "../hooks/apiFetch";
-import * as Device from 'expo-device';
+import * as Device from "expo-device";
 
 const AuthContext = createContext({});
 

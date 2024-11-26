@@ -1,5 +1,3 @@
-import {IPrint} from "../contracts/Print";
-
 export interface PrintData {
     id: string;
     title: string;

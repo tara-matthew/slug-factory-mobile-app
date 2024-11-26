@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

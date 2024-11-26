@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import apiFetch from "../../hooks/apiFetch";
-import {KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import {RadioButton} from "react-native-paper";
+import React, { useState } from "react";
+import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { RadioButton } from "react-native-paper";
 
 const PrintComposer = () => {
     const [formValues, setFormValues] = useState({ adhesion: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
@@ -151,7 +150,7 @@ const PrintComposer = () => {
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({

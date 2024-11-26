@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Button,
     KeyboardAvoidingView,
@@ -7,37 +7,32 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
 } from "react-native";
 import apiFetch from "../hooks/apiFetch";
-import {ActivityIndicator, RadioButton} from "react-native-paper";
+import { RadioButton } from "react-native-paper";
 import ImageList from "../components/molecule/ImageList";
-import {Size} from "../contracts/Image";
-import {IPrint} from "../contracts/Print";
-import {fromResponse} from "../data-transfer-objects/PrintData";
+import { Size } from "../contracts/Image";
+import { fromResponse } from "../data-transfer-objects/PrintData";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
-import {fromRequest} from "../data-transfer-objects/ImagePickerData";
-import form from "../components/organism/Form";
-import {useNavigation} from "@react-navigation/native";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../contracts/Navigator";
+import { fromRequest } from "../data-transfer-objects/ImagePickerData";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../contracts/Navigator";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
-
 
 const EditPrint = ({ route }) => {
     const [formValues, setFormValues] = useState({ adhesion_type: "brim", filament_material_id: null, filament_colour_id: null, uses_supports: false, title: "", description: "", images: null });
     const [images, setImages] = useState([]);
     const [newImages, setNewImages] = useState([]);
-    const [print,setPrint] = useState({});
+    const [print, setPrint] = useState({});
     const [loading, setLoading] = useState(false);
-
 
     const id = route.params.id;
 
     const navigation = useNavigation<NavigationProps>();
-
 
     useEffect(() => {
         const fetchPrint = async () => {
@@ -63,7 +58,7 @@ const EditPrint = ({ route }) => {
             }
         };
 
-        void fetchPrint()
+        void fetchPrint();
     }, []);
 
     const handleChange = (name: string, value: string | number | boolean) => {
@@ -78,7 +73,7 @@ const EditPrint = ({ route }) => {
         Object.keys(formValues).forEach((key) => {
             // console.log(key);
             // if (formValues[key] !== null) {
-                formData.append(key, formValues[key]);
+            formData.append(key, formValues[key]);
             // }
         });
         formData.append("_method", "PATCH");
@@ -154,23 +149,23 @@ const EditPrint = ({ route }) => {
 
     return (
         <View style={ { flex: 1 } }>
-            {/*{loading && (*/}
-            {/*    <View*/}
-            {/*        style={ {*/}
-            {/*            position: "absolute",*/}
-            {/*            top: 0,*/}
-            {/*            left: 0,*/}
-            {/*            right: 0,*/}
-            {/*            bottom: 0,*/}
-            {/*            justifyContent: "center",*/}
-            {/*            alignItems: "center",*/}
-            {/*            backgroundColor: "white",*/}
-            {/*            zIndex: 1,*/}
-            {/*        } }*/}
-            {/*    >*/}
-            {/*        <ActivityIndicator size="large" color="#0000ff" animating={ true } />*/}
-            {/*    </View>*/}
-            {/*)}*/}
+            {/* {loading && ( */}
+            {/*    <View */}
+            {/*        style={ { */}
+            {/*            position: "absolute", */}
+            {/*            top: 0, */}
+            {/*            left: 0, */}
+            {/*            right: 0, */}
+            {/*            bottom: 0, */}
+            {/*            justifyContent: "center", */}
+            {/*            alignItems: "center", */}
+            {/*            backgroundColor: "white", */}
+            {/*            zIndex: 1, */}
+            {/*        } } */}
+            {/*    > */}
+            {/*        <ActivityIndicator size="large" color="#0000ff" animating={ true } /> */}
+            {/*    </View> */}
+            {/* )} */}
 
             <KeyboardAvoidingView behavior="position">
                 <ScrollView contentContainerStyle={ { flexGrow: 1 } } style={ { width: "100%" } }>
@@ -183,7 +178,7 @@ const EditPrint = ({ route }) => {
                             <Text className="font-bold text-lg">Title</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
                                 <TextInput
-                                    defaultValue={formValues.title}
+                                    defaultValue={ formValues.title }
                                     placeholder="title"
                                     onChangeText={ text => handleChange("title", text) }
                                 />
@@ -293,7 +288,7 @@ const EditPrint = ({ route }) => {
                                     editable
                                     multiline
                                     numberOfLines={ 10 }
-                                    defaultValue={formValues.description}
+                                    defaultValue={ formValues.description }
                                     placeholder="description"
                                     onChangeText={ text => handleChange("description", text) }
                                 />
@@ -313,7 +308,7 @@ const EditPrint = ({ route }) => {
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({

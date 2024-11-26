@@ -51,7 +51,7 @@ const Register = () => {
                 <Welcome sendDataToParent={ handleDataFromChild } headerText="Register for Slug Factory" buttonText="Register" buttonTo="Home" inputs={ inputs }></Welcome>
             </KeyboardAvoidingView>
             <TouchableOpacity onPress={ () => navigation.navigate("Login") }>
-                <Text className={"font-bold text-md"}>Already have an account?</Text>
+                <Text className="font-bold text-md">Already have an account?</Text>
             </TouchableOpacity>
         </View>
     );
