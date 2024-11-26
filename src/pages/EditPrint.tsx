@@ -24,7 +24,7 @@ import { RootStackParamList } from "../contracts/Navigator";
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const EditPrint = ({ route }) => {
-    const [formValues, setFormValues] = useState({ adhesion_type: "brim", filament_material_id: null, uses_supports: false, title: "", description: ""});
+    const [formValues, setFormValues] = useState({ adhesion_type: "brim", filament_material_id: null, uses_supports: false, title: "", description: "" });
     const [images, setImages] = useState([]);
     const [newImages, setNewImages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -91,7 +91,6 @@ const EditPrint = ({ route }) => {
                     { name: "PrintedDesign", params: { print: result.data } },
                 ],
             });
-
         } catch (error) {
             console.log("error", error);
         } finally {

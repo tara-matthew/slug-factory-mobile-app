@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
@@ -8,7 +8,7 @@ import apiFetch from "../hooks/apiFetch";
 import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 import { format } from "date-fns";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const PrintedDesign = ({ route }) => {
     const navigation = useNavigation();
@@ -21,7 +21,7 @@ const PrintedDesign = ({ route }) => {
 
     const pills = [
         // { title: "Ender-3" },
-        { title: print.filament_material.name },
+        // { title: print.filament_material.name },
         // { title: print?.filament_brand?.name ?? "A brand" },
         // { title: print?.filament_colour?.name ?? "A colour" },
         // { title: "20% infill" },
@@ -98,11 +98,11 @@ const PrintedDesign = ({ route }) => {
         if (belongsToUser) {
             navigation.setOptions({
                 headerRight: () => (
-                    <Button title={"Edit"} onPress={ () => navigation.navigate("EditPrint", {id: print.id}) }></Button>
+                    <Button title="Edit" onPress={ () => navigation.navigate("EditPrint", { id: print.id }) }></Button>
                 ),
             });
         }
-    }, [navigation])
+    }, [navigation]);
 
     return (
         <ScrollView style={ { width: "100%" } }>
