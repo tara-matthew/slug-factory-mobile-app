@@ -24,7 +24,17 @@ const Login = () => {
             <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={ 100 } className="w-full mb-6">
 
                 {error ? <Text className="text-red-500 text-center mb-4">{error}</Text> : null}
-                <Welcome sendDataToParent={ handleDataFromChild } headerText="Sign in to Slug Factory" buttonText="Sign In" buttonTo="Home" inputs={ [{ placeholder: "username", title: "Username", inputProps: { autoCapitalize: "none" } }, { placeholder: "password", title: "Password", inputProps: { secureTextEntry: true, autoCapitalize: "none" } }] }></Welcome>
+                <Welcome
+                    sendDataToParent={ handleDataFromChild }
+                    headerText="Sign in to Slug Factory"
+                    buttonText="Sign In"
+                    buttonTo="Home"
+                    inputs={ [
+                        { placeholder: "username", title: "Username", inputProps: { autoCapitalize: "none" } },
+                        { placeholder: "password", title: "Password", inputProps: { secureTextEntry: true, autoCapitalize: "none" } },
+                    ] }
+                >
+                </Welcome>
             </KeyboardAvoidingView>
             <TouchableOpacity onPress={ () => navigation.navigate("Register") }>
                 <Text className="font-bold text-md">Don't have an account yet?</Text>

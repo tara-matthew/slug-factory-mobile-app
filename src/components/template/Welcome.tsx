@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, View } from "react-native";
 import Form from "../organism/Form";
+import { IWelcomeProps } from "../../contracts/Welcome";
 
-const Welcome = ({ headerText, buttonText, inputs, buttonTo, sendDataToParent }) => {
-    const [dataFromChild, setDataFromChild] = useState("");
-
-    function handleDataFromChild(data) {
+const Welcome = ({ headerText, buttonText, inputs, buttonTo, sendDataToParent }: IWelcomeProps) => {
+    function handleDataFromChild(data: never) {
         sendDataToParent(data);
     }
 
