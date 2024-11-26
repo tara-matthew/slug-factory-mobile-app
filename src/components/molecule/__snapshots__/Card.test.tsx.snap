@@ -78,7 +78,9 @@ exports[`Renders correctly 1`] = `
             "padding": 8,
           }
         }
-      />
+      >
+        A card
+      </Text>
     </View>
   </View>
 </View>
