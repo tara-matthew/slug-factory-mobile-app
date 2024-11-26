@@ -71,9 +71,6 @@ const StorePrint = () => {
                 ...prevUser,
                 prints_count: prevUser.prints_count + 1,
             }));
-            console.log(user.prints_count);
-
-            // navigation.navigate("PrintedDesign", { print: result.data });
         } catch (error) {
             console.log("error", error.message);
         } finally {
