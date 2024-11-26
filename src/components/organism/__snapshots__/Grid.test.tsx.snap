@@ -80,6 +80,7 @@ exports[`Renders correctly 1`] = `
           }
         >
           <View
+            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,

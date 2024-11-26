@@ -15,6 +15,7 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
     return (
         <View style={ [styles.container] }>
             <Pressable
+                accessibilityRole="button"
                 onPress={ () => buttonPressed(item) }
             >
                 <View className="relative">
