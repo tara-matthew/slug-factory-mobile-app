@@ -7,7 +7,6 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
 import apiFetch from "../hooks/apiFetch";
 import { useNavigation } from "@react-navigation/native";
 import { GenericNavigationProps } from "../contracts/Navigator";
@@ -16,18 +15,28 @@ import RadioButtonGroupWithHeading from "../components/molecule/RadioButtonGroup
 import { adhesionRadioButtons, materialRadioButtons, supportsRadioButtons } from "../config/radio-buttons";
 import ImageSelector from "../components/molecule/ImageSelector";
 import useFormData from "../hooks/useFormData";
+import LoadingSpinner from "../components/atom/LoadingSpinner";
 
 const StorePrint = () => {
+    // TODO Could refactor to use useReducer
     const [formValues, setFormValues] = useState({ adhesion_type: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const { user, setUser } = useUser();
+    const { setUser } = useUser();
 
     const navigation = useNavigation<GenericNavigationProps>();
     const formData = useFormData(images, formValues);
 
     const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
+    };
+
+    const handleDataFromChild = (key, value) => {
+        handleChange(key, value);
+    };
+
+    const handleImages = (value) => {
+        setImages(value);
     };
 
     const handleSubmit = async () => {
@@ -53,34 +62,12 @@ const StorePrint = () => {
         }
     };
 
-    function handleDataFromChild(key, value) {
-        handleChange(key, value);
-    }
-
-    function handleImages(value) {
-        setImages(value);
-    }
-
     /* TODO read from the database on app load, add a context, and use that here */
 
     return (
         <View style={ { flex: 1 } }>
             {loading && (
-                <View
-                    style={ {
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: "white",
-                        zIndex: 1,
-                    } }
-                >
-                    <ActivityIndicator size="large" color="#0000ff" animating={ true } />
-                </View>
+                <LoadingSpinner />
             )}
 
             <KeyboardAvoidingView behavior="position">
