@@ -147,7 +147,6 @@ const StorePrint = () => {
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>
-
     );
 };
 
