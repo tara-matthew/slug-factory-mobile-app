@@ -83,6 +83,7 @@ const StorePrint = () => {
                                     onChangeText={ text => handleChange("title", text) }
                                 />
                             </View>
+
                             <View className="mb-8">
                                 <RadioButtonGroupWithHeading
                                     radioButtons={ materialRadioButtons }
@@ -92,8 +93,8 @@ const StorePrint = () => {
                                     sendDataToParent={ handleDataFromChild }
                                 />
                             </View>
-                            <View className="mb-8">
 
+                            <View className="mb-8">
                                 <RadioButtonGroupWithHeading
                                     heading="Adhesion"
                                     groupID="adhesion_type"
@@ -102,8 +103,8 @@ const StorePrint = () => {
                                     sendDataToParent={ handleDataFromChild }
                                 />
                             </View>
-                            <View className="mb-8">
 
+                            <View className="mb-8">
                                 <RadioButtonGroupWithHeading
                                     heading="Supports"
                                     groupID="uses_supports"
