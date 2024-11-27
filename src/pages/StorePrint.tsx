@@ -22,6 +22,7 @@ import { fromRequest } from "../data-transfer-objects/ImagePickerData";
 import { useUser } from "../contexts/UserContext";
 import RadioButtonGroupWithHeading from "../components/molecule/RadioButtonGroupWithHeading";
 import {adhesionRadioButtons, materialRadioButtons, supportsRadioButtons} from "../config/radio-buttons";
+import ImageSelector from "../components/molecule/ImageSelector";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -45,6 +46,7 @@ const StorePrint = () => {
         });
 
         if (images) {
+            console.log(images);
             images.forEach((image) => {
                 formData.append("images[]", {
                     uri: image.url,
@@ -110,6 +112,10 @@ const StorePrint = () => {
         handleChange(key, value);
     }
 
+    function handleImages(value) {
+        setImages(value);
+    }
+
 
     /* TODO read from the database on app load, add a context, and use that here */
     /* TODO generate groups and items in a loop */
@@ -138,10 +144,7 @@ const StorePrint = () => {
                 <ScrollView contentContainerStyle={ { flexGrow: 1 } } style={ { width: "100%" } }>
                     <View>
                         <View className="p-5">
-                            <View style={ styles.container } className="mb-8">
-                                <Button title="Choose images" onPress={ pickImage } />
-                                {images.length > 0 && <ImageList size={ Size.Small } images={ images } />}
-                            </View>
+                            <ImageSelector sendDataToParent={handleImages} />
 
                             <Text className="font-bold text-lg">Title</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
