@@ -83,30 +83,35 @@ const StorePrint = () => {
                                     onChangeText={ text => handleChange("title", text) }
                                 />
                             </View>
+                            <View className="mb-8">
+                                <RadioButtonGroupWithHeading
+                                    radioButtons={ materialRadioButtons }
+                                    groupID="filament_material_id"
+                                    heading="Material"
+                                    initialValue={ formValues?.filament_material_id?.toString() }
+                                    sendDataToParent={ handleDataFromChild }
+                                />
+                            </View>
+                            <View className="mb-8">
 
-                            <RadioButtonGroupWithHeading
-                                radioButtons={ materialRadioButtons }
-                                groupID="filament_material_id"
-                                heading="Material"
-                                initialValue={ formValues?.filament_material_id?.toString() }
-                                sendDataToParent={ handleDataFromChild }
-                            />
+                                <RadioButtonGroupWithHeading
+                                    heading="Adhesion"
+                                    groupID="adhesion_type"
+                                    radioButtons={ adhesionRadioButtons }
+                                    initialValue={ formValues?.adhesion_type }
+                                    sendDataToParent={ handleDataFromChild }
+                                />
+                            </View>
+                            <View className="mb-8">
 
-                            <RadioButtonGroupWithHeading
-                                heading="Adhesion"
-                                groupID="adhesion_type"
-                                radioButtons={ adhesionRadioButtons }
-                                initialValue={ formValues?.adhesion_type }
-                                sendDataToParent={ handleDataFromChild }
-                            />
-
-                            <RadioButtonGroupWithHeading
-                                heading="Supports"
-                                groupID="uses_supports"
-                                radioButtons={ supportsRadioButtons }
-                                initialValue={ formValues?.uses_supports ? "true" : "false" }
-                                sendDataToParent={ handleDataFromChild }
-                            />
+                                <RadioButtonGroupWithHeading
+                                    heading="Supports"
+                                    groupID="uses_supports"
+                                    radioButtons={ supportsRadioButtons }
+                                    initialValue={ formValues?.uses_supports ? "true" : "false" }
+                                    sendDataToParent={ handleDataFromChild }
+                                />
+                            </View>
 
                             <Text className="font-bold text-lg">Description</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">

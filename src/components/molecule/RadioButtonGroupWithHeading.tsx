@@ -18,7 +18,7 @@ const RadioButtonGroupWithHeading = ({ heading, groupID, radioButtons, initialVa
     return (
         <View>
             <Text className="font-bold text-lg">{heading}</Text>
-            <View className="mb-8">
+            <View>
                 <RadioButton.Group
                     onValueChange={ newValue => handleChange(groupID, newValue) }
                     value={ value }
