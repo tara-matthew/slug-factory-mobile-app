@@ -30,7 +30,7 @@ it("Renders correctly", () => {
             is_favourite: false,
         },
     ];
-    const tree = renderer.create(<Grid items={ prints } sendDataToParent={mockSendDataToParent} />).toJSON();
+    const tree = renderer.create(<Grid items={ prints } sendDataToParent={ mockSendDataToParent } />).toJSON();
     expect(tree).toMatchSnapshot();
 });
 

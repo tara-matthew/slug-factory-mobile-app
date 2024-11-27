@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 import {
-    Button,
     KeyboardAvoidingView,
     ScrollView,
-    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
-import { RadioButton, ActivityIndicator } from "react-native-paper";
-import * as ImagePicker from "expo-image-picker";
+import { ActivityIndicator } from "react-native-paper";
 import apiFetch from "../hooks/apiFetch";
-import ImageList from "../components/molecule/ImageList";
-import { Size } from "../contracts/Image";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../contracts/Navigator";
-import * as ImageManipulator from "expo-image-manipulator";
-import { fromRequest } from "../data-transfer-objects/ImagePickerData";
 import { useUser } from "../contexts/UserContext";
 import RadioButtonGroupWithHeading from "../components/molecule/RadioButtonGroupWithHeading";
-import {adhesionRadioButtons, materialRadioButtons, supportsRadioButtons} from "../config/radio-buttons";
+import { adhesionRadioButtons, materialRadioButtons, supportsRadioButtons } from "../config/radio-buttons";
 import ImageSelector from "../components/molecule/ImageSelector";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -46,7 +39,6 @@ const StorePrint = () => {
         });
 
         if (images) {
-            console.log(images);
             images.forEach((image) => {
                 formData.append("images[]", {
                     uri: image.url,
@@ -82,32 +74,6 @@ const StorePrint = () => {
         }
     };
 
-    const pickImage = async () => {
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsMultipleSelection: true,
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            const compressedImagePromises = result.assets.map(asset =>
-                ImageManipulator.manipulateAsync(
-                    asset.uri,
-                    [{ resize: { width: asset.width / 2, height: asset.height / 2 } }],
-                    { compress: 0.5 },
-                ),
-            );
-
-            const compressedImages = await Promise.all(compressedImagePromises);
-
-            const selectedImages = compressedImages.map(asset => ({
-                uri: asset.uri,
-            }));
-
-            setImages(fromRequest(selectedImages));
-        }
-    };
-
     function handleDataFromChild(key, value) {
         handleChange(key, value);
     }
@@ -115,7 +81,6 @@ const StorePrint = () => {
     function handleImages(value) {
         setImages(value);
     }
-
 
     /* TODO read from the database on app load, add a context, and use that here */
     /* TODO generate groups and items in a loop */
@@ -144,7 +109,7 @@ const StorePrint = () => {
                 <ScrollView contentContainerStyle={ { flexGrow: 1 } } style={ { width: "100%" } }>
                     <View>
                         <View className="p-5">
-                            <ImageSelector sendDataToParent={handleImages} />
+                            <ImageSelector sendDataToParent={ handleImages } />
 
                             <Text className="font-bold text-lg">Title</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
@@ -207,19 +172,5 @@ const StorePrint = () => {
 
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    image: {
-        width: 100,
-        height: 100,
-        marginBottom: 30,
-
-    },
-});
 
 export default StorePrint;

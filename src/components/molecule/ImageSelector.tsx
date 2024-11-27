@@ -1,13 +1,13 @@
-import React, {useState} from "react"
-import {Button, StyleSheet, View} from "react-native";
+import React, { useState } from "react";
+import { Button, StyleSheet, View } from "react-native";
 import ImageList from "./ImageList";
-import {Size} from "../../contracts/Image";
-import {fromRequest} from "../../data-transfer-objects/ImagePickerData";
+import { Size } from "../../contracts/Image";
+import { fromRequest } from "../../data-transfer-objects/ImagePickerData";
 import * as ImagePicker from "expo-image-picker";
 
 import * as ImageManipulator from "expo-image-manipulator";
 
-const ImageSelector = ({sendDataToParent}) => {
+const ImageSelector = ({ sendDataToParent }) => {
     const [images, setImages] = useState([]);
 
     const pickImage = async () => {
@@ -41,8 +41,8 @@ const ImageSelector = ({sendDataToParent}) => {
             <Button title="Choose images" onPress={ pickImage } />
             {images.length > 0 && <ImageList size={ Size.Small } images={ images } />}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

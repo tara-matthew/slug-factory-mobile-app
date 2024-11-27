@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Text, View } from "react-native";
 import { RadioButton } from "react-native-paper";
 
-const RadioButtonGroupWithHeading = ({heading, groupID, radioButtons, initialValue, sendDataToParent}) => {
+const RadioButtonGroupWithHeading = ({ heading, groupID, radioButtons, initialValue, sendDataToParent }) => {
     const [value, setValue] = React.useState(initialValue);
 
     const handleChange = (name, value) => {
@@ -15,7 +15,6 @@ const RadioButtonGroupWithHeading = ({heading, groupID, radioButtons, initialVal
         return value === matchValue ? { backgroundColor: "#d0cadb" } : {};
     };
 
-
     return (
         <View>
             <Text className="font-bold text-lg">{heading}</Text>
@@ -26,12 +25,12 @@ const RadioButtonGroupWithHeading = ({heading, groupID, radioButtons, initialVal
                 >
                     {radioButtons.map(radioButton => (
                         <RadioButton.Item
-                            value={radioButton.value}
-                            label={radioButton.label}
+                            value={ radioButton.value }
+                            label={ radioButton.label }
                             style={ {
                                 ...getBackgroundColorStyle(value, radioButton.value),
                             } }
-                            key={radioButton.value}
+                            key={ radioButton.value }
                         />
                     ))}
                 </RadioButton.Group>

@@ -39,10 +39,10 @@ export const adhesionRadioButtons = [
 export const supportsRadioButtons = [
     {
         value: "true",
-        label: "Yes"
+        label: "Yes",
     },
     {
         value: "false",
-        label: "No"
-    }
-]
+        label: "No",
+    },
+];
