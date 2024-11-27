@@ -10,6 +10,7 @@ const RadioButtonGroupWithHeading = ({heading, groupID, radioButtons, initialVal
         sendDataToParent(name, value);
     };
 
+    // TODO could memoise this
     const getBackgroundColorStyle = (value: string | number | boolean, matchValue: string | number | boolean) => {
         return value === matchValue ? { backgroundColor: "#d0cadb" } : {};
     };

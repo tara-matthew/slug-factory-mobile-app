@@ -79,11 +79,6 @@ const StorePrint = () => {
         }
     };
 
-    // TODO could memoise this
-    const getBackgroundColorStyle = (value: string | number | boolean, matchValue: string | number | boolean) => {
-        return value === matchValue ? { backgroundColor: "#d0cadb" } : {};
-    };
-
     const pickImage = async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -137,6 +132,32 @@ const StorePrint = () => {
         },
     ];
 
+    const adhesionRadioButtons = [
+        {
+            value: "skirt",
+            label: "Skirt",
+        },
+        {
+            value: "brim",
+            label: "Brim",
+        },
+        {
+            value: "raft",
+            label: "Raft",
+        },
+    ];
+
+    const supportsRadioButtons = [
+        {
+            value: "true",
+            label: "Yes"
+        },
+        {
+            value: "false",
+            label: "No"
+        }
+    ]
+
     /* TODO read from the database on app load, add a context, and use that here */
     /* TODO generate groups and items in a loop */
 
@@ -177,68 +198,29 @@ const StorePrint = () => {
                                 />
                             </View>
 
-                            <View className="mb-8">
-                                <RadioButtonGroupWithHeading
-                                    radioButtons={ materialRadioButtons }
-                                    groupID="filament_material_id"
-                                    heading="Material"
-                                    initialValue={ formValues?.filament_material_id?.toString() }
-                                    sendDataToParent={ handleDataFromChild }
-                                />
-                            </View>
+                            <RadioButtonGroupWithHeading
+                                radioButtons={ materialRadioButtons }
+                                groupID="filament_material_id"
+                                heading="Material"
+                                initialValue={ formValues?.filament_material_id?.toString() }
+                                sendDataToParent={ handleDataFromChild }
+                            />
 
-                            <Text className="font-bold text-lg">Adhesion</Text>
-                            <View className="mb-8">
-                                <RadioButton.Group
-                                    onValueChange={ newValue => handleChange("adhesion_type", newValue) }
-                                    value={ formValues?.adhesion_type }
-                                >
-                                    <RadioButton.Item
-                                        value="skirt"
-                                        label="Skirt"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "skirt"),
-                                        } }
-                                    />
-                                    <RadioButton.Item
-                                        value="brim"
-                                        label="Brim"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "brim"),
-                                        } }
-                                    />
-                                    <RadioButton.Item
-                                        value="raft"
-                                        label="Raft"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues?.adhesion_type, "raft"),
-                                        } }
-                                    />
-                                </RadioButton.Group>
-                            </View>
+                            <RadioButtonGroupWithHeading
+                                heading="Adhesion"
+                                groupID="adhesion_type"
+                                radioButtons={ adhesionRadioButtons }
+                                initialValue={ formValues?.adhesion_type }
+                                sendDataToParent={ handleDataFromChild }
+                            />
 
-                            <Text className="font-bold text-lg">Supports</Text>
-                            <View className="mb-8">
-                                <RadioButton.Group
-                                    onValueChange={ newValue => handleChange("uses_supports", newValue == "true") }
-                                    value={ formValues?.uses_supports ? "true" : "false" }
-                                >
-                                    <RadioButton.Item
-                                        value="true"
-                                        label="Yes"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues?.uses_supports, true),
-                                        } }
-                                    />
-                                    <RadioButton.Item
-                                        value="false"
-                                        label="No"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues?.uses_supports, false),
-                                        } }
-                                    />
-                                </RadioButton.Group>
-                            </View>
+                            <RadioButtonGroupWithHeading
+                                heading="Supports"
+                                groupID="uses_supports"
+                                radioButtons={ supportsRadioButtons }
+                                initialValue={ formValues?.uses_supports ? "true" : "false" }
+                                sendDataToParent={ handleDataFromChild }
+                            />
 
                             <Text className="font-bold text-lg">Description</Text>
                             <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
