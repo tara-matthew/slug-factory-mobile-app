@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { Text, View } from "react-native";
 import { RadioButton } from "react-native-paper";
 
-const RadioButtonGroupWithHeading = ({sendDataToParent}) => {
+const RadioButtonGroupWithHeading = ({heading, groupID, radioButtons, sendDataToParent}) => {
     const [value, setValue] = React.useState('1');
 
     const handleChange = (name, value) => {
@@ -10,39 +10,34 @@ const RadioButtonGroupWithHeading = ({sendDataToParent}) => {
         sendDataToParent(name, parseInt(value));
     };
 
-    // useEffect(() => {
-    //     console.log(value);
-    // }, [value]);
+    const getBackgroundColorStyle = (value: string | number | boolean, matchValue: string | number | boolean) => {
+        return value === matchValue ? { backgroundColor: "#d0cadb" } : {};
+    };
+
+
+    useEffect(() => {
+        console.log(value);
+    }, [value]);
 
 
     return (
         <View>
-            <Text className="font-bold text-lg">Material</Text>
+            <Text className="font-bold text-lg">{heading}</Text>
             <View className="mb-8">
                 <RadioButton.Group
-                    onValueChange={ newValue => handleChange("filament_material_id", newValue) }
+                    onValueChange={ newValue => handleChange(groupID, newValue) }
                     value={ value }
                 >
-                    <RadioButton.Item
-                        value="1"
-                        label="PLA"
-                    />
-                    <RadioButton.Item
-                        value="2"
-                        label="PETG"
-                    />
-                    <RadioButton.Item
-                        value="3"
-                        label="ABS"
-                    />
-                    <RadioButton.Item
-                        value="4"
-                        label="Nylon"
-                    />
-                    <RadioButton.Item
-                        value="5"
-                        label="TPU"
-                    />
+                    {radioButtons.map(radioButton => (
+                        <RadioButton.Item
+                            value={radioButton.value}
+                            label={radioButton.label}
+                            style={ {
+                                ...getBackgroundColorStyle(value, radioButton.value),
+                            } }
+                            key={radioButton.value}
+                        />
+                    ))}
                 </RadioButton.Group>
             </View>
         </View>
