@@ -32,6 +32,7 @@ const StorePrint = () => {
     const navigation = useNavigation<NavigationProps>();
 
     const handleChange = (name: string, value: string | number | boolean) => {
+        console.log(value);
         setFormValues({ ...formValues, [name]: value });
     };
 
