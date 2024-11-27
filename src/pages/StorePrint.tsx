@@ -20,6 +20,7 @@ import { RootStackParamList } from "../contracts/Navigator";
 import * as ImageManipulator from "expo-image-manipulator";
 import { fromRequest } from "../data-transfer-objects/ImagePickerData";
 import { useUser } from "../contexts/UserContext";
+import RadioButtonGroupWithHeading from "../components/molecule/RadioButtonGroupWithHeading";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -32,7 +33,6 @@ const StorePrint = () => {
     const navigation = useNavigation<NavigationProps>();
 
     const handleChange = (name: string, value: string | number | boolean) => {
-        console.log(value);
         setFormValues({ ...formValues, [name]: value });
     };
 
@@ -110,6 +110,33 @@ const StorePrint = () => {
         }
     };
 
+    function handleDataFromChild(key, value) {
+        handleChange(key, value);
+    }
+
+    const materialRadioButtons = [
+        {
+            value: "1",
+            label: "PLA",
+        },
+        {
+            value: "2",
+            label: "PETG",
+        },
+        {
+            value: "3",
+            label: "ABS",
+        },
+        {
+            value: "4",
+            label: "Nylon",
+        },
+        {
+            value: "5",
+            label: "TPU",
+        },
+    ];
+
     /* TODO read from the database on app load, add a context, and use that here */
     /* TODO generate groups and items in a loop */
 
@@ -150,48 +177,14 @@ const StorePrint = () => {
                                 />
                             </View>
 
-                            <Text className="font-bold text-lg">Material</Text>
                             <View className="mb-8">
-                                <RadioButton.Group
-                                    onValueChange={ newValue => handleChange("filament_material_id", parseInt(newValue)) }
-                                    value={ formValues?.filament_material_id?.toString() }
-                                >
-                                    <RadioButton.Item
-                                        value="1"
-                                        label="PLA"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues.filament_material_id, 1),
-                                        } }
-                                    />
-                                    <RadioButton.Item
-                                        value="2"
-                                        label="PETG"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues.filament_material_id, 2),
-                                        } }
-                                    />
-                                    <RadioButton.Item
-                                        value="3"
-                                        label="ABS"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues.filament_material_id, 3),
-                                        } }
-                                    />
-                                    <RadioButton.Item
-                                        value="4"
-                                        label="Nylon"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues.filament_material_id, 4),
-                                        } }
-                                    />
-                                    <RadioButton.Item
-                                        value="5"
-                                        label="TPU"
-                                        style={ {
-                                            ...getBackgroundColorStyle(formValues.filament_material_id, 5),
-                                        } }
-                                    />
-                                </RadioButton.Group>
+                                <RadioButtonGroupWithHeading
+                                    radioButtons={ materialRadioButtons }
+                                    groupID="filament_material_id"
+                                    heading="Material"
+                                    initialValue={ formValues?.filament_material_id?.toString() }
+                                    sendDataToParent={ handleDataFromChild }
+                                />
                             </View>
 
                             <Text className="font-bold text-lg">Adhesion</Text>

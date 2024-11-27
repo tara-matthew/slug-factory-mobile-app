@@ -2,22 +2,17 @@ import React, {useEffect} from "react";
 import { Text, View } from "react-native";
 import { RadioButton } from "react-native-paper";
 
-const RadioButtonGroupWithHeading = ({heading, groupID, radioButtons, sendDataToParent}) => {
-    const [value, setValue] = React.useState('1');
+const RadioButtonGroupWithHeading = ({heading, groupID, radioButtons, initialValue, sendDataToParent}) => {
+    const [value, setValue] = React.useState(initialValue);
 
     const handleChange = (name, value) => {
         setValue(value);
-        sendDataToParent(name, parseInt(value));
+        sendDataToParent(name, value);
     };
 
     const getBackgroundColorStyle = (value: string | number | boolean, matchValue: string | number | boolean) => {
         return value === matchValue ? { backgroundColor: "#d0cadb" } : {};
     };
-
-
-    useEffect(() => {
-        console.log(value);
-    }, [value]);
 
 
     return (
