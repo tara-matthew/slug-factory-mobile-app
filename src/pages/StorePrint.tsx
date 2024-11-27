@@ -21,6 +21,7 @@ import * as ImageManipulator from "expo-image-manipulator";
 import { fromRequest } from "../data-transfer-objects/ImagePickerData";
 import { useUser } from "../contexts/UserContext";
 import RadioButtonGroupWithHeading from "../components/molecule/RadioButtonGroupWithHeading";
+import {adhesionRadioButtons, materialRadioButtons, supportsRadioButtons} from "../config/radio-buttons";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -109,54 +110,6 @@ const StorePrint = () => {
         handleChange(key, value);
     }
 
-    const materialRadioButtons = [
-        {
-            value: "1",
-            label: "PLA",
-        },
-        {
-            value: "2",
-            label: "PETG",
-        },
-        {
-            value: "3",
-            label: "ABS",
-        },
-        {
-            value: "4",
-            label: "Nylon",
-        },
-        {
-            value: "5",
-            label: "TPU",
-        },
-    ];
-
-    const adhesionRadioButtons = [
-        {
-            value: "skirt",
-            label: "Skirt",
-        },
-        {
-            value: "brim",
-            label: "Brim",
-        },
-        {
-            value: "raft",
-            label: "Raft",
-        },
-    ];
-
-    const supportsRadioButtons = [
-        {
-            value: "true",
-            label: "Yes"
-        },
-        {
-            value: "false",
-            label: "No"
-        }
-    ]
 
     /* TODO read from the database on app load, add a context, and use that here */
     /* TODO generate groups and items in a loop */
