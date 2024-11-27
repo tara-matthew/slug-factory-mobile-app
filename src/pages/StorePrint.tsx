@@ -10,14 +10,12 @@ import {
 import { ActivityIndicator } from "react-native-paper";
 import apiFetch from "../hooks/apiFetch";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../contracts/Navigator";
+import { GenericNavigationProps } from "../contracts/Navigator";
 import { useUser } from "../contexts/UserContext";
 import RadioButtonGroupWithHeading from "../components/molecule/RadioButtonGroupWithHeading";
 import { adhesionRadioButtons, materialRadioButtons, supportsRadioButtons } from "../config/radio-buttons";
 import ImageSelector from "../components/molecule/ImageSelector";
-
-type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+import useFormData from "../hooks/useFormData";
 
 const StorePrint = () => {
     const [formValues, setFormValues] = useState({ adhesion_type: "skirt", filament_material_id: 1, uses_supports: false, title: "", description: "" });
@@ -25,33 +23,14 @@ const StorePrint = () => {
     const [loading, setLoading] = useState(false);
     const { user, setUser } = useUser();
 
-    const navigation = useNavigation<NavigationProps>();
+    const navigation = useNavigation<GenericNavigationProps>();
+    const formData = useFormData(images, formValues);
 
     const handleChange = (name: string, value: string | number | boolean) => {
         setFormValues({ ...formValues, [name]: value });
     };
 
-    const createFormData = () => {
-        const formData = new FormData();
-
-        Object.keys(formValues).forEach((key) => {
-            formData.append(key, formValues[key]);
-        });
-
-        if (images) {
-            images.forEach((image) => {
-                formData.append("images[]", {
-                    uri: image.url,
-                    name: "image",
-                    type: "image/jpeg",
-                } as unknown as Blob);
-            });
-        }
-        return formData;
-    };
-
     const handleSubmit = async () => {
-        const formData = createFormData();
         setLoading(true);
 
         try {
@@ -83,7 +62,6 @@ const StorePrint = () => {
     }
 
     /* TODO read from the database on app load, add a context, and use that here */
-    /* TODO generate groups and items in a loop */
 
     return (
         <View style={ { flex: 1 } }>

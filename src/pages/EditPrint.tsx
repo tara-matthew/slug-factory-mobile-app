@@ -65,6 +65,7 @@ const EditPrint = ({ route }) => {
             formData.append(key, formValues[key]);
         });
         formData.append("_method", "PATCH");
+        // TODO Use a hook and append PATCH in the submit method below this
 
         if (newImages) {
             newImages.forEach((image) => {
