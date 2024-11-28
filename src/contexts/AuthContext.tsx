@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
             return result;
         } catch (e) {
             console.error(e);
-            return { error: true };
+            return { error: true, msg: e.message };
         }
     };
 

@@ -1,4 +1,6 @@
+import React from "react";
+
 export interface ITouchableLinkProps {
     title: string;
-    to: never;
+    to: () => React.JSX.Element;
 }
