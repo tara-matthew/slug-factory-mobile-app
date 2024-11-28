@@ -1,12 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import React from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import fetchData from "../hooks/apiFetch";
 import apiFetch from "../hooks/apiFetch";
 import * as Device from "expo-device";
-import {IAuthContext} from "../contracts/AuthContext";
-import {ILoginErrorResponse, ILoginSuccessResponse} from "../contracts/Login";
+import { IAuthContext, IAuthProviderProps } from "../contracts/AuthContext";
+import { ILoginErrorResponse, ILoginSuccessResponse } from "../contracts/Login";
 
 const AuthContext = createContext<IAuthContext | null>(null);
 
@@ -14,7 +13,8 @@ export const useAuth = () => {
     return useContext(AuthContext);
 };
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: IAuthProviderProps) => {
+    console.log(children);
     const [authState, setAuthState] = useState({
         token: null,
         authenticated: null,
@@ -61,8 +61,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username: string, password: string): Promise<ILoginErrorResponse | ILoginSuccessResponse> => {
         try {
-            const deviceName = Device.deviceName;
-            const result = await fetchData("/auth/login", "POST", { username: username, password: password, device_name: deviceName });
+            const result = await fetchData("/auth/login", "POST", { username: username, password: password, device_name: Device.deviceName });
             const token = result.data.token;
             setAuthState({
                 token: token,
@@ -73,8 +72,7 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.setItem("token", token);
             return result;
         } catch (e) {
-            // await logout();
-
+            console.error(e);
             return { error: true };
         }
     };

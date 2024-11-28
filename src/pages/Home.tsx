@@ -2,11 +2,8 @@ import React, { memo } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import ListGroup from "../components/template/ListGroup";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { PrintedDesignNavigationProps, RootStackParamList } from "../contracts/Navigator";
+import { PrintedDesignNavigationProps } from "../contracts/Navigator";
 import { usePrints } from "../contexts/PrintsContext";
-import { useAuth } from "../contexts/AuthContext";
-
 
 const Home = () => {
     const { prints, loading } = usePrints();

@@ -31,7 +31,7 @@ it("renders correctly", () => {
         },
     ];
     const { toJSON } = render(<Grid items={ prints } sendDataToParent={ mockSendDataToParent } />);
-    expect(toJSON).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
 });
 
 it.todo("Displays the correct number of items");
