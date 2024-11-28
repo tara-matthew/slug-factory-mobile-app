@@ -7,7 +7,7 @@ it("renders correctly", () => {
     const widths = [DividerWidth.Half, DividerWidth.Full];
 
     widths.forEach((width) => {
-        const { toJSON } = render(<Divider width={width} />);
+        const { toJSON } = render(<Divider width={ width } />);
         expect(toJSON()).toMatchSnapshot();
     });
 });

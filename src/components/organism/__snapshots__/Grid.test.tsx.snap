@@ -155,3 +155,5 @@ exports[`Renders correctly 1`] = `
   </View>
 </RCTScrollView>
 `;
+
+exports[`renders correctly 1`] = `[Function]`;

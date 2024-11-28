@@ -1,7 +1,7 @@
 import React from "react";
-import renderer from "react-test-renderer";
 import Grid from "./Grid";
-it("Renders correctly", () => {
+import { render } from "@testing-library/react-native";
+it("renders correctly", () => {
     const mockSendDataToParent = jest.fn();
     const prints = [
         {
@@ -30,8 +30,8 @@ it("Renders correctly", () => {
             is_favourite: false,
         },
     ];
-    const tree = renderer.create(<Grid items={ prints } sendDataToParent={ mockSendDataToParent } />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { toJSON } = render(<Grid items={ prints } sendDataToParent={ mockSendDataToParent } />);
+    expect(toJSON).toMatchSnapshot();
 });
 
 it.todo("Displays the correct number of items");

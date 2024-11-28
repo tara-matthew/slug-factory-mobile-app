@@ -85,3 +85,89 @@ exports[`Renders correctly 1`] = `
   </View>
 </View>
 `;
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#d0cadb",
+        "flex": 1,
+        "marginBottom": 20,
+        "shadowRadius": 2,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      className="relative"
+    >
+      <Image
+        placeholder={
+          {
+            "blurhash": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+          }
+        }
+        source={
+          {
+            "uri": "https://test.com",
+          }
+        }
+        style={
+          {
+            "height": 200,
+            "width": "100%",
+          }
+        }
+        transition={1000}
+      />
+      Icon: favorite-outline, Size: 32, Color: white
+      <Text
+        adjustsFontSizeToFit={true}
+        numberOfLines={2}
+        style={
+          {
+            "fontSize": 18,
+            "height": 50,
+            "padding": 8,
+          }
+        }
+      >
+        A card
+      </Text>
+    </View>
+  </View>
+</View>
+`;

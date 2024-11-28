@@ -1,9 +1,26 @@
 import { render } from "@testing-library/react-native";
 import Form from "./Form";
 import React from "react";
-import renderer from "react-test-renderer";
 
-it("Displays the correct inputs", () => {
+it("renders correctly", () => {
+    const inputs = [
+        {
+            placeholder: "First placeholder",
+        },
+        {
+            placeholder: "Second placeholder",
+        },
+        {
+            placeholder: "Third placeholder",
+        },
+    ];
+    const buttonText: string = "Click me";
+    const buttonTo: string = "To link";
+    const { toJSON } = render(<Form inputs={ inputs } buttonText={ buttonText } buttonTo={ buttonTo } />);
+    expect(toJSON()).toMatchSnapshot();
+});
+
+it("displays the correct inputs", () => {
     const inputs = [
         {
             placeholder: "First placeholder",
@@ -22,22 +39,4 @@ it("Displays the correct inputs", () => {
     placeholders.forEach(placeholder => expect(placeholder).toBeTruthy());
 });
 
-it.todo("Sends data when the button is clicked");
-
-it("Renders correctly", () => {
-    const inputs = [
-        {
-            placeholder: "First placeholder",
-        },
-        {
-            placeholder: "Second placeholder",
-        },
-        {
-            placeholder: "Third placeholder",
-        },
-    ];
-    const buttonText: string = "Click me";
-    const buttonTo: string = "To link";
-    const tree = renderer.create(<Form inputs={ inputs } buttonText={ buttonText } buttonTo={ buttonTo } />).toJSON();
-    expect(tree).toMatchSnapshot();
-});
+it.todo("sends data when the button is clicked");
