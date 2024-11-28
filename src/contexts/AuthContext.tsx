@@ -6,6 +6,7 @@ import fetchData from "../hooks/apiFetch";
 import apiFetch from "../hooks/apiFetch";
 import * as Device from "expo-device";
 import {IAuthContext} from "../contracts/AuthContext";
+import {ILoginErrorResponse, ILoginSuccessResponse} from "../contracts/Login";
 
 const AuthContext = createContext<IAuthContext | null>(null);
 
@@ -58,7 +59,7 @@ export const AuthProvider = ({ children }) => {
         void loadToken();
     }, []);
 
-    const login = async (username: string, password: string) => {
+    const login = async (username: string, password: string): Promise<ILoginErrorResponse | ILoginSuccessResponse> => {
         try {
             const deviceName = Device.deviceName;
             const result = await fetchData("/auth/login", "POST", { username: username, password: password, device_name: deviceName });
