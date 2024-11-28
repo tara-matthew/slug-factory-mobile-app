@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
+// TODO Add variants, remove hardcoded colour
 const LoadingSpinner = () => {
     return (
         <View
