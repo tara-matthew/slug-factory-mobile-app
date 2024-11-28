@@ -31,8 +31,7 @@ const PrintedDesign = ({ route }) => {
     ];
 
     const printCreatedAt = useMemo(() => {
-        const options = { year: "numeric", month: "numeric", day: "numeric" };
-        return new Date(print.created_at).toLocaleDateString("en-GB", options);
+        return new Date(print.created_at).toLocaleDateString("en-GB");
     }, []);
 
     const uploadText = useMemo(() => {
