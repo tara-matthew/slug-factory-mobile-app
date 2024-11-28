@@ -1,13 +1,13 @@
 import Divider from "./Divider";
 import React from "react";
-import renderer from "react-test-renderer";
 import { DividerWidth } from "../../contracts/Divider";
+import { render } from "@testing-library/react-native";
 
-it("Renders correctly", () => {
+it("renders correctly", () => {
     const widths = [DividerWidth.Half, DividerWidth.Full];
 
     widths.forEach((width) => {
-        const tree = renderer.create(<Divider width={ width } />).toJSON();
-        expect(tree).toMatchSnapshot();
+        const { toJSON } = render(<Divider width={width} />);
+        expect(toJSON()).toMatchSnapshot();
     });
 });
