@@ -7,11 +7,9 @@ import { PrintedDesignNavigationProps, RootStackParamList } from "../contracts/N
 import { usePrints } from "../contexts/PrintsContext";
 import { useAuth } from "../contexts/AuthContext";
 
-type NavigationProps = NativeStackNavigationProp<RootStackParamList, "PrintedDesign">;
 
 const Home = () => {
     const { prints, loading } = usePrints();
-    const { logout } = useAuth();
     const navigation = useNavigation<PrintedDesignNavigationProps>();
 
     async function handleDataFromChild(item) {

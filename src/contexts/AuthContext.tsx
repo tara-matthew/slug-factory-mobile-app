@@ -5,8 +5,9 @@ import axios from "axios";
 import fetchData from "../hooks/apiFetch";
 import apiFetch from "../hooks/apiFetch";
 import * as Device from "expo-device";
+import {IAuthContext} from "../contracts/AuthContext";
 
-const AuthContext = createContext({});
+const AuthContext = createContext<IAuthContext | null>(null);
 
 export const useAuth = () => {
     return useContext(AuthContext);
