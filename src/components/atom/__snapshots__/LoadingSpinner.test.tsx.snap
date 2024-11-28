@@ -1,38 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches the snapshot 1`] = `
+exports[`LoadingSpinner renders correctly 1`] = `
 <View
-  style={
-    {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "bottom": 0,
-      "justifyContent": "center",
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-      "zIndex": 1,
-    }
-  }
-/>
-`;
-
-exports[`renders correctly 1`] = `
-<View
-  style={
-    {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "bottom": 0,
-      "justifyContent": "center",
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-      "zIndex": 1,
-    }
-  }
+  className="absolute top-0 left-0 right-0 bottom-0 justify-center bg-white z-10"
 >
   <View
     accessibilityRole="progressbar"
