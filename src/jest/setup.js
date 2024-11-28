@@ -26,6 +26,14 @@ jest.mock("expo-image-picker", () => ({
     },
 }));
 
+// jest.mock('react-native-paper', () => {
+//     const realModule = jest.requireActual('react-native-paper');
+//     return {
+//         ...realModule,
+//         ActivityIndicator: jest.fn(() => null), // Mock the ActivityIndicator
+//     };
+// });
+
 jest.mock("expo-image-manipulator", () => ({
     manipulateAsync: jest.fn().mockResolvedValue({
         uri: "mock-manipulated-image-uri",
