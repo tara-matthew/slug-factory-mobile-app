@@ -4,7 +4,7 @@ import ContentWithDivider from "./ContentWithDivider";
 import { DividerWidth } from "../../contracts/Divider";
 import { IInfoCardProps } from "../../contracts/InfoCard";
 
-const InfoCard = ({ name, uploadCount, imageUrl, info }: IInfoCardProps) => {
+const InfoCard = ({ name, uploadText, imageUrl, info }: IInfoCardProps) => {
     return (
         <View style={ styles.container } className="rounded-lg shadow-sm p-8">
             <View className="flex flex-row items-center">
@@ -34,7 +34,7 @@ const InfoCard = ({ name, uploadCount, imageUrl, info }: IInfoCardProps) => {
                         className="text-lg text-center"
                         style={ { maxWidth: 120, textAlign: "center" } }
                     >
-                        {uploadCount}
+                        {uploadText}
                     </Text>
                 </View>
 
@@ -50,7 +50,10 @@ const InfoCard = ({ name, uploadCount, imageUrl, info }: IInfoCardProps) => {
                                 bottom={ !isLast }
                                 dividerWidth={ DividerWidth.Half }
                             >
-                                <Text className="text-lg py-2">{item}</Text>
+                                <Text
+                                    numberOfLines={ 1 }
+                                    style={ { maxWidth: 160 }}
+                                    className="text-lg py-2">{item}</Text>
 
                             </ContentWithDivider>
                         );

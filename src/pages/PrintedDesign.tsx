@@ -126,7 +126,7 @@ const PrintedDesign = ({ route }) => {
                     <InfoCard
                         imageUrl={ print.user.avatar_url }
                         name={ print.user.username }
-                        uploadCount={ uploadText }
+                        uploadText={ uploadText }
                         info={ [printCreatedAt, "0 reviews", favouriteInfoText] }
 
                     />

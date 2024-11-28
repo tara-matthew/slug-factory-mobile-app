@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import { fromResponse } from "../data-transfer-objects/UserData";
@@ -22,10 +22,9 @@ const EditProfile = () => {
     const handleSubmit = async () => {
         try {
             const updatedUser = await apiFetch("/me", "PATCH", formValues);
-            console.log(updatedUser);
             const userData = fromResponse(updatedUser.data);
             setUser(userData);
-            navigation.navigate("MyProfile");
+            navigation.goBack();
         } catch (error) {
             console.error(error);
         }

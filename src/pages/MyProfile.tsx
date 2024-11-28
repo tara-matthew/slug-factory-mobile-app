@@ -26,7 +26,7 @@ const MyProfile = () => {
             <InfoCard
                 imageUrl={ user.avatar_url }
                 name={ user.username }
-                uploadCount={ uploadText }
+                uploadText={ uploadText }
                 info={ [favouritesText, user.email] }
             />
             <View className="w-full mt-4 mb-8">

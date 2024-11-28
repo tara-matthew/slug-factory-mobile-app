@@ -1,6 +1,6 @@
 export interface IInfoCardProps {
     imageUrl: string;
     name: string;
-    uploadCount: number;
+    uploadText: string;
     info: Array<string>;
 }
