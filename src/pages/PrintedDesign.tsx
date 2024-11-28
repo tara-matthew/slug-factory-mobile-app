@@ -7,7 +7,6 @@ import { Size } from "../contracts/Image";
 import apiFetch from "../hooks/apiFetch";
 import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
-import { format } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
 
 const PrintedDesign = ({ route }) => {
@@ -32,8 +31,9 @@ const PrintedDesign = ({ route }) => {
     ];
 
     const printCreatedAt = useMemo(() => {
-        return format(new Date(print.created_at), "dd/mm/yyyy");
-    });
+        const options = { year: "numeric", month: "numeric", day: "numeric" };
+        return new Date(print.created_at).toLocaleDateString("en-GB", options);
+    }, []);
 
     const uploadText = useMemo(() => {
         const text = print.user.prints_count > 1 ? "uploads" : "upload";
