@@ -6,4 +6,5 @@ export interface ILoginSuccessResponse {
 
 export interface ILoginErrorResponse {
     error: boolean;
+    msg: string;
 }
