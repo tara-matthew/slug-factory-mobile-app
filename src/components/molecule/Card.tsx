@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { ICardProps } from "../../contracts/Card";
 import { Image } from "expo-image";
 
@@ -30,14 +29,6 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
                             uri: uri,
                         } }
                     />
-                    <MaterialIcons
-                        name="favorite-outline"
-                        size={ 32 }
-                        color="white"
-                        style={ styles.icon }
-                        className="absolute top-1 right-2"
-                    />
-
                     <Text adjustsFontSizeToFit={ true } numberOfLines={ 2 } style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
                 </View>
             </Pressable>
