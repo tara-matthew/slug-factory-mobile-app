@@ -36,13 +36,9 @@ const PrintedDesign = ({ route }) => {
         { title: adhesionType },
     ];
 
-    const uploadText = useMemo(() => {
-        return usePluralisedText(print.user.prints_count, "upload", "uploads");
-    }, []);
+    const uploadText = usePluralisedText(print.user.prints_count, "upload", "uploads");
 
-    const favouriteInfoText = useMemo(() => {
-        return usePluralisedText(print.favourited_count, "times", "time");
-    }, [print.favourited_count]);
+    const favouriteInfoText = usePluralisedText(print.favourited_count, "time", "times");
 
     const belongsToUser = user?.id === print.user_id;
     const favouriteText = useMemo(() => {
