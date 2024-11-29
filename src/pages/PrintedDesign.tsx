@@ -38,7 +38,7 @@ const PrintedDesign = ({ route }) => {
 
     const uploadText = usePluralisedText(print.user.prints_count, "upload", "uploads");
 
-    const favouriteInfoText = usePluralisedText(print.favourited_count, "time", "times");
+    const favouriteInfoText = `Favourited ${usePluralisedText(print.favourited_count, "time", "times")}`;
 
     const belongsToUser = user?.id === print.user_id;
     const favouriteText = useMemo(() => {
