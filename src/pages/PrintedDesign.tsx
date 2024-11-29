@@ -31,7 +31,7 @@ const PrintedDesign = ({ route }) => {
     }, []);
 
     const pills = [
-        { title: print.filament_material.name },
+        { title: print?.filament_material?.name },
         { title: supportsText },
         { title: adhesionType },
     ];

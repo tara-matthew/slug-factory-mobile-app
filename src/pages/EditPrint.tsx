@@ -41,7 +41,7 @@ const EditPrint = ({ route }) => {
                 setFormValues({
                     title: printData.title,
                     description: printData.description,
-                    filament_material_id: printData.filament_material_id,
+                    filament_material_id: printData.filament_material_id, // TODO Fix so the name is displayed after this screen
                     uses_supports: printData.uses_supports,
                     adhesion_type: printData.adhesion_type,
                 });

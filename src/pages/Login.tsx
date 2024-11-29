@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { RegisterNavigationProps } from "../contracts/Navigator";
 
 const Login = () => {
+    // TODO could move TouchableOpacity into Welcome template
     const [error, setError] = useState("");
     const { onLogin } = useAuth();
     const navigation = useNavigation<RegisterNavigationProps>();
