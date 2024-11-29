@@ -13,6 +13,10 @@ const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
         };
     }, [size]);
 
+    const imageSource = (url) => {
+        return url.startsWith("prints") ? `${process.env.EXPO_PUBLIC_URL}/${url}` : url;
+    };
+
     return (
         <ScrollView
             horizontal
@@ -25,7 +29,7 @@ const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
                     key={ index }
                     placeholder={ image?.blurhash ?? blurhash }
                     transition={ 500 }
-                    source={ { uri: image.url.startsWith("prints") ? `${process.env.EXPO_PUBLIC_URL}/${image.url}` : image.url } }
+                    source={ imageSource(image.url) }
                     style={ [computedStyles.image, styles.image] }
                 />
             ))}
