@@ -69,7 +69,7 @@ const InfoCard = ({ name, uploadText, imageUrl, info }: IInfoCardProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#d0cadb", // '#e8e8e8', //"#e8eaeb",
+        backgroundColor: "#d0cadb",
     },
     divider: {
         width: "50%",
