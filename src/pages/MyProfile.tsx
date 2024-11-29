@@ -35,8 +35,6 @@ const MyProfile = () => {
             </View>
             <View>
                 <Button title="Sign out" onPress={ logout }></Button>
-                {/* <TouchableLink to={ EditProfile } title="Printer & filament preference" /> */}
-                {/* <TouchableLink to={ EditProfile } title="Saved tutorials & notes" /> */}
             </View>
         </View>
     );
