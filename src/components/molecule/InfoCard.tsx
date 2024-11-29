@@ -52,8 +52,11 @@ const InfoCard = ({ name, uploadText, imageUrl, info }: IInfoCardProps) => {
                             >
                                 <Text
                                     numberOfLines={ 1 }
-                                    style={ { maxWidth: 160 }}
-                                    className="text-lg py-2">{item}</Text>
+                                    style={ { maxWidth: 160 } }
+                                    className="text-lg py-2"
+                                >
+                                    {item}
+                                </Text>
 
                             </ContentWithDivider>
                         );

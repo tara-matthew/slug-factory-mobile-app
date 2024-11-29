@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import PillGroup from "../components/molecule/PillGroup";
 import InfoCard from "../components/molecule/InfoCard";
 import ImageList from "../components/molecule/ImageList";
@@ -8,42 +8,40 @@ import apiFetch from "../hooks/apiFetch";
 import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
+import usePluralisedText from "../hooks/usePluralisedText";
 
 const PrintedDesign = ({ route }) => {
     const navigation = useNavigation();
     // TODO just pass in the print ID rather than the whole object, this is an anti-pattern!
     // https://reactnavigation.org/docs/params/
-    // console.log(route.params.print_id);
     const [print, setPrint] = useState(route.params.print);
     const { updatePrint, toggleFavouritePrint } = usePrints();
     const { user, setUser } = useUser();
 
-    const pills = [
-        // { title: "Ender-3" },
-        // { title: print.filament_material.name },
-        // { title: print?.filament_brand?.name ?? "A brand" },
-        // { title: print?.filament_colour?.name ?? "A colour" },
-        // { title: "20% infill" },
-        { title: "Supports" },
-        { title: print?.settings?.adhesion_type ?? "Skirt" },
-        // { title: "Another tag" },
-        // { title: "Yet another tag" },
-    ];
+    const adhesionType = useMemo(() => {
+        return `${print.settings.adhesion_type.charAt(0).toUpperCase()}${print.settings.adhesion_type.slice(1)}`;
+    }, []);
+
+    const supportsText = useMemo(() => {
+        return print?.settings?.uses_supports ? "Supports" : "No Supports";
+    }, []);
 
     const printCreatedAt = useMemo(() => {
         return new Date(print.created_at).toLocaleDateString("en-GB");
     }, []);
 
-    const uploadText = useMemo(() => {
-        const text = print.user.prints_count > 1 ? "uploads" : "upload";
+    const pills = [
+        { title: print.filament_material.name },
+        { title: supportsText },
+        { title: adhesionType },
+    ];
 
-        return `${print.user.prints_count} ${text}`;
+    const uploadText = useMemo(() => {
+        return usePluralisedText(print.user.prints_count, "upload", "uploads");
     }, []);
 
     const favouriteInfoText = useMemo(() => {
-        const text = print.favourited_count > 1 || print.favourited_count === 0 ? "times" : "time";
-
-        return `Favourited ${print.favourited_count} ${text}`;
+        return usePluralisedText(print.favourited_count, "times", "time");
     }, [print.favourited_count]);
 
     const belongsToUser = user?.id === print.user_id;

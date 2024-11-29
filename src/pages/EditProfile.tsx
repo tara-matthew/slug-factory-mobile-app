@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import { fromResponse } from "../data-transfer-objects/UserData";
