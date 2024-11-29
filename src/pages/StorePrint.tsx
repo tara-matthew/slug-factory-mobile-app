@@ -63,6 +63,7 @@ const StorePrint = () => {
     };
 
     /* TODO read from the database on app load, add a context, and use that here */
+    /* TODO could generate radioButtonGroupWithHeading components in a loop when done atomically */
 
     return (
         <View style={ { flex: 1 } }>

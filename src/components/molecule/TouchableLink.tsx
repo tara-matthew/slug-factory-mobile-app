@@ -10,7 +10,7 @@ const TouchableLink = ({ to, title }: ITouchableLinkProps) => {
     const navigation = useNavigation();
     return (
         <TouchableOpacity
-            onPress={ () => navigation.navigate(to) }
+            onPress={ () => navigation.navigate(to as never) }
         >
             <ContentWithDivider top={ false } bottom={ true } innerClass="flex flex-row justify-between items-center w-full" dividerWidth={ DividerWidth.Full }>
                 <Text className="py-5 px-10 text-lg">{title}</Text>

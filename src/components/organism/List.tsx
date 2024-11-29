@@ -37,11 +37,6 @@ const List = ({ data, sendDataToParent }: IListProps) => {
 const styles = StyleSheet.create({
     container: {
         width: 300,
-        // height: 250,
-        // flex: 1,
-        // backgroundColor: "#d0cadb",
-        // marginBottom: 20,
-        // shadowRadius: 2,
     },
 });
 
