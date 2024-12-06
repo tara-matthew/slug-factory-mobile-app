@@ -16,6 +16,7 @@ import { adhesionRadioButtons, materialRadioButtons, supportsRadioButtons } from
 import ImageSelector from "../components/molecule/ImageSelector";
 import useFormData from "../hooks/useFormData";
 import LoadingSpinner from "../components/atom/LoadingSpinner";
+import BaseButton from "../components/atom/BaseButton";
 
 const StorePrint = () => {
     // TODO Could refactor to use useReducer
@@ -128,13 +129,7 @@ const StorePrint = () => {
                             </View>
 
                             <View className="w-full mt-4">
-                                <TouchableOpacity
-                                    style={ { backgroundColor: "#d0cadb" } }
-                                    className="w-full p-3.5 rounded-2xl"
-                                    onPress={ handleSubmit }
-                                >
-                                    <Text className="text-center">Submit</Text>
-                                </TouchableOpacity>
+                                <BaseButton title="Submit" sendDataToParent={ handleSubmit }></BaseButton>
                             </View>
                         </View>
                     </View>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
+import BaseButton from "../atom/BaseButton";
 
 const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
     const [formValues, setFormValues] = useState(
@@ -31,15 +32,7 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
                 </View>
             ))}
             <View className="w-full mt-4">
-                <TouchableOpacity
-                    style={ styles.button }
-                    className="w-full p-3.5 rounded-2xl"
-                    onPress={ handleSubmit }
-                >
-                    <Text className="text-center">{buttonText}</Text>
-
-                </TouchableOpacity>
-
+                <BaseButton title={buttonText} sendDataToParent={handleSubmit}></BaseButton>
             </View>
         </View>
     );
