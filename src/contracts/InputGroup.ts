@@ -2,5 +2,5 @@ import {IInputWithLabelProps} from "./InputWithLabel";
 
 export interface IInputGroupProps {
     inputs: IInputWithLabelProps[];
-    sendDataToParent: (data: never);
+    sendDataToParent: (data: never) => void;
 }
