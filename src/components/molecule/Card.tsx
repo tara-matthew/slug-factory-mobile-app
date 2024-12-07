@@ -7,7 +7,7 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
     const height = 200;
 
     const uri = imageURL.startsWith("https") ? imageURL : `${process.env.EXPO_PUBLIC_URL}/${imageURL}`;
-    const buttonPressed = (item) => {
+    const buttonPressed = (item: { title: string }) => {
         sendDataToParent(item);
     };
 

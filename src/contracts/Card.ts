@@ -4,5 +4,5 @@ export interface ICardProps {
     };
     imageURL: string;
     blurhash: string;
-    sendDataToParent: (data: never) => void;
+    sendDataToParent: (data: { title: string }) => void;
 }

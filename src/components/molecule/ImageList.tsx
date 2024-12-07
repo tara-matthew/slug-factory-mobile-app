@@ -13,7 +13,7 @@ const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
         };
     }, [size]);
 
-    const imageSource = (url) => {
+    const imageSource = (url: string) => {
         return url.startsWith("prints") ? `${process.env.EXPO_PUBLIC_URL}/${url}` : url;
     };
 

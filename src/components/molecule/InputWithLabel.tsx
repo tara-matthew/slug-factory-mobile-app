@@ -12,6 +12,7 @@ const InputWithLabel = ({ title, titleSize, value = null, inputProps = {}, place
                 numberOfLines: 10,
             }
         : inputProps;
+
     const titleClassName = titleSize === TitleSize.Large ? "text-lg" : "text-md";
 
     return (

@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../contracts/Navigator";
 import { useUser } from "../contexts/UserContext";
+import BaseButton from "../components/atom/BaseButton";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -57,13 +58,7 @@ const EditProfile = () => {
                     </TextInput>
                 </View>
                 <View className="w-full mt-4">
-                    <TouchableOpacity
-                        style={ { backgroundColor: "#d0cadb" } }
-                        className="w-full p-3.5 rounded-2xl"
-                        onPress={ handleSubmit }
-                    >
-                        <Text className="text-center">Submit</Text>
-                    </TouchableOpacity>
+                    <BaseButton title="Submit" sendDataToParent={ handleSubmit }></BaseButton>
                 </View>
             </ScrollView>
 
