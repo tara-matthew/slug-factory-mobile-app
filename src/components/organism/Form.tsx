@@ -3,6 +3,7 @@ import { View } from "react-native";
 import BaseButton from "../atom/BaseButton";
 import InputWithLabel from "../molecule/InputWithLabel";
 import { TitleSize } from "../../contracts/InputWithLabel";
+import InputGroup from "../molecule/InputGroup";
 
 const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
     const [formValues, setFormValues] = useState(
@@ -19,21 +20,7 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
 
     return (
         <View className="w-full">
-            {inputs.map((field, index) => (
-                <View key={ index }>
-                    <InputWithLabel
-                        title={ field.title }
-                        titleSize={ TitleSize.Medium }
-                        inputProps={ { ...field.inputProps } }
-                        value={ formValues[field.placeholder] }
-                        placeholder={ field.placeholder }
-                        isMultiline={ false }
-                        sendDataToParent={ handleChange }
-                    >
-
-                    </InputWithLabel>
-                </View>
-            ))}
+            <InputGroup inputs={inputs} sendDataToParent={handleChange}></InputGroup>
             <View className="w-full mt-4">
                 <BaseButton title={ buttonText } sendDataToParent={ handleSubmit }></BaseButton>
             </View>
