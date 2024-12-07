@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import BaseButton from "../atom/BaseButton";
 import InputGroup from "../molecule/InputGroup";
-import {IFormProps} from "../../contracts/Form";
+import { IFormProps } from "../../contracts/Form";
 
 const Form = ({ inputs, buttonText, buttonTo, sendDataToParent }: IFormProps) => {
     const [formValues, setFormValues] = useState(

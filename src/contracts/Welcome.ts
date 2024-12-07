@@ -1,4 +1,4 @@
-import {IInputWithLabel} from "./InputWithLabel";
+import { IInputWithLabel } from "./InputWithLabel";
 
 export interface IWelcomeProps {
     headerText: string;
