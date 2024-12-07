@@ -4,7 +4,6 @@ import {
     ScrollView,
     Text,
     TextInput,
-    TouchableOpacity,
     View,
 } from "react-native";
 import apiFetch from "../hooks/apiFetch";
@@ -17,6 +16,8 @@ import ImageSelector from "../components/molecule/ImageSelector";
 import useFormData from "../hooks/useFormData";
 import LoadingSpinner from "../components/atom/LoadingSpinner";
 import BaseButton from "../components/atom/BaseButton";
+import InputWithLabel from "../components/molecule/InputWithLabel";
+import {TitleSize} from "../contracts/InputWithLabel";
 
 const StorePrint = () => {
     // TODO Could refactor to use useReducer
@@ -77,16 +78,16 @@ const StorePrint = () => {
                     <View>
                         <View className="p-5">
                             <ImageSelector sendDataToParent={ handleImages } />
+                            <InputWithLabel
+                                title="Title"
+                                titleSize={TitleSize.Large}
+                                placeholder="title"
+                                isMultiline={ false }
+                                sendDataToParent={ handleDataFromChild }
+                            >
+                            </InputWithLabel>
 
-                            <Text className="font-bold text-lg">Title</Text>
-                            <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                                <TextInput
-                                    placeholder="title"
-                                    onChangeText={ text => handleChange("title", text) }
-                                />
-                            </View>
-
-                            <View className="mb-8">
+                            <View className="mb-7">
                                 <RadioButtonGroupWithHeading
                                     radioButtons={ materialRadioButtons }
                                     groupID="filament_material_id"
@@ -96,7 +97,7 @@ const StorePrint = () => {
                                 />
                             </View>
 
-                            <View className="mb-8">
+                            <View className="mb-7">
                                 <RadioButtonGroupWithHeading
                                     heading="Adhesion"
                                     groupID="adhesion_type"
@@ -106,7 +107,7 @@ const StorePrint = () => {
                                 />
                             </View>
 
-                            <View className="mb-8">
+                            <View className="mb-7">
                                 <RadioButtonGroupWithHeading
                                     heading="Supports"
                                     groupID="uses_supports"
@@ -116,18 +117,14 @@ const StorePrint = () => {
                                 />
                             </View>
 
-                            <Text className="font-bold text-lg">Description</Text>
-                            <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                                <TextInput
-                                    style={ { height: 50 } }
-                                    editable
-                                    multiline
-                                    numberOfLines={ 10 }
-                                    placeholder="description"
-                                    onChangeText={ text => handleChange("description", text) }
-                                />
-                            </View>
-
+                            <InputWithLabel
+                                title="Description"
+                                titleSize={TitleSize.Large}
+                                placeholder="description"
+                                isMultiline={ true }
+                                sendDataToParent={ handleDataFromChild }
+                            >
+                            </InputWithLabel>
                             <View className="w-full mt-4">
                                 <BaseButton title="Submit" sendDataToParent={ handleSubmit }></BaseButton>
                             </View>

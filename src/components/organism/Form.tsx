@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
 import BaseButton from "../atom/BaseButton";
+import InputWithLabel from "../molecule/InputWithLabel";
+import {TitleSize} from "../../contracts/InputWithLabel";
 
 const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
     const [formValues, setFormValues] = useState(
@@ -19,16 +21,16 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
         <View className="w-full">
             {inputs.map((field, index) => (
                 <View key={ index }>
-                    <Text className="font-bold">{field.title}</Text>
+                    <InputWithLabel
+                        title={ field.title}
+                        titleSize={TitleSize.Medium}
+                        inputProps={{ ...field.inputProps }}
+                        value={ formValues[field.placeholder] }
+                        placeholder={field.placeholder}
+                        isMultiline={false}
+                        sendDataToParent={handleChange}>
 
-                    <View className="bg-black/5 w-full p-5 rounded-2xl mb-7">
-                        <TextInput
-                            { ...field.inputProps }
-                            placeholder={ field.placeholder }
-                            value={ formValues[field.placeholder] }
-                            onChangeText={ text => handleChange(field.placeholder, text) }
-                        />
-                    </View>
+                    </InputWithLabel>
                 </View>
             ))}
             <View className="w-full mt-4">
@@ -37,11 +39,5 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    button: {
-        backgroundColor: "#d0cadb",
-    },
-});
 
 export default Form;
