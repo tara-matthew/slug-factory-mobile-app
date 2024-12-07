@@ -67,7 +67,6 @@ exports[`renders correctly 1`] = `
         }
         transition={1000}
       />
-      Icon: favorite-outline, Size: 32, Color: white
       <Text
         adjustsFontSizeToFit={true}
         numberOfLines={2}
