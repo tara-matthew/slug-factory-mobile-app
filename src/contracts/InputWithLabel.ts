@@ -5,7 +5,7 @@ export enum TitleSize {
 
 export interface IInputWithLabelProps {
     title: string;
-    value: string|null;
+    value: string | null;
     titleSize: TitleSize;
     inputProps: object;
     placeholder: string;

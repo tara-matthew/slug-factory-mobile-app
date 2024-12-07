@@ -1,8 +1,8 @@
-import React from 'react';
-import {Text, TouchableOpacity} from "react-native";
-import {IButtonProps} from "../../contracts/Button";
+import React from "react";
+import { Text, TouchableOpacity } from "react-native";
+import { IButtonProps } from "../../contracts/Button";
 
-const BaseButton = ({title, sendDataToParent }: IButtonProps) => {
+const BaseButton = ({ title, sendDataToParent }: IButtonProps) => {
     return (
         <TouchableOpacity
             style={ { backgroundColor: "#d0cadb" } }

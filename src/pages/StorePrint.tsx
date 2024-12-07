@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
     KeyboardAvoidingView,
     ScrollView,
-    Text,
-    TextInput,
     View,
 } from "react-native";
 import apiFetch from "../hooks/apiFetch";
@@ -17,7 +15,7 @@ import useFormData from "../hooks/useFormData";
 import LoadingSpinner from "../components/atom/LoadingSpinner";
 import BaseButton from "../components/atom/BaseButton";
 import InputWithLabel from "../components/molecule/InputWithLabel";
-import {TitleSize} from "../contracts/InputWithLabel";
+import { TitleSize } from "../contracts/InputWithLabel";
 
 const StorePrint = () => {
     // TODO Could refactor to use useReducer
@@ -80,7 +78,7 @@ const StorePrint = () => {
                             <ImageSelector sendDataToParent={ handleImages } />
                             <InputWithLabel
                                 title="Title"
-                                titleSize={TitleSize.Large}
+                                titleSize={ TitleSize.Large }
                                 placeholder="title"
                                 isMultiline={ false }
                                 sendDataToParent={ handleDataFromChild }
@@ -119,7 +117,7 @@ const StorePrint = () => {
 
                             <InputWithLabel
                                 title="Description"
-                                titleSize={TitleSize.Large}
+                                titleSize={ TitleSize.Large }
                                 placeholder="description"
                                 isMultiline={ true }
                                 sendDataToParent={ handleDataFromChild }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextInput, View } from "react-native";
-import {IInputWithLabelProps, TitleSize} from "../../contracts/InputWithLabel";
+import { IInputWithLabelProps, TitleSize } from "../../contracts/InputWithLabel";
 
 const InputWithLabel = ({ title, titleSize, value = null, inputProps = {}, placeholder, isMultiline, sendDataToParent }: IInputWithLabelProps) => {
     const inputStyling = isMultiline
