@@ -15,6 +15,8 @@ export interface IInputWithLabel {
 
 export interface IInputWithLabelProps extends IInputWithLabel {
 
-    sendDataToParent: (placeholder: string, text: string) => void; // TODO this pattern of having sendDataToParent within component props likely exists in several places
+    sendDataToParent: (placeholder: string, text: string) => void;
+    // TODO this pattern of having sendDataToParent within component props likely exists in several places.
+    // Perhaps could have an interface defining the component, and then one for props which extends it
 
 }
