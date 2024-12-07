@@ -2,11 +2,11 @@ import React from "react";
 import { Text, TextInput, View } from "react-native";
 import { IInputWithLabelProps, TitleSize } from "../../contracts/InputWithLabel";
 
-const InputWithLabel = ({ title, titleSize, value = null, inputProps = {}, placeholder, isMultiline, sendDataToParent }: IInputWithLabelProps) => {
+const InputWithLabel = ({ title, titleSize = TitleSize.Medium, value = null, defaultValue = null, inputProps = {}, placeholder, isMultiline, sendDataToParent }: IInputWithLabelProps) => {
     const inputStyling = isMultiline
         ? {
                 ...inputProps,
-                style: { height: 50 },
+                style: { height: 60 },
                 editable: true,
                 multiline: true,
                 numberOfLines: 10,
@@ -22,6 +22,7 @@ const InputWithLabel = ({ title, titleSize, value = null, inputProps = {}, place
                 <TextInput
                     { ...inputStyling }
                     value={ value }
+                    defaultValue={defaultValue}
                     placeholder={ placeholder }
                     onChangeText={ text => sendDataToParent(placeholder, text) }
                 />

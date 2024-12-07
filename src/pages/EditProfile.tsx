@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, {useState} from "react";
+import {ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import apiFetch from "../hooks/apiFetch";
-import { fromResponse } from "../data-transfer-objects/UserData";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../contracts/Navigator";
-import { useUser } from "../contexts/UserContext";
+import {fromResponse} from "../data-transfer-objects/UserData";
+import {useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {RootStackParamList} from "../contracts/Navigator";
+import {useUser} from "../contexts/UserContext";
 import BaseButton from "../components/atom/BaseButton";
+import InputWithLabel from "../components/molecule/InputWithLabel";
+import {TitleSize} from "../contracts/InputWithLabel";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -38,25 +40,9 @@ const EditProfile = () => {
     return (
         <View>
             <ScrollView contentContainerStyle={ styles.container }>
-
-                <Text className="font-bold text-lg">Name</Text>
-                <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                    <TextInput defaultValue={ user.name } onChangeText={ text => handleChange("name", text) }></TextInput>
-                </View>
-                <Text className="font-bold text-lg">Email</Text>
-                <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                    <TextInput defaultValue={ user.email } onChangeText={ text => handleChange("email", text) }></TextInput>
-                </View>
-                <Text className="font-bold text-lg">Bio</Text>
-                <View className="bg-black/5 w-full p-5 rounded-2xl mb-8">
-                    <TextInput
-                        defaultValue={ user.bio }
-                        multiline
-                        numberOfLines={ 10 }
-                        onChangeText={ text => handleChange("bio", text) }
-                    >
-                    </TextInput>
-                </View>
+                <InputWithLabel title={"Name"} titleSize={TitleSize.Large} placeholder={"name"} isMultiline={false} sendDataToParent={handleChange} defaultValue={user.name}></InputWithLabel>
+                <InputWithLabel title={"Email"} titleSize={TitleSize.Large} placeholder={"email"} isMultiline={false} sendDataToParent={handleChange} defaultValue={user.email}></InputWithLabel>
+                <InputWithLabel title={"Bio"} titleSize={TitleSize.Large} placeholder={"bio"} isMultiline={true} sendDataToParent={handleChange} defaultValue={user.bio}></InputWithLabel>
                 <View className="w-full mt-4">
                     <BaseButton title="Submit" sendDataToParent={ handleSubmit }></BaseButton>
                 </View>
