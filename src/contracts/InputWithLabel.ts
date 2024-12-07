@@ -3,7 +3,7 @@ export enum TitleSize {
     Medium = "medium",
 }
 
-export interface IInputWithLabelProps {
+export interface IInputWithLabel {
     title: string;
     value?: string;
     defaultValue?: string;
@@ -11,6 +11,10 @@ export interface IInputWithLabelProps {
     inputProps?: object;
     placeholder: string;
     isMultiline: boolean;
-    sendDataToParent: (placeholder: string, text: string) => void;
+}
+
+export interface IInputWithLabelProps extends IInputWithLabel{
+
+    sendDataToParent: (placeholder: string, text: string) => void; // TODO this pattern of having sendDataToParent within component props likely exists in several places
 
 }

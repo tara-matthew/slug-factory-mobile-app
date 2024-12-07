@@ -1,6 +1,6 @@
-import {IInputWithLabelProps} from "./InputWithLabel";
+import {IInputWithLabel, IInputWithLabelProps} from "./InputWithLabel";
 
 export interface IInputGroupProps {
-    inputs: IInputWithLabelProps[];
-    sendDataToParent: (data: never) => void;
+    inputs: IInputWithLabel[];
+    sendDataToParent: (name: string, value: string) => void;
 }

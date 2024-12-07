@@ -18,21 +18,6 @@ const EditProfile = () => {
     const { user, setUser, loading } = useUser();
     const navigation = useNavigation<NavigationProps>();
 
-    const handleChange = (name: string, value: string) => {
-        setFormValues(prevValues => ({ ...prevValues, [name]: value }));
-    };
-
-    const handleSubmit = async () => {
-        try {
-            const updatedUser = await apiFetch("/me", "PATCH", formValues);
-            const userData = fromResponse(updatedUser.data);
-            setUser(userData);
-            navigation.goBack();
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     const inputs = [
         {
             title: "Name",
@@ -56,6 +41,21 @@ const EditProfile = () => {
             defaultValue: user.bio,
         },
     ];
+
+    const handleChange = (name: string, value: string) => {
+        setFormValues(prevValues => ({ ...prevValues, [name]: value }));
+    };
+
+    const handleSubmit = async () => {
+        try {
+            const updatedUser = await apiFetch("/me", "PATCH", formValues);
+            const userData = fromResponse(updatedUser.data);
+            setUser(userData);
+            navigation.goBack();
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     if (loading) {
         return (<Text>Loading...</Text>);
