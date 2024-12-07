@@ -1,9 +1,9 @@
 import React from "react";
 import {View} from "react-native";
 import InputWithLabel from "./InputWithLabel";
-import {TitleSize} from "../../contracts/InputWithLabel";
+import {IInputGroupProps} from "../../contracts/InputGroup";
 
-const InputGroup = ({inputs}) => {
+const InputGroup = ({inputs, sendDataToParent}: IInputGroupProps) => {
     return (
         <View>
         {inputs.map((field, index) => (
@@ -11,10 +11,11 @@ const InputGroup = ({inputs}) => {
                     <InputWithLabel
                         title={ field.title }
                         inputProps={ { ...field.inputProps } }
-                        // value={ formValues[field.placeholder] }
+                        value={ field?.value }
+                        defaultValue={ field?.defaultValue }
                         placeholder={ field.placeholder }
-                        isMultiline={ false }
-                        // sendDataToParent={ handleChange }
+                        isMultiline={ field.isMultiline }
+                        sendDataToParent={ sendDataToParent }
                     >
 
                     </InputWithLabel>

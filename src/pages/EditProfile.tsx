@@ -1,14 +1,14 @@
-import React, {useState} from "react";
-import {ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import React, { useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
-import {fromResponse} from "../data-transfer-objects/UserData";
-import {useNavigation} from "@react-navigation/native";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../contracts/Navigator";
-import {useUser} from "../contexts/UserContext";
+import { fromResponse } from "../data-transfer-objects/UserData";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../contracts/Navigator";
+import { useUser } from "../contexts/UserContext";
 import BaseButton from "../components/atom/BaseButton";
-import InputWithLabel from "../components/molecule/InputWithLabel";
-import {TitleSize} from "../contracts/InputWithLabel";
+import { TitleSize } from "../contracts/InputWithLabel";
+import InputGroup from "../components/molecule/InputGroup";
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -33,6 +33,30 @@ const EditProfile = () => {
         }
     };
 
+    const inputs = [
+        {
+            title: "Name",
+            titleSize: TitleSize.Large,
+            placeholder: "name",
+            isMultiline: false,
+            defaultValue: user.name,
+        },
+        {
+            title: "Email",
+            titleSize: TitleSize.Large,
+            placeholder: "email",
+            isMultiline: false,
+            defaultValue: user.email,
+        },
+        {
+            title: "Bio",
+            titleSize: TitleSize.Large,
+            placeholder: "bio",
+            isMultiline: true,
+            defaultValue: user.bio,
+        },
+    ];
+
     if (loading) {
         return (<Text>Loading...</Text>);
     }
@@ -40,9 +64,7 @@ const EditProfile = () => {
     return (
         <View>
             <ScrollView contentContainerStyle={ styles.container }>
-                <InputWithLabel title={"Name"} titleSize={TitleSize.Large} placeholder={"name"} isMultiline={false} sendDataToParent={handleChange} defaultValue={user.name}></InputWithLabel>
-                <InputWithLabel title={"Email"} titleSize={TitleSize.Large} placeholder={"email"} isMultiline={false} sendDataToParent={handleChange} defaultValue={user.email}></InputWithLabel>
-                <InputWithLabel title={"Bio"} titleSize={TitleSize.Large} placeholder={"bio"} isMultiline={true} sendDataToParent={handleChange} defaultValue={user.bio}></InputWithLabel>
+                <InputGroup inputs={inputs} sendDataToParent={handleChange}></InputGroup>
                 <View className="w-full mt-4">
                     <BaseButton title="Submit" sendDataToParent={ handleSubmit }></BaseButton>
                 </View>
