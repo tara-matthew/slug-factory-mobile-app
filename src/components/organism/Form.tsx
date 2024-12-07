@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import BaseButton from "../atom/BaseButton";
-import InputWithLabel from "../molecule/InputWithLabel";
-import { TitleSize } from "../../contracts/InputWithLabel";
 import InputGroup from "../molecule/InputGroup";
 
 const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
@@ -20,7 +18,7 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
 
     return (
         <View className="w-full">
-            <InputGroup inputs={inputs} sendDataToParent={handleChange}></InputGroup>
+            <InputGroup inputs={ inputs } sendDataToParent={ handleChange }></InputGroup>
             <View className="w-full mt-4">
                 <BaseButton title={ buttonText } sendDataToParent={ handleSubmit }></BaseButton>
             </View>
