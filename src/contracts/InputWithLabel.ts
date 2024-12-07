@@ -13,7 +13,7 @@ export interface IInputWithLabel {
     isMultiline: boolean;
 }
 
-export interface IInputWithLabelProps extends IInputWithLabel{
+export interface IInputWithLabelProps extends IInputWithLabel {
 
     sendDataToParent: (placeholder: string, text: string) => void; // TODO this pattern of having sendDataToParent within component props likely exists in several places
 

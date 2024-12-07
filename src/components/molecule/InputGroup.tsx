@@ -1,12 +1,12 @@
 import React from "react";
-import {View} from "react-native";
+import { View } from "react-native";
 import InputWithLabel from "./InputWithLabel";
-import {IInputGroupProps} from "../../contracts/InputGroup";
+import { IInputGroupProps } from "../../contracts/InputGroup";
 
-const InputGroup = ({inputs, sendDataToParent}: IInputGroupProps) => {
+const InputGroup = ({ inputs, sendDataToParent }: IInputGroupProps) => {
     return (
         <View>
-        {inputs.map((field, index) => (
+            {inputs.map((field, index) => (
                 <View key={ index }>
                     <InputWithLabel
                         title={ field.title }
@@ -22,7 +22,7 @@ const InputGroup = ({inputs, sendDataToParent}: IInputGroupProps) => {
                 </View>
             ))}
         </View>
-    )
-}
+    );
+};
 
 export default InputGroup;

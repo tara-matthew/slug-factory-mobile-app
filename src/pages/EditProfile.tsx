@@ -64,7 +64,7 @@ const EditProfile = () => {
     return (
         <View>
             <ScrollView contentContainerStyle={ styles.container }>
-                <InputGroup inputs={inputs} sendDataToParent={handleChange}></InputGroup>
+                <InputGroup inputs={ inputs } sendDataToParent={ handleChange }></InputGroup>
                 <View className="w-full mt-4">
                     <BaseButton title="Submit" sendDataToParent={ handleSubmit }></BaseButton>
                 </View>

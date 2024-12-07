@@ -1,4 +1,4 @@
-import {IInputWithLabel, IInputWithLabelProps} from "./InputWithLabel";
+import { IInputWithLabel } from "./InputWithLabel";
 
 export interface IInputGroupProps {
     inputs: IInputWithLabel[];

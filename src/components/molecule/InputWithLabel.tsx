@@ -22,7 +22,7 @@ const InputWithLabel = ({ title, titleSize = TitleSize.Medium, value = null, def
                 <TextInput
                     { ...inputStyling }
                     value={ value }
-                    defaultValue={defaultValue}
+                    defaultValue={ defaultValue }
                     placeholder={ placeholder }
                     onChangeText={ text => sendDataToParent(placeholder, text) }
                 />
