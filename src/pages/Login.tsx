@@ -29,8 +29,8 @@ const Login = () => {
                     buttonText="Sign In"
                     buttonTo="Home"
                     inputs={ [
-                        { placeholder: "username", title: "Username", inputProps: { autoCapitalize: "none" } },
-                        { placeholder: "password", title: "Password", inputProps: { secureTextEntry: true, autoCapitalize: "none" } },
+                        { placeholder: "username", title: "Username", isMultiline: false, inputProps: { autoCapitalize: "none" } },
+                        { placeholder: "password", title: "Password", isMultiline: false, inputProps: { secureTextEntry: true, autoCapitalize: "none" } },
                     ] }
                 >
                 </Welcome>

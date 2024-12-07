@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import BaseButton from "../atom/BaseButton";
 import InputGroup from "../molecule/InputGroup";
+import {IFormProps} from "../../contracts/Form";
 
-const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
+const Form = ({ inputs, buttonText, buttonTo, sendDataToParent }: IFormProps) => {
     const [formValues, setFormValues] = useState(
         inputs.reduce((acc, field) => ({ ...acc, [field.placeholder]: "" }), {}),
     );
@@ -12,7 +13,7 @@ const Form = ({ inputs, buttonText, buttonTo, sendDataToParent = null }) => {
         sendDataToParent(formValues);
     };
 
-    const handleChange = (name, value) => {
+    const handleChange = (name: string, value: string) => {
         setFormValues({ ...formValues, [name]: value });
     };
 
