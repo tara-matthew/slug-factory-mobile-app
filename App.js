@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { Dimensions, View } from "react-native";
 import "./global.css";
 import Home from "./src/pages/Home";
 import Login from "./src/pages/Login";
@@ -8,14 +8,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import PrintedDesign from "./src/pages/PrintedDesign";
-import { AuthProvider, useAuth } from "./src/contexts/AuthContext";
 import MyProfile from "./src/pages/MyProfile";
 import EditProfile from "./src/pages/EditProfile";
 import MyPrints from "./src/pages/MyPrints";
 import MyFavouritePrints from "./src/pages/MyFavouritePrints";
 import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
-import ImagePickerExample from "./src/pages/ImagePicker";
 import StorePrint from "./src/pages/StorePrint";
 import { ActivityIndicator, PaperProvider } from "react-native-paper";
 import { PrintProvider } from "./src/contexts/PrintsContext";
@@ -23,6 +21,7 @@ import { UserProvider, useUser } from "./src/contexts/UserContext";
 import CreateProfile from "./src/pages/CreateProfile";
 import Register from "./src/pages/Register";
 import EditPrint from "./src/pages/EditPrint";
+import { AuthProvider, useAuth } from "./src/contexts/AuthContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -108,7 +107,6 @@ function MainTabs() {
         <Tab.Navigator>
             <Tab.Screen name="Home" component={ Home } />
             <Tab.Screen name="Favourites" component={ FavouriteTopTabs } options={ { title: "Favourites" } } />
-            <Tab.Screen name="Image" component={ ImagePickerExample } />
             <Tab.Screen name="New Print" component={ StorePrint } />
             <Tab.Screen name="ProfileStack" component={ ProfileStack } options={ { headerShown: false, title: "Profile" } } />
         </Tab.Navigator>
@@ -163,19 +161,5 @@ function FavouriteTopTabs() {
         </TopTab.Navigator>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        paddingVertical: 100,
-        paddingHorizontal: 20,
-    },
-    outerContainer: {
-        position: "relative",
-    },
-    text: {
-        fontSize: 18,
-        marginBottom: 10,
-    },
-});
 
 export default App;
