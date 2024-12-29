@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  className="rounded-lg shadow-sm p-8"
+  style={
+    {
+      "backgroundColor": "#d0cadb",
+    }
+  }
+>
+  <View
+    className="flex flex-row items-center"
+  >
+    <View
+      className="justify-center items-center"
+    >
+      <Image
+        resizeMode="cover"
+        source={
+          {
+            "uri": "/prints/1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 75,
+            "height": 75,
+            "marginBottom": 8,
+            "width": 75,
+          }
+        }
+      />
+      <Text
+        className="text-xl font-bold text-center"
+        numberOfLines={1}
+        style={
+          {
+            "maxWidth": 120,
+            "textAlign": "center",
+          }
+        }
+      >
+        Test name
+      </Text>
+      <Text
+        className="text-lg text-center"
+        style={
+          {
+            "maxWidth": 120,
+            "textAlign": "center",
+          }
+        }
+      >
+        Upload text
+      </Text>
+    </View>
+    <View
+      className="flex-1 flex flex-col"
+    >
+      <View
+        className="items-end"
+      >
+        <View>
+          <Text
+            className="text-lg py-2"
+            numberOfLines={1}
+            style={
+              {
+                "maxWidth": 160,
+              }
+            }
+          >
+            some info
+          </Text>
+        </View>
+        <View
+          className="w-1/2"
+          style={
+            {
+              "backgroundColor": "gray",
+              "height": 1,
+            }
+          }
+        />
+      </View>
+      <View
+        className="items-end"
+      >
+        <View>
+          <Text
+            className="text-lg py-2"
+            numberOfLines={1}
+            style={
+              {
+                "maxWidth": 160,
+              }
+            }
+          >
+            some more info
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
