@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <View>
+    <View>
+      <Text
+        className="font-bold text-md"
+      >
+        First input
+      </Text>
+      <View
+        className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+      >
+        <TextInput
+          defaultValue={null}
+          onChangeText={[Function]}
+          placeholder="First placeholder"
+          value={null}
+        />
+      </View>
+    </View>
+  </View>
+  <View>
+    <View>
+      <Text
+        className="font-bold text-md"
+      >
+        Second input
+      </Text>
+      <View
+        className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+      >
+        <TextInput
+          defaultValue={null}
+          onChangeText={[Function]}
+          placeholder="Second placeholder"
+          value={null}
+        />
+      </View>
+    </View>
+  </View>
+  <View>
+    <View>
+      <Text
+        className="font-bold text-md"
+      >
+        Third input
+      </Text>
+      <View
+        className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+      >
+        <TextInput
+          defaultValue={null}
+          onChangeText={[Function]}
+          placeholder="Third placeholder"
+          value={null}
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;

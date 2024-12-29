@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <Text
+    className="font-bold text-md"
+  >
+    title
+  </Text>
+  <View
+    className="bg-black/5 w-full p-5 rounded-2xl mb-7"
+  >
+    <TextInput
+      defaultValue={null}
+      editable={true}
+      multiline={true}
+      numberOfLines={10}
+      onChangeText={[Function]}
+      placeholder="placeholder"
+      style={
+        {
+          "height": 60,
+        }
+      }
+      value={null}
+    />
+  </View>
+</View>
+`;

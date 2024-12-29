@@ -32,18 +32,18 @@ it("displays the correct inputs", () => {
     const mockSendDataToParent = jest.fn();
     const inputs = [
         {
-            title: "First input",
-            placeholder: "First placeholder",
+            title: "Name",
+            placeholder: "Enter name",
             isMultiline: false,
         },
         {
-            title: "Second input",
-            placeholder: "Second placeholder",
+            title: "Email",
+            placeholder: "Enter email",
             isMultiline: false,
         },
         {
-            title: "Third input",
-            placeholder: "Third placeholder",
+            title: "Password",
+            placeholder: "Enter password",
             isMultiline: false,
         },
     ];
@@ -52,10 +52,10 @@ it("displays the correct inputs", () => {
     const buttonTo: string = "To link";
     const { getByPlaceholderText, getByText } = render(<Form inputs={ inputs } buttonText={ buttonText } buttonTo={ buttonTo } sendDataToParent={ mockSendDataToParent } />);
 
-    const placeholders = [getByPlaceholderText("First placeholder"), getByPlaceholderText("Second placeholder"), getByPlaceholderText("Third placeholder")];
+    const placeholders = [getByPlaceholderText("Enter name"), getByPlaceholderText("Enter email"), getByPlaceholderText("Enter password")];
     placeholders.forEach(placeholder => expect(placeholder).toBeTruthy());
 
-    const inputTexts = [getByText("First input"), getByText("Second input"), getByText("Third input")];
+    const inputTexts = [getByText("Name"), getByText("Email"), getByText("Password")];
     inputTexts.forEach(input => expect(input).toBeTruthy());
 });
 
