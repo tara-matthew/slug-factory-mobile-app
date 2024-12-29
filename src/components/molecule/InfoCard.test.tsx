@@ -38,7 +38,7 @@ it("does not render a divider on the bottom of the last info item", () => {
 });
 
 // find the correct parent
-// perhaps a bit brittle, but ensures we find the parent
+// perhaps a bit dependent on hierarchy, but also less brittle than looking up a component directly. Maybe??
 const findParentWithType = (element, typeName) => {
     let parent = element.parent;
     while (parent && parent.type?.name !== typeName) {
