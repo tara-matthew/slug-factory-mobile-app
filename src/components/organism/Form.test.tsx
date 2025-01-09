@@ -23,8 +23,7 @@ it("renders correctly", () => {
     ];
 
     const buttonText: string = "Click me";
-    const buttonTo: string = "To link";
-    const { toJSON } = render(<Form inputs={ inputs } buttonText={ buttonText } buttonTo={ buttonTo } sendDataToParent={ mockSendDataToParent } />);
+    const { toJSON } = render(<Form inputs={ inputs } buttonText={ buttonText } sendDataToParent={ mockSendDataToParent } />);
     expect(toJSON()).toMatchSnapshot();
 });
 

@@ -22,7 +22,7 @@ it("renders correctly", () => {
         },
     ];
 
-    const {toJSON} = render(<InputGroup  inputs={inputs} sendDataToParent={mockSendDataToParent} />);
+    const {toJSON} = render(<InputGroup inputs={inputs} sendDataToParent={mockSendDataToParent} />);
     expect(toJSON()).toMatchSnapshot();
 
 });

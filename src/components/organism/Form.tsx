@@ -4,7 +4,7 @@ import BaseButton from "../atom/BaseButton";
 import InputGroup from "../molecule/InputGroup";
 import { IFormProps } from "../../contracts/Form";
 
-const Form = ({ inputs, buttonText, buttonTo, sendDataToParent }: IFormProps) => {
+const Form = ({ inputs, buttonText, sendDataToParent }: IFormProps) => {
     const [formValues, setFormValues] = useState(
         inputs.reduce((acc, field) => ({ ...acc, [field.placeholder]: "" }), {}),
     );
