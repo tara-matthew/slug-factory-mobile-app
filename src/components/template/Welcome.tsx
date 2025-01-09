@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import Form from "../organism/Form";
 import { IWelcomeProps } from "../../contracts/Welcome";
 
-const Welcome = ({ headerText, buttonText, inputs, buttonTo, sendDataToParent }: IWelcomeProps) => {
+const Welcome = ({ headerText, buttonText, inputs, sendDataToParent }: IWelcomeProps) => {
     function handleDataFromChild(data: never) {
         sendDataToParent(data);
     }

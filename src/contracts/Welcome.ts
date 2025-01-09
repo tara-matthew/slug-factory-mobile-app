@@ -3,7 +3,6 @@ import { IInputWithLabel } from "./InputWithLabel";
 export interface IWelcomeProps {
     headerText: string;
     buttonText: string;
-    buttonTo: string;
     inputs: IInputWithLabel[];
     sendDataToParent: (data: never) => void;
 }

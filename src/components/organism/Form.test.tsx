@@ -48,8 +48,7 @@ it("displays the correct inputs", () => {
     ];
 
     const buttonText: string = "Click me";
-    const buttonTo: string = "To link";
-    const { getByPlaceholderText, getByText } = render(<Form inputs={ inputs } buttonText={ buttonText } buttonTo={ buttonTo } sendDataToParent={ mockSendDataToParent } />);
+    const { getByPlaceholderText, getByText } = render(<Form inputs={ inputs } buttonText={ buttonText } sendDataToParent={ mockSendDataToParent } />);
 
     const placeholders = [getByPlaceholderText("Enter name"), getByPlaceholderText("Enter email"), getByPlaceholderText("Enter password")];
     placeholders.forEach(placeholder => expect(placeholder).toBeTruthy());
