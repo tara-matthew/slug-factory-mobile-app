@@ -22,9 +22,8 @@ it("renders correctly", () => {
         },
     ];
 
-    const {toJSON} = render(<InputGroup inputs={inputs} sendDataToParent={mockSendDataToParent} />);
+    const { toJSON } = render(<InputGroup inputs={ inputs } sendDataToParent={ mockSendDataToParent } />);
     expect(toJSON()).toMatchSnapshot();
-
 });
 
 it("displays all fields correctly", () => {
@@ -47,11 +46,11 @@ it("displays all fields correctly", () => {
         },
     ];
 
-    const {getByText, getByPlaceholderText} = render(<InputGroup  inputs={inputs} sendDataToParent={mockSendDataToParent} />);
+    const { getByText, getByPlaceholderText } = render(<InputGroup inputs={ inputs } sendDataToParent={ mockSendDataToParent } />);
 
     const placeholders = [getByPlaceholderText("First placeholder"), getByPlaceholderText("Second placeholder"), getByPlaceholderText("Third placeholder")];
     placeholders.forEach(placeholder => expect(placeholder).toBeTruthy());
 
     const inputTexts = [getByText("First input"), getByText("Second input"), getByText("Third input")];
     inputTexts.forEach(input => expect(input).toBeTruthy());
-})
+});

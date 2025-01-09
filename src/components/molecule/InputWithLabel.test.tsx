@@ -4,7 +4,7 @@ import InputWithLabel from "./InputWithLabel";
 
 it("renders correctly", () => {
     const mockSendDataToParent = jest.fn();
-    const { toJSON } = render(<InputWithLabel isMultiline placeholder="placeholder" sendDataToParent={mockSendDataToParent} title="title"/>);
+    const { toJSON } = render(<InputWithLabel isMultiline placeholder="placeholder" sendDataToParent={ mockSendDataToParent } title="title" />);
 
     expect(toJSON()).toMatchSnapshot();
 });
