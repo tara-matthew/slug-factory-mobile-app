@@ -27,7 +27,6 @@ const Login = () => {
                     sendDataToParent={ handleDataFromChild }
                     headerText="Sign in to Slug Factory"
                     buttonText="Sign In"
-                    buttonTo="Home"
                     inputs={ [
                         { placeholder: "username", title: "Username", isMultiline: false, inputProps: { autoCapitalize: "none" } },
                         { placeholder: "password", title: "Password", isMultiline: false, inputProps: { secureTextEntry: true, autoCapitalize: "none" } },
