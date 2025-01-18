@@ -6,7 +6,7 @@ import { fromResponse } from "../data-transfer-objects/UserData"; // Assuming th
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({}); // TODO define user shape
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

@@ -13,6 +13,14 @@ const ImageList = ({ images, size = Size.Large }: IImageListProps) => {
         };
     }, [size]);
 
+    /*
+
+        const computedStyles = {
+        [Size.Large]: styles.largeImage,
+        [Size.Small]: styles.smallImage,
+    };
+     */
+
     const imageSource = (url: string) => {
         return url.startsWith("prints") ? `${process.env.EXPO_PUBLIC_URL}/${url}` : url;
     };
