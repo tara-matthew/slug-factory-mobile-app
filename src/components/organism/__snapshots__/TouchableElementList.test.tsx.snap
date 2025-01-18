@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "opacity": 1,
+      }
+    }
+  >
+    <View>
+      <View
+        className="flex flex-row justify-between items-center w-full"
+      >
+        <Text
+          className="py-5 px-10 text-lg"
+        >
+          My profile
+        </Text>
+        Icon: chevron-right, Size: 20, Color: undefined
+      </View>
+      <View
+        className="w-full"
+        style={
+          {
+            "backgroundColor": "gray",
+            "height": 1,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "opacity": 1,
+      }
+    }
+  >
+    <View>
+      <View
+        className="flex flex-row justify-between items-center w-full"
+      >
+        <Text
+          className="py-5 px-10 text-lg"
+        >
+          Edit profile
+        </Text>
+        Icon: chevron-right, Size: 20, Color: undefined
+      </View>
+      <View
+        className="w-full"
+        style={
+          {
+            "backgroundColor": "gray",
+            "height": 1,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "opacity": 1,
+      }
+    }
+  >
+    <View>
+      <View
+        className="flex flex-row justify-between items-center w-full"
+      >
+        <Text
+          className="py-5 px-10 text-lg"
+        >
+          My prints
+        </Text>
+        Icon: chevron-right, Size: 20, Color: undefined
+      </View>
+      <View
+        className="w-full"
+        style={
+          {
+            "backgroundColor": "gray",
+            "height": 1,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
