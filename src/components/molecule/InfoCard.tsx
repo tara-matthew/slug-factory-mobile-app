@@ -6,7 +6,7 @@ import { IInfoCardProps } from "../../contracts/InfoCard";
 
 const InfoCard = ({ name, uploadText, imageUrl, info }: IInfoCardProps) => {
     return (
-        <View style={ styles.container } className="rounded-lg shadow-sm p-8">
+        <View style={ styles.container } className="rounded-lg shadow-sm p-5">
             <View className="flex flex-row items-center">
                 <View className="justify-center items-center">
                     <Image
@@ -24,7 +24,7 @@ const InfoCard = ({ name, uploadText, imageUrl, info }: IInfoCardProps) => {
 
                     <Text
                         className="text-xl font-bold text-center"
-                        style={ { maxWidth: 120, textAlign: "center" } }
+                        style={ { maxWidth: 200, textAlign: "center" } }
                         numberOfLines={ 1 }
                     >
                         {name}
@@ -52,7 +52,7 @@ const InfoCard = ({ name, uploadText, imageUrl, info }: IInfoCardProps) => {
                             >
                                 <Text
                                     numberOfLines={ 1 }
-                                    style={ { maxWidth: 160 } }
+                                    style={ { maxWidth: 200 } }
                                     className="text-lg py-2"
                                 >
                                     {item}
