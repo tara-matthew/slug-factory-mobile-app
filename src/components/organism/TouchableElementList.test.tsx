@@ -22,3 +22,5 @@ it("renders correctly", () => {
     const { toJSON } = render(<TouchableElementList items={ items } />);
     expect(toJSON()).toMatchSnapshot();
 });
+
+it.todo("displays the correct text");
