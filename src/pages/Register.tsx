@@ -16,13 +16,13 @@ const Register = () => {
                 placeholder: "name", title: "Name", inputProps: {},
             },
             {
-                placeholder: "email", title: "Email", inputProps: { keyboardType: "email-address", autoCapitalize: "none" },
+                placeholder: "email", title: "Email", inputProps: { keyboardType: "email-address", autoCapitalize: "none", autoCorrect: false, textContentType: "oneTimeCode" },
             },
             {
-                placeholder: "username", title: "Username", inputProps: { autoCapitalize: "none" },
+                placeholder: "username", title: "Username", inputProps: { autoCapitalize: "none", autoCorrect: false, textContentType: "oneTimeCode" },
             },
             {
-                placeholder: "password", title: "Password", inputProps: { secureTextEntry: false, autoCapitalize: "none" },
+                placeholder: "password", title: "Password", inputProps: { secureTextEntry: true, autoCapitalize: "none" },
             },
         ];
 
