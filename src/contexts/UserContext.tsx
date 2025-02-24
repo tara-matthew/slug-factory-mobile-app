@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import fetchData from "../hooks/apiFetch";
-import { fromResponse } from "../data-transfer-objects/UserData"; // Assuming this is your custom hook for making API requests
+import { fromResponse } from "../data-transfer-objects/UserData"; 
 
 // Create the context
 const UserContext = createContext(null);
