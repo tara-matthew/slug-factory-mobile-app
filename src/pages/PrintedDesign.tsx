@@ -11,9 +11,10 @@ import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
 import fetchData from "../hooks/apiFetch";
 import {defaultPrint, PrintData} from "../data-transfer-objects/PrintData";
+import {EditPrintedDesignNavigationProps} from "../contracts/Navigator";
 
 const PrintedDesign = ({ route }) => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<EditPrintedDesignNavigationProps>();
     const printID = route.params.print_id;
     const [print, setPrint] = useState<PrintData>(defaultPrint);
     const [loading, setLoading] = useState(true);
