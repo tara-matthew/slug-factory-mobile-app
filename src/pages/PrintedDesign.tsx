@@ -37,7 +37,6 @@ const PrintedDesign = ({ route }) => {
     const favouriteInfoText = `Favourited ${usePluralisedText(print.favourited_count, "time", "times")}`;
 
     const belongsToUser = user?.id === print.user_id;
-    console.log(belongsToUser);
     const favouriteText = useMemo(() => {
         return print.is_favourite ? "Unfavourite" : "Favourite";
     }, [print, print.is_favourite]);
@@ -59,6 +58,8 @@ const PrintedDesign = ({ route }) => {
             favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
         }));
     };
+
+    // TODO could put in a hook?
 
     const addToFavourites = async () => {
         try {
@@ -86,7 +87,6 @@ const PrintedDesign = ({ route }) => {
     };
 
     useEffect(() => {
-        // TODO use prints context
         const fetchPrint = async () => {
             try {
                 const fetchedPrint = await fetchData(`/prints/${printID}`);
