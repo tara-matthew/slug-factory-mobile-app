@@ -61,7 +61,6 @@ const PrintedDesign = ({ route }) => {
     };
 
     // TODO could put in a hook?
-
     const addToFavourites = async () => {
         try {
             await apiFetch(`/favourites/printed_design/${print.id}`, "POST");
