@@ -13,6 +13,7 @@ import fetchData from "../hooks/apiFetch";
 import { PrintData } from "../data-transfer-objects/PrintData";
 
 const PrintedDesign = ({ route }) => {
+    // TODO move to another file
     const defaultPrint: PrintData = {
         id: "",
         title: "",
