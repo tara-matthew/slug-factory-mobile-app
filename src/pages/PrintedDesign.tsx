@@ -9,100 +9,146 @@ import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
+import fetchData from "../hooks/apiFetch";
+import {fromResponse} from "../data-transfer-objects/UserData";
+import {PrintData} from "../data-transfer-objects/PrintData";
 
 const PrintedDesign = ({ route }) => {
+    const defaultPrint: PrintData = {
+        id: "",
+        title: "",
+        description: "",
+        user_id: "",
+        filament_material: { id: "", name: "" },
+        filament_colour: { id: "", name: "" },
+        favourited_count: 0,
+        settings: { uses_supports: false, adhesion_type: "" },
+        created_at: "",
+        images: [
+            {
+                id: "",
+                printed_design_id: "",
+                url: "",
+                blurhash: "",
+                is_cover_image: false
+            }
+        ],
+        user: {
+            id: "",
+            prints_count: 0,
+            username: "",
+            avatar_url: ""
+        }
+    };
+
+
     const navigation = useNavigation();
     // TODO just pass in the print ID rather than the whole object, this is an anti-pattern!
+    const printID = route.params.print_id;
+    const [print, setPrint] = useState<PrintData>(defaultPrint);
+    const [loading, setLoading] = useState(true);
     // https://reactnavigation.org/docs/params/
-    const [print, setPrint] = useState(route.params.print);
-    const { updatePrint, toggleFavouritePrint } = usePrints();
-    const { user, setUser } = useUser();
+    // const [print, setPrint] = useState(route.params.print);
+    // const { updatePrint, toggleFavouritePrint } = usePrints();
+    // const { user, setUser } = useUser();
 
     const adhesionType = useMemo(() => {
         return `${print.settings.adhesion_type.charAt(0).toUpperCase()}${print.settings.adhesion_type.slice(1)}`;
-    }, []);
+    }, [print]);
 
-    const supportsText = useMemo(() => {
-        return print?.settings?.uses_supports ? "Supports" : "No Supports";
-    }, []);
+    const supportsText = print.settings.uses_supports ? "Supports" : "No Supports";
 
-    const printCreatedAt = useMemo(() => {
-        return new Date(print.created_at).toLocaleDateString("en-GB");
-    }, []);
+    const printCreatedAt = new Date(print.created_at).toLocaleDateString("en-GB");
 
     const pills = [
         { title: print?.filament_material?.name },
         { title: supportsText },
         { title: adhesionType },
     ];
-
     const uploadText = usePluralisedText(print.user.prints_count, "upload", "uploads");
-
+    //
     const favouriteInfoText = `Favourited ${usePluralisedText(print.favourited_count, "time", "times")}`;
+    //
+    // const belongsToUser = user?.id === print.user_id;
+    // const favouriteText = useMemo(() => {
+    //     return print.is_favourite ? "Unfavourite" : "Favourite";
+    // }, [print, print.is_favourite]);
 
-    const belongsToUser = user?.id === print.user_id;
-    const favouriteText = useMemo(() => {
-        return print.is_favourite ? "Unfavourite" : "Favourite";
-    }, [print, print.is_favourite]);
+    // const toggleFavourite = async () => {
+    //     if (!print.is_favourite) {
+    //         await addToFavourites();
+    //     } else {
+    //         await removeFromFavourites();
+    //     }
+    //     toggleFavouriteStatus();
+    //     // Makes sure if we go back and back onto the print, the state remains updated
+    //     const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
+    //     updatePrint(updatedPrint);
+    //     toggleFavouritePrint(updatedPrint);
+    //     setUser(prevUser => ({
+    //         ...prevUser,
+    //         favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
+    //     }));
+    // };
 
-    const toggleFavourite = async () => {
-        if (!print.is_favourite) {
-            await addToFavourites();
-        } else {
-            await removeFromFavourites();
-        }
-        toggleFavouriteStatus();
-        // Makes sure if we go back and back onto the print, the state remains updated
-        const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
-        updatePrint(updatedPrint);
-        toggleFavouritePrint(updatedPrint);
-        setUser(prevUser => ({
-            ...prevUser,
-            favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
-        }));
-    };
+    // const addToFavourites = async () => {
+    //     try {
+    //         await apiFetch(`/favourites/printed_design/${print.id}`, "POST");
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // };
 
-    const addToFavourites = async () => {
-        try {
-            await apiFetch(`/favourites/printed_design/${print.id}`, "POST");
-        } catch (e) {
-            console.error(e);
-        }
-    };
+    // const removeFromFavourites = async () => {
+    //     try {
+    //         await apiFetch(`/favourites/printed_design/${print.id}`, "DELETE");
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // };
 
-    const removeFromFavourites = async () => {
-        try {
-            await apiFetch(`/favourites/printed_design/${print.id}`, "DELETE");
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    const toggleFavouriteStatus = () => {
-        // For showing the state update immediately in the component (different from comment above)
-        setPrint(prevPrint => ({
-            ...prevPrint,
-            is_favourite: !prevPrint.is_favourite, // Toggle the favourite status
-            favourited_count: prevPrint.favourited_count + (print.is_favourite ? -1 : +1),
-        }));
-    };
+    // const toggleFavouriteStatus = () => {
+    //     // For showing the state update immediately in the component (different from comment above)
+    //     setPrint(prevPrint => ({
+    //         ...prevPrint,
+    //         is_favourite: !prevPrint.is_favourite, // Toggle the favourite status
+    //         favourited_count: prevPrint.favourited_count + (print.is_favourite ? -1 : +1),
+    //     }));
+    // };
 
     useEffect(() => {
-        if (belongsToUser) {
-            navigation.setOptions({
-                headerRight: () => (
-                    <Button title="Edit" onPress={ () => navigation.navigate("EditPrint", { id: print.id }) }></Button>
-                ),
-            });
-        }
+        const fetchPrint = async () => {
+            try {
+                const fetchedPrint = await fetchData(`/prints/${printID}`);
+                console.log(fetchedPrint.data.user);
+                setPrint(fetchedPrint.data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        // if (belongsToUser) {
+        //     navigation.setOptions({
+        //         headerRight: () => (
+        //             <Button title="Edit" onPress={ () => navigation.navigate("EditPrint", { id: print.id }) }></Button>
+        //         ),
+        //     });
+        // }
+        void fetchPrint();
+
     }, [navigation]);
+
+    if (loading) {
+        return (<Text>Loading...</Text>);
+    }
 
     return (
         <ScrollView style={ { width: "100%" } }>
             <View style={ styles.imageContainer }>
                 <ImageList images={ print.images } size={ Size.Large } />
             </View>
-            {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
+            {/*{!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}*/}
 
             <View style={ styles.container }>
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
@@ -121,7 +167,6 @@ const PrintedDesign = ({ route }) => {
                         name={ print.user.username }
                         uploadText={ uploadText }
                         info={ [printCreatedAt, "0 reviews", favouriteInfoText] }
-
                     />
                 </View>
             </View>
