@@ -47,24 +47,14 @@ export const PrintProvider = ({ children }) => {
     // Updates a print property within every category (categories being latest, popular etc), may need to refactor to update specific categories, or write another method
     const updatePrint = (updatedPrint) => {
         setPrints((currentPrints) => {
-            const updatedCategories = Object.keys(currentPrints).reduce((result, category) => {
-                const printsInCategory = currentPrints[category];
-
-                result[category] = printsInCategory.map((print) => {
-                    if (print.id === updatedPrint.id) {
-                        return { ...print, ...updatedPrint }; // Update the matching print
-                    }
-
-                    return print;
-                });
-
-                return result;
-            }, {});
-
-            return {
-                ...currentPrints,
-                ...updatedCategories,
-            };
+            return Object.fromEntries(
+                Object.entries(currentPrints).map(([category, prints]) => [
+                    category,
+                    prints.map(print =>
+                        print.id === updatedPrint.id ? { ...print, ...updatedPrint } : print
+                    ),
+                ]),
+            ) as typeof currentPrints;
         });
     };
 
