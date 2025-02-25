@@ -48,7 +48,7 @@ const StorePrint = () => {
                 index: 1,
                 routes: [
                     { name: "Main" },
-                    { name: "PrintedDesign", params: { print: result.data, print_id: result.data.id } },
+                    { name: "PrintedDesign", params: { print_id: result.data.id } },
                 ],
             });
             setUser(prevUser => ({

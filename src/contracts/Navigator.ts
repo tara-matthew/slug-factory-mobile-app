@@ -1,7 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
-    PrintedDesign: { print_id: string; print: object };
+    PrintedDesign: { print_id: string, title: string };
     Filament: { filament: object };
     EditPrint: { id: string }
     Main: undefined;

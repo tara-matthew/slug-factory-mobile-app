@@ -92,7 +92,7 @@ export const Layout = () => {
                                     component={ MyFavouritePrints }
                                     options={ { title: "My Favourite Prints", headerBackTitle: "Back" } }
                                 />
-                                <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.print.title }) } />
+                                <Stack.Screen name="PrintedDesign" component={ PrintedDesign } options={ ({ route }) => ({ title: route.params.title }) } />
                                 <Stack.Screen name="EditPrint" component={ EditPrint } />
                                 <Stack.Screen name="Filament" component={ Filament } options={ ({ route }) => ({ title: route.params.filament.title }) } />
                             </>

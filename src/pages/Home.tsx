@@ -10,7 +10,7 @@ const Home = () => {
     const navigation = useNavigation<PrintedDesignNavigationProps>();
 
     async function handleDataFromChild(item) {
-        navigation.navigate("PrintedDesign", { print_id: item.id, print: item });
+        navigation.navigate("PrintedDesign", { print_id: item.id, title: item.title });
     }
 
     if (loading) {
