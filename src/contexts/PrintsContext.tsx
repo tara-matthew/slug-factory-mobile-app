@@ -63,13 +63,15 @@ export const PrintProvider = ({ children }) => {
         });
     };
 
-    const toggleFavouritePrint = (print) => {
+    const toggleFavouritePrint = (updatedPrint) => {
         setPrints((currentPrints) => {
-            const isAlreadyFavourite = currentPrints.favourites.some(favPrint => favPrint.id === print.id);
+            let updatedFavourites = [...currentPrints.favourites]; 
 
-            const updatedFavourites = isAlreadyFavourite
-                ? currentPrints.favourites.filter(favPrint => favPrint.id !== print.id)
-                : [...currentPrints.favourites, print];
+            if (updatedPrint.is_favourite) {
+                updatedFavourites.push(updatedPrint);
+            } else {
+                updatedFavourites = updatedFavourites.filter(favPrint => favPrint.id !== updatedPrint.id);
+            }
 
             return {
                 ...currentPrints,
