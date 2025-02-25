@@ -9,7 +9,6 @@ import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
-import fetchData from "../hooks/apiFetch";
 import { defaultPrint, PrintData } from "../data-transfer-objects/PrintData";
 import { EditPrintedDesignNavigationProps } from "../contracts/Navigator";
 
@@ -89,7 +88,7 @@ const PrintedDesign = ({ route }) => {
     useEffect(() => {
         const fetchPrint = async () => {
             try {
-                const fetchedPrint = await fetchData(`/prints/${printID}`);
+                const fetchedPrint = await apiFetch(`/prints/${printID}`);
                 setPrint(fetchedPrint.data);
             } catch (error) {
                 console.error(error);
