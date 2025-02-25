@@ -124,6 +124,7 @@ const PrintedDesign = ({ route }) => {
                 setLoading(false);
             }
         };
+        
         if (belongsToUser) {
             navigation.setOptions({
                 headerRight: () => (
@@ -132,7 +133,7 @@ const PrintedDesign = ({ route }) => {
             });
         }
         void fetchPrint();
-    }, [navigation]);
+    }, [navigation, print.id]);
 
     if (loading) {
         return (<Text>Loading...</Text>);

@@ -89,7 +89,7 @@ const EditPrint = ({ route }) => {
                 index: 1,
                 routes: [
                     { name: "Main" },
-                    { name: "PrintedDesign", params: { print: result.data } },
+                    { name: "PrintedDesign", params: { print: result.data, print_id: result.data.id } },
                 ],
             });
         } catch (error) {
