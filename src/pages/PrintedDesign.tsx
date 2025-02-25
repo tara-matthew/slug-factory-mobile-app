@@ -10,38 +10,9 @@ import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
 import fetchData from "../hooks/apiFetch";
-import { PrintData } from "../data-transfer-objects/PrintData";
+import {defaultPrint, PrintData} from "../data-transfer-objects/PrintData";
 
 const PrintedDesign = ({ route }) => {
-    // TODO move to another file
-    const defaultPrint: PrintData = {
-        id: "",
-        title: "",
-        description: "",
-        user_id: "",
-        filament_material: { id: "", name: "" },
-        filament_colour: { id: "", name: "" },
-        favourited_count: 0,
-        is_favourite: false,
-        settings: { uses_supports: false, adhesion_type: "" },
-        created_at: "",
-        images: [
-            {
-                id: "",
-                printed_design_id: "",
-                url: "",
-                blurhash: "",
-                is_cover_image: false,
-            },
-        ],
-        user: {
-            id: "",
-            prints_count: 0,
-            username: "",
-            avatar_url: "",
-        },
-    };
-
     const navigation = useNavigation();
     const printID = route.params.print_id;
     const [print, setPrint] = useState<PrintData>(defaultPrint);
@@ -63,10 +34,10 @@ const PrintedDesign = ({ route }) => {
         { title: adhesionType },
     ];
     const uploadText = usePluralisedText(print.user.prints_count, "upload", "uploads");
-    //
     const favouriteInfoText = `Favourited ${usePluralisedText(print.favourited_count, "time", "times")}`;
 
     const belongsToUser = user?.id === print.user_id;
+    console.log(belongsToUser);
     const favouriteText = useMemo(() => {
         return print.is_favourite ? "Unfavourite" : "Favourite";
     }, [print, print.is_favourite]);
@@ -115,6 +86,7 @@ const PrintedDesign = ({ route }) => {
     };
 
     useEffect(() => {
+        // TODO use prints context
         const fetchPrint = async () => {
             try {
                 const fetchedPrint = await fetchData(`/prints/${printID}`);
@@ -125,7 +97,7 @@ const PrintedDesign = ({ route }) => {
                 setLoading(false);
             }
         };
-        
+
         if (belongsToUser) {
             navigation.setOptions({
                 headerRight: () => (
