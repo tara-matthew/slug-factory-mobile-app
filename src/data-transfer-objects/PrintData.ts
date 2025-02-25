@@ -2,6 +2,8 @@ export interface PrintData {
     id: string;
     title: string;
     description: string;
+    user_id: string;
+    favourited_count: number;
     filament_material: {
         id: string;
         name: string;
@@ -23,6 +25,14 @@ export interface PrintData {
             is_cover_image: boolean;
         },
     ];
+    user: {
+        id: string;
+        username: string;
+        prints_count: number;
+        avatar_url: string;
+    },
+    is_favourite: boolean;
+    created_at: string;
 }
 
 export function fromResponse(print: PrintData) {
