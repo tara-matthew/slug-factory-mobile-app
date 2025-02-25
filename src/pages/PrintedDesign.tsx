@@ -22,6 +22,7 @@ const PrintedDesign = ({ route }) => {
         filament_material: { id: "", name: "" },
         filament_colour: { id: "", name: "" },
         favourited_count: 0,
+        is_favourite: false,
         settings: { uses_supports: false, adhesion_type: "" },
         created_at: "",
         images: [
@@ -41,16 +42,12 @@ const PrintedDesign = ({ route }) => {
         }
     };
 
-
     const navigation = useNavigation();
-    // TODO just pass in the print ID rather than the whole object, this is an anti-pattern!
     const printID = route.params.print_id;
     const [print, setPrint] = useState<PrintData>(defaultPrint);
     const [loading, setLoading] = useState(true);
-    // https://reactnavigation.org/docs/params/
-    // const [print, setPrint] = useState(route.params.print);
-    // const { updatePrint, toggleFavouritePrint } = usePrints();
-    // const { user, setUser } = useUser();
+    const { updatePrint, toggleFavouritePrint } = usePrints();
+    const { user, setUser } = useUser();
 
     const adhesionType = useMemo(() => {
         return `${print.settings.adhesion_type.charAt(0).toUpperCase()}${print.settings.adhesion_type.slice(1)}`;
@@ -68,59 +65,58 @@ const PrintedDesign = ({ route }) => {
     const uploadText = usePluralisedText(print.user.prints_count, "upload", "uploads");
     //
     const favouriteInfoText = `Favourited ${usePluralisedText(print.favourited_count, "time", "times")}`;
-    //
-    // const belongsToUser = user?.id === print.user_id;
-    // const favouriteText = useMemo(() => {
-    //     return print.is_favourite ? "Unfavourite" : "Favourite";
-    // }, [print, print.is_favourite]);
 
-    // const toggleFavourite = async () => {
-    //     if (!print.is_favourite) {
-    //         await addToFavourites();
-    //     } else {
-    //         await removeFromFavourites();
-    //     }
-    //     toggleFavouriteStatus();
+    const belongsToUser = user?.id === print.user_id;
+    const favouriteText = useMemo(() => {
+        return print.is_favourite ? "Unfavourite" : "Favourite";
+    }, [print, print.is_favourite]);
+
+    const toggleFavourite = async () => {
+        if (!print.is_favourite) {
+            await addToFavourites();
+        } else {
+            await removeFromFavourites();
+        }
+        toggleFavouriteStatus();
     //     // Makes sure if we go back and back onto the print, the state remains updated
-    //     const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
-    //     updatePrint(updatedPrint);
-    //     toggleFavouritePrint(updatedPrint);
-    //     setUser(prevUser => ({
-    //         ...prevUser,
-    //         favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
-    //     }));
-    // };
+        const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
+        updatePrint(updatedPrint);
+        toggleFavouritePrint(updatedPrint);
+        setUser(prevUser => ({
+            ...prevUser,
+            favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
+        }));
+    };
 
-    // const addToFavourites = async () => {
-    //     try {
-    //         await apiFetch(`/favourites/printed_design/${print.id}`, "POST");
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // };
+    const addToFavourites = async () => {
+        try {
+            await apiFetch(`/favourites/printed_design/${print.id}`, "POST");
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
-    // const removeFromFavourites = async () => {
-    //     try {
-    //         await apiFetch(`/favourites/printed_design/${print.id}`, "DELETE");
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // };
+    const removeFromFavourites = async () => {
+        try {
+            await apiFetch(`/favourites/printed_design/${print.id}`, "DELETE");
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
-    // const toggleFavouriteStatus = () => {
-    //     // For showing the state update immediately in the component (different from comment above)
-    //     setPrint(prevPrint => ({
-    //         ...prevPrint,
-    //         is_favourite: !prevPrint.is_favourite, // Toggle the favourite status
-    //         favourited_count: prevPrint.favourited_count + (print.is_favourite ? -1 : +1),
-    //     }));
-    // };
+    const toggleFavouriteStatus = () => {
+        // For showing the state update immediately in the component (different from comment above)
+        setPrint(prevPrint => ({
+            ...prevPrint,
+            is_favourite: !prevPrint.is_favourite, // Toggle the favourite status
+            favourited_count: prevPrint.favourited_count + (print.is_favourite ? -1 : +1),
+        }));
+    };
 
     useEffect(() => {
         const fetchPrint = async () => {
             try {
                 const fetchedPrint = await fetchData(`/prints/${printID}`);
-                console.log(fetchedPrint.data.user);
                 setPrint(fetchedPrint.data);
             } catch (error) {
                 console.error(error);
@@ -128,13 +124,13 @@ const PrintedDesign = ({ route }) => {
                 setLoading(false);
             }
         };
-        // if (belongsToUser) {
-        //     navigation.setOptions({
-        //         headerRight: () => (
-        //             <Button title="Edit" onPress={ () => navigation.navigate("EditPrint", { id: print.id }) }></Button>
-        //         ),
-        //     });
-        // }
+        if (belongsToUser) {
+            navigation.setOptions({
+                headerRight: () => (
+                    <Button title="Edit" onPress={ () => navigation.navigate("EditPrint", { id: print.id }) }></Button>
+                ),
+            });
+        }
         void fetchPrint();
 
     }, [navigation]);
@@ -148,7 +144,7 @@ const PrintedDesign = ({ route }) => {
             <View style={ styles.imageContainer }>
                 <ImageList images={ print.images } size={ Size.Large } />
             </View>
-            {/*{!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}*/}
+            {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
 
             <View style={ styles.container }>
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
