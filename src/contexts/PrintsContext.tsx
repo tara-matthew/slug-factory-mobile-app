@@ -50,9 +50,14 @@ export const PrintProvider = ({ children }) => {
             const updatedCategories = Object.keys(currentPrints).reduce((result, category) => {
                 const printsInCategory = currentPrints[category];
 
-                result[category] = printsInCategory.map(print =>
-                    print.id === updatedPrint.id ? { ...print, ...updatedPrint } : print,
-                );
+                result[category] = printsInCategory.map((print) => {
+                    if (print.id === updatedPrint.id) {
+                        return { ...print, ...updatedPrint }; // Update the matching print
+                    }
+
+                    return print;
+                });
+
                 return result;
             }, {});
 
@@ -65,7 +70,7 @@ export const PrintProvider = ({ children }) => {
 
     const toggleFavouritePrint = (updatedPrint) => {
         setPrints((currentPrints) => {
-            let updatedFavourites = [...currentPrints.favourites]; 
+            let updatedFavourites = [...currentPrints.favourites];
 
             if (updatedPrint.is_favourite) {
                 updatedFavourites.push(updatedPrint);
