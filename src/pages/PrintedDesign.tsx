@@ -10,8 +10,8 @@ import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
 import fetchData from "../hooks/apiFetch";
-import {defaultPrint, PrintData} from "../data-transfer-objects/PrintData";
-import {EditPrintedDesignNavigationProps} from "../contracts/Navigator";
+import { defaultPrint, PrintData } from "../data-transfer-objects/PrintData";
+import { EditPrintedDesignNavigationProps } from "../contracts/Navigator";
 
 const PrintedDesign = ({ route }) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
