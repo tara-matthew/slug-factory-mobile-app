@@ -10,8 +10,7 @@ import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
 import fetchData from "../hooks/apiFetch";
-import {fromResponse} from "../data-transfer-objects/UserData";
-import {PrintData} from "../data-transfer-objects/PrintData";
+import { PrintData } from "../data-transfer-objects/PrintData";
 
 const PrintedDesign = ({ route }) => {
     const defaultPrint: PrintData = {
@@ -31,15 +30,15 @@ const PrintedDesign = ({ route }) => {
                 printed_design_id: "",
                 url: "",
                 blurhash: "",
-                is_cover_image: false
-            }
+                is_cover_image: false,
+            },
         ],
         user: {
             id: "",
             prints_count: 0,
             username: "",
-            avatar_url: ""
-        }
+            avatar_url: "",
+        },
     };
 
     const navigation = useNavigation();
@@ -78,7 +77,8 @@ const PrintedDesign = ({ route }) => {
             await removeFromFavourites();
         }
         toggleFavouriteStatus();
-    //     // Makes sure if we go back and back onto the print, the state remains updated
+
+        // Makes sure if we go back and back onto the print, the state remains updated
         const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
         updatePrint(updatedPrint);
         toggleFavouritePrint(updatedPrint);
@@ -132,7 +132,6 @@ const PrintedDesign = ({ route }) => {
             });
         }
         void fetchPrint();
-
     }, [navigation]);
 
     if (loading) {

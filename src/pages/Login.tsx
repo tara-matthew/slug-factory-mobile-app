@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import Welcome from "../components/template/Welcome";
-import { View, Text, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import { RegisterNavigationProps } from "../contracts/Navigator";

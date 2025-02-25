@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import fetchData from "../hooks/apiFetch";
 import { IFavourite } from "../contracts/Favourite";
-// Assuming this is your custom hook for making API requests
 
-// Create the context
 const PrintContext = createContext(null);
 
 export const PrintProvider = ({ children }) => {
@@ -51,7 +49,7 @@ export const PrintProvider = ({ children }) => {
                 Object.entries(currentPrints).map(([category, prints]) => [
                     category,
                     prints.map(print =>
-                        print.id === updatedPrint.id ? { ...print, ...updatedPrint } : print
+                        print.id === updatedPrint.id ? { ...print, ...updatedPrint } : print,
                     ),
                 ]),
             ) as typeof currentPrints;

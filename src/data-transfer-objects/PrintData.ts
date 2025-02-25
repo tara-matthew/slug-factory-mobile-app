@@ -30,7 +30,7 @@ export interface PrintData {
         username: string;
         prints_count: number;
         avatar_url: string;
-    },
+    };
     is_favourite: boolean;
     created_at: string;
 }
