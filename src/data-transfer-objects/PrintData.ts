@@ -47,31 +47,3 @@ export function fromResponse(print: PrintData) {
         images: print.images,
     };
 }
-
-export const defaultPrint: PrintData = {
-    id: "",
-    title: "",
-    description: "",
-    user_id: "",
-    filament_material: { id: "", name: "" },
-    filament_colour: { id: "", name: "" },
-    favourited_count: 0,
-    is_favourite: false,
-    settings: { uses_supports: false, adhesion_type: "" },
-    created_at: "",
-    images: [
-        {
-            id: "",
-            printed_design_id: "",
-            url: "",
-            blurhash: "",
-            is_cover_image: false,
-        },
-    ],
-    user: {
-        id: "",
-        prints_count: 0,
-        username: "",
-        avatar_url: "",
-    },
-};

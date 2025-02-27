@@ -9,8 +9,9 @@ import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
-import { defaultPrint, PrintData } from "../data-transfer-objects/PrintData";
+import { PrintData } from "../data-transfer-objects/PrintData";
 import { EditPrintedDesignNavigationProps } from "../contracts/Navigator";
+import {defaultPrint} from "../contracts/Print";
 
 const PrintedDesign = ({ route }) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();

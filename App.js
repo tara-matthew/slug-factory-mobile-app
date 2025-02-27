@@ -22,6 +22,7 @@ import CreateProfile from "./src/pages/CreateProfile";
 import Register from "./src/pages/Register";
 import EditPrint from "./src/pages/EditPrint";
 import { AuthProvider, useAuth } from "./src/contexts/AuthContext";
+import MyLists from "./src/pages/MyLists";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -107,6 +108,7 @@ function MainTabs() {
         <Tab.Navigator>
             <Tab.Screen name="Home" component={ Home } />
             <Tab.Screen name="Favourites" component={ FavouriteTopTabs } options={ { title: "Favourites" } } />
+            <Tab.Screen name="Lists" component={ MyLists } options={ { title: "Lists" } } />
             <Tab.Screen name="New Print" component={ StorePrint } />
             <Tab.Screen name="ProfileStack" component={ ProfileStack } options={ { headerShown: false, title: "Profile" } } />
         </Tab.Navigator>
