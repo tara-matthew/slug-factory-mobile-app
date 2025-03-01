@@ -15,7 +15,7 @@ import MyFavouritePrints from "./src/pages/MyFavouritePrints";
 import MyFavouriteFilaments from "./src/pages/MyFavouriteFilaments";
 import Filament from "./src/pages/Filament";
 import StorePrint from "./src/pages/StorePrint";
-import {ActivityIndicator, PaperProvider} from "react-native-paper";
+import { ActivityIndicator, PaperProvider } from "react-native-paper";
 import { PrintProvider } from "./src/contexts/PrintsContext";
 import { UserProvider, useUser } from "./src/contexts/UserContext";
 import CreateProfile from "./src/pages/CreateProfile";

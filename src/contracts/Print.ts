@@ -1,5 +1,5 @@
 import { IImage } from "./Image";
-import {PrintData} from "../data-transfer-objects/PrintData";
+import { PrintData } from "../data-transfer-objects/PrintData";
 
 export interface IPrint {
     id: string;

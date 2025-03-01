@@ -1,42 +1,40 @@
-import React, {useEffect, useState} from 'react'
-import {Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
-import {useNavigation} from "@react-navigation/native";
-import {PrintedDesignNavigationProps} from "../contracts/Navigator";
+import { useNavigation } from "@react-navigation/native";
 import List from "./List";
 
 const MyLists = () => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
     const [lists, setLists] = useState([{
         title: "Add New List",
-        image_url: "https://static.vecteezy.com/system/resources/thumbnails/000/376/259/small/Basic_Elements__28121_29.jpg"
+        image_url: "https://static.vecteezy.com/system/resources/thumbnails/000/376/259/small/Basic_Elements__28121_29.jpg",
     }]);
     const navigation = useNavigation();
 
-
     useEffect(() => {
-        void getLists()
+        void getLists();
     }, []);
 
     const handleDataFromChild = (item) => {
         // @ts-ignore
-        navigation.navigate(List, {})
-    }
+        navigation.navigate(List, {});
+    };
 
     const getLists = async () => {
         try {
             const lists = await apiFetch("/my/printed-design-lists");
             setLists(prevLists => [
                 prevLists[0],
-                ...lists.data
+                ...lists.data,
             ]);
         } catch (error) {
             console.error("Error in getLists", error);
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     if (loading) {
         return (<Text>Loading...</Text>);
@@ -44,10 +42,10 @@ const MyLists = () => {
 
     return (
         <View>
-            <Grid items={ lists } sendDataToParent={ handleDataFromChild } ></Grid>
+            <Grid items={ lists } sendDataToParent={ handleDataFromChild }></Grid>
 
         </View>
-    )
-}
+    );
+};
 
 export default MyLists;

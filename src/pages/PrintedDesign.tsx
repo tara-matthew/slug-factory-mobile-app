@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
 import { PrintData } from "../data-transfer-objects/PrintData";
 import { EditPrintedDesignNavigationProps } from "../contracts/Navigator";
-import {defaultPrint} from "../contracts/Print";
+import { defaultPrint } from "../contracts/Print";
 
 const PrintedDesign = ({ route }) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
