@@ -2,10 +2,6 @@ import { IUser } from "../contracts/User";
 
 export interface UserData {
     id: string;
-    country: {
-        id: string;
-        name: string;
-    };
     name: string;
     username: string;
     email: string;
