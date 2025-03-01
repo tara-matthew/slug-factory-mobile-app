@@ -2,23 +2,35 @@ import React, {useEffect, useState} from 'react'
 import {Text, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
+import {useNavigation} from "@react-navigation/native";
+import {PrintedDesignNavigationProps} from "../contracts/Navigator";
+import List from "./List";
 
 const MyLists = () => {
     const [loading, setLoading] = useState(true)
-    const [lists, setLists] = useState([])
+    const [lists, setLists] = useState([{
+        title: "Add New List",
+        image_url: "https://static.vecteezy.com/system/resources/thumbnails/000/376/259/small/Basic_Elements__28121_29.jpg"
+    }]);
+    const navigation = useNavigation();
+
 
     useEffect(() => {
         void getLists()
     }, []);
 
-    const handleDataFromChild = () => {
-        return;
+    const handleDataFromChild = (item) => {
+        // @ts-ignore
+        navigation.navigate(List, {})
     }
 
     const getLists = async () => {
         try {
             const lists = await apiFetch("/my/printed-design-lists");
-            setLists(lists.data)
+            setLists(prevLists => [
+                prevLists[0],
+                ...lists.data
+            ]);
         } catch (error) {
             console.error("Error in getLists", error);
         } finally {
