@@ -1,37 +1,56 @@
 export interface PrintData {
     id: string;
+    type: string;
+    user_id: string;
+    user: {
+        id: string;
+        name: string;
+        username: string;
+        email: string;
+        avatar_url: string;
+        favourites_count: number;
+        prints_count: number;
+    };
     title: string;
     description: string;
-    user_id: string;
-    favourited_count: number;
-    filament_material: {
-        id: string;
-        name: string;
-    };
-    filament_colour: {
-        id: string;
-        name: string;
-    };
-    settings: {
-        uses_supports: boolean;
-        adhesion_type: string;
-    };
     images: [
         {
             id: string;
             printed_design_id: string;
+            user_id?: string;
             url: string;
             blurhash: string;
             is_cover_image: boolean;
         },
     ];
-    user: {
+    filament_brand: {
         id: string;
-        username: string;
-        prints_count: number;
-        avatar_url: string;
+        name: string;
+        created_at: string;
+        updated_at: string;
+    };
+    filament_colour: {
+        id: string;
+        name: string;
+        created_at: string;
+        updated_at: string;
+    };
+    filament_material: {
+        id: string;
+        name: string;
+        created_at: string;
+        updated_at: string;
     };
     is_favourite: boolean;
+    favourited_count: number;
+    settings: {
+        id: string;
+        infill_percentage: number;
+        print_speed: number;
+        nozzle_size: number;
+        uses_supports: boolean;
+        adhesion_type: string;
+    };
     created_at: string;
 }
 

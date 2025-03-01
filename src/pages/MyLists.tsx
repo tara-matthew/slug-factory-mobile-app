@@ -18,8 +18,11 @@ const MyLists = () => {
     }, []);
 
     const handleDataFromChild = (item) => {
+        console.log(item.id);
         // @ts-ignore
-        navigation.navigate(List, {});
+        if (item.id) {
+            navigation.navigate("List", {listID: item.id});
+        }
     };
 
     const getLists = async () => {
@@ -43,7 +46,6 @@ const MyLists = () => {
     return (
         <View>
             <Grid items={ lists } sendDataToParent={ handleDataFromChild }></Grid>
-
         </View>
     );
 };

@@ -18,15 +18,19 @@ export interface IPrint {
 
 export const defaultPrint: PrintData = {
     id: "",
+    type: "PrintedDesign",
+    user_id: "",
+    user: {
+        id: "",
+        name: "",
+        username: "",
+        email: "",
+        avatar_url: "",
+        favourites_count: 0,
+        prints_count: 0,
+    },
     title: "",
     description: "",
-    user_id: "",
-    filament_material: { id: "", name: "" },
-    filament_colour: { id: "", name: "" },
-    favourited_count: 0,
-    is_favourite: false,
-    settings: { uses_supports: false, adhesion_type: "" },
-    created_at: "",
     images: [
         {
             id: "",
@@ -36,10 +40,32 @@ export const defaultPrint: PrintData = {
             is_cover_image: false,
         },
     ],
-    user: {
+    filament_brand: {
         id: "",
-        prints_count: 0,
-        username: "",
-        avatar_url: "",
+        name: "",
+        created_at: "",
+        updated_at: "",
     },
+    filament_colour: {
+        id: "",
+        name: "",
+        created_at: "",
+        updated_at: "",
+    },
+    filament_material: {
+        id: "",
+        name: "",
+        created_at: "",
+        updated_at: "",
+    },
+    is_favourite: false,
+    favourited_count: 0,
+    settings: {
+        id: "",
+        infill_percentage: 0,
+        print_speed: 0,
+        nozzle_size: 0,
+        uses_supports: false,
+        adhesion_type: "" },
+    created_at: "",
 };
