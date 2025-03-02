@@ -29,10 +29,10 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
                             uri: uri,
                         } }
                     />
-                    <View style={{ height: 60, flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 8, paddingVertical: 8 }}>
+                    <View style={{ height: 50, flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 8, paddingVertical: 8 }}>
                         <Text
                             adjustsFontSizeToFit={ false }
-                            numberOfLines={ 2 }
+                            numberOfLines={ 1 }
                             style={ { fontSize: 18 } }
                         >
                             {item.title}
