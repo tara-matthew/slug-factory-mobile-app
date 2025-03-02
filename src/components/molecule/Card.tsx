@@ -29,7 +29,16 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
                             uri: uri,
                         } }
                     />
-                    <Text adjustsFontSizeToFit={ true } numberOfLines={ 2 } style={ { height: 50, fontSize: 18, padding: 8 } }>{item.title}</Text>
+                    <View style={{ height: 60, flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 8, paddingVertical: 8 }}>
+                        <Text
+                            adjustsFontSizeToFit={ false }
+                            numberOfLines={ 2 }
+                            style={ { fontSize: 18 } }
+                        >
+                            {item.title}
+                        </Text>
+                        {/*<Text adjustsFontSizeToFit={ false } numberOfLines={ 1 } style={ { fontSize: 13 } }>7 saved</Text>*/}
+                    </View>
                 </View>
             </Pressable>
         </View>
