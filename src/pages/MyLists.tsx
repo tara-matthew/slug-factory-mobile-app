@@ -8,8 +8,8 @@ import List from "./List";
 const MyLists = () => {
     const [loading, setLoading] = useState(true);
     const [lists, setLists] = useState([{
-        title: "Add New List",
-        image_url: "https://static.vecteezy.com/system/resources/thumbnails/000/376/259/small/Basic_Elements__28121_29.jpg",
+        // title: "Recently Viewed",
+        // image_url: "https://fastly.picsum.photos/id/488/640/480.jpg?hmac=sWWw446VOr-h4w5IzFlmXdwIicctjWtsNDGi9bX-HR4",
     }]);
     const navigation = useNavigation();
 
@@ -27,11 +27,12 @@ const MyLists = () => {
 
     const getLists = async () => {
         try {
-            const lists = await apiFetch("/my/printed-design-lists");
-            setLists(prevLists => [
-                prevLists[0],
-                ...lists.data,
-            ]);
+            const response = await apiFetch("/my/printed-design-lists");
+            const lists = response.data.map(list => ({
+                ...list,
+                extraData: `${list.count} in list`,
+            }));
+            setLists(lists);
         } catch (error) {
             console.error("Error in getLists", error);
         } finally {

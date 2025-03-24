@@ -24,6 +24,8 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
                         style={ {
                             width: "100%",
                             height: height,
+                            borderTopLeftRadius: 8,
+                            borderTopRightRadius: 8
                         } }
                         source={ {
                             uri: uri,
@@ -37,7 +39,9 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
                         >
                             {item.title}
                         </Text>
-                        {/*<Text adjustsFontSizeToFit={ false } numberOfLines={ 1 } style={ { fontSize: 13 } }>7 saved</Text>*/}
+                        {item.extraData && (
+                            <Text adjustsFontSizeToFit={ false } numberOfLines={ 1 } style={ { fontSize: 13 } }>{item.extraData}</Text>
+                        )}
                     </View>
                 </View>
             </Pressable>
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#d0cadb",
         marginBottom: 20,
         shadowRadius: 2,
+        borderRadius: 8,
     },
     icon: {
         textShadowColor: "rgba(0, 0, 0, 0.75)",
