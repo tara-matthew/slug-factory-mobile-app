@@ -10,9 +10,6 @@ const List = ({route}) => {
     const [list, setList] = useState<ListData>();
     const [loading, setLoading] = useState(true);
 
-    const blurhash
-        = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
-
     useEffect(() => {
         void fetchList();
     }, []);
@@ -26,14 +23,18 @@ const List = ({route}) => {
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     const handleDataFromChild = () => {
-        console.log('here');
+        // console.log('here');
     }
 
     if (loading) {
         return (<Text>Loading...</Text>);
+    }
+
+    if (list.printed_designs.length === 0) {
+        return (<Text>Nothing in this list yet</Text>);
     }
 
     return (
