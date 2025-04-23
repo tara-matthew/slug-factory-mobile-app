@@ -25,8 +25,8 @@ const List = ({route}) => {
         }
     };
 
-    const handleDataFromChild = () => {
-        // console.log('here');
+    const handleDataFromChild = (item) => {
+        console.log('here', item.title);
     }
 
     if (loading) {
@@ -39,12 +39,16 @@ const List = ({route}) => {
 
     return (
         <ScrollView>
-            <View>
-                <Card
-                    item={list.printed_designs[0]}
-                    imageURL={list.printed_designs[0].images[0].url}
-                    blurhash={list.printed_designs[0].images[0].blurhash}
-                    sendDataToParent={handleDataFromChild }></Card>
+            <View className={"p-6"}>
+                {list.printed_designs.map((print, index) => (
+                    <Card
+                        key={index}
+                        item={print}
+                        imageURL={print.images[0].url}
+                        blurhash={print.images[0].blurhash}
+                        sendDataToParent={handleDataFromChild }>
+                    </Card>
+                ))}
             </View>
         </ScrollView>
     );
