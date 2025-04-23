@@ -6,6 +6,8 @@ import { Image } from "expo-image";
 const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
     const height = 200;
 
+    // TODO add a variant for full width vs other width?
+
     const uri = imageURL.startsWith("https") ? imageURL : `${process.env.EXPO_PUBLIC_URL}/${imageURL}`;
     const buttonPressed = (item: { title: string }) => {
         sendDataToParent(item);
@@ -51,11 +53,12 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 0.5,
         backgroundColor: "#d0cadb",
         marginBottom: 20,
         shadowRadius: 2,
         borderRadius: 8,
+        // maxWidth: "50%",
     },
     icon: {
         textShadowColor: "rgba(0, 0, 0, 0.75)",
