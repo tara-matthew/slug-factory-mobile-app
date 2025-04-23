@@ -12,6 +12,7 @@ import usePluralisedText from "../hooks/usePluralisedText";
 import { PrintData } from "../data-transfer-objects/PrintData";
 import { EditPrintedDesignNavigationProps } from "../contracts/Navigator";
 import { defaultPrint } from "../contracts/Print";
+import BaseModal from "../components/organism/BaseModal";
 
 const PrintedDesign = ({ route }) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
@@ -43,21 +44,22 @@ const PrintedDesign = ({ route }) => {
     }, [print, print.is_favourite]);
 
     const toggleFavourite = async () => {
-        if (!print.is_favourite) {
-            await addToFavourites();
-        } else {
-            await removeFromFavourites();
-        }
-        toggleFavouriteStatus();
-
-        // Makes sure if we go back and back onto the print, the state remains updated
-        const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
-        updatePrint(updatedPrint);
-        toggleFavouritePrint(updatedPrint);
-        setUser(prevUser => ({
-            ...prevUser,
-            favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
-        }));
+        console.log('toggleFavourite');
+        // if (!print.is_favourite) {
+        //     await addToFavourites();
+        // } else {
+        //     await removeFromFavourites();
+        // }
+        // toggleFavouriteStatus();
+        //
+        // // Makes sure if we go back and back onto the print, the state remains updated
+        // const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
+        // updatePrint(updatedPrint);
+        // toggleFavouritePrint(updatedPrint);
+        // setUser(prevUser => ({
+        //     ...prevUser,
+        //     favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
+        // }));
     };
 
     // TODO could put in a hook?
@@ -118,8 +120,9 @@ const PrintedDesign = ({ route }) => {
                 <ImageList images={ print.images } size={ Size.Large } />
             </View>
             {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
-
             <View style={ styles.container }>
+                <BaseModal></BaseModal>
+
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
 
                 <View className="my-5">
