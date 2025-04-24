@@ -5,4 +5,3 @@ export interface IModalProps {
     visible: boolean;
     onClose: () => void;
 }
-
