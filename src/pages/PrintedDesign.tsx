@@ -5,7 +5,6 @@ import InfoCard from "../components/molecule/InfoCard";
 import ImageList from "../components/molecule/ImageList";
 import { Size } from "../contracts/Image";
 import apiFetch from "../hooks/apiFetch";
-import { usePrints } from "../contexts/PrintsContext";
 import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
@@ -18,8 +17,11 @@ const PrintedDesign = ({ route }) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
     const printID = route.params.print_id;
     const [print, setPrint] = useState<PrintData>(defaultPrint);
-    const [loading, setLoading] = useState(true);
-    const { updatePrint, toggleFavouritePrint } = usePrints();
+    const [lists, setLists] = useState([]);
+    const [loading, setLoading] = useState({
+        lists: true,
+        prints: true,
+    });
     const { user, setUser } = useUser();
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -47,47 +49,6 @@ const PrintedDesign = ({ route }) => {
     const toggleFavourite = async () => {
         console.log("toggleFavourite");
         setModalVisible(true);
-        // if (!print.is_favourite) {
-        //     await addToFavourites();
-        // } else {
-        //     await removeFromFavourites();
-        // }
-        // toggleFavouriteStatus();
-        //
-        // // Makes sure if we go back and back onto the print, the state remains updated
-        // const updatedPrint = { ...print, is_favourite: !print.is_favourite, favourited_count: print.favourited_count + (print.is_favourite ? -1 : +1) };
-        // updatePrint(updatedPrint);
-        // toggleFavouritePrint(updatedPrint);
-        // setUser(prevUser => ({
-        //     ...prevUser,
-        //     favourites_count: prevUser.favourites_count + (print.is_favourite ? -1 : 1),
-        // }));
-    };
-
-    // TODO could put in a hook?
-    const addToFavourites = async () => {
-        try {
-            await apiFetch(`/favourites/printed_design/${print.id}`, "POST");
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    const removeFromFavourites = async () => {
-        try {
-            await apiFetch(`/favourites/printed_design/${print.id}`, "DELETE");
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    const toggleFavouriteStatus = () => {
-        // For showing the state update immediately in the component (different from comment above)
-        setPrint(prevPrint => ({
-            ...prevPrint,
-            is_favourite: !prevPrint.is_favourite, // Toggle the favourite status
-            favourited_count: prevPrint.favourited_count + (print.is_favourite ? -1 : +1),
-        }));
     };
 
     useEffect(() => {
@@ -98,7 +59,26 @@ const PrintedDesign = ({ route }) => {
             } catch (error) {
                 console.error(error);
             } finally {
-                setLoading(false);
+                setLoading(prevState => ({
+                    ...prevState, prints: false,
+                }));
+            }
+        };
+
+        const getLists = async () => {
+            try {
+                const response = await apiFetch(`/my/printed-design-lists/prints/${printID}/available`);
+                const lists = response.data.map(list => ({
+                    ...list,
+                    extraData: `${list.count} in list`,
+                }));
+                setLists(lists);
+            } catch (error) {
+                console.error("Error in getLists", error);
+            } finally {
+                setLoading(prevState => ({
+                    ...prevState, lists: false,
+                }));
             }
         };
 
@@ -110,9 +90,10 @@ const PrintedDesign = ({ route }) => {
             });
         }
         void fetchPrint();
+        void getLists();
     }, [navigation, print.id]);
 
-    if (loading) {
+    if (loading.prints || loading.lists) {
         return (<Text>Loading...</Text>);
     }
 
@@ -124,8 +105,8 @@ const PrintedDesign = ({ route }) => {
             {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
             <View style={ styles.container }>
                 <BaseModal
+                    items={ lists }
                     visible={ modalVisible }
-                    printID={ print.id }
                     onClose={ () => {
                         setModalVisible(!modalVisible);
                     } }

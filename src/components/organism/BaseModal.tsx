@@ -4,29 +4,9 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import apiFetch from "../../hooks/apiFetch";
 import Grid from "./Grid";
 
-const BaseModal = ({ printID, visible, onClose }) => {
-    const [lists, setLists] = useState([{}]);
+// TODO Use a slot rather than hardcoded grid
 
-    useEffect(() => {
-        void getLists();
-    }, []);
-
-    const getLists = async () => {
-        try {
-            const response = await apiFetch(`/my/printed-design-lists/prints/${printID}/available`);
-            const lists = response.data.map(list => ({
-                ...list,
-                extraData: `${list.count} in list`,
-            }));
-            setLists(lists);
-        } catch (error) {
-            console.error("Error in getLists", error);
-        } finally {
-            console.log(lists);
-            // setLoading(false);
-        }
-    };
-
+const BaseModal = ({ visible, onClose, items }) => {
     return (
         <SafeAreaProvider>
             <SafeAreaView className="flex flex-1 justify-center text-center">
@@ -38,13 +18,13 @@ const BaseModal = ({ printID, visible, onClose }) => {
                 >
                     <View className="flex flex-1 justify-center text-center bg-black/50">
                         <View className="w-full max-h-[80%] bg-white rounded-xl p-1 shadow-md shadow-black/25">
-                            <View className="flex-row items-center mt-5 px-4">
+                            <View className="flex-row items-center mt-5 mb-4 px-4">
                                 <Text className="font-bold text-xl text-center flex-1">Save to list</Text>
                                 <Pressable onPress={ onClose }>
                                     <Text>✕</Text>
                                 </Pressable>
                             </View>
-                            <Grid items={ lists } sendDataToParent={ null } />
+                            <Grid items={ items } sendDataToParent={ null } />
                         </View>
                     </View>
                 </Modal>
