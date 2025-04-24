@@ -1,7 +1,8 @@
-import React, { memo } from "react";
+import React, {memo, useEffect} from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { ICardProps } from "../../contracts/Card";
 import { Image } from "expo-image";
+import {MaterialIcons} from "@expo/vector-icons";
 
 const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
     const height = 200;
@@ -13,13 +14,25 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
         sendDataToParent(item);
     };
 
+    const iconColor = item?.contains_item === true ? 'red' : 'white';
+    const iconOpacity = item?.contains_item === true ? 1 : 0.8;
+
     return (
         <View style={ [styles.container] }>
             <Pressable
                 accessibilityRole="button"
                 onPress={ () => buttonPressed(item) }
             >
-                <View className="relative">
+                <View className="relative bg-transparent">
+                    {item?.contains_item !== null && item?.contains_item !== undefined && (
+                        <MaterialIcons
+                            name="favorite"
+                            size={32}
+                            color={iconColor}
+                            style={{ opacity: iconOpacity }}
+                            className={"absolute top-2 right-2 z-10"}
+                        />
+                    )}
                     <Image
                         placeholder={ { blurhash } }
                         transition={ 1000 }
@@ -32,6 +45,7 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
                         source={ {
                             uri: uri,
                         } }
+
                     />
                     <View style={ { height: 50, flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 8, paddingVertical: 8 } }>
                         <Text

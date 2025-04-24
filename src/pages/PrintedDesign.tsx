@@ -50,6 +50,14 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         setModalVisible(true);
     };
 
+    function handleDataFromChild(item) {
+        setLists((prevLists) => {
+            return prevLists.map(list =>
+                list.id === item.id ? { ...list, contains_item: !item.contains_item } : list
+            );
+        });
+    }
+
     useEffect(() => {
         const fetchPrint = async () => {
             try {
@@ -66,7 +74,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
 
         const getLists = async () => {
             try {
-                const response = await apiFetch(`/my/printed-design-lists`);
+                const response = await apiFetch(`/my/printed-design-lists/prints/${printID}/available`);
                 const lists = response.data.map(list => ({
                     ...list,
                     extraData: `${list.count} in list`,
@@ -90,6 +98,8 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         }
         void fetchPrint();
         void getLists();
+
+        console.log(lists);
     }, [navigation, print.id]);
 
     if (loading.prints || loading.lists) {
@@ -105,6 +115,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             <View style={ styles.container }>
                 <BaseModal
                     items={ lists }
+                    sendDataToParent={ handleDataFromChild }
                     visible={ modalVisible }
                     onClose={ () => {
                         setModalVisible(!modalVisible);

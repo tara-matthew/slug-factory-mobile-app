@@ -6,7 +6,12 @@ import { IModalProps } from "../../contracts/Modal";
 
 // TODO Use a slot rather than hardcoded grid
 
-const BaseModal = ({ visible, onClose, items }: IModalProps) => {
+const BaseModal = ({ visible, onClose, items, sendDataToParent }: IModalProps) => {
+
+    function handleDataFromChild(item: never) {
+        sendDataToParent(item);
+    }
+
     return (
         <SafeAreaProvider>
             <View className="flex flex-1 justify-center text-center">
@@ -25,7 +30,7 @@ const BaseModal = ({ visible, onClose, items }: IModalProps) => {
                                 </Pressable>
                             </View>
                             <View className="px-4 max-h-[90%]">
-                                <Grid items={ items } sendDataToParent={ null } />
+                                <Grid items={ items } sendDataToParent={ handleDataFromChild } />
                             </View>
                         </View>
                     </View>
