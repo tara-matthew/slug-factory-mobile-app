@@ -35,15 +35,4 @@ const BaseModal = ({ visible, onClose, items }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    grid: {
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingBottom: 20
-    },
-    card: {
-        marginRight: 20,
-    },
-});
-
 export default BaseModal;

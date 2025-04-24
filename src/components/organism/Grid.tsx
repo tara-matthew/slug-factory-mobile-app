@@ -21,7 +21,6 @@ const Grid = ({ items, sendDataToParent }: IGridProps) => {
     return (
         <FlatList
             className="mb-8"
-            contentContainerStyle={ styles.grid }
             columnWrapperStyle={ { justifyContent: "space-between", gap: 20 } }
             data={ items }
             numColumns={ 2 }
@@ -33,9 +32,6 @@ const Grid = ({ items, sendDataToParent }: IGridProps) => {
 };
 
 const styles = StyleSheet.create({
-    // grid: {
-    //     padding: 20,
-    // },
     card: {
         marginRight: 20,
     },

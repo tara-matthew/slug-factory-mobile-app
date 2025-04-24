@@ -38,19 +38,10 @@ const MyPrints = () => {
     }
 
     return (
-        <View style={styles.grid}>
+        <View className={"p-6"}>
             <Grid items={ prints } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    grid: {
-        padding: 20,
-    },
-    card: {
-        marginRight: 20,
-    },
-});
 
 export default MyPrints;

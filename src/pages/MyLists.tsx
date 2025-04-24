@@ -45,7 +45,7 @@ const MyLists = () => {
     }
 
     return (
-        <View style={styles.grid}>
+        <View className={"p-6"}>
             <Grid items={ lists } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );
@@ -54,9 +54,6 @@ const MyLists = () => {
 const styles = StyleSheet.create({
     grid: {
         padding: 20,
-    },
-    card: {
-        marginRight: 20,
     },
 });
 
