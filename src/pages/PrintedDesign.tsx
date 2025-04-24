@@ -9,11 +9,11 @@ import { useUser } from "../contexts/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import usePluralisedText from "../hooks/usePluralisedText";
 import { PrintData } from "../data-transfer-objects/PrintData";
-import { EditPrintedDesignNavigationProps } from "../contracts/Navigator";
+import { EditPrintedDesignNavigationProps, PrintedDesignProps } from "../contracts/Navigator";
 import { defaultPrint } from "../contracts/Print";
 import BaseModal from "../components/organism/BaseModal";
 
-const PrintedDesign = ({ route }) => {
+const PrintedDesign = ({ route }: PrintedDesignProps) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
     const printID = route.params.print_id;
     const [print, setPrint] = useState<PrintData>(defaultPrint);
@@ -98,7 +98,7 @@ const PrintedDesign = ({ route }) => {
 
     return (
         <ScrollView className="w-100">
-            <View style={ styles.imageContainer }>
+            <View>
                 <ImageList images={ print.images } size={ Size.Large } />
             </View>
             {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}

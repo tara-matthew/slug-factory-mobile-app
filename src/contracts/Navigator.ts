@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RouteProp } from "@react-navigation/native";
 
 export type RootStackParamList = {
     PrintedDesign: { print_id: string; title: string };
@@ -18,3 +19,8 @@ export type EditPrintedDesignNavigationProps = NativeStackNavigationProp<RootSta
 export type FilamentNavigationProps = NativeStackNavigationProp<RootStackParamList, "Filament">;
 export type RegisterNavigationProps = NativeStackNavigationProp<RootStackParamList, "Register">;
 export type LoginNavigationProps = NativeStackNavigationProp<RootStackParamList, "Login">;
+export type PrintedDesignRouteProp = RouteProp<RootStackParamList, "PrintedDesign">;
+
+export type PrintedDesignProps = {
+    route: PrintedDesignRouteProp;
+};
