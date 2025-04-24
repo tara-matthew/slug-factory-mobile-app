@@ -1,15 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import {Pressable, Text, View, StyleSheet, Modal} from 'react-native'
-import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
+import React, { useEffect, useState } from "react";
+import { Pressable, Text, View, StyleSheet, Modal } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import apiFetch from "../../hooks/apiFetch";
 import Grid from "./Grid";
 
 const BaseModal = ({ printID }) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [lists, setLists] = useState([{
-        // title: "Recently Viewed",
-        // image_url: "https://fastly.picsum.photos/id/488/640/480.jpg?hmac=sWWw446VOr-h4w5IzFlmXdwIicctjWtsNDGi9bX-HR4",
-    }]);
+    const [lists, setLists] = useState([{}]);
 
     useEffect(() => {
         void getLists();
@@ -26,35 +23,39 @@ const BaseModal = ({ printID }) => {
         } catch (error) {
             console.error("Error in getLists", error);
         } finally {
-            console.log(lists)
+            console.log(lists);
             // setLoading(false);
         }
     };
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.centeredView}>
+            <SafeAreaView className="flex flex-1 justify-center text-center">
                 <Modal
                     animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
+                    transparent={ true }
+                    visible={ modalVisible }
+                    onRequestClose={ () => {
                         setModalVisible(!modalVisible);
-                    }}>
-                    <View style={styles.modalOverlay}>
-                        <View style={styles.modalView}>
-                            <Text className={"text-center mt-5 font-bold text-lg"}>Save to list</Text>
-                            <Pressable style={styles.closeButton} onPress={() => setModalVisible(false)}>
-                                <Text style={styles.closeButtonText}>✕</Text>
-                            </Pressable>
-                            <Grid items={lists} sendDataToParent={null} />
+                    } }
+                >
+                    <View className="flex flex-1 justify-center text-center bg-black/50">
+                        <View className="w-full max-h-[80%] bg-white rounded-xl p-1 shadow-md shadow-black/25">
+                            <View className="flex-row items-center mt-5 px-4">
+                                <Text className="font-bold text-xl text-center flex-1">Save to list</Text>
+                                <Pressable onPress={ () => setModalVisible(false) }>
+                                    <Text>✕</Text>
+                                </Pressable>
+                            </View>
+                            <Grid items={ lists } sendDataToParent={ null } />
                         </View>
                     </View>
                 </Modal>
                 <Pressable
-                    style={[styles.button, styles.buttonOpen]}
-                    onPress={() => setModalVisible(true)}>
-                    <Text style={styles.textStyle}>Show Modal</Text>
+                    style={ [styles.button, styles.buttonOpen] }
+                    onPress={ () => setModalVisible(true) }
+                >
+                    <Text>Show Modal</Text>
                 </Pressable>
             </SafeAreaView>
         </SafeAreaProvider>
@@ -62,25 +63,22 @@ const BaseModal = ({ printID }) => {
 };
 
 const styles = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    // modalView: {
-    //     margin: 20,
-    //     backgroundColor: 'white',
-    //     borderRadius: 20,
-    //     padding: 35,
-    //     alignItems: 'center',
-    //     shadowColor: '#000',
-    //     shadowOffset: {
-    //         width: 0,
-    //         height: 2,
-    //     },
-    //     shadowOpacity: 0.25,
-    //     shadowRadius: 4,
-    //     elevation: 5,
+    // closeButton: {
+    //     position: "absolute",
+    //     top: 18,
+    //     right: 10,
+    //     zIndex: 1,
+    //     backgroundColor: "#eee",
+    //     borderRadius: 15,
+    //     width: 30,
+    //     height: 30,
+    //     alignItems: "center",
+    //     justifyContent: "center",
+    // },
+    // closeButtonText: {
+    //     fontSize: 18,
+    //     fontWeight: "bold",
+    //     color: "#333",
     // },
     button: {
         borderRadius: 20,
@@ -88,59 +86,11 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     buttonOpen: {
-        backgroundColor: '#F194FF',
+        backgroundColor: "#F194FF",
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: "#2196F3",
     },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: 'center',
-    },
-    modalOverlay: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(0,0,0,0.5)", // Optional dim background
-    },
-    modalView: {
-        width: "100%",
-        maxHeight: "80%",
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 5,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-    closeButton: {
-        position: 'absolute',
-        top: 18,
-        right: 10,
-        zIndex: 1,
-        backgroundColor: '#eee',
-        borderRadius: 15,
-        width: 30,
-        height: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    closeButtonText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#333',
-    },
-
 });
 
 export default BaseModal;
