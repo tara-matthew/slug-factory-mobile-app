@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
 import { useNavigation } from "@react-navigation/native";
@@ -45,10 +45,19 @@ const MyLists = () => {
     }
 
     return (
-        <View>
+        <View style={styles.grid}>
             <Grid items={ lists } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    grid: {
+        padding: 20,
+    },
+    card: {
+        marginRight: 20,
+    },
+});
 
 export default MyLists;

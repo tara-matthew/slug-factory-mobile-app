@@ -33,9 +33,9 @@ const Grid = ({ items, sendDataToParent }: IGridProps) => {
 };
 
 const styles = StyleSheet.create({
-    grid: {
-        padding: 20,
-    },
+    // grid: {
+    //     padding: 20,
+    // },
     card: {
         marginRight: 20,
     },
