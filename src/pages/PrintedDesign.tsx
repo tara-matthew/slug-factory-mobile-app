@@ -21,6 +21,7 @@ const PrintedDesign = ({ route }) => {
     const [loading, setLoading] = useState(true);
     const { updatePrint, toggleFavouritePrint } = usePrints();
     const { user, setUser } = useUser();
+    const [modalVisible, setModalVisible] = useState(false);
 
     const adhesionType = useMemo(() => {
         return `${print.settings.adhesion_type.charAt(0).toUpperCase()}${print.settings.adhesion_type.slice(1)}`;
@@ -44,7 +45,8 @@ const PrintedDesign = ({ route }) => {
     }, [print, print.is_favourite]);
 
     const toggleFavourite = async () => {
-        console.log('toggleFavourite');
+        console.log("toggleFavourite");
+        setModalVisible(true);
         // if (!print.is_favourite) {
         //     await addToFavourites();
         // } else {
@@ -121,7 +123,14 @@ const PrintedDesign = ({ route }) => {
             </View>
             {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
             <View style={ styles.container }>
-                <BaseModal printID={print.id}></BaseModal>
+                <BaseModal
+                    visible={ modalVisible }
+                    printID={ print.id }
+                    onClose={ () => {
+                        setModalVisible(!modalVisible);
+                    } }
+                >
+                </BaseModal>
 
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
 
