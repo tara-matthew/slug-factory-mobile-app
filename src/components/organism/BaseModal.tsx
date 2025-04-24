@@ -2,10 +2,11 @@ import React from "react";
 import { Pressable, Text, View, Modal } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Grid from "./Grid";
+import { IModalProps } from "../../contracts/Modal";
 
 // TODO Use a slot rather than hardcoded grid
 
-const BaseModal = ({ visible, onClose, items }) => {
+const BaseModal = ({ visible, onClose, items }: IModalProps) => {
     return (
         <SafeAreaProvider>
             <View className="flex flex-1 justify-center text-center">

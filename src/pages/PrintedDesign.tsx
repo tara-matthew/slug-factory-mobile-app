@@ -47,7 +47,6 @@ const PrintedDesign = ({ route }) => {
     }, [print, print.is_favourite]);
 
     const toggleFavourite = async () => {
-        console.log("toggleFavourite");
         setModalVisible(true);
     };
 
@@ -98,7 +97,7 @@ const PrintedDesign = ({ route }) => {
     }
 
     return (
-        <ScrollView style={ { width: "100%" } }>
+        <ScrollView className="w-100">
             <View style={ styles.imageContainer }>
                 <ImageList images={ print.images } size={ Size.Large } />
             </View>
@@ -139,11 +138,7 @@ const PrintedDesign = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         paddingBottom: 20,
-        // paddingVertical: 20,
         paddingHorizontal: 15,
-    },
-    imageContainer: {
-        // height: 400
     },
     title: {
         fontSize: 24,

@@ -6,10 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const MyLists = () => {
     const [loading, setLoading] = useState(true);
-    const [lists, setLists] = useState([{
-        // title: "Recently Viewed",
-        // image_url: "https://fastly.picsum.photos/id/488/640/480.jpg?hmac=sWWw446VOr-h4w5IzFlmXdwIicctjWtsNDGi9bX-HR4",
-    }]);
+    const [lists, setLists] = useState([{}]);
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -49,11 +46,5 @@ const MyLists = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    grid: {
-        padding: 20,
-    },
-});
 
 export default MyLists;
