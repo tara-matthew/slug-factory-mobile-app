@@ -4,7 +4,7 @@ import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
 import apiFetch from "../../hooks/apiFetch";
 import Grid from "./Grid";
 
-const BaseModal = () => {
+const BaseModal = ({ printID }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [lists, setLists] = useState([{
         // title: "Recently Viewed",
@@ -17,7 +17,7 @@ const BaseModal = () => {
 
     const getLists = async () => {
         try {
-            const response = await apiFetch("/my/printed-design-lists");
+            const response = await apiFetch(`/my/printed-design-lists/prints/${printID}/available`);
             const lists = response.data.map(list => ({
                 ...list,
                 extraData: `${list.count} in list`,
@@ -43,6 +43,7 @@ const BaseModal = () => {
                     }}>
                     <View style={styles.modalOverlay}>
                         <View style={styles.modalView}>
+                            <Text className={"text-center mt-5 font-bold text-lg"}>Save to list</Text>
                             <Pressable style={styles.closeButton} onPress={() => setModalVisible(false)}>
                                 <Text style={styles.closeButtonText}>✕</Text>
                             </Pressable>
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     },
     closeButton: {
         position: 'absolute',
-        top: 10,
+        top: 18,
         right: 10,
         zIndex: 1,
         backgroundColor: '#eee',

@@ -121,7 +121,7 @@ const PrintedDesign = ({ route }) => {
             </View>
             {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
             <View style={ styles.container }>
-                <BaseModal></BaseModal>
+                <BaseModal printID={print.id}></BaseModal>
 
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
 
