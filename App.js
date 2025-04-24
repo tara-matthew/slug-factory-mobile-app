@@ -109,7 +109,6 @@ function MainTabs() {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Home" component={ Home } />
-            <Tab.Screen name="Favourites" component={ FavouriteTopTabs } options={ { title: "Favourites" } } />
             <Tab.Screen name="Lists" component={ MyLists } options={ { title: "Lists" } } />
             <Tab.Screen name="New Print" component={ StorePrint } />
             <Tab.Screen name="ProfileStack" component={ ProfileStack } options={ { headerShown: false, title: "Profile" } } />
