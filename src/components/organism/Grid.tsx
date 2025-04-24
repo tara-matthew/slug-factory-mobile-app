@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import Card from "../molecule/Card";
 import { IGridProps } from "../../contracts/Grid";
 
@@ -30,11 +30,5 @@ const Grid = ({ items, sendDataToParent }: IGridProps) => {
         />
     );
 };
-
-const styles = StyleSheet.create({
-    card: {
-        marginRight: 20,
-    },
-});
 
 export default Grid;

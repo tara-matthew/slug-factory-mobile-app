@@ -3,19 +3,18 @@ import { Text, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
 import { useNavigation } from "@react-navigation/native";
+import { ListNavigationProps } from "../contracts/Navigator";
 
 const MyLists = () => {
     const [loading, setLoading] = useState(true);
     const [lists, setLists] = useState([{}]);
-    const navigation = useNavigation();
+    const navigation = useNavigation<ListNavigationProps>();
 
     useEffect(() => {
         void getLists();
     }, []);
 
     const handleDataFromChild = (item) => {
-        console.log(item.id);
-        // @ts-ignore
         if (item.id) {
             navigation.navigate("List", { listID: item.id });
         }
@@ -24,7 +23,7 @@ const MyLists = () => {
     const getLists = async () => {
         try {
             const response = await apiFetch("/my/printed-design-lists");
-            const lists = response.data.map(list => ({
+            const lists = response.data.map((list: { count: string }) => ({
                 ...list,
                 extraData: `${list.count} in list`,
             }));
