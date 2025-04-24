@@ -20,7 +20,12 @@ export type FilamentNavigationProps = NativeStackNavigationProp<RootStackParamLi
 export type RegisterNavigationProps = NativeStackNavigationProp<RootStackParamList, "Register">;
 export type LoginNavigationProps = NativeStackNavigationProp<RootStackParamList, "Login">;
 export type PrintedDesignRouteProp = RouteProp<RootStackParamList, "PrintedDesign">;
+export type ListRouteProp = RouteProp<RootStackParamList, "List">;
 
 export type PrintedDesignProps = {
     route: PrintedDesignRouteProp;
+};
+
+export type ListProps = {
+    route: ListRouteProp;
 };

@@ -22,7 +22,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         lists: true,
         prints: true,
     });
-    const { user, setUser } = useUser();
+    const { user } = useUser();
     const [modalVisible, setModalVisible] = useState(false);
 
     const adhesionType = useMemo(() => {
@@ -66,7 +66,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
 
         const getLists = async () => {
             try {
-                const response = await apiFetch(`/my/printed-design-lists/prints/${printID}/available`);
+                const response = await apiFetch(`/my/printed-design-lists`);
                 const lists = response.data.map(list => ({
                     ...list,
                     extraData: `${list.count} in list`,
