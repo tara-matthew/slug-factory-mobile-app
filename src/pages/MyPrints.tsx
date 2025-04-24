@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {StyleSheet, Text, View} from "react-native";
+import { Text, View } from "react-native";
 import fetchData from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
 import { useNavigation } from "@react-navigation/native";
@@ -38,7 +38,7 @@ const MyPrints = () => {
     }
 
     return (
-        <View className={"p-6"}>
+        <View className="p-6">
             <Grid items={ prints } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );

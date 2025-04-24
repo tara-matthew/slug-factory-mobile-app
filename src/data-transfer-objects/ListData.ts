@@ -1,4 +1,4 @@
-import {PrintData} from "./PrintData";
+import { PrintData } from "./PrintData";
 
 export interface ListData {
     id: string;

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {StyleSheet, Text, View} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
 import { useNavigation } from "@react-navigation/native";
-import List from "./List";
 
 const MyLists = () => {
     const [loading, setLoading] = useState(true);
@@ -21,7 +20,7 @@ const MyLists = () => {
         console.log(item.id);
         // @ts-ignore
         if (item.id) {
-            navigation.navigate("List", {listID: item.id});
+            navigation.navigate("List", { listID: item.id });
         }
     };
 
@@ -45,7 +44,7 @@ const MyLists = () => {
     }
 
     return (
-        <View className={"p-6"}>
+        <View className="p-6">
             <Grid items={ lists } sendDataToParent={ handleDataFromChild }></Grid>
         </View>
     );

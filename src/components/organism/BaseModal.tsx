@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Pressable, Text, View, StyleSheet, Modal, ScrollView } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import apiFetch from "../../hooks/apiFetch";
+import React from "react";
+import { Pressable, Text, View, Modal } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import Grid from "./Grid";
 
 // TODO Use a slot rather than hardcoded grid
@@ -24,7 +23,7 @@ const BaseModal = ({ visible, onClose, items }) => {
                                     <Text>✕</Text>
                                 </Pressable>
                             </View>
-                            <View className={"px-4 max-h-[90%]"}>
+                            <View className="px-4 max-h-[90%]">
                                 <Grid items={ items } sendDataToParent={ null } />
                             </View>
                         </View>

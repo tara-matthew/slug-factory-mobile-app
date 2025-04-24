@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {ScrollView, Text, View} from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import Card from "../components/molecule/Card";
-import {ListData} from "../data-transfer-objects/ListData";
+import { ListData } from "../data-transfer-objects/ListData";
 
-const List = ({route}) => {
-    const listID = route.params.listID
+const List = ({ route }) => {
+    const listID = route.params.listID;
 
     const [list, setList] = useState<ListData>();
     const [loading, setLoading] = useState(true);
@@ -26,8 +26,8 @@ const List = ({route}) => {
     };
 
     const handleDataFromChild = (item) => {
-        console.log('here', item.title);
-    }
+        console.log("here", item.title);
+    };
 
     if (loading) {
         return (<Text>Loading...</Text>);
@@ -39,14 +39,15 @@ const List = ({route}) => {
 
     return (
         <ScrollView>
-            <View className={"p-6"}>
+            <View className="p-6">
                 {list.printed_designs.map((print, index) => (
                     <Card
-                        key={index}
-                        item={print}
-                        imageURL={print.images[0].url}
-                        blurhash={print.images[0].blurhash}
-                        sendDataToParent={handleDataFromChild }>
+                        key={ index }
+                        item={ print }
+                        imageURL={ print.images[0].url }
+                        blurhash={ print.images[0].blurhash }
+                        sendDataToParent={ handleDataFromChild }
+                    >
                     </Card>
                 ))}
             </View>
