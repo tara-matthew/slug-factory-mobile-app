@@ -1,8 +1,8 @@
-import React, {memo, useEffect} from "react";
+import React, {memo, useMemo} from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { ICardProps } from "../../contracts/Card";
 import { Image } from "expo-image";
-import {MaterialIcons} from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
     const height = 200;
@@ -14,8 +14,13 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
         sendDataToParent(item);
     };
 
-    const iconColor = item?.contains_item === true ? 'red' : 'white';
-    const iconOpacity = item?.contains_item === true ? 1 : 0.8;
+    const iconColour = useMemo(() => {
+        return item.contains_item ? "red" : "white";
+    }, [item.contains_item]);
+
+    const iconOpacity = useMemo(() => {
+        return item.contains_item ? 1 : 0.8;
+    }, [item.contains_item]);
 
     return (
         <View style={ [styles.container] }>
@@ -24,13 +29,13 @@ const Card = ({ item, imageURL, blurhash, sendDataToParent }: ICardProps) => {
                 onPress={ () => buttonPressed(item) }
             >
                 <View className="relative bg-transparent">
-                    {item?.contains_item !== null && item?.contains_item !== undefined && (
+                    {item.contains_item !== undefined && (
                         <MaterialIcons
                             name="favorite"
-                            size={32}
-                            color={iconColor}
-                            style={{ opacity: iconOpacity }}
-                            className={"absolute top-2 right-2 z-10"}
+                            size={ 32 }
+                            color={ iconColour }
+                            style={ { opacity: iconOpacity } }
+                            className="absolute top-2 right-2 z-10"
                         />
                     )}
                     <Image

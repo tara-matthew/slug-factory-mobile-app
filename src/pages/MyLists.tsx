@@ -4,10 +4,12 @@ import apiFetch from "../hooks/apiFetch";
 import Grid from "../components/organism/Grid";
 import { useNavigation } from "@react-navigation/native";
 import { ListNavigationProps } from "../contracts/Navigator";
+import {ListData} from "../data-transfer-objects/ListData";
+import {defaultList} from "../contracts/List";
 
 const MyLists = () => {
     const [loading, setLoading] = useState(true);
-    const [lists, setLists] = useState([{}]);
+    const [lists, setLists] = useState<ListData[]>();
     const navigation = useNavigation<ListNavigationProps>();
 
     useEffect(() => {

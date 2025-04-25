@@ -12,12 +12,13 @@ import { PrintData } from "../data-transfer-objects/PrintData";
 import { EditPrintedDesignNavigationProps, PrintedDesignProps } from "../contracts/Navigator";
 import { defaultPrint } from "../contracts/Print";
 import BaseModal from "../components/organism/BaseModal";
+import {ListData} from "../data-transfer-objects/ListData";
 
 const PrintedDesign = ({ route }: PrintedDesignProps) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
     const printID = route.params.print_id;
     const [print, setPrint] = useState<PrintData>(defaultPrint);
-    const [lists, setLists] = useState([]);
+    const [lists, setLists] = useState<ListData[]>();
     const [loading, setLoading] = useState({
         lists: true,
         prints: true,
@@ -51,10 +52,18 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     };
 
     function handleDataFromChild(item) {
-        setLists((prevLists) => {
-            return prevLists.map(list =>
-                list.id === item.id ? { ...list, contains_item: !item.contains_item } : list
-            );
+        // TODO extract toggle logic into a helper method
+        setLists(() => {
+            return lists.map((list) => {
+                if (list.id !== item.id) {
+                    return list;
+                }
+
+                const updatedList = { ...list };
+                updatedList.contains_item = !item.contains_item;
+
+                return updatedList;
+            });
         });
     }
 
@@ -98,8 +107,6 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         }
         void fetchPrint();
         void getLists();
-
-        console.log(lists);
     }, [navigation, print.id]);
 
     if (loading.prints || loading.lists) {
