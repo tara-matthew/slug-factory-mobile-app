@@ -6,7 +6,7 @@ import { IModalProps } from "../../contracts/Modal";
 
 // TODO Use a slot rather than hardcoded grid
 
-const BaseModal = ({ visible, onClose, items, sendDataToParent }: IModalProps) => {
+const BaseModal = ({ visible, onClose, items, title, sendDataToParent }: IModalProps) => {
 
     function handleDataFromChild(item: never) {
         sendDataToParent(item);
@@ -24,7 +24,7 @@ const BaseModal = ({ visible, onClose, items, sendDataToParent }: IModalProps) =
                     <View className="flex flex-1 justify-center text-center bg-black/50">
                         <View className="w-full max-h-[80%] pt-5 bg-white rounded-xl p-1 shadow-md shadow-black/25">
                             <View className="flex-row items-center my-5 px-4">
-                                <Text className="font-bold text-xl text-center flex-1">Save to list</Text>
+                                <Text className="font-bold text-xl text-center flex-1">{title}</Text>
                                 <Pressable onPress={ onClose }>
                                     <Text>✕</Text>
                                 </Pressable>

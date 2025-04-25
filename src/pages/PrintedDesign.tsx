@@ -40,12 +40,9 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         { title: adhesionType },
     ];
     const uploadText = usePluralisedText(print.user.prints_count, "upload", "uploads");
-    const favouriteInfoText = `Favourited ${usePluralisedText(print.favourited_count, "time", "times")}`;
+    const favouriteInfoText = `On ${usePluralisedText(print.favourited_count, "list", "lists")}`;
 
     const belongsToUser = user?.id === print.user_id;
-    const favouriteText = useMemo(() => {
-        return print.is_favourite ? "Unfavourite" : "Favourite";
-    }, [print, print.is_favourite]);
 
     const toggleFavourite = async () => {
         setModalVisible(true);
@@ -118,17 +115,18 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             <View>
                 <ImageList images={ print.images } size={ Size.Large } />
             </View>
-            {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title={ favouriteText }></Button></View>}
+
+            {!belongsToUser && <View className="w-full flex flex-row justify-center"><Button onPress={ toggleFavourite } title="Add to List"></Button></View>}
             <View style={ styles.container }>
                 <BaseModal
+                    title="Add to List"
                     items={ lists }
                     sendDataToParent={ handleDataFromChild }
                     visible={ modalVisible }
                     onClose={ () => {
                         setModalVisible(!modalVisible);
                     } }
-                >
-                </BaseModal>
+                />
 
                 <Text className="text-center text-2xl mt-5 font-bold">{print.title}</Text>
 
