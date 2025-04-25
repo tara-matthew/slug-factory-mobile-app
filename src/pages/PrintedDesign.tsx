@@ -19,6 +19,8 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     const printID = route.params.print_id;
     const [print, setPrint] = useState<PrintData>(defaultPrint);
     const [lists, setLists] = useState<ListData[]>();
+    const [originalLists, setOriginalLists] = useState<ListData[]>([]);
+
     const [loading, setLoading] = useState({
         lists: true,
         prints: true,
@@ -49,6 +51,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     };
 
     function handleDataFromChild(item) {
+
         // TODO extract toggle logic into a helper method
         setLists(() => {
             return lists.map((list) => {
@@ -62,6 +65,17 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                 return updatedList;
             });
         });
+    }
+
+    function save(items) {
+        const toAddIDs = items
+            .filter((item, i) => !originalLists[i].contains_item && item.contains_item)
+            .map(item => item.id);
+        const toRemoveIDs = items
+            .filter((item, i) => originalLists[i].contains_item && !item.contains_item)
+            .map(item => item.id);
+
+        // hit the API to add/remove the print from the lists
     }
 
     useEffect(() => {
@@ -86,6 +100,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                     extraData: `${list.count} in list`,
                 }));
                 setLists(lists);
+                setOriginalLists(lists)
             } catch (error) {
                 console.error("Error in getLists", error);
             } finally {
@@ -122,6 +137,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                     title="Add to List"
                     items={ lists }
                     sendDataToParent={ handleDataFromChild }
+                    saveInParent={ save }
                     visible={ modalVisible }
                     onClose={ () => {
                         setModalVisible(!modalVisible);

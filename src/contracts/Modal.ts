@@ -6,4 +6,5 @@ export interface IModalProps {
     visible: boolean;
     onClose: () => void;
     sendDataToParent: (data: never) => void;
+    saveInParent: (data: IGridItem[]) => void;
 }

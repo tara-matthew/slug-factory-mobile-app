@@ -1,16 +1,20 @@
-import React from "react";
-import { Pressable, Text, View, Modal } from "react-native";
+import React, {useState} from "react";
+import { Pressable, Text, View, Modal, Button } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Grid from "./Grid";
 import { IModalProps } from "../../contracts/Modal";
+import BaseButton from "../atom/BaseButton";
 
 // TODO Use a slot rather than hardcoded grid
 
-const BaseModal = ({ visible, onClose, items, title, sendDataToParent }: IModalProps) => {
-
+const BaseModal = ({ visible, onClose, items, title, sendDataToParent, saveInParent }: IModalProps) => {
     function handleDataFromChild(item: never) {
         sendDataToParent(item);
     }
+
+    const save = () => {
+        saveInParent(items);
+    };
 
     return (
         <SafeAreaProvider>
@@ -31,6 +35,9 @@ const BaseModal = ({ visible, onClose, items, title, sendDataToParent }: IModalP
                             </View>
                             <View className="px-4 max-h-[90%]">
                                 <Grid items={ items } sendDataToParent={ handleDataFromChild } />
+                                <View className="w-1/2 m-auto">
+                                    <BaseButton title="Save" sendDataToParent={ save }></BaseButton>
+                                </View>
                             </View>
                         </View>
                     </View>
