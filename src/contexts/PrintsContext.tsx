@@ -56,6 +56,30 @@ export const PrintProvider = ({ children }) => {
         });
     };
 
+    /*
+    const updatePrint = (updatedPrint) => {
+        setPrints((currentPrints) => {
+            const newPrints: typeof currentPrints = {};
+
+            for (const category in currentPrints) {
+                const printList = currentPrints[category];
+
+                const updatedPrintList = printList.map((print) => {
+                    if (print.id === updatedPrint.id) {
+                        return { ...print, ...updatedPrint };
+                    } else {
+                        return print;
+                    }
+                });
+
+                newPrints[category] = updatedPrintList;
+            }
+
+            return newPrints;
+        });
+    };
+     */
+
     const toggleFavouritePrint = (updatedPrint) => {
         setPrints((currentPrints) => {
             let updatedFavourites = [...currentPrints.favourites];
