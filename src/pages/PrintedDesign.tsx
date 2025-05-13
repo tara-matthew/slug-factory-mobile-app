@@ -42,7 +42,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         { title: adhesionType },
     ];
     const uploadText = usePluralisedText(print.user.prints_count, "upload", "uploads");
-    const favouriteInfoText = `On ${usePluralisedText(print.favourited_count, "list", "lists")}`;
+    const favouriteInfoText = `On ${usePluralisedText(print.list_count, "list", "lists")}`;
 
     const belongsToUser = user?.id === print.user_id;
 

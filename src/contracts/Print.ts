@@ -59,7 +59,7 @@ export const defaultPrint: PrintData = {
         updated_at: "",
     },
     is_favourite: false,
-    favourited_count: 0,
+    list_count: 0,
     settings: {
         id: "",
         infill_percentage: 0,

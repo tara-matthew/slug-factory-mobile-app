@@ -42,7 +42,7 @@ export interface PrintData {
         updated_at: string;
     };
     is_favourite: boolean;
-    favourited_count: number;
+    list_count: number;
     settings: {
         id: string;
         infill_percentage: number;
