@@ -13,6 +13,7 @@ import { EditPrintedDesignNavigationProps, PrintedDesignProps } from "../contrac
 import { defaultPrint } from "../contracts/Print";
 import BaseModal from "../components/organism/BaseModal";
 import {ListData} from "../data-transfer-objects/ListData";
+import ApiFetch from "../hooks/apiFetch";
 
 const PrintedDesign = ({ route }: PrintedDesignProps) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
@@ -67,7 +68,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         });
     }
 
-    function save(items) {
+    async function save(items) {
         const toAddIDs = items
             .filter((item, i) => !originalLists[i].contains_item && item.contains_item)
             .map(item => item.id);
@@ -75,7 +76,39 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             .filter((item, i) => originalLists[i].contains_item && !item.contains_item)
             .map(item => item.id);
 
-        // hit the API to add/remove the print from the lists
+        try {
+            await apiFetch(`/my/prints/${printID}/printed-design-lists`, "POST", { printed_design_list_ids: toAddIDs });
+            setOriginalLists((prevLists) => {
+                return prevLists.map((list) => {
+                    if (toAddIDs.includes(list.id)) {
+                        return { ...list, contains_item: true };
+                    }
+                    if (toRemoveIDs.includes(list.id)) {
+                        return { ...list, contains_item: false };
+                    }
+                    return list;
+                });
+            });
+            setLists((prevLists) => {
+                return prevLists.map((list) => {
+                    if (toAddIDs.includes(list.id)) {
+                        return { ...list, contains_item: true };
+                    }
+                    if (toRemoveIDs.includes(list.id)) {
+                        return { ...list, contains_item: false };
+                    }
+                    return list;
+                });
+            });
+            setPrint(prevPrint => ({
+                ...prevPrint,
+                list_count: prevPrint.list_count + toAddIDs.length - toRemoveIDs.length,
+            }));
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setModalVisible(false)
+        }
     }
 
     useEffect(() => {
@@ -101,6 +134,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                 }));
                 setLists(lists);
                 setOriginalLists(lists)
+                console.log(lists)
             } catch (error) {
                 console.error("Error in getLists", error);
             } finally {

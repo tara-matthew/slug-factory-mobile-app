@@ -100,7 +100,7 @@ export const PrintProvider = ({ children }) => {
     // TODO investigate destructuring prints into its separate properties
 
     return (
-        <PrintContext.Provider value={ { prints, loading, updatePrint, toggleFavouritePrint } }>
+        <PrintContext.Provider value={ { prints, loading } }>
             {children}
         </PrintContext.Provider>
     );
