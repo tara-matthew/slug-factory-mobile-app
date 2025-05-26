@@ -78,30 +78,20 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             .filter((item, i) => originalLists[i].contains_item && !item.contains_item)
             .map(item => item.id);
 
-        console.log(toAddIDs, toRemoveIDs)
-
         try {
-            const response = await apiFetch(`/my/prints/${printID}/printed-design-lists`, "POST", {
+            const { data } = await apiFetch(`/my/prints/${printID}/printed-design-lists`, "POST", {
                 printed_design_list_add_ids: toAddIDs,
                 printed_design_list_remove_ids: toRemoveIDs,
             });
 
-            console.log(response, toAddIDs)
             // Ensure that original lists is updated, otherwise there will be duplicates
             setOriginalLists((prevLists) => {
                 return prevLists.map((list) => {
                     if (toAddIDs.includes(list.id)) {
-                        // console.log(list.count)
-                        const newCount = list.count + 1
-
-                        return { ...list, contains_item: true, extraData: `${newCount} in list` };
+                        return { ...list, contains_item: true };
                     }
                     if (toRemoveIDs.includes(list.id)) {
-                        // console.log(list.count)
-
-                        const newCount = list.count - 1
-
-                        return { ...list, contains_item: false, extraData: `${newCount} in list` };
+                        return { ...list, contains_item: false };
                     }
                     return list;
                 });
@@ -111,16 +101,14 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             setLists((prevLists) => {
                 return prevLists.map((list) => {
                     if (toAddIDs.includes(list.id)) {
-                        console.log(list.count)
-                        const newCount = list.count
+                        list.count ++
                         return { ...list, contains_item: true, extraData: `${list.count} in list` };
                     }
                     if (toRemoveIDs.includes(list.id)) {
-                        console.log(list.count)
-                        const newCount = list.count
+                        list.count --
                         return { ...list, contains_item: false, extraData: `${list.count} in list` };
                     }
-                    return {...list, extraData: `200 in list`};
+                    return {...list, extraData: `${list.count} in list`};
                 });
             });
             setPrint(prevPrint => ({
