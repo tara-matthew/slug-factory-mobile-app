@@ -58,7 +58,6 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         setLists(() => {
             return lists.map((list) => {
                 if (list.id !== item.id) {
-                    // console.log('here', list.id, item.id)
                     return list;
                 }
                const matchedOriginalItems = originalLists.filter((originalList) => {
