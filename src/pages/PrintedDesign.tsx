@@ -69,35 +69,58 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     }
 
     async function save(items) {
+        // Stop already-selected lists in the UI (from previous adds) being put in the toAddIDs array, as any list which is selected in the UI will have contains_item set to true
         const toAddIDs = items
             .filter((item, i) => !originalLists[i].contains_item && item.contains_item)
             .map(item => item.id);
+
         const toRemoveIDs = items
             .filter((item, i) => originalLists[i].contains_item && !item.contains_item)
             .map(item => item.id);
 
+        console.log(toAddIDs, toRemoveIDs)
+
         try {
-            await apiFetch(`/my/prints/${printID}/printed-design-lists`, "POST", { printed_design_list_ids: toAddIDs });
+            const response = await apiFetch(`/my/prints/${printID}/printed-design-lists`, "POST", {
+                printed_design_list_add_ids: toAddIDs,
+                printed_design_list_remove_ids: toRemoveIDs,
+            });
+
+            console.log(response, toAddIDs)
+            // Ensure that original lists is updated, otherwise there will be duplicates
             setOriginalLists((prevLists) => {
                 return prevLists.map((list) => {
                     if (toAddIDs.includes(list.id)) {
-                        return { ...list, contains_item: true };
+                        // console.log(list.count)
+                        const newCount = list.count + 1
+
+                        return { ...list, contains_item: true, extraData: `${newCount} in list` };
                     }
                     if (toRemoveIDs.includes(list.id)) {
-                        return { ...list, contains_item: false };
+                        // console.log(list.count)
+
+                        const newCount = list.count - 1
+
+                        return { ...list, contains_item: false, extraData: `${newCount} in list` };
                     }
                     return list;
                 });
             });
+
+            // Update list count?
             setLists((prevLists) => {
                 return prevLists.map((list) => {
                     if (toAddIDs.includes(list.id)) {
-                        return { ...list, contains_item: true };
+                        console.log(list.count)
+                        const newCount = list.count
+                        return { ...list, contains_item: true, extraData: `${list.count} in list` };
                     }
                     if (toRemoveIDs.includes(list.id)) {
-                        return { ...list, contains_item: false };
+                        console.log(list.count)
+                        const newCount = list.count
+                        return { ...list, contains_item: false, extraData: `${list.count} in list` };
                     }
-                    return list;
+                    return {...list, extraData: `200 in list`};
                 });
             });
             setPrint(prevPrint => ({
@@ -134,7 +157,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                 }));
                 setLists(lists);
                 setOriginalLists(lists)
-                console.log(lists)
+                // console.log(lists)
             } catch (error) {
                 console.error("Error in getLists", error);
             } finally {
