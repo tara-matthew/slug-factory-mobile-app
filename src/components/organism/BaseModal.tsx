@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Pressable, Text, View, Modal, Button } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Grid from "./Grid";
@@ -7,7 +7,9 @@ import BaseButton from "../atom/BaseButton";
 
 // TODO Use a slot rather than hardcoded grid
 
-const BaseModal = ({ visible, onClose, items, title, sendDataToParent, saveInParent }: IModalProps) => {
+const BaseModal = ({ visible, onClose, items, title, sendDataToParent, saveInParent, isButtonDisabled }: IModalProps) => {
+    // const [ buttonDisabled, setButtonDisabled] = useState(true)
+
     function handleDataFromChild(item: never) {
         sendDataToParent(item);
     }
@@ -36,7 +38,7 @@ const BaseModal = ({ visible, onClose, items, title, sendDataToParent, saveInPar
                             <View className="px-4 max-h-[90%]">
                                 <Grid items={ items } sendDataToParent={ handleDataFromChild } />
                                 <View className="w-1/2 m-auto">
-                                    <BaseButton title="Save" sendDataToParent={ save }></BaseButton>
+                                    <BaseButton isDisabled={isButtonDisabled} title="Save" sendDataToParent={ save }></BaseButton>
                                 </View>
                             </View>
                         </View>

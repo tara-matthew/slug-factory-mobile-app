@@ -28,6 +28,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     });
     const { user } = useUser();
     const [modalVisible, setModalVisible] = useState(false);
+    const [ buttonDisabled, setButtonDisabled] = useState(true)
 
     const adhesionType = useMemo(() => {
         return `${print.settings.adhesion_type.charAt(0).toUpperCase()}${print.settings.adhesion_type.slice(1)}`;
@@ -57,7 +58,19 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
         setLists(() => {
             return lists.map((list) => {
                 if (list.id !== item.id) {
+                    // console.log('here', list.id, item.id)
                     return list;
+                }
+               const matchedOriginalItems = originalLists.filter((originalList) => {
+                   return originalList.id === list.id
+               })
+
+                const changeDetected = matchedOriginalItems[0].contains_item === list.contains_item
+
+                if (changeDetected) {
+                    setButtonDisabled(false)
+                } else {
+                    setButtonDisabled(true)
                 }
 
                 const updatedList = { ...list };
@@ -119,6 +132,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             console.error(error)
         } finally {
             setModalVisible(false)
+            setButtonDisabled(true)
         }
     }
 
@@ -145,7 +159,6 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                 }));
                 setLists(lists);
                 setOriginalLists(lists)
-                // console.log(lists)
             } catch (error) {
                 console.error("Error in getLists", error);
             } finally {
@@ -184,6 +197,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                     sendDataToParent={ handleDataFromChild }
                     saveInParent={ save }
                     visible={ modalVisible }
+                    isButtonDisabled = {buttonDisabled}
                     onClose={ () => {
                         setModalVisible(!modalVisible);
                     } }
