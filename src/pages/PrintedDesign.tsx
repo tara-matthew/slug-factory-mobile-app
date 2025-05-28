@@ -143,6 +143,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             }
         };
 
+        // TODO move into a hook
         const getLists = async () => {
             try {
                 const response = await apiFetch(`/my/printed-design-lists/prints/${printID}/available`);
