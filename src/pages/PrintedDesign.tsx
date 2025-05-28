@@ -79,6 +79,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     }
 
     async function save(items) {
+        // Compare the current state of lists (via items) to the original state (originalLists) to determine which items were toggled.
         // Stop already-selected lists in the UI (from previous adds) being put in the toAddIDs array, as any list which is selected in the UI will have contains_item set to true
         const toAddIDs = items
             .filter((item, i) => !originalLists[i].contains_item && item.contains_item)
@@ -89,34 +90,36 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             .map(item => item.id);
 
         try {
-            const { data } = await apiFetch(`/my/prints/${printID}/printed-design-lists`, "POST", {
+            await apiFetch(`/my/prints/${printID}/printed-design-lists`, "POST", {
                 printed_design_list_add_ids: toAddIDs,
                 printed_design_list_remove_ids: toRemoveIDs,
             });
 
-            // Ensure that original lists is updated, otherwise there will be duplicates
+            // Update originalLists state to reflect the new "baseline" after a successful save — essentially syncing the original state with the current one.
             setOriginalLists((prevLists) => {
                 return prevLists.map((list) => {
                     if (toAddIDs.includes(list.id)) {
+                        // Mark item as selected
                         return { ...list, contains_item: true };
                     }
                     if (toRemoveIDs.includes(list.id)) {
+                        // Mark item as unselected
                         return { ...list, contains_item: false };
                     }
                     return list;
                 });
             });
 
-            // Update list count?
+            // Update the actual visible list state after a successful save.
             setLists((prevLists) => {
                 return prevLists.map((list) => {
                     if (toAddIDs.includes(list.id)) {
-                        list.count++;
-                        return { ...list, contains_item: true, extraData: `${list.count} in list` };
+                        const newCount = list.count + 1;
+                        return { ...list, count: newCount, contains_item: true, extraData: `${newCount} in list` };
                     }
                     if (toRemoveIDs.includes(list.id)) {
-                        list.count--;
-                        return { ...list, contains_item: false, extraData: `${list.count} in list` };
+                        const newCount = list.count - 1;
+                        return { ...list, count: newCount, contains_item: false, extraData: `${newCount} in list` };
                     }
                     return { ...list, extraData: `${list.count} in list` };
                 });
