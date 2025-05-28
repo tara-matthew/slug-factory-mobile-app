@@ -3,7 +3,7 @@ import { ScrollView, Text, View } from "react-native";
 import apiFetch from "../hooks/apiFetch";
 import Card from "../components/molecule/Card";
 import { ListData } from "../data-transfer-objects/ListData";
-import {ListProps} from "../contracts/Navigator";
+import { ListProps } from "../contracts/Navigator";
 
 const List = ({ route }: ListProps) => {
     const listID = route.params.listID;

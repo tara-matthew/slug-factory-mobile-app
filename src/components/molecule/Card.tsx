@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from "react";
+import React, { memo, useMemo } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { ICardProps } from "../../contracts/Card";
 import { Image } from "expo-image";

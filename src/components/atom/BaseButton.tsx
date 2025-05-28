@@ -1,5 +1,5 @@
-import React, {useMemo} from "react";
-import {Dimensions, StyleSheet, Text, TouchableOpacity} from "react-native";
+import React, { useMemo } from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { IButtonProps } from "../../contracts/Button";
 
 const BaseButton = ({ title, sendDataToParent, isDisabled = false }: IButtonProps) => {
@@ -7,13 +7,12 @@ const BaseButton = ({ title, sendDataToParent, isDisabled = false }: IButtonProp
         return isDisabled ? styles.disabledButton : styles.enabledButton;
     }, [isDisabled]);
 
-
     return (
         <TouchableOpacity
-            style={buttonStyling}
+            style={ buttonStyling }
             className="w-full p-3.5 rounded-2xl"
             onPress={ sendDataToParent }
-            disabled={isDisabled}
+            disabled={ isDisabled }
         >
             <Text className="text-center">{title}</Text>
         </TouchableOpacity>

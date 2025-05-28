@@ -12,8 +12,7 @@ import { PrintData } from "../data-transfer-objects/PrintData";
 import { EditPrintedDesignNavigationProps, PrintedDesignProps } from "../contracts/Navigator";
 import { defaultPrint } from "../contracts/Print";
 import BaseModal from "../components/organism/BaseModal";
-import {ListData} from "../data-transfer-objects/ListData";
-import ApiFetch from "../hooks/apiFetch";
+import { ListData } from "../data-transfer-objects/ListData";
 
 const PrintedDesign = ({ route }: PrintedDesignProps) => {
     const navigation = useNavigation<EditPrintedDesignNavigationProps>();
@@ -28,7 +27,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     });
     const { user } = useUser();
     const [modalVisible, setModalVisible] = useState(false);
-    const [ buttonDisabled, setButtonDisabled] = useState(true)
+    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const adhesionType = useMemo(() => {
         return `${print.settings.adhesion_type.charAt(0).toUpperCase()}${print.settings.adhesion_type.slice(1)}`;
@@ -53,23 +52,22 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
     };
 
     function handleDataFromChild(item) {
-
         // TODO extract toggle logic into a helper method
         setLists(() => {
             return lists.map((list) => {
                 if (list.id !== item.id) {
                     return list;
                 }
-               const matchedOriginalItems = originalLists.filter((originalList) => {
-                   return originalList.id === list.id
-               })
+                const matchedOriginalItems = originalLists.filter((originalList) => {
+                    return originalList.id === list.id;
+                });
 
-                const changeDetected = matchedOriginalItems[0].contains_item === list.contains_item
+                const changeDetected = matchedOriginalItems[0].contains_item === list.contains_item;
 
                 if (changeDetected) {
-                    setButtonDisabled(false)
+                    setButtonDisabled(false);
                 } else {
-                    setButtonDisabled(true)
+                    setButtonDisabled(true);
                 }
 
                 const updatedList = { ...list };
@@ -113,14 +111,14 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
             setLists((prevLists) => {
                 return prevLists.map((list) => {
                     if (toAddIDs.includes(list.id)) {
-                        list.count ++
+                        list.count++;
                         return { ...list, contains_item: true, extraData: `${list.count} in list` };
                     }
                     if (toRemoveIDs.includes(list.id)) {
-                        list.count --
+                        list.count--;
                         return { ...list, contains_item: false, extraData: `${list.count} in list` };
                     }
-                    return {...list, extraData: `${list.count} in list`};
+                    return { ...list, extraData: `${list.count} in list` };
                 });
             });
             setPrint(prevPrint => ({
@@ -128,10 +126,10 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                 list_count: prevPrint.list_count + toAddIDs.length - toRemoveIDs.length,
             }));
         } catch (error) {
-            console.error(error)
+            console.error(error);
         } finally {
-            setModalVisible(false)
-            setButtonDisabled(true)
+            setModalVisible(false);
+            setButtonDisabled(true);
         }
     }
 
@@ -157,7 +155,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                     extraData: `${list.count} in list`,
                 }));
                 setLists(lists);
-                setOriginalLists(lists)
+                setOriginalLists(lists);
             } catch (error) {
                 console.error("Error in getLists", error);
             } finally {
@@ -196,7 +194,7 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
                     sendDataToParent={ handleDataFromChild }
                     saveInParent={ save }
                     visible={ modalVisible }
-                    isButtonDisabled = {buttonDisabled}
+                    isButtonDisabled={ buttonDisabled }
                     onClose={ () => {
                         setModalVisible(!modalVisible);
                     } }
