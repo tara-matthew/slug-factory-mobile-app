@@ -53,28 +53,21 @@ const PrintedDesign = ({ route }: PrintedDesignProps) => {
 
     function handleDataFromChild(item) {
         // TODO extract toggle logic into a helper method
-        setLists(() => {
-            return lists.map((list) => {
-                if (list.id !== item.id) {
-                    return list;
-                }
-                const matchedOriginalItems = originalLists.filter((originalList) => {
-                    return originalList.id === list.id;
-                });
+        setLists((prevLists) => {
+            const updatedLists = prevLists.map((list) => {
+                // Skip updating any lists which the user hasn't interacted with
+                if (list.id !== item.id) return list;
 
-                const changeDetected = matchedOriginalItems[0].contains_item === list.contains_item;
-
-                if (changeDetected) {
-                    setButtonDisabled(false);
-                } else {
-                    setButtonDisabled(true);
-                }
-
-                const updatedList = { ...list };
-                updatedList.contains_item = !item.contains_item;
-
-                return updatedList;
+                return { ...list, contains_item: !list.contains_item };
             });
+
+            const changed = updatedLists.some((updatedList) => {
+                const original = originalLists.find(orig => orig.id === updatedList.id);
+                return original?.contains_item !== updatedList.contains_item;
+            });
+
+            setButtonDisabled(!changed);
+            return updatedLists;
         });
     }
 
