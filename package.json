@@ -41,7 +41,7 @@
     "tailwindcss": "^3.4.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "^7.27.4",
     "@eslint/js": "^9.10.0",
     "@stylistic/eslint-plugin": "^2.8.0",
     "@testing-library/jest-native": "^5.4.3",
