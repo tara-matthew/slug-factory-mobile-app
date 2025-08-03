@@ -10,7 +10,11 @@ const config: StorybookConfig = {
   ],
   "framework": {
     "name": "@storybook/react-native-web-vite",
-    "options": {}
+    options: {
+      pluginReactOptions: {
+        jsxImportSource: "nativewind",
+      },
+    },
   }
 };
 export default config;
