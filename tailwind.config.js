@@ -6,6 +6,7 @@ module.exports = {
         "./src/pages/*.{js,jsx,ts,tsx}",
         "./storybook/**/*.{js,jsx,ts,tsx}",
         "./src/stories/*.{js,jsx,ts,tsx}",
+        "./src/**/*.{js,jsx,ts,tsx}",
     ],
     presets: [require("nativewind/preset")],
     theme: {

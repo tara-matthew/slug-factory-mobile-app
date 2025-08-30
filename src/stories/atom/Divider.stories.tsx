@@ -2,36 +2,35 @@ import type { Meta, StoryObj } from "@storybook/react-native-web-vite";
 
 import { View } from "react-native";
 
-import BaseButton from "../components/atom/BaseButton";
+import Divider from "../../components/atom/Divider";
+import {DividerWidth} from "../../contracts/Divider";
 
 const meta = {
-    title: "BaseButton",
-    component: BaseButton,
+    title: "Atom/Divider",
+    component: Divider,
     decorators: [
         Story => (
-            <View className="w-1/3">
+            <View className={"flex w-1/2"}>
                 <Story />
             </View>
         ),
     ],
     // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
     // Use `fn` to spy on the onPress arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-} satisfies Meta<typeof BaseButton>;
+} satisfies Meta<typeof Divider>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Disabled = {
+export const HalfWidth = {
     args: {
-        title: "Button",
-        isDisabled: true,
+        width: DividerWidth.Half,
     },
 };
 
-export const Enabled = {
+export const FullWidth = {
     args: {
-        title: "Button",
-        isDisabled: false,
+        width: DividerWidth.Full,
     },
 };
