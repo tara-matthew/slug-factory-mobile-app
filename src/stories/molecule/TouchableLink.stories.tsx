@@ -4,10 +4,22 @@ import { Text, View } from "react-native";
 
 import TouchableLink from "../../components/molecule/TouchableLink";
 import React from "react";
+import MyPrints from "../../pages/MyPrints";
+import MyLists from "../../pages/MyLists";
 
 const meta = {
     title: "Molecule/TouchableLink",
     component: TouchableLink,
+    argTypes: {
+        to: {
+            control: {type: 'select'}, // must be a selectable control
+            options: ['MyPrints', 'MyLists'],
+            mapping: {
+                MyPrints: MyPrints,
+                MyLists: MyLists
+            },
+        },
+    },
     decorators: [
         Story => (
             <View style={ { flex: 1, alignItems: "flex-start" } }>
@@ -23,10 +35,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     args: {
-        to: () => <Text className="text-lg">Hello from render prop</Text>,
+        to: MyLists,
         title: "A link"
     },
     render: args => (
+        <View>
             <TouchableLink {...args}></TouchableLink>
+        </View>
+
     )
 };

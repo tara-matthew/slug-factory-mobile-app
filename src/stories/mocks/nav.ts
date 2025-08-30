@@ -20,7 +20,8 @@ export const useNavigation = () => {
         reset: () => null,
         replace: () => null,
         // navigate: fn("navigate"),
-        navigate: (...args: any[]) => action("navigate")(...args),
+        navigate: (to: any, ...args: any[]) =>
+            action("navigate")(typeof to === "function" ? to.name : String(to), ...args),
         // navigate: () => console.log('here'),
         setParams: () => null,
         jumpTo: () => null
