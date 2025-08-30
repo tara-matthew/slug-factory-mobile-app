@@ -9,8 +9,8 @@ const meta = {
     component: LoadingSpinner,
     decorators: [
         Story => (
-            <View className="w-1/3">
-                <Story  />
+            <View className="w-1/3 mt-10">
+                <Story />
             </View>
         ),
     ],

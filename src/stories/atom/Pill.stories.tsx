@@ -9,7 +9,7 @@ const meta = {
     component: Pill,
     decorators: [
         Story => (
-            <View className="flex justify-center items-center bg-gray-100 h-28">
+            <View className="flex justify-center items-center bg-gray-100 h-28 w-32">
                 <View>
                     <Story />
                 </View>
@@ -26,6 +26,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
     args: {
-        title: 'My pill',
+        title: "My pill",
     },
 };

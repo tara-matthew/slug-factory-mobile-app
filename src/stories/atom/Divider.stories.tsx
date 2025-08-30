@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from "@storybook/react-native-web-vite";
 import { View } from "react-native";
 
 import Divider from "../../components/atom/Divider";
-import {DividerWidth} from "../../contracts/Divider";
+import { DividerWidth } from "../../contracts/Divider";
 
 const meta = {
     title: "Atom/Divider",
     component: Divider,
     decorators: [
         Story => (
-            <View className={"flex w-1/2"}>
+            <View className="flex w-1/2">
                 <Story />
             </View>
         ),

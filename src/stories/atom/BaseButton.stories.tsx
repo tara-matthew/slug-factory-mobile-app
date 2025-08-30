@@ -4,7 +4,6 @@ import { View } from "react-native";
 
 import BaseButton from "../../components/atom/BaseButton";
 
-
 const meta = {
     title: "Atom/BaseButton",
     component: BaseButton,
